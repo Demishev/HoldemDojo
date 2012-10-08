@@ -32,8 +32,7 @@ public class DealerTest {
         int PLAYERS_QUANTITY = 2;
         setPlayersQuantity(PLAYERS_QUANTITY);
         setDealerPlayerNumber(-1);
-        setPlayerAmount(0, GameSettings.COINS_AT_START);
-        setPlayerAmount(1, GameSettings.COINS_AT_START);
+        when(deskMock.getPlayerAmount(anyInt())).thenReturn(GameSettings.COINS_AT_START);
     }
 
     private void setPlayerAmount(int playerNumber, int amount) {
@@ -183,7 +182,7 @@ public class DealerTest {
 
         dealer.run();
 
-        verify(deskMock).addToPot(5);
+        verify(deskMock).setPlayerBet(0, 5);
     }
 
     @Test
@@ -192,6 +191,6 @@ public class DealerTest {
 
         dealer.run();
 
-        verify(deskMock).addToPot(5);
+        verify(deskMock).setPlayerAmount(0,0);
     }
 }

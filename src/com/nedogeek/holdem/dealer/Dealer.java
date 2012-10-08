@@ -48,15 +48,12 @@ public class Dealer implements Runnable {
 
     private void makeBet(int playerNumber, int bet) {
         final int playerAmount = desk.getPlayerAmount(playerNumber);
-        if (playerAmount > bet) {
-            desk.setPlayerBet(playerNumber, bet);
-            desk.addToPot(bet);
-            desk.setPlayerAmount(playerNumber, playerAmount - bet);
-        } else {
-            desk.setPlayerBet(playerNumber, bet);
-            desk.addToPot(playerAmount);
-            desk.setPlayerAmount(playerNumber, playerAmount - bet);
+        if (playerAmount < bet) {
+            bet = playerAmount;
         }
+        desk.setPlayerBet(playerNumber, bet);
+        desk.addToPot(bet);
+        desk.setPlayerAmount(playerNumber, playerAmount - bet);
     }
 
     private int nextPlayer(int playerNumber) {
