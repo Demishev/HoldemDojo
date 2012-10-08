@@ -47,6 +47,15 @@ public class DealerTest {
         when(deskMock.getPlayersMove(anyInt())).thenReturn(playersActionMock);
     }
 
+    private void setResponseType(PlayersAction.ActionType actionType) {
+        when(playersActionMock.getActionType()).thenReturn(actionType);
+    }
+
+    private void setResponseBet(int bet) {
+        when(playersActionMock.getActionType()).thenReturn(PlayersAction.ActionType.Bet);
+        when(playersActionMock.getBetQuantity()).thenReturn(bet);
+    }
+
     private void setPlayersBet(int playerNumber, int playersBet) {
         when(deskMock.getPlayerBet(playerNumber)).thenReturn(playersBet);
     }
@@ -301,5 +310,19 @@ public class DealerTest {
         dealer.tick();
 
         verify(deskMock).setLastMovedPlayer(1);
+    }
+
+
+    @Test
+    public void shouldBet50WhenFirstPlayerMovedLastFirstRoundFirstPlayerBet50Second50AndPlayerActionIsBet500() throws Exception {
+        setGameRound(1);
+        setPlayersBet(0,100);
+        setPlayersBet(1,50);
+        setLastPlayerMoved(0);
+        setResponseBet(50);
+
+        dealer.tick();
+
+        verify(deskMock).setPlayerBet(1,50);
     }
 }
