@@ -22,7 +22,16 @@ public class Dealer implements Runnable {
         if (desk.getGameStatus().equals(GameStatus.Ready)) {
             prepareNewGameCycle();
         }
-        newGame();
+        tick();
+    }
+
+    void tick() {
+        if (desk.getGameStatus().equals(GameStatus.Ready)) {
+            desk.getGameRound();
+            newGame();
+            int moverNumber = nextPlayer(desk.getDealerPlayerNumber());
+            desk.getPlayersMove(moverNumber);
+        }
     }
 
     private void prepareNewGameCycle() {

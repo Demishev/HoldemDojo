@@ -1,6 +1,7 @@
 package com.nedogeek.holdem.gamingStuff;
 
 import com.nedogeek.holdem.GameStatus;
+import com.nedogeek.holdem.connections.PlayersAction;
 
 /**
  * User: Konstantin Demishev
@@ -9,6 +10,7 @@ import com.nedogeek.holdem.GameStatus;
  */
 public class Desk {
     private int dealerPlayerNumber;
+    private int gameRound;
 
     public GameStatus getGameStatus() {
         return null;
@@ -43,5 +45,13 @@ public class Desk {
 
     public int getPlayerAmount(int playerNumber) {
         return 0;
+    }
+
+    public PlayersAction getPlayersMove(int playerNumber) {
+        return null;
+    }
+
+    public int getGameRound() {
+        return gameRound;
     }
 }

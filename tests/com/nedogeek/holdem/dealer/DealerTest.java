@@ -15,7 +15,6 @@ import static org.mockito.Mockito.*;
  * Time: 22:02
  */
 public class DealerTest {
-
     private Dealer dealer;
     private Desk deskMock;
 
@@ -23,6 +22,10 @@ public class DealerTest {
     public void setUp() throws Exception {
         resetDeskMock();
 
+        createDealer();
+    }
+
+    private void createDealer() {
         dealer = new Dealer(deskMock);
     }
 
@@ -60,7 +63,7 @@ public class DealerTest {
     public void shouldDeskIsGamePossibleWhenStart() throws Exception {
         dealer.run();
 
-        verify(deskMock).getGameStatus();
+        verify(deskMock, atLeast(1)).getGameStatus();
     }
 
     @Test
@@ -191,6 +194,49 @@ public class DealerTest {
 
         dealer.run();
 
-        verify(deskMock).setPlayerAmount(0,0);
+        verify(deskMock).setPlayerAmount(0, 0);
+    }
+
+    @Test
+    public void shouldFirstPlayerMoveRequestWhenNewGameStartedAndDealerIsSecond() throws Exception {
+        setDealerPlayerNumber(1);
+
+        dealer.run();
+
+        verify(deskMock).getPlayersMove(0);
+    }
+
+    @Test
+    public void shouldSecondPlayerMoveRequestWhenTickAndNewGameSet() throws Exception {
+        setDealerPlayerNumber(0);
+
+        dealer.tick();
+
+        verify(deskMock).getPlayersMove(1);
+    }
+
+    @Test
+    public void shouldNoGetPlayerMoveWhenStatusNotReadyAndTick() throws Exception {
+        setGameStatus(GameStatus.Not_Ready);
+
+        dealer.tick();
+
+        verify(deskMock, never()).getPlayersMove(1);
+    }
+
+    @Test
+    public void shouldGetGameRoundNumberWhenTick() throws Exception {
+        dealer.tick();
+
+        verify(deskMock).getGameRound();
+    }
+
+    @Test
+    public void shouldNotGetGameRoundNumberWhenTickAndGameStatusNotReady() throws Exception {
+        setGameStatus(GameStatus.Not_Ready);
+
+        dealer.tick();
+
+        verify(deskMock, never()).getGameRound();
     }
 }
