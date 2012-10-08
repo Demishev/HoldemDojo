@@ -2,6 +2,7 @@ package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.GameStatus;
+import com.nedogeek.holdem.connections.PlayersAction;
 import com.nedogeek.holdem.gamingStuff.Desk;
 
 /**
@@ -27,11 +28,29 @@ public class Dealer implements Runnable {
 
     void tick() {
         if (desk.getGameStatus().equals(GameStatus.Ready)) {
-            desk.getGameRound();
-            newGame();
-            int moverNumber = nextPlayer(desk.getDealerPlayerNumber());
-            desk.getPlayersMove(moverNumber);
+            int gameRound = desk.getGameRound();
+            switch (gameRound) {
+                case 0:
+                    newGameTick();
+                    break;
+                case 1:
+                    int lastMovedPlayer = desk.getLastMovedPlayer();
+                    int moverNumber;
+                    if (lastMovedPlayer != -1) {
+                        moverNumber = nextPlayer(lastMovedPlayer);
+                    } else {
+                        moverNumber = nextPlayer(desk.getDealerPlayerNumber());
+                    }
+                    PlayersAction answer = desk.getPlayersMove(moverNumber);
+                    makeBet(moverNumber, answer.getBetQuantity());
+                    break;
+            }
         }
+    }
+
+    private void newGameTick() {
+        newGame();
+        desk.setNextGameRound();
     }
 
     private void prepareNewGameCycle() {
@@ -63,6 +82,8 @@ public class Dealer implements Runnable {
         desk.setPlayerBet(playerNumber, bet);
         desk.addToPot(bet);
         desk.setPlayerAmount(playerNumber, playerAmount - bet);
+
+        desk.setLastMovedPlayer(playerNumber);
     }
 
     private int nextPlayer(int playerNumber) {

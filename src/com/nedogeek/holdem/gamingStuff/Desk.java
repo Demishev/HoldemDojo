@@ -54,4 +54,20 @@ public class Desk {
     public int getGameRound() {
         return gameRound;
     }
+
+    public void setNextGameRound() {
+
+    }
+
+
+    public int getLastMovedPlayer() {
+        return 0;
+    }
+
+    public int getPlayerBet(int playerNumber) {
+        return 0;
+    }
+
+    public void setLastMovedPlayer(int playerNumber) {
+    }
 }

@@ -2,6 +2,7 @@ package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.GameStatus;
+import com.nedogeek.holdem.connections.PlayersAction;
 import com.nedogeek.holdem.gamingStuff.Desk;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,12 +18,18 @@ import static org.mockito.Mockito.*;
 public class DealerTest {
     private Dealer dealer;
     private Desk deskMock;
+    private PlayersAction playersActionMock;
 
     @Before
     public void setUp() throws Exception {
+        resetPlayerActionMock();
         resetDeskMock();
 
         createDealer();
+    }
+
+    private void resetPlayerActionMock() {
+        playersActionMock = mock(PlayersAction.class);
     }
 
     private void createDealer() {
@@ -36,6 +43,16 @@ public class DealerTest {
         setPlayersQuantity(PLAYERS_QUANTITY);
         setDealerPlayerNumber(-1);
         when(deskMock.getPlayerAmount(anyInt())).thenReturn(GameSettings.COINS_AT_START);
+        when(deskMock.getLastMovedPlayer()).thenReturn(-1);
+        when(deskMock.getPlayersMove(anyInt())).thenReturn(playersActionMock);
+    }
+
+    private void setPlayersBet(int playerNumber, int playersBet) {
+        when(deskMock.getPlayerBet(playerNumber)).thenReturn(playersBet);
+    }
+
+    private void setLastPlayerMoved(int movedPlayerNumber) {
+        when(deskMock.getLastMovedPlayer()).thenReturn(movedPlayerNumber);
     }
 
     private void setPlayerAmount(int playerNumber, int amount) {
@@ -52,6 +69,10 @@ public class DealerTest {
 
     private void setGameStatus(GameStatus newGameStatus) {
         when(deskMock.getGameStatus()).thenReturn(newGameStatus);
+    }
+
+    private void setGameRound(int newGameRound) {
+        when(deskMock.getGameRound()).thenReturn(newGameRound);
     }
 
     @Test
@@ -199,6 +220,7 @@ public class DealerTest {
 
     @Test
     public void shouldFirstPlayerMoveRequestWhenNewGameStartedAndDealerIsSecond() throws Exception {
+        setGameRound(1);
         setDealerPlayerNumber(1);
 
         dealer.run();
@@ -208,6 +230,7 @@ public class DealerTest {
 
     @Test
     public void shouldSecondPlayerMoveRequestWhenTickAndNewGameSet() throws Exception {
+        setGameRound(1);
         setDealerPlayerNumber(0);
 
         dealer.tick();
@@ -238,5 +261,45 @@ public class DealerTest {
         dealer.tick();
 
         verify(deskMock, never()).getGameRound();
+    }
+
+    @Test
+    public void shouldSetGameRound1WhenTick() throws Exception {
+        dealer.tick();
+
+        verify(deskMock).setNextGameRound();
+    }
+
+    @Test
+    public void shouldNotSetGameRound1WhenTickGameRoundIs1() throws Exception {
+        setGameRound(1);
+
+        dealer.tick();
+
+        verify(deskMock, never()).setNextGameRound();
+    }
+
+    @Test
+    public void shouldMoveSecondPlayerWhenFirstPlayerMovedLastFirstRoundFirstPlayerBet100Second50() throws Exception {
+        setGameRound(1);
+        setPlayersBet(0,100);
+        setPlayersBet(1,50);
+        setLastPlayerMoved(0);
+
+        dealer.tick();
+
+        verify(deskMock).getPlayersMove(1);
+    }
+
+    @Test
+    public void shouldSetLastMovedPlayer1WhenFirstPlayerMovedLastFirstRoundFirstPlayerBet100Second50AndPlayerActionIsBet500() throws Exception {
+        setGameRound(1);
+        setPlayersBet(0,100);
+        setPlayersBet(1,50);
+        setLastPlayerMoved(0);
+
+        dealer.tick();
+
+        verify(deskMock).setLastMovedPlayer(1);
     }
 }
