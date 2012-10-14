@@ -17,21 +17,23 @@ public class Dealer implements Runnable {
 
     Dealer(Desk desk) {
         this.desk = desk;
+        playersQuantity = desk.getPlayersQuantity();
     }
 
     public void run() {
-        if (desk.getGameStatus().equals(GameStatus.Ready)) {
-            prepareNewGameCycle();
-        }
         tick();
     }
 
     void tick() {
+
         if (desk.getGameStatus().equals(GameStatus.Ready)) {
+            prepareNewGameCycle();
+        }
+        if (desk.getGameStatus().equals(GameStatus.Started)) {
             int gameRound = desk.getGameRound();
             switch (gameRound) {
                 case 0:
-                    newGameTick();
+                    newGame();
                     break;
                 case 1:
                     int lastMovedPlayer = desk.getLastMovedPlayer();
@@ -46,11 +48,6 @@ public class Dealer implements Runnable {
                     break;
             }
         }
-    }
-
-    private void newGameTick() {
-        newGame();
-        desk.setNextGameRound();
     }
 
     private void prepareNewGameCycle() {
@@ -72,6 +69,8 @@ public class Dealer implements Runnable {
 
         int bigBlindPlayerNumber = nextPlayer(smallBlindPlayerNumber);
         makeBet(bigBlindPlayerNumber, GameSettings.SMALL_BLIND_AT_START * 2);
+
+        desk.setNextGameRound();
     }
 
     private void makeBet(int playerNumber, int bet) {

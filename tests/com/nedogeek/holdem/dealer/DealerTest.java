@@ -38,7 +38,7 @@ public class DealerTest {
 
     private void resetDeskMock() {
         deskMock = mock(Desk.class);
-        setGameStatus(GameStatus.Ready);
+        setGameStatus(GameStatus.Started);
         int PLAYERS_QUANTITY = 2;
         setPlayersQuantity(PLAYERS_QUANTITY);
         setDealerPlayerNumber(-1);
@@ -74,6 +74,8 @@ public class DealerTest {
 
     private void setPlayersQuantity(int PLAYERS_QUANTITY) {
         when(deskMock.getPlayersQuantity()).thenReturn(PLAYERS_QUANTITY);
+
+        createDealer();
     }
 
     private void setGameStatus(GameStatus newGameStatus) {
@@ -107,6 +109,8 @@ public class DealerTest {
 
     @Test
     public void shouldSetGameStatusStartedWhenGameStatusReady() throws Exception {
+        setGameStatus(GameStatus.Ready);
+
         dealer.run();
 
         verify(deskMock).setGameStatus(GameStatus.Started);
@@ -114,32 +118,29 @@ public class DealerTest {
 
     @Test
     public void shouldGetPlayersQuantityWhenGameStarted() throws Exception {
+        setGameStatus(GameStatus.Ready);
+
         dealer.run();
 
-        verify(deskMock).getPlayersQuantity();
+        verify(deskMock, atLeast(1)).getPlayersQuantity();
     }
 
     @Test
     public void shouldFirstPlayerSetDefaultAmountWhenGameStarted() throws Exception {
-        dealer.run();
+        setGameStatus(GameStatus.Ready);
+
+        dealer.tick();
 
         verify(deskMock).setPlayerAmount(0, GameSettings.COINS_AT_START);
     }
 
     @Test
     public void shouldSecondPlayerSetDefaultAmountWhenGameStarted() throws Exception {
+        setGameStatus(GameStatus.Ready);
+
         dealer.run();
 
         verify(deskMock).setPlayerAmount(1, GameSettings.COINS_AT_START);
-    }
-
-    @Test
-    public void shouldNoDeskGetPlayersQuantityWhenGameStatusIsNotReady() throws Exception {
-        setGameStatus(GameStatus.Not_Ready);
-
-        dealer.run();
-
-        verify(deskMock, never()).getPlayersQuantity();
     }
 
     @Test
@@ -165,7 +166,9 @@ public class DealerTest {
 
     @Test
     public void shouldFirstPlayerGiveBigBlindWhenGameStarted() throws Exception {
-        dealer.run();
+        setGameStatus(GameStatus.Started);
+
+        dealer.tick();
 
         verify(deskMock).setPlayerBet(0,GameSettings.SMALL_BLIND_AT_START * 2);
     }
@@ -174,7 +177,7 @@ public class DealerTest {
     public void shouldThirdPlayerGiveBigBlindWhenGameStartedWith3Players() throws Exception {
         setPlayersQuantity(3);
 
-        dealer.run();
+        dealer.tick();
 
         verify(deskMock).setPlayerBet(2,GameSettings.SMALL_BLIND_AT_START * 2);
     }
@@ -213,7 +216,7 @@ public class DealerTest {
     public void shouldBet5WhenFirstPlayerHasOnly5Coins() throws Exception {
         setPlayerAmount(0, 5);
 
-        dealer.run();
+        dealer.tick();
 
         verify(deskMock).setPlayerBet(0, 5);
     }
@@ -232,7 +235,7 @@ public class DealerTest {
         setGameRound(1);
         setDealerPlayerNumber(1);
 
-        dealer.run();
+        dealer.tick();
 
         verify(deskMock).getPlayersMove(0);
     }
@@ -325,4 +328,33 @@ public class DealerTest {
 
         verify(deskMock).setPlayerBet(1,50);
     }
+
+    /*
+        Что бы еще потестить:
+        Круг закрывается, когда одинаковое кол-во ставок.
+        Круг закрывается, когда остался один не фолданувший.
+
+        Если игрок фолданул - нужно ставить ему соответствующий статуус.
+        Если игрок заколил - нужно фигачить сумму минимальную для хода игры.
+        Если игрок ушел в оллин - нужно делать максимальную ставку.
+        Если игрок заколил, но у него не хватает фишек - нужно делать оллин.
+        Если игрок райзанул, но этого не хватает - это фолд.
+        Если игрок чеканул, но этого нельзя было делать - это фолд.
+        Если игрок райзанул до предела, когда у него не хватает фишек на разй или ровно столько - это оллин.
+
+        Если у игрока оллин - то не нужно его трогать.
+        Ход не должен переходить к фолданувшему игроку.
+
+
+        Игра заканчивается, когда остался один фолданувший.
+        Игра заканчивается, когда закрылся 3-й круг.
+
+        Конец игры будет 4-й этап. И в любом случае нужно идти от него..
+
+
+        Если выиграл игрок с оллин - то нужно отдать ему только ту часть денег, на которую он заслуживает.
+        Остальные же деньги нужно разыгрывать между другими игроками.
+        А среди них тоже может быть тот, кто оллин сказал. Правило такое - банки нужно делить по очереди.
+        Вот как. Т.е. должна быть возможность создания многих банков...
+     */
 }
