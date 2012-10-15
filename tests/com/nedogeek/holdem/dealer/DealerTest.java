@@ -47,6 +47,7 @@ public class DealerTest {
         setDealerPlayerNumber(-1);
         when(deskMock.getPlayerAmount(anyInt())).thenReturn(COINS_AT_START);
         when(deskMock.getLastMovedPlayer()).thenReturn(-1);
+        setResponseFold();
         when(deskMock.getPlayersMove(anyInt())).thenReturn(playersActionMock);
     }
 
@@ -75,7 +76,10 @@ public class DealerTest {
 
     private void setResponseFold() {
         setResponseType(PlayersAction.ActionType.Fold);
-        when(playersActionMock.getBetQuantity()).thenReturn(0);
+    }
+
+    private void setResponseCall() {
+        setResponseType(PlayersAction.ActionType.Call);
     }
 
     private void setPlayersBet(int playerNumber, int playersBet) {
@@ -386,6 +390,28 @@ public class DealerTest {
         dealer.tick();
 
         verify(deskMock, never()).setPlayerFold(1);
+    }
+
+    @Test
+    public void shouldSecondPlayerBet1WhenFirstRoundAndSecondCalls() throws Exception {
+        setFirstRound();
+
+        setResponseCall();
+
+        dealer.tick();
+
+        verify(deskMock).setPlayerBet(1, GameSettings.SMALL_BLIND_AT_START);
+    }
+
+    @Test
+    public void shouldNoSecondPlayerBet0WhenFirstRoundAndHeFolds() throws Exception {
+        setFirstRound();
+
+        setResponseFold();
+
+        dealer.tick();
+
+        verify(deskMock, never()).setPlayerBet(1,0);
     }
 
     /*

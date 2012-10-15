@@ -74,11 +74,22 @@ public class Dealer implements Runnable {
     }
 
     private void makeMove(int playerNumber, PlayersAction playerMove) {
-        makeBet(playerNumber, playerMove.getBetQuantity());
-
-        if (playerMove.getActionType() == PlayersAction.ActionType.Fold) {
-            desk.setPlayerFold(playerNumber);
+        switch (playerMove.getActionType()) {
+            case Fold:
+                desk.setPlayerFold(playerNumber);
+                break;
+            case Check:
+                break;
+            case Call:
+                makeBet(1, GameSettings.SMALL_BLIND_AT_START);
+                break;
+            case Bet:
+                makeBet(playerNumber, playerMove.getBetQuantity());
+                break;
+            case AllIn:
+                break;
         }
+        desk.setLastMovedPlayer(playerNumber);
     }
 
     private void makeBet(int playerNumber, int bet) {
@@ -90,7 +101,6 @@ public class Dealer implements Runnable {
         desk.addToPot(bet);
         desk.setPlayerAmount(playerNumber, playerAmount - bet);
 
-        desk.setLastMovedPlayer(playerNumber);
     }
 
     private int nextPlayer(int playerNumber) {
