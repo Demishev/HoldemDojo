@@ -76,20 +76,28 @@ public class Dealer implements Runnable {
     private void makeMove(int playerNumber, PlayersAction playerMove) {
         switch (playerMove.getActionType()) {
             case Fold:
-                desk.setPlayerFold(playerNumber);
+                playerFolds(playerNumber);
                 break;
             case Check:
                 break;
             case Call:
-                makeBet(1, desk.getCallValue());
+                makeBet(playerNumber, desk.getCallValue() - desk.getPlayerBet(playerNumber));
                 break;
             case Bet:
-                makeBet(playerNumber, playerMove.getBetQuantity());
+                if (desk.getPlayerBet(playerNumber) + playerMove.getBetQuantity() > desk.getCallValue()) {
+                    makeBet(playerNumber, playerMove.getBetQuantity());
+                } else {
+                    playerFolds(playerNumber);
+                }
                 break;
             case AllIn:
                 break;
         }
         desk.setLastMovedPlayer(playerNumber);
+    }
+
+    private void playerFolds(int playerNumber) {
+        desk.setPlayerFold(playerNumber);
     }
 
     private void makeBet(int playerNumber, int bet) {
@@ -100,7 +108,7 @@ public class Dealer implements Runnable {
         desk.setPlayerBet(playerNumber, bet);
         desk.addToPot(bet);
         desk.setPlayerAmount(playerNumber, playerAmount - bet);
-
+        desk.setCallValue(bet);
     }
 
     private int nextPlayer(int playerNumber) {

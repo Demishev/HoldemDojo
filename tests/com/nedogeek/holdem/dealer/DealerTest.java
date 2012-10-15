@@ -57,18 +57,30 @@ public class DealerTest {
 
     private void setFirstRound() {
         when(deskMock.getGameRound()).thenReturn(1);
-        when(deskMock.getDealerPlayerNumber()).thenReturn(0);
-        when(deskMock.getGameStatus()).thenReturn(GameStatus.Started);
+        setDealerPlayerNumber(0);
+        setGameStatus(GameStatus.Started);
 
-        when(deskMock.getPlayerBet(1)).thenReturn(SMALL_BLIND);
-        when(deskMock.getPlayerAmount(1)).thenReturn(COINS_AT_START - SMALL_BLIND);
+        setPlayersBet(1, SMALL_BLIND);
+        setPlayerAmount(1, COINS_AT_START - SMALL_BLIND);
 
-        when(deskMock.getPlayerBet(0)).thenReturn(2 * SMALL_BLIND);
-        when(deskMock.getPlayerAmount(0)).thenReturn(COINS_AT_START - 2 * SMALL_BLIND);
+        setPlayersBet(0, 2 * SMALL_BLIND);
+        setPlayerAmount(0, COINS_AT_START - 2 * SMALL_BLIND);
 
         when(deskMock.getLastMovedPlayer()).thenReturn(-1);
 
-        setCallValue(SMALL_BLIND);
+        setCallValue(2 * SMALL_BLIND);
+    }
+
+    private void setFirstRoundSecondPlayerDealer() {
+        setFirstRound();
+
+        setDealerPlayerNumber(1);
+
+        setPlayersBet(0, SMALL_BLIND);
+        setPlayerAmount(0, COINS_AT_START - SMALL_BLIND);
+
+        setPlayersBet(1, 2 * SMALL_BLIND);
+        setPlayerAmount(1, COINS_AT_START - 2 * SMALL_BLIND);
     }
 
     private void setCallValue(int minimumBet) {
@@ -429,10 +441,50 @@ public class DealerTest {
 
         dealer.tick();
 
-        verify(deskMock).setPlayerBet(1, 2 * SMALL_BLIND);
+        verify(deskMock).setPlayerBet(1, SMALL_BLIND);
     }
 
-    /*
+    @Test
+    public void shouldSetCallValue2SmallBlindsWhenNewGame() throws Exception {
+        setGameStatus(GameStatus.Started);
+
+        dealer.tick();
+
+        verify(deskMock).setCallValue(2 * GameSettings.SMALL_BLIND_AT_START);
+    }
+
+    @Test
+    public void shouldSecondPlayerFoldWhenBetSmallerThanNeeded() throws Exception {
+        setFirstRound();
+        setResponseBet(SMALL_BLIND / 2);
+
+        dealer.tick();
+
+        verify(deskMock).setPlayerFold(1);
+    }
+
+    @Test
+    public void shouldFirstPlayerFoldWhenBetSmallerThanNeeded() throws Exception {
+        setFirstRoundSecondPlayerDealer() ;
+        setResponseBet(SMALL_BLIND / 2);
+
+        dealer.tick();
+
+        verify(deskMock).setPlayerFold(0);
+    }
+
+    @Test
+    public void shouldFirstPlayerBetSmallBlindWhenFirstRoundWithSecondPlayerDealer() throws Exception {
+        setFirstRoundSecondPlayerDealer();
+        setResponseCall();
+
+        dealer.tick();
+
+        verify(deskMock).setPlayerBet(0,SMALL_BLIND);
+
+    }
+
+/*
        Что бы еще потестить:
        Круг закрывается, когда одинаковое кол-во ставок.
        Круг закрывается, когда остался один не фолданувший.

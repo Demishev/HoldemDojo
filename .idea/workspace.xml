@@ -85,19 +85,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="DealerTest.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="DealerTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="432" column="5" selection-start="11387" selection-end="11387" vertical-scroll-proportion="0.82653064">
+            <state line="472" column="40" selection-start="12275" selection-end="12275" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Dealer.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Dealer.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="83" column="25" selection-start="2572" selection-end="2572" vertical-scroll-proportion="0.0">
+            <state line="86" column="50" selection-start="2729" selection-end="2729" vertical-scroll-proportion="0.4962963">
               <folding />
             </state>
           </provider>
@@ -106,7 +106,7 @@
       <file leaf-file-name="Desk.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Desk.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="77" column="16" selection-start="1420" selection-end="1420" vertical-scroll-proportion="0.0">
+            <state line="81" column="4" selection-start="1474" selection-end="1479" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -142,8 +142,8 @@
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/connections/PlayersAction.java" />
         <option value="$PROJECT_DIR$/.travis.yml" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Desk.java" />
-        <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java" />
         <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java" />
+        <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java" />
       </list>
     </option>
   </component>
@@ -825,7 +825,11 @@
       <created>1350322198765</created>
       <updated>1350322198765</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="CallValue property added to desk">
+      <created>1350323389987</created>
+      <updated>1350323389987</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -866,7 +870,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988048" sideWeight="0.6923077" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.6923077" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2621514" sideWeight="0.6923077" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30769232" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30769232" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -911,7 +915,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Player can call" />
+    <option name="LAST_COMMIT_MESSAGE" value="CallValue property added to desk" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -936,6 +940,7 @@
     <MESSAGE value="Player can folds." />
     <MESSAGE value="Tests refactored." />
     <MESSAGE value="Player can call" />
+    <MESSAGE value="CallValue property added to desk" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1021,21 +1026,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Desk.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="16" selection-start="1420" selection-end="1420" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="83" column="25" selection-start="2572" selection-end="2572" vertical-scroll-proportion="0.0">
+        <state line="81" column="4" selection-start="1474" selection-end="1479" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="432" column="5" selection-start="11387" selection-end="11387" vertical-scroll-proportion="0.82653064">
+        <state line="472" column="40" selection-start="12275" selection-end="12275" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="86" column="50" selection-start="2729" selection-end="2729" vertical-scroll-proportion="0.4962963">
           <folding />
         </state>
       </provider>

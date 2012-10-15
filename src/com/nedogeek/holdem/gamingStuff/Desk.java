@@ -77,4 +77,7 @@ public class Desk {
     public int getCallValue() {
         return 0;
     }
+
+    public void setCallValue(int callValue) {
+    }
 }
