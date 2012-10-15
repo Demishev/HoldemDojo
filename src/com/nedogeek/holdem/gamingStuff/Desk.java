@@ -73,4 +73,8 @@ public class Desk {
 
     public void setPlayerFold(int playerNumber) {
     }
+
+    public int getCallValue() {
+        return 0;
+    }
 }

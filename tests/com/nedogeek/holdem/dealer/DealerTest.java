@@ -67,6 +67,12 @@ public class DealerTest {
         when(deskMock.getPlayerAmount(0)).thenReturn(COINS_AT_START - 2 * SMALL_BLIND);
 
         when(deskMock.getLastMovedPlayer()).thenReturn(-1);
+
+        setCallValue(SMALL_BLIND);
+    }
+
+    private void setCallValue(int minimumBet) {
+        when(deskMock.getCallValue()).thenReturn(minimumBet);
     }
 
     private void setResponseBet(int bet) {
@@ -400,7 +406,7 @@ public class DealerTest {
 
         dealer.tick();
 
-        verify(deskMock).setPlayerBet(1, GameSettings.SMALL_BLIND_AT_START);
+        verify(deskMock).setPlayerBet(1, SMALL_BLIND);
     }
 
     @Test
@@ -411,7 +417,19 @@ public class DealerTest {
 
         dealer.tick();
 
-        verify(deskMock, never()).setPlayerBet(1,0);
+        verify(deskMock, never()).setPlayerBet(1, 0);
+    }
+
+    @Test
+    public void shouldSecondPlayerBet2SmallBlindWhenCallInFirstRoundWithCallValue2SmallBlind() throws Exception {
+        setFirstRound();
+        setCallValue(2 * SMALL_BLIND);
+
+        setResponseCall();
+
+        dealer.tick();
+
+        verify(deskMock).setPlayerBet(1, 2 * SMALL_BLIND);
     }
 
     /*

@@ -81,7 +81,7 @@ public class Dealer implements Runnable {
             case Check:
                 break;
             case Call:
-                makeBet(1, GameSettings.SMALL_BLIND_AT_START);
+                makeBet(1, desk.getCallValue());
                 break;
             case Bet:
                 makeBet(playerNumber, playerMove.getBetQuantity());

@@ -4,6 +4,7 @@
     <list default="true" id="388e9789-c4c7-491f-aae9-9962e0a04901" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Desk.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Desk.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java" afterPath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java" />
     </list>
     <ignored path="holdem.iws" />
@@ -84,19 +85,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="DealerTest.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="DealerTest.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="331" column="16" selection-start="9098" selection-end="9098" vertical-scroll-proportion="0.0">
+            <state line="432" column="5" selection-start="11387" selection-end="11387" vertical-scroll-proportion="0.82653064">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Dealer.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Dealer.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="91" column="46" selection-start="2849" selection-end="2849" vertical-scroll-proportion="0.41234568">
+            <state line="83" column="25" selection-start="2572" selection-end="2572" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -105,7 +106,7 @@
       <file leaf-file-name="Desk.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Desk.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="74" column="4" selection-start="1364" selection-end="1369" vertical-scroll-proportion="0.0">
+            <state line="77" column="16" selection-start="1420" selection-end="1420" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -141,8 +142,8 @@
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/connections/PlayersAction.java" />
         <option value="$PROJECT_DIR$/.travis.yml" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Desk.java" />
-        <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java" />
+        <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java" />
       </list>
     </option>
   </component>
@@ -449,65 +450,7 @@
       <recent name="com.nedogeek.holdem.connections" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.DealerTest">
-    <configuration default="false" name="DealerTest" type="JUnit" factoryName="JUnit" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="holdem" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.nedogeek.holdem.dealer" />
-      <option name="MAIN_CLASS_NAME" value="com.nedogeek.holdem.dealer.DealerTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="true" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Debug" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="DealerTest.shouldFirstPlayerGiveBigBlindWhenGameStarted" type="JUnit" factoryName="JUnit" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="holdem" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.nedogeek.holdem.dealer" />
-      <option name="MAIN_CLASS_NAME" value="com.nedogeek.holdem.dealer.DealerTest" />
-      <option name="METHOD_NAME" value="shouldFirstPlayerGiveBigBlindWhenGameStarted" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="true" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Debug" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="JUnit.All in holdem">
     <configuration default="false" name="DealerTest.shouldBet5WhenFirstPlayerHasOnly5Coins" type="JUnit" factoryName="JUnit" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="holdem" />
@@ -574,6 +517,35 @@
       <option name="PACKAGE_NAME" value="com.nedogeek.holdem.dealer" />
       <option name="MAIN_CLASS_NAME" value="com.nedogeek.holdem.dealer.DealerTest" />
       <option name="METHOD_NAME" value="shouldMovedFirstPlayerWhenDefaultFirstRound" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="DealerTest.shouldSecondPlayerBet2SmallBlindWhenCallInFirstRoundWithCallValue2SmallBlind" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="holdem" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.nedogeek.holdem.dealer" />
+      <option name="MAIN_CLASS_NAME" value="com.nedogeek.holdem.dealer.DealerTest" />
+      <option name="METHOD_NAME" value="shouldSecondPlayerBet2SmallBlindWhenCallInFirstRoundWithCallValue2SmallBlind" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -741,12 +713,35 @@
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
+    <configuration default="false" name="All in holdem" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="holdem" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="package" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.DealerTest" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.DealerTest.shouldFirstPlayerGiveBigBlindWhenGameStarted" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.DealerTest.shouldBet5WhenFirstPlayerHasOnly5Coins" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.DealerTest.shouldThirdPlayerGiveBigBlindWhenGameStartedWith3Players" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.DealerTest.shouldMovedFirstPlayerWhenDefaultFirstRound" />
+      <item index="0" class="java.lang.String" itemvalue="JUnit.DealerTest.shouldBet5WhenFirstPlayerHasOnly5Coins" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.DealerTest.shouldThirdPlayerGiveBigBlindWhenGameStartedWith3Players" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.DealerTest.shouldMovedFirstPlayerWhenDefaultFirstRound" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.DealerTest.shouldSecondPlayerBet2SmallBlindWhenCallInFirstRoundWithCallValue2SmallBlind" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.All in holdem" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -826,7 +821,11 @@
       <created>1350321618198</created>
       <updated>1350321618198</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Player can call">
+      <created>1350322198765</created>
+      <updated>1350322198765</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -867,7 +866,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988048" sideWeight="0.6923077" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.6923077" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2621514" sideWeight="0.6923077" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30769232" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30769232" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -912,7 +911,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Tests refactored." />
+    <option name="LAST_COMMIT_MESSAGE" value="Player can call" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -936,6 +935,7 @@
     <MESSAGE value="binary files removed from vcs" />
     <MESSAGE value="Player can folds." />
     <MESSAGE value="Tests refactored." />
+    <MESSAGE value="Player can call" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1021,21 +1021,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Desk.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="4" selection-start="1364" selection-end="1369" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="331" column="16" selection-start="9098" selection-end="9098" vertical-scroll-proportion="0.0">
+        <state line="77" column="16" selection-start="1420" selection-end="1420" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="91" column="46" selection-start="2849" selection-end="2849" vertical-scroll-proportion="0.41234568">
+        <state line="83" column="25" selection-start="2572" selection-end="2572" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="432" column="5" selection-start="11387" selection-end="11387" vertical-scroll-proportion="0.82653064">
           <folding />
         </state>
       </provider>
