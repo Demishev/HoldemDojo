@@ -69,12 +69,12 @@ public class DealerTest {
     }
 
     private void setResponseBet(int bet) {
-        when(playersActionMock.getActionType()).thenReturn(PlayersAction.ActionType.Bet);
+        setResponseType(PlayersAction.ActionType.Bet);
         when(playersActionMock.getBetQuantity()).thenReturn(bet);
     }
 
     private void setResponseFold() {
-        when(playersActionMock.getActionType()).thenReturn(PlayersAction.ActionType.Fold);
+        setResponseType(PlayersAction.ActionType.Fold);
         when(playersActionMock.getBetQuantity()).thenReturn(0);
     }
 
@@ -336,11 +336,11 @@ public class DealerTest {
     public void shouldBet50WhenFirstPlayerMovedLastFirstRoundFirstPlayerBet50Second50AndPlayerActionIsBet500() throws Exception {
         setFirstRound();
 
-        setResponseBet(50);
+        setResponseBet(2 * SMALL_BLIND);
 
         dealer.tick();
 
-        verify(deskMock).setPlayerBet(1, 50);
+        verify(deskMock).setPlayerBet(1, 2 * SMALL_BLIND);
     }
 
     @Test
@@ -367,7 +367,7 @@ public class DealerTest {
     public void shouldFirstPlayerFoldWhenFirstRoundAndFirstMovesAndHeFolds() throws Exception {
         setFirstRound();
 
-        setPlayersBet(1,200);
+        setPlayersBet(1,2 * SMALL_BLIND);
         setLastPlayerMoved(1);
 
         setResponseFold();
@@ -393,7 +393,7 @@ public class DealerTest {
        Круг закрывается, когда одинаковое кол-во ставок.
        Круг закрывается, когда остался один не фолданувший.
 
-       Если игрок фолданул - нужно ставить ему соответствующий статуус.
+       Если игрок фолданул - нужно ставить ему соответствующий статуус.       ok
        Если игрок заколил - нужно фигачить сумму минимальную для хода игры.
        Если игрок ушел в оллин - нужно делать максимальную ставку.
        Если игрок заколил, но у него не хватает фишек - нужно делать оллин.

@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="388e9789-c4c7-491f-aae9-9962e0a04901" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Desk.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Desk.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java" afterPath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java" />
     </list>
     <ignored path="holdem.iws" />
@@ -85,19 +83,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="DealerTest.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="DealerTest.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="387" column="32" selection-start="10398" selection-end="10398" vertical-scroll-proportion="0.0">
+            <state line="75" column="53" selection-start="2367" selection-end="2367" vertical-scroll-proportion="0.8239796">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Dealer.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Dealer.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="80" column="9" selection-start="2526" selection-end="2526" vertical-scroll-proportion="0.54567903">
+            <state line="80" column="9" selection-start="2526" selection-end="2526" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -142,8 +140,8 @@
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/connections/PlayersAction.java" />
         <option value="$PROJECT_DIR$/.travis.yml" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Desk.java" />
-        <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java" />
+        <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java" />
       </list>
     </option>
   </component>
@@ -819,7 +817,11 @@
       <created>1350316993010</created>
       <updated>1350316993010</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Player can folds.">
+      <created>1350321183413</created>
+      <updated>1350321183413</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -905,7 +907,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="binary files removed from vcs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Player can folds." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -927,6 +929,7 @@
     <MESSAGE value="Dealer asks players about moves.&#10;Some refactorings done.&#10;New issues in test file created." />
     <MESSAGE value="JDK versions added to travis yml file." />
     <MESSAGE value="binary files removed from vcs" />
+    <MESSAGE value="Player can folds." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1017,16 +1020,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java">
+    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="387" column="32" selection-start="10398" selection-end="10398" vertical-scroll-proportion="0.0">
+        <state line="80" column="9" selection-start="2526" selection-end="2526" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java">
+    <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="80" column="9" selection-start="2526" selection-end="2526" vertical-scroll-proportion="0.54567903">
+        <state line="75" column="53" selection-start="2367" selection-end="2367" vertical-scroll-proportion="0.8239796">
           <folding />
         </state>
       </provider>
