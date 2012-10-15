@@ -70,4 +70,7 @@ public class Desk {
 
     public void setLastMovedPlayer(int playerNumber) {
     }
+
+    public void setPlayerFold(int playerNumber) {
+    }
 }

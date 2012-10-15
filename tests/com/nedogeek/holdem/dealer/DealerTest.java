@@ -16,6 +16,9 @@ import static org.mockito.Mockito.*;
  * Time: 22:02
  */
 public class DealerTest {
+    private final int COINS_AT_START = 1000;
+    private final int SMALL_BLIND = 10;
+
     private Dealer dealer;
     private Desk deskMock;
     private PlayersAction playersActionMock;
@@ -42,7 +45,7 @@ public class DealerTest {
         int PLAYERS_QUANTITY = 2;
         setPlayersQuantity(PLAYERS_QUANTITY);
         setDealerPlayerNumber(-1);
-        when(deskMock.getPlayerAmount(anyInt())).thenReturn(GameSettings.COINS_AT_START);
+        when(deskMock.getPlayerAmount(anyInt())).thenReturn(COINS_AT_START);
         when(deskMock.getLastMovedPlayer()).thenReturn(-1);
         when(deskMock.getPlayersMove(anyInt())).thenReturn(playersActionMock);
     }
@@ -51,9 +54,28 @@ public class DealerTest {
         when(playersActionMock.getActionType()).thenReturn(actionType);
     }
 
+    private void setFirstRound() {
+        when(deskMock.getGameRound()).thenReturn(1);
+        when(deskMock.getDealerPlayerNumber()).thenReturn(0);
+        when(deskMock.getGameStatus()).thenReturn(GameStatus.Started);
+
+        when(deskMock.getPlayerBet(1)).thenReturn(SMALL_BLIND);
+        when(deskMock.getPlayerAmount(1)).thenReturn(COINS_AT_START - SMALL_BLIND);
+
+        when(deskMock.getPlayerBet(0)).thenReturn(2 * SMALL_BLIND);
+        when(deskMock.getPlayerAmount(0)).thenReturn(COINS_AT_START - 2 * SMALL_BLIND);
+
+        when(deskMock.getLastMovedPlayer()).thenReturn(-1);
+    }
+
     private void setResponseBet(int bet) {
         when(playersActionMock.getActionType()).thenReturn(PlayersAction.ActionType.Bet);
         when(playersActionMock.getBetQuantity()).thenReturn(bet);
+    }
+
+    private void setResponseFold() {
+        when(playersActionMock.getActionType()).thenReturn(PlayersAction.ActionType.Fold);
+        when(playersActionMock.getBetQuantity()).thenReturn(0);
     }
 
     private void setPlayersBet(int playerNumber, int playersBet) {
@@ -161,7 +183,7 @@ public class DealerTest {
     public void shouldSecondPlayerGiveSmallBlindWhenGameStarted() throws Exception {
         dealer.run();
 
-        verify(deskMock).setPlayerBet(1,GameSettings.SMALL_BLIND_AT_START);
+        verify(deskMock).setPlayerBet(1, GameSettings.SMALL_BLIND_AT_START);
     }
 
     @Test
@@ -170,7 +192,7 @@ public class DealerTest {
 
         dealer.tick();
 
-        verify(deskMock).setPlayerBet(0,GameSettings.SMALL_BLIND_AT_START * 2);
+        verify(deskMock).setPlayerBet(0, GameSettings.SMALL_BLIND_AT_START * 2);
     }
 
     @Test
@@ -179,7 +201,7 @@ public class DealerTest {
 
         dealer.tick();
 
-        verify(deskMock).setPlayerBet(2,GameSettings.SMALL_BLIND_AT_START * 2);
+        verify(deskMock).setPlayerBet(2, GameSettings.SMALL_BLIND_AT_START * 2);
     }
 
     @Test
@@ -293,10 +315,7 @@ public class DealerTest {
 
     @Test
     public void shouldMoveSecondPlayerWhenFirstPlayerMovedLastFirstRoundFirstPlayerBet100Second50() throws Exception {
-        setGameRound(1);
-        setPlayersBet(0,100);
-        setPlayersBet(1,50);
-        setLastPlayerMoved(0);
+        setFirstRound();
 
         dealer.tick();
 
@@ -305,10 +324,7 @@ public class DealerTest {
 
     @Test
     public void shouldSetLastMovedPlayer1WhenFirstPlayerMovedLastFirstRoundFirstPlayerBet100Second50AndPlayerActionIsBet500() throws Exception {
-        setGameRound(1);
-        setPlayersBet(0,100);
-        setPlayersBet(1,50);
-        setLastPlayerMoved(0);
+        setFirstRound();
 
         dealer.tick();
 
@@ -318,48 +334,91 @@ public class DealerTest {
 
     @Test
     public void shouldBet50WhenFirstPlayerMovedLastFirstRoundFirstPlayerBet50Second50AndPlayerActionIsBet500() throws Exception {
-        setGameRound(1);
-        setPlayersBet(0,100);
-        setPlayersBet(1,50);
-        setLastPlayerMoved(0);
+        setFirstRound();
+
         setResponseBet(50);
 
         dealer.tick();
 
-        verify(deskMock).setPlayerBet(1,50);
+        verify(deskMock).setPlayerBet(1, 50);
+    }
+
+    @Test
+    public void shouldMovedFirstPlayerWhenDefaultFirstRound() throws Exception {
+        setFirstRound();
+
+        dealer.tick();
+
+        verify(deskMock).getPlayersMove(1);
+    }
+
+    @Test
+    public void shouldSecondPlayerFoldWhenFirstRoundAndHeFolds() throws Exception {
+        setFirstRound();
+
+        setResponseFold();
+
+        dealer.tick();
+
+        verify(deskMock).setPlayerFold(1);
+    }
+
+    @Test
+    public void shouldFirstPlayerFoldWhenFirstRoundAndFirstMovesAndHeFolds() throws Exception {
+        setFirstRound();
+
+        setPlayersBet(1,200);
+        setLastPlayerMoved(1);
+
+        setResponseFold();
+
+        dealer.tick();
+
+        verify(deskMock).setPlayerFold(0);
+    }
+
+    @Test
+    public void shouldNoSecondPlayerFoldWhenFirstRoundAndHeBet2SmallBlinds() throws Exception {
+        setFirstRound();
+
+        setResponseBet(2 * SMALL_BLIND);
+
+        dealer.tick();
+
+        verify(deskMock, never()).setPlayerFold(1);
     }
 
     /*
-        Что бы еще потестить:
-        Круг закрывается, когда одинаковое кол-во ставок.
-        Круг закрывается, когда остался один не фолданувший.
+       Что бы еще потестить:
+       Круг закрывается, когда одинаковое кол-во ставок.
+       Круг закрывается, когда остался один не фолданувший.
 
-        Если игрок фолданул - нужно ставить ему соответствующий статуус.
-        Если игрок заколил - нужно фигачить сумму минимальную для хода игры.
-        Если игрок ушел в оллин - нужно делать максимальную ставку.
-        Если игрок заколил, но у него не хватает фишек - нужно делать оллин.
-        Если игрок райзанул, но этого не хватает - это фолд.
-        Если игрок чеканул, но этого нельзя было делать - это фолд.
-        Если игрок райзанул до предела, когда у него не хватает фишек на разй или ровно столько - это оллин.
+       Если игрок фолданул - нужно ставить ему соответствующий статуус.
+       Если игрок заколил - нужно фигачить сумму минимальную для хода игры.
+       Если игрок ушел в оллин - нужно делать максимальную ставку.
+       Если игрок заколил, но у него не хватает фишек - нужно делать оллин.
+       Если игрок райзанул, но этого не хватает - это фолд.
+       Если игрок чеканул, но этого нельзя было делать - это фолд.
+       Если игрок райзанул до предела, когда у него не хватает фишек на разй или ровно столько - это оллин.
 
-        Если у игрока оллин - то не нужно его трогать.
-        Ход не должен переходить к фолданувшему игроку.
-
-
-        Игра заканчивается, когда остался один фолданувший.
-        Игра заканчивается, когда закрылся 3-й круг.
-
-        Конец игры будет 4-й этап. И в любом случае нужно идти от него..
-        Кстати, желательно, чтобы был такой метод, типа goToEndStage()
-
-        Если выиграл игрок с оллин - то нужно отдать ему только ту часть денег, на которую он заслуживает.
-        Остальные же деньги нужно разыгрывать между другими игроками.
-        А среди них тоже может быть тот, кто оллин сказал. Правило такое - банки нужно делить по очереди.
-        Вот как. Т.е. должна быть возможность создания многих банков...
+       Если у игрока оллин - то не нужно его трогать.
+       Ход не должен переходить к фолданувшему игроку.
 
 
-        А после того, как заканчивается игра - нужно выполнить чего-то типа newGame()
-        Но, если ни у кого фишек не осталось - нужно закончить игровой цикл, записать победителя,
-        выбрать нового диллера и заново.
-     */
+       Игра заканчивается, когда остался один фолданувший.
+       Игра заканчивается, когда закрылся 3-й круг.
+
+       Конец игры будет 4-й этап. И в любом случае нужно идти от него..
+       Кстати, желательно, чтобы был такой метод, типа goToEndStage()
+
+       Если выиграл игрок с оллин - то нужно отдать ему только ту часть денег, на которую он заслуживает.
+       Остальные же деньги нужно разыгрывать между другими игроками.
+       А среди них тоже может быть тот, кто оллин сказал. Правило такое - банки нужно делить по очереди.
+       Вот как. Т.е. должна быть возможность создания многих банков...
+
+
+       А после того, как заканчивается игра - нужно выполнить чего-то типа newGame()
+       Но, если ни у кого фишек не осталось - нужно закончить игровой цикл, записать победителя,
+       выбрать нового диллера и заново.
+    */
 }

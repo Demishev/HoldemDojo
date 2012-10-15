@@ -44,7 +44,7 @@ public class Dealer implements Runnable {
                         moverNumber = nextPlayer(desk.getDealerPlayerNumber());
                     }
                     PlayersAction answer = desk.getPlayersMove(moverNumber);
-                    makeBet(moverNumber, answer.getBetQuantity());
+                    makeMove(moverNumber, answer);
                     break;
             }
         }
@@ -71,6 +71,14 @@ public class Dealer implements Runnable {
         makeBet(bigBlindPlayerNumber, GameSettings.SMALL_BLIND_AT_START * 2);
 
         desk.setNextGameRound();
+    }
+
+    private void makeMove(int playerNumber, PlayersAction playerMove) {
+        makeBet(playerNumber, playerMove.getBetQuantity());
+
+        if (playerMove.getActionType() == PlayersAction.ActionType.Fold) {
+            desk.setPlayerFold(playerNumber);
+        }
     }
 
     private void makeBet(int playerNumber, int bet) {
