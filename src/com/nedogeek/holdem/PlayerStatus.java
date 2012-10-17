@@ -6,5 +6,5 @@ package com.nedogeek.holdem;
  * Time: 17:01
  */
 public enum PlayerStatus {
-    Call, NotMoved, Check
+    Call, NotMoved, Fold, Check
 }

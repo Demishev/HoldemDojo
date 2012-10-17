@@ -103,6 +103,7 @@ public class Dealer implements Runnable {
             case Check:
                 break;
             case Call:
+                desk.setPlayerStatus(playerNumber,PlayerStatus.Call);
                 makeBet(playerNumber, desk.getCallValue() - desk.getPlayerBet(playerNumber));
                 break;
             case Bet:
@@ -124,6 +125,7 @@ public class Dealer implements Runnable {
 
     private void playerFolds(int playerNumber) {
         desk.setPlayerFold(playerNumber);
+        desk.setPlayerStatus(playerNumber, PlayerStatus.Fold);
     }
 
     private void makeBet(int playerNumber, int bet) {

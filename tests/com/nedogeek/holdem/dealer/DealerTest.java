@@ -392,7 +392,7 @@ public class DealerTest {
 
         dealer.tick();
 
-        verify(deskMock).setPlayerFold(1);
+        verify(deskMock).setPlayerStatus(1, PlayerStatus.Fold);
     }
 
     @Test
@@ -406,7 +406,7 @@ public class DealerTest {
 
         dealer.tick();
 
-        verify(deskMock).setPlayerFold(0);
+        verify(deskMock).setPlayerStatus(0, PlayerStatus.Fold);
     }
 
     @Test
@@ -417,7 +417,7 @@ public class DealerTest {
 
         dealer.tick();
 
-        verify(deskMock, never()).setPlayerFold(1);
+        verify(deskMock, never()).setPlayerStatus(1, PlayerStatus.Fold);
     }
 
     @Test
@@ -497,7 +497,49 @@ public class DealerTest {
 
         verify(deskMock).setGameRound(2);
 
-    }  //TODO player status changed after move
+    }
+
+    @Test
+    public void shouldSetSecondPlayerCallStatusWhenFirstRoundAndHeCall() throws Exception {
+        setFirstRound();
+        setResponseCall();
+
+        dealer.tick();
+
+        verify(deskMock).setPlayerStatus(1, PlayerStatus.Call);
+    }
+
+    @Test
+    public void shouldFirstPlayerCallWhenFirstRoundWithSecondPlayerDealerAndFirstCalls() throws Exception {
+        setFirstRoundSecondPlayerDealer();
+        setResponseCall();
+
+        dealer.tick();
+
+        verify(deskMock).setPlayerStatus(0,PlayerStatus.Call);
+    }
+
+    @Test
+    public void shouldNoSecondPlayerSetMoveStatusCallWhenFirstRoundGameSecondPlayerFold() throws Exception {
+        setFirstRound();
+        setResponseFold();
+
+        dealer.tick();
+
+        verify(deskMock, never()).setPlayerStatus(1, PlayerStatus.Call);
+    }
+
+    @Test
+    public void shouldSecondPlayerSetFoldStatusCallWhenFirstRoundGameSecondPlayerFold() throws Exception {
+        setFirstRound();
+        setResponseFold();
+
+        dealer.tick();
+
+        verify(deskMock).setPlayerStatus(1, PlayerStatus.Fold);
+    }
+
+    //TODO New round when all players bet is same as call bet or fold
 
     /*
        Что бы еще потестить:
