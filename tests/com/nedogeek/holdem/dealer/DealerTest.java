@@ -454,26 +454,6 @@ public class DealerTest {
     }
 
     @Test
-    public void shouldSecondPlayerFoldWhenBetSmallerThanNeeded() throws Exception {
-        setFirstRound();
-        setResponseBet(SMALL_BLIND / 2);
-
-        dealer.tick();
-
-        verify(deskMock).setPlayerFold(1);
-    }
-
-    @Test
-    public void shouldFirstPlayerFoldWhenBetSmallerThanNeeded() throws Exception {
-        setFirstRoundSecondPlayerDealer() ;
-        setResponseBet(SMALL_BLIND / 2);
-
-        dealer.tick();
-
-        verify(deskMock).setPlayerFold(0);
-    }
-
-    @Test
     public void shouldFirstPlayerBetSmallBlindWhenFirstRoundWithSecondPlayerDealer() throws Exception {
         setFirstRoundSecondPlayerDealer();
         setResponseCall();
