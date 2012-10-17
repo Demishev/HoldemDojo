@@ -2,6 +2,7 @@ package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.GameStatus;
+import com.nedogeek.holdem.PlayerStatus;
 import com.nedogeek.holdem.connections.PlayersAction;
 import com.nedogeek.holdem.gamingStuff.Desk;
 import org.junit.Before;
@@ -44,11 +45,20 @@ public class DealerTest {
         setGameStatus(GameStatus.Started);
         int PLAYERS_QUANTITY = 2;
         setPlayersQuantity(PLAYERS_QUANTITY);
+        resetPlayersMoves();
         setDealerPlayerNumber(-1);
         when(deskMock.getPlayerAmount(anyInt())).thenReturn(COINS_AT_START);
         when(deskMock.getLastMovedPlayer()).thenReturn(-1);
         setResponseFold();
         when(deskMock.getPlayersMove(anyInt())).thenReturn(playersActionMock);
+    }
+
+    private void resetPlayersMoves() {
+        when(deskMock.getPlayerStatus(anyInt())).thenReturn(PlayerStatus.NotMoved);
+    }
+
+    private void setPlayerStatus(int playerNumber, PlayerStatus playerStatus) {
+        when(deskMock.getPlayerStatus(playerNumber)).thenReturn(playerStatus);
     }
 
     private void setResponseType(PlayersAction.ActionType actionType) {
@@ -323,7 +333,7 @@ public class DealerTest {
     public void shouldSetGameRound1WhenTick() throws Exception {
         dealer.tick();
 
-        verify(deskMock).setNextGameRound();
+        verify(deskMock).setGameRound(1);
     }
 
     @Test
@@ -332,7 +342,7 @@ public class DealerTest {
 
         dealer.tick();
 
-        verify(deskMock, never()).setNextGameRound();
+        verify(deskMock, never()).setGameRound(1);
     }
 
     @Test
@@ -472,6 +482,22 @@ public class DealerTest {
 
         verify(deskMock).setPlayerBet(1, 2 * SMALL_BLIND);
     }
+
+    @Test
+    public void shouldGameStage2WhenGameStage1AndAllPlayersMoved() throws Exception {
+        setFirstRound();
+
+        setPlayersBet(1, 2 * SMALL_BLIND);
+        setPlayerStatus(1, PlayerStatus.Check);
+
+        setPlayerStatus(0, PlayerStatus.Call);
+        setLastPlayerMoved(0);
+
+        dealer.tick();
+
+        verify(deskMock).setGameRound(2);
+
+    }  //TODO player status changed after move
 
     /*
        Что бы еще потестить:

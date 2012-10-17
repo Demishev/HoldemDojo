@@ -2,6 +2,7 @@ package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.GameStatus;
+import com.nedogeek.holdem.PlayerStatus;
 import com.nedogeek.holdem.connections.PlayersAction;
 import com.nedogeek.holdem.gamingStuff.Desk;
 
@@ -25,28 +26,49 @@ public class Dealer implements Runnable {
     }
 
     void tick() {
-
         if (desk.getGameStatus().equals(GameStatus.Ready)) {
             prepareNewGameCycle();
         }
         if (desk.getGameStatus().equals(GameStatus.Started)) {
-            int gameRound = desk.getGameRound();
-            switch (gameRound) {
-                case 0:
-                    newGame();
-                    break;
-                case 1:
-                    int lastMovedPlayer = desk.getLastMovedPlayer();
-                    int moverNumber;
-                    if (lastMovedPlayer != -1) {
-                        moverNumber = nextPlayer(lastMovedPlayer);
-                    } else {
-                        moverNumber = nextPlayer(desk.getDealerPlayerNumber());
-                    }
-                    PlayersAction answer = desk.getPlayersMove(moverNumber);
-                    makeMove(moverNumber, answer);
-                    break;
+            if (hasAvailableMovers()) {
+                makeMove();
+            } else {
+                changeGameRound();
             }
+        }
+    }
+
+    private void changeGameRound() {
+        desk.setGameRound(2);
+    }
+
+    private boolean hasAvailableMovers() {
+        for (int i = 0; i < desk.getPlayersQuantity(); i++) {
+            PlayerStatus playerStatus = desk.getPlayerStatus(i);
+            if (playerStatus.equals(PlayerStatus.NotMoved)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void makeMove() {
+        int gameRound = desk.getGameRound();
+        switch (gameRound) {
+            case 0:
+                newGame();
+                break;
+            case 1:
+                int lastMovedPlayer = desk.getLastMovedPlayer();
+                int moverNumber;
+                if (lastMovedPlayer != -1) {
+                    moverNumber = nextPlayer(lastMovedPlayer);
+                } else {
+                    moverNumber = nextPlayer(desk.getDealerPlayerNumber());
+                }
+                PlayersAction answer = desk.getPlayersMove(moverNumber);
+                makeMove(moverNumber, answer);
+                break;
         }
     }
 
@@ -70,7 +92,7 @@ public class Dealer implements Runnable {
         int bigBlindPlayerNumber = nextPlayer(smallBlindPlayerNumber);
         makeBet(bigBlindPlayerNumber, GameSettings.SMALL_BLIND_AT_START * 2);
 
-        desk.setNextGameRound();
+        desk.setGameRound(1);
     }
 
     private void makeMove(int playerNumber, PlayersAction playerMove) {

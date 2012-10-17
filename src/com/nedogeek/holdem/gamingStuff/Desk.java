@@ -1,6 +1,7 @@
 package com.nedogeek.holdem.gamingStuff;
 
 import com.nedogeek.holdem.GameStatus;
+import com.nedogeek.holdem.PlayerStatus;
 import com.nedogeek.holdem.connections.PlayersAction;
 
 /**
@@ -55,6 +56,7 @@ public class Desk {
         return gameRound;
     }
 
+    @Deprecated
     public void setNextGameRound() {
 
     }
@@ -79,5 +81,12 @@ public class Desk {
     }
 
     public void setCallValue(int callValue) {
+    }
+
+    public PlayerStatus getPlayerStatus(int i) {
+        return null;
+    }
+
+    public void setGameRound(int roundNumber) {
     }
 }
