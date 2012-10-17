@@ -98,7 +98,7 @@ public class DealerTest {
     }
 
     private void setResponseBet(int bet) {
-        setResponseType(PlayersAction.ActionType.Bet);
+        setResponseType(PlayersAction.ActionType.Rise);
         when(playersActionMock.getBetQuantity()).thenReturn(bet);
     }
 
@@ -537,6 +537,36 @@ public class DealerTest {
         dealer.tick();
 
         verify(deskMock).setPlayerStatus(1, PlayerStatus.Fold);
+    }
+
+    @Test
+    public void shouldSecondPlayerSetStatusBetWhenFirstGameRoundSecondPlayerBet() throws Exception {
+        setFirstRound();
+        setResponseBet(0);
+
+        dealer.tick();
+
+        verify(deskMock).setPlayerStatus(1, PlayerStatus.Rise);
+    }
+
+    @Test
+    public void shouldNoSecondPlayerSetStatusBetWhenFirstGameRoundSecondPlayerCall() throws Exception {
+        setFirstRound();
+        setResponseCall();
+
+        dealer.tick();
+
+        verify(deskMock, never()).setPlayerStatus(1, PlayerStatus.Rise);
+    }
+
+    @Test
+    public void shouldFirstPlayerSetStatusBetWhenFirstGameRoundWithDealerSecondPlayerSecondPlayerBet() throws Exception {
+        setFirstRoundSecondPlayerDealer();
+        setResponseBet(0);
+
+        dealer.tick();
+
+        verify(deskMock).setPlayerStatus(0, PlayerStatus.Rise);
     }
 
     //TODO New round when all players bet is same as call bet or fold

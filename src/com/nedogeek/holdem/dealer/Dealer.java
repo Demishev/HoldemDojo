@@ -106,7 +106,8 @@ public class Dealer implements Runnable {
                 desk.setPlayerStatus(playerNumber,PlayerStatus.Call);
                 makeBet(playerNumber, desk.getCallValue() - desk.getPlayerBet(playerNumber));
                 break;
-            case Bet:
+            case Rise:
+                desk.setPlayerStatus(playerNumber, PlayerStatus.Rise);
                 if (desk.getPlayerBet(playerNumber) + playerMove.getBetQuantity() >= minimumRiseValue()) {
                     makeBet(playerNumber, playerMove.getBetQuantity());
                 } else {
@@ -124,7 +125,6 @@ public class Dealer implements Runnable {
     }
 
     private void playerFolds(int playerNumber) {
-        desk.setPlayerFold(playerNumber);
         desk.setPlayerStatus(playerNumber, PlayerStatus.Fold);
     }
 

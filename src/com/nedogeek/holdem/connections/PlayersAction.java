@@ -7,7 +7,7 @@ package com.nedogeek.holdem.connections;
  */
 public class PlayersAction {
     public enum ActionType {
-        Fold, Check, Call, Bet, AllIn
+        Fold, Check, Call, Rise, AllIn
     }
 
     public ActionType getActionType() {
