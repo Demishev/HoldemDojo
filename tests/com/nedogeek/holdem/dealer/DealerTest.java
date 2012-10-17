@@ -97,7 +97,7 @@ public class DealerTest {
         when(deskMock.getCallValue()).thenReturn(minimumBet);
     }
 
-    private void setResponseBet(int bet) {
+    private void setResponseRise(int bet) {
         setResponseType(PlayersAction.ActionType.Rise);
         when(playersActionMock.getBetQuantity()).thenReturn(bet);
     }
@@ -368,7 +368,7 @@ public class DealerTest {
     public void shouldBet50WhenFirstPlayerMovedLastFirstRoundFirstPlayerBet50Second50AndPlayerActionIsBet500() throws Exception {
         setFirstRound();
 
-        setResponseBet(2 * SMALL_BLIND);
+        setResponseRise(2 * SMALL_BLIND);
 
         dealer.tick();
 
@@ -413,7 +413,7 @@ public class DealerTest {
     public void shouldNoSecondPlayerFoldWhenFirstRoundAndHeBet2SmallBlinds() throws Exception {
         setFirstRound();
 
-        setResponseBet(2 * SMALL_BLIND);
+        setResponseRise(2 * SMALL_BLIND);
 
         dealer.tick();
 
@@ -476,7 +476,7 @@ public class DealerTest {
     @Test
     public void shouldSecondPlayerBet2SmallBlindWhenRiseSmallerThan2SmallBlind() throws Exception {
         setFirstRound();
-        setResponseBet(SMALL_BLIND + SMALL_BLIND / 2);
+        setResponseRise(SMALL_BLIND + SMALL_BLIND / 2);
 
         dealer.tick();
 
@@ -542,7 +542,7 @@ public class DealerTest {
     @Test
     public void shouldSecondPlayerSetStatusBetWhenFirstGameRoundSecondPlayerBet() throws Exception {
         setFirstRound();
-        setResponseBet(0);
+        setResponseRise(0);
 
         dealer.tick();
 
@@ -562,11 +562,41 @@ public class DealerTest {
     @Test
     public void shouldFirstPlayerSetStatusBetWhenFirstGameRoundWithDealerSecondPlayerSecondPlayerBet() throws Exception {
         setFirstRoundSecondPlayerDealer();
-        setResponseBet(0);
+        setResponseRise(0);
 
         dealer.tick();
 
         verify(deskMock).setPlayerStatus(0, PlayerStatus.Rise);
+    }
+
+    @Test
+    public void shouldSetAllInMoveSecondPlayerWhenFirstRoundGameAndSecondRise2CoinsAtStart() throws Exception {
+        setFirstRound();
+        setResponseRise(2 * COINS_AT_START);
+
+        dealer.tick();
+
+        verify(deskMock).setPlayerStatus(1, PlayerStatus.AllIn);
+    }
+
+    @Test
+    public void shouldSetAllInMoveFirstPlayerWhenFirstRoundGameWithSecondPlayerDealerAndSecondRise2CoinsAtStart() throws Exception {
+        setFirstRoundSecondPlayerDealer();
+        setResponseRise(2 * COINS_AT_START);
+
+        dealer.tick();
+
+        verify(deskMock).setPlayerStatus(0, PlayerStatus.AllIn);
+    }
+
+    @Test
+    public void shouldDoNotSetAllInSecondPlayerWhenFirstRoundGameAndSecondPlayerRise0() throws Exception {
+        setFirstRound();
+        setResponseRise(0);
+
+        dealer.tick();
+
+        verify(deskMock, never()).setPlayerStatus(1, PlayerStatus.AllIn);
     }
 
     //TODO New round when all players bet is same as call bet or fold

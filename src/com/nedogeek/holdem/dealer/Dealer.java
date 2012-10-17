@@ -87,10 +87,10 @@ public class Dealer implements Runnable {
         desk.setDealerPlayer(dealerPlayerNumber);
 
         int smallBlindPlayerNumber = nextPlayer(dealerPlayerNumber);
-        makeBet(smallBlindPlayerNumber, GameSettings.SMALL_BLIND_AT_START);
+        makeRise(smallBlindPlayerNumber, GameSettings.SMALL_BLIND_AT_START);
 
         int bigBlindPlayerNumber = nextPlayer(smallBlindPlayerNumber);
-        makeBet(bigBlindPlayerNumber, GameSettings.SMALL_BLIND_AT_START * 2);
+        makeRise(bigBlindPlayerNumber, GameSettings.SMALL_BLIND_AT_START * 2);
 
         desk.setGameRound(1);
     }
@@ -104,14 +104,14 @@ public class Dealer implements Runnable {
                 break;
             case Call:
                 desk.setPlayerStatus(playerNumber,PlayerStatus.Call);
-                makeBet(playerNumber, desk.getCallValue() - desk.getPlayerBet(playerNumber));
+                makeRise(playerNumber, desk.getCallValue() - desk.getPlayerBet(playerNumber));
                 break;
             case Rise:
                 desk.setPlayerStatus(playerNumber, PlayerStatus.Rise);
                 if (desk.getPlayerBet(playerNumber) + playerMove.getBetQuantity() >= minimumRiseValue()) {
-                    makeBet(playerNumber, playerMove.getBetQuantity());
+                    makeRise(playerNumber, playerMove.getBetQuantity());
                 } else {
-                    makeBet(playerNumber, minimumRiseValue() - desk.getPlayerBet(playerNumber));
+                    makeRise(playerNumber, minimumRiseValue() - desk.getPlayerBet(playerNumber));
                 }
                 break;
             case AllIn:
@@ -128,15 +128,20 @@ public class Dealer implements Runnable {
         desk.setPlayerStatus(playerNumber, PlayerStatus.Fold);
     }
 
-    private void makeBet(int playerNumber, int bet) {
+    private void makeRise(int playerNumber, int bet) {
         final int playerAmount = desk.getPlayerAmount(playerNumber);
+        boolean isAllInMove = false;
         if (playerAmount < bet) {
             bet = playerAmount;
+            isAllInMove = true;
         }
         desk.setPlayerBet(playerNumber, bet);
         desk.addToPot(bet);
         desk.setPlayerAmount(playerNumber, playerAmount - bet);
         desk.setCallValue(bet);
+        if (isAllInMove) {
+            desk.setPlayerStatus(playerNumber, PlayerStatus.AllIn);
+        }
     }
 
     private int nextPlayer(int playerNumber) {
