@@ -84,16 +84,20 @@ public class Dealer implements Runnable {
                 makeBet(playerNumber, desk.getCallValue() - desk.getPlayerBet(playerNumber));
                 break;
             case Bet:
-                if (desk.getPlayerBet(playerNumber) + playerMove.getBetQuantity() > desk.getCallValue()) {
+                if (desk.getPlayerBet(playerNumber) + playerMove.getBetQuantity() >= minimumRiseValue()) {
                     makeBet(playerNumber, playerMove.getBetQuantity());
                 } else {
-                    playerFolds(playerNumber);
+                    makeBet(playerNumber, minimumRiseValue() - desk.getPlayerBet(playerNumber));
                 }
                 break;
             case AllIn:
                 break;
         }
         desk.setLastMovedPlayer(playerNumber);
+    }
+
+    private int minimumRiseValue() {
+        return desk.getCallValue() + GameSettings.SMALL_BLIND_AT_START;
     }
 
     private void playerFolds(int playerNumber) {

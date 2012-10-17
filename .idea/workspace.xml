@@ -4,7 +4,6 @@
     <list default="true" id="388e9789-c4c7-491f-aae9-9962e0a04901" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Desk.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Desk.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java" afterPath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java" />
     </list>
     <ignored path="holdem.iws" />
@@ -75,8 +74,8 @@
       <property name="field_breakpoints_groupByClasses" value="true" />
       <property name="method_breakpoints_groupByClasses" value="true" />
       <property name="exception_breakpoints_viewId" value="TABLE" />
-      <property name="exception_breakpoints_groupByClasses" value="true" />
       <property name="field_breakpoints_viewId" value="TABLE" />
+      <property name="exception_breakpoints_groupByClasses" value="true" />
       <property name="method_breakpoints_groupByMethods" value="false" />
     </ui_properties>
   </component>
@@ -88,7 +87,7 @@
       <file leaf-file-name="DealerTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="472" column="40" selection-start="12275" selection-end="12275" vertical-scroll-proportion="0.0">
+            <state line="486" column="48" selection-start="12613" selection-end="12613" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -97,7 +96,7 @@
       <file leaf-file-name="Dealer.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="86" column="50" selection-start="2729" selection-end="2729" vertical-scroll-proportion="0.4962963">
+            <state line="80" column="42" selection-start="2493" selection-end="2493" vertical-scroll-proportion="0.04197531">
               <folding />
             </state>
           </provider>
@@ -215,6 +214,60 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Default">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="HoldemDojo">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+        <subPane subId="Production">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="HoldemDojo">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+        <subPane subId="Changed Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+        <subPane subId="All">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="HoldemDojo">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -373,60 +426,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope">
-        <subPane subId="Default">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="HoldemDojo">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-        <subPane subId="Production">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="HoldemDojo">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-        <subPane subId="Changed Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-        <subPane subId="All">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="HoldemDojo">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -450,7 +449,7 @@
       <recent name="com.nedogeek.holdem.connections" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in holdem">
+  <component name="RunManager" selected="JUnit.DealerTest.shouldSecondPlayerBet2SmallBlindWhenRiseSmallerThan2SmallBlind">
     <configuration default="false" name="DealerTest.shouldBet5WhenFirstPlayerHasOnly5Coins" type="JUnit" factoryName="JUnit" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="holdem" />
@@ -567,6 +566,35 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
+    <configuration default="false" name="DealerTest.shouldSecondPlayerBet2SmallBlindWhenRiseSmallerThan2SmallBlind" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="holdem" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.nedogeek.holdem.dealer" />
+      <option name="MAIN_CLASS_NAME" value="com.nedogeek.holdem.dealer.DealerTest" />
+      <option name="METHOD_NAME" value="shouldSecondPlayerBet2SmallBlindWhenRiseSmallerThan2SmallBlind" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
@@ -616,6 +644,24 @@
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="Make" enabled="true" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -642,24 +688,6 @@
       <envs />
       <properties />
       <listeners />
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Make" enabled="true" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method>
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
@@ -736,12 +764,13 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <list size="5">
+    <list size="6">
       <item index="0" class="java.lang.String" itemvalue="JUnit.DealerTest.shouldBet5WhenFirstPlayerHasOnly5Coins" />
       <item index="1" class="java.lang.String" itemvalue="JUnit.DealerTest.shouldThirdPlayerGiveBigBlindWhenGameStartedWith3Players" />
       <item index="2" class="java.lang.String" itemvalue="JUnit.DealerTest.shouldMovedFirstPlayerWhenDefaultFirstRound" />
       <item index="3" class="java.lang.String" itemvalue="JUnit.DealerTest.shouldSecondPlayerBet2SmallBlindWhenCallInFirstRoundWithCallValue2SmallBlind" />
       <item index="4" class="java.lang.String" itemvalue="JUnit.All in holdem" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.DealerTest.shouldSecondPlayerBet2SmallBlindWhenRiseSmallerThan2SmallBlind" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -829,7 +858,11 @@
       <created>1350323389987</created>
       <updated>1350323389987</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Second player can move with same logic as first.">
+      <created>1350332574857</created>
+      <updated>1350332574857</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -870,7 +903,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988048" sideWeight="0.6923077" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.6923077" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2621514" sideWeight="0.6923077" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30769232" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30769232" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -915,7 +948,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="CallValue property added to desk" />
+    <option name="LAST_COMMIT_MESSAGE" value="Second player can move with same logic as first." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -941,6 +974,7 @@
     <MESSAGE value="Tests refactored." />
     <MESSAGE value="Player can call" />
     <MESSAGE value="CallValue property added to desk" />
+    <MESSAGE value="Second player can move with same logic as first." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -991,35 +1025,27 @@
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.7.0_03/src.zip!/java/lang/reflect/Method.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="171" column="0" selection-start="5855" selection-end="5855" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="171" column="0" selection-start="5855" selection-end="5855" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/mockito/mockito-all/1.8.4/mockito-all-1.8.4.jar!/org/mockito/internal/util/ObjectMethodsGuru.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="19" selection-start="672" selection-end="672" vertical-scroll-proportion="-7.2">
-          <folding />
-        </state>
+        <state line="16" column="19" selection-start="672" selection-end="672" vertical-scroll-proportion="-7.2" />
       </provider>
     </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/mockito/mockito-all/1.8.4/mockito-all-1.8.4.jar!/org/mockito/internal/creation/MethodInterceptorFilter.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="28" selection-start="836" selection-end="836" vertical-scroll-proportion="-3.8">
-          <folding />
-        </state>
+        <state line="14" column="28" selection-start="836" selection-end="836" vertical-scroll-proportion="-3.8" />
       </provider>
     </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.10/junit-4.10.jar!/org/junit/internal/runners/model/ReflectiveCallable.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="40" selection-start="397" selection-end="397" vertical-scroll-proportion="0.5">
-          <folding />
-        </state>
+        <state line="11" column="40" selection-start="397" selection-end="397" vertical-scroll-proportion="0.5" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.travis.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="14" selection-start="47" selection-end="47" vertical-scroll-proportion="0.12592593">
+        <state line="0" column="0" selection-start="0" selection-end="98" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -1033,14 +1059,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="472" column="40" selection-start="12275" selection-end="12275" vertical-scroll-proportion="0.0">
+        <state line="486" column="48" selection-start="12613" selection-end="12613" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="86" column="50" selection-start="2729" selection-end="2729" vertical-scroll-proportion="0.4962963">
+        <state line="80" column="42" selection-start="2493" selection-end="2493" vertical-scroll-proportion="0.04197531">
           <folding />
         </state>
       </provider>

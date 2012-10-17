@@ -481,10 +481,19 @@ public class DealerTest {
         dealer.tick();
 
         verify(deskMock).setPlayerBet(0,SMALL_BLIND);
-
     }
 
-/*
+    @Test
+    public void shouldSecondPlayerBet2SmallBlindWhenRiseSmallerThan2SmallBlind() throws Exception {
+        setFirstRound();
+        setResponseBet(SMALL_BLIND + SMALL_BLIND / 2);
+
+        dealer.tick();
+
+        verify(deskMock).setPlayerBet(1, 2 * SMALL_BLIND);
+    }
+
+    /*
        Что бы еще потестить:
        Круг закрывается, когда одинаковое кол-во ставок.
        Круг закрывается, когда остался один не фолданувший.
