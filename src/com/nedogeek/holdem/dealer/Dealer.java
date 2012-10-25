@@ -87,12 +87,21 @@ public class Dealer implements Runnable {
         desk.setDealerPlayer(dealerPlayerNumber);
 
         int smallBlindPlayerNumber = nextPlayer(dealerPlayerNumber);
-        makeRise(smallBlindPlayerNumber, GameSettings.SMALL_BLIND_AT_START);
+        makeStartBet(smallBlindPlayerNumber, GameSettings.SMALL_BLIND_AT_START);
 
         int bigBlindPlayerNumber = nextPlayer(smallBlindPlayerNumber);
-        makeRise(bigBlindPlayerNumber, GameSettings.SMALL_BLIND_AT_START * 2);
+        makeStartBet(bigBlindPlayerNumber, GameSettings.SMALL_BLIND_AT_START * 2);
 
         desk.setGameRound(1);
+    }
+
+    private void makeStartBet(int playerNumber, int bet) {
+        final int playerAmount = desk.getPlayerAmount(playerNumber);
+        if (playerAmount > bet) {
+            makeBet(playerNumber, bet);
+        } else {
+            makeBet(playerNumber, playerAmount);
+        }
     }
 
     private void makeMove(int playerNumber, PlayersAction playerMove) {
@@ -104,24 +113,31 @@ public class Dealer implements Runnable {
                 break;
             case Call:
                 desk.setPlayerStatus(playerNumber,PlayerStatus.Call);
-                makeRise(playerNumber, desk.getCallValue() - desk.getPlayerBet(playerNumber));
+                makeBet(playerNumber, desk.getCallValue() - desk.getPlayerBet(playerNumber));
                 break;
             case Rise:
-                desk.setPlayerStatus(playerNumber, PlayerStatus.Rise);
-                if (desk.getPlayerBet(playerNumber) + playerMove.getBetQuantity() >= minimumRiseValue()) {
-                    makeRise(playerNumber, playerMove.getBetQuantity());
+                final int bet = playerMove.getBetQuantity();
+
+                if (isAllInMove(playerNumber, bet)) {
+                    makeAllIn(playerNumber);
                 } else {
-                    makeRise(playerNumber, minimumRiseValue() - desk.getPlayerBet(playerNumber));
+                    makeRise(playerNumber, bet);
                 }
                 break;
             case AllIn:
+                makeAllIn(playerNumber);
                 break;
         }
         desk.setLastMovedPlayer(playerNumber);
     }
 
+    private boolean isAllInMove(int playerNumber, int bet) {
+        final int playerAmount = desk.getPlayerAmount(playerNumber);
+        return playerAmount <= bet;
+    }
+
     private int minimumRiseValue() {
-        return desk.getCallValue() + GameSettings.SMALL_BLIND_AT_START;
+        return desk.getCallValue() + 2 * GameSettings.SMALL_BLIND_AT_START;
     }
 
     private void playerFolds(int playerNumber) {
@@ -129,19 +145,28 @@ public class Dealer implements Runnable {
     }
 
     private void makeRise(int playerNumber, int bet) {
-        final int playerAmount = desk.getPlayerAmount(playerNumber);
-        boolean isAllInMove = false;
-        if (playerAmount < bet) {
-            bet = playerAmount;
-            isAllInMove = true;
+        desk.setPlayerStatus(playerNumber, PlayerStatus.Rise);
+
+        if (desk.getPlayerBet(playerNumber) + bet >= minimumRiseValue()) {
+            makeBet(playerNumber, bet);
+        } else {
+            makeBet(playerNumber, minimumRiseValue() - desk.getPlayerBet(playerNumber));
         }
-        desk.setPlayerBet(playerNumber, bet);
+    }
+
+    private void makeBet(int playerNumber, int bet) {
+        final int playerAmount = desk.getPlayerAmount(playerNumber);
+        final int previousBet = desk.getPlayerBet(playerNumber);
+        desk.setPlayerBet(playerNumber, bet + previousBet);
         desk.addToPot(bet);
         desk.setPlayerAmount(playerNumber, playerAmount - bet);
         desk.setCallValue(bet);
-        if (isAllInMove) {
-            desk.setPlayerStatus(playerNumber, PlayerStatus.AllIn);
-        }
+    }
+
+    private void makeAllIn(int playerNumber) {
+        final int playerAmount = desk.getPlayerAmount(playerNumber);
+        desk.setPlayerStatus(playerNumber, PlayerStatus.AllIn);
+        makeBet(playerNumber, playerAmount);
     }
 
     private int nextPlayer(int playerNumber) {

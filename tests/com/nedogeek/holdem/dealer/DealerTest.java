@@ -105,6 +105,9 @@ public class DealerTest {
     private void setResponseFold() {
         setResponseType(PlayersAction.ActionType.Fold);
     }
+    private void setResponseAllIn() {
+        setResponseType(PlayersAction.ActionType.AllIn);
+    }
 
     private void setResponseCall() {
         setResponseType(PlayersAction.ActionType.Call);
@@ -247,21 +250,21 @@ public class DealerTest {
 
     @Test
     public void shouldSmallBlindAddedToPotWhenGameStarted() throws Exception {
-        dealer.run();
+        dealer.tick();
 
         verify(deskMock).addToPot(GameSettings.SMALL_BLIND_AT_START);
     }
 
     @Test
     public void shouldBigBlindAddedToPotWhenGameStarted() throws Exception {
-        dealer.run();
+        dealer.tick();
 
         verify(deskMock).addToPot(GameSettings.SMALL_BLIND_AT_START * 2);
     }
 
     @Test
     public void shouldSecondPlayerAmountMinusSmallBlindWhenGameStarted() throws Exception {
-        dealer.run();
+        dealer.tick();
 
         verify(deskMock).setPlayerAmount(1, GameSettings.COINS_AT_START - GameSettings.SMALL_BLIND_AT_START);
     }
@@ -279,7 +282,7 @@ public class DealerTest {
     public void shouldFirstPlayerAmountIs0HasOnly5Coins() throws Exception {
         setPlayerAmount(0, 5);
 
-        dealer.run();
+        dealer.tick();
 
         verify(deskMock).setPlayerAmount(0, 0);
     }
@@ -372,7 +375,7 @@ public class DealerTest {
 
         dealer.tick();
 
-        verify(deskMock).setPlayerBet(1, 2 * SMALL_BLIND);
+        verify(deskMock).setPlayerBet(1, 4 * SMALL_BLIND);
     }
 
     @Test
@@ -428,7 +431,7 @@ public class DealerTest {
 
         dealer.tick();
 
-        verify(deskMock).setPlayerBet(1, SMALL_BLIND);
+        verify(deskMock).setPlayerBet(1, 2 * SMALL_BLIND);
     }
 
     @Test
@@ -451,7 +454,7 @@ public class DealerTest {
 
         dealer.tick();
 
-        verify(deskMock).setPlayerBet(1, SMALL_BLIND);
+        verify(deskMock).setPlayerBet(1, 2 * SMALL_BLIND);
     }
 
     @Test
@@ -470,17 +473,17 @@ public class DealerTest {
 
         dealer.tick();
 
-        verify(deskMock).setPlayerBet(0,SMALL_BLIND);
+        verify(deskMock).setPlayerBet(0,2 * SMALL_BLIND);
     }
 
     @Test
     public void shouldSecondPlayerBet2SmallBlindWhenRiseSmallerThan2SmallBlind() throws Exception {
         setFirstRound();
-        setResponseRise(SMALL_BLIND + SMALL_BLIND / 2);
+        setResponseRise(SMALL_BLIND / 2);
 
         dealer.tick();
 
-        verify(deskMock).setPlayerBet(1, 2 * SMALL_BLIND);
+        verify(deskMock).setPlayerBet(1, 4 * SMALL_BLIND);
     }
 
     @Test
@@ -550,7 +553,7 @@ public class DealerTest {
     }
 
     @Test
-    public void shouldNoSecondPlayerSetStatusBetWhenFirstGameRoundSecondPlayerCall() throws Exception {
+    public void shouldNoSecondPlayerSetStatusRiseWhenFirstGameRoundSecondPlayerCall() throws Exception {
         setFirstRound();
         setResponseCall();
 
@@ -597,6 +600,26 @@ public class DealerTest {
         dealer.tick();
 
         verify(deskMock, never()).setPlayerStatus(1, PlayerStatus.AllIn);
+    }
+
+    @Test
+    public void shouldSetAllInSecondPlayerWhenFirstRoundGameAndSecondPlayerAllIn() throws Exception {
+        setFirstRound();
+        setResponseAllIn();
+
+        dealer.tick();
+
+        verify(deskMock).setPlayerStatus(1, PlayerStatus.AllIn);
+    }
+
+    @Test
+    public void shouldNameWhen() throws Exception {
+        setFirstRound();
+        setResponseAllIn();
+
+        dealer.tick();
+
+        verify(deskMock).setPlayerBet(1, COINS_AT_START);
     }
 
     //TODO New round when all players bet is same as call bet or fold
