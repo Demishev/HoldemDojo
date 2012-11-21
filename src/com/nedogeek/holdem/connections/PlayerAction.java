@@ -5,7 +5,7 @@ package com.nedogeek.holdem.connections;
  * Date: 08.10.12
  * Time: 21:47
  */
-public class PlayersAction {
+public class PlayerAction {
     public enum ActionType {
         Fold, Check, Call, Rise, AllIn
     }

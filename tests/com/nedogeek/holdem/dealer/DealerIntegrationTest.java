@@ -4,7 +4,7 @@ import com.nedogeek.holdem.GameRound;
 import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.GameStatus;
 import com.nedogeek.holdem.PlayerStatus;
-import com.nedogeek.holdem.connections.PlayersAction;
+import com.nedogeek.holdem.connections.PlayerAction;
 import com.nedogeek.holdem.gamingStuff.Desk;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,13 +17,13 @@ import static org.mockito.Mockito.*;
  * Date: 05.10.12
  * Time: 22:02
  */
-public class DealerTest {
+public class DealerIntegrationTest {
     private final int COINS_AT_START = 1000;
     private final int SMALL_BLIND = 10;
 
     private Dealer dealer;
     private Desk deskMock;
-    private PlayersAction playersActionMock;
+    private PlayerAction playerActionMock;
 
     @Before
     public void setUp() throws Exception {
@@ -34,7 +34,7 @@ public class DealerTest {
     }
 
     private void resetPlayerActionMock() {
-        playersActionMock = mock(PlayersAction.class);
+        playerActionMock = mock(PlayerAction.class);
     }
 
     private void createDealer() {
@@ -52,7 +52,7 @@ public class DealerTest {
         when(deskMock.getPlayerAmount(anyInt())).thenReturn(COINS_AT_START);
         when(deskMock.getLastMovedPlayer()).thenReturn(-1);
         setResponseFold();
-        when(deskMock.getPlayersMove(anyInt())).thenReturn(playersActionMock);
+        when(deskMock.getPlayersMove(anyInt())).thenReturn(playerActionMock);
     }
 
     private void resetPlayersMoves() {
@@ -63,8 +63,8 @@ public class DealerTest {
         when(deskMock.getPlayerStatus(playerNumber)).thenReturn(playerStatus);
     }
 
-    private void setResponseType(PlayersAction.ActionType actionType) {
-        when(playersActionMock.getActionType()).thenReturn(actionType);
+    private void setResponseType(PlayerAction.ActionType actionType) {
+        when(playerActionMock.getActionType()).thenReturn(actionType);
     }
 
     private void setFirstRound() {
@@ -100,19 +100,19 @@ public class DealerTest {
     }
 
     private void setResponseRise(int bet) {
-        setResponseType(PlayersAction.ActionType.Rise);
-        when(playersActionMock.getBetQuantity()).thenReturn(bet);
+        setResponseType(PlayerAction.ActionType.Rise);
+        when(playerActionMock.getBetQuantity()).thenReturn(bet);
     }
 
     private void setResponseFold() {
-        setResponseType(PlayersAction.ActionType.Fold);
+        setResponseType(PlayerAction.ActionType.Fold);
     }
     private void setResponseAllIn() {
-        setResponseType(PlayersAction.ActionType.AllIn);
+        setResponseType(PlayerAction.ActionType.AllIn);
     }
 
     private void setResponseCall() {
-        setResponseType(PlayersAction.ActionType.Call);
+        setResponseType(PlayerAction.ActionType.Call);
     }
 
     private void setPlayersBet(int playerNumber, int playersBet) {
@@ -152,7 +152,7 @@ public class DealerTest {
 
     @Test
     public void shouldDeskIsGamePossibleWhenStart() throws Exception {
-        dealer.run();
+        dealer.tick();
 
         verify(deskMock, atLeast(1)).getGameStatus();
     }
@@ -170,7 +170,7 @@ public class DealerTest {
     public void shouldSetGameStatusStartedWhenGameStatusReady() throws Exception {
         setGameStatus(GameStatus.Ready);
 
-        dealer.run();
+        dealer.tick();
 
         verify(deskMock).setGameStatus(GameStatus.Started);
     }
@@ -197,28 +197,28 @@ public class DealerTest {
     public void shouldSecondPlayerSetDefaultAmountWhenGameStarted() throws Exception {
         setGameStatus(GameStatus.Ready);
 
-        dealer.run();
+        dealer.tick();
 
         verify(deskMock).setPlayerAmount(1, GameSettings.COINS_AT_START);
     }
 
     @Test
     public void shouldSetDealerPlayer0WhenStartGaming() throws Exception {
-        dealer.run();
+        dealer.tick();
 
         verify(deskMock).setDealerPlayer(0);
     }
 
     @Test
     public void shouldShuffleCardsWhenStartGaming() throws Exception {
-        dealer.run();
+        dealer.tick();
 
         verify(deskMock).shuffleCards();
     }
 
     @Test
     public void shouldSecondPlayerGiveSmallBlindWhenGameStarted() throws Exception {
-        dealer.run();
+        dealer.tick();
 
         verify(deskMock).setPlayerBet(1, GameSettings.SMALL_BLIND_AT_START);
     }

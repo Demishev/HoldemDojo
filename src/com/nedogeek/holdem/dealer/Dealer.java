@@ -3,7 +3,7 @@ package com.nedogeek.holdem.dealer;
 import com.nedogeek.holdem.GameRound;
 import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.GameStatus;
-import com.nedogeek.holdem.connections.PlayersAction;
+import com.nedogeek.holdem.connections.PlayerAction;
 import com.nedogeek.holdem.gamingStuff.Desk;
 
 /**
@@ -26,7 +26,7 @@ public class Dealer implements Runnable {
     }
 
     public void run() {
-        tick();
+        //TODO not codded yet
     }
 
     void tick() {
@@ -37,13 +37,9 @@ public class Dealer implements Runnable {
             if (playersManager.hasAvailableMovers()) {
                 makeMove();
             } else {
-                setNextGameRound();
+                desk.setNextGameRound();
             }
         }
-    }
-
-    private void setNextGameRound() {
-        desk.setNextGameRound();
     }
 
     private void makeMove() {
@@ -53,15 +49,8 @@ public class Dealer implements Runnable {
                 newGameSetter.setNewGame();
                 break;
             case BLIND:
-                int lastMovedPlayer = desk.getLastMovedPlayer();
-                int moverNumber;
-                if (lastMovedPlayer != -1) {
-                    moverNumber = playersManager.nextPlayer(lastMovedPlayer);
-                } else {
-                    moverNumber = playersManager.nextPlayer(desk.getDealerPlayerNumber());
-                }
-                PlayersAction answer = desk.getPlayersMove(moverNumber);
-                makeMove(moverNumber, answer);
+                PlayerAction answer = desk.getPlayersMove(playersManager.getMoverNumber());
+                moveManager.makeMove(playersManager.getMoverNumber(), answer);
                 break;
         }
     }
@@ -72,26 +61,5 @@ public class Dealer implements Runnable {
         for (int i = 0; i < playersQuantity; i++) {
             desk.setPlayerAmount(i, GameSettings.COINS_AT_START);
         }
-    }
-
-
-    private void makeMove(int playerNumber, PlayersAction playerMove) {
-        switch (playerMove.getActionType()) {
-            case Fold:
-                moveManager.makeFold(playerNumber);
-                break;
-            case Check:
-                break;
-            case Call:
-                moveManager.makeCall(playerNumber);
-                break;
-            case Rise:
-                moveManager.makeRise(playerNumber, playerMove.getBetQuantity());
-                break;
-            case AllIn:
-                moveManager.makeAllIn(playerNumber);
-                break;
-        }
-        desk.setLastMovedPlayer(playerNumber);
     }
 }

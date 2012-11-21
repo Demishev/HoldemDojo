@@ -2,6 +2,7 @@ package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.PlayerStatus;
+import com.nedogeek.holdem.connections.PlayerAction;
 import com.nedogeek.holdem.gamingStuff.Desk;
 
 /**
@@ -16,6 +17,26 @@ public class MoveManager {
         this.desk = desk;
     }
 
+    void makeMove(int playerNumber, PlayerAction playerMove) {
+        switch (playerMove.getActionType()) {
+            case Fold:
+                makeFold(playerNumber);
+                break;
+            case Check:
+                break;
+            case Call:
+                makeCall(playerNumber);
+                break;
+            case Rise:
+                makeRise(playerNumber, playerMove.getBetQuantity());
+                break;
+            case AllIn:
+                makeAllIn(playerNumber);
+                break;
+        }
+        desk.setLastMovedPlayer(playerNumber);
+    }
+
     void makeBet(int playerNumber, int betValue) {
         final int playerAmount = desk.getPlayerAmount(playerNumber);
         final int previousBet = desk.getPlayerBet(playerNumber);
@@ -25,22 +46,22 @@ public class MoveManager {
         desk.setCallValue(betValue);
     }
 
-    void makeFold(int playerNumber) {
+    private void makeFold(int playerNumber) {
         desk.setPlayerStatus(playerNumber, PlayerStatus.Fold);
     }
 
-    void makeCall(int playerNumber) {
+    private void makeCall(int playerNumber) {
         desk.setPlayerStatus(playerNumber,PlayerStatus.Call);
         makeBet(playerNumber, desk.getCallValue() - desk.getPlayerBet(playerNumber));
     }
 
-    void makeAllIn(int playerNumber) {
+    private void makeAllIn(int playerNumber) {
         final int playerAmount = desk.getPlayerAmount(playerNumber);
         desk.setPlayerStatus(playerNumber, PlayerStatus.AllIn);
         makeBet(playerNumber, playerAmount);
     }
 
-    void makeRise(int playerNumber, int riseValue) {
+    private void makeRise(int playerNumber, int riseValue) {
         if (isAllInMove(playerNumber, riseValue)) {
             makeAllIn(playerNumber);
         } else {

@@ -3,7 +3,7 @@ package com.nedogeek.holdem.gamingStuff;
 import com.nedogeek.holdem.GameRound;
 import com.nedogeek.holdem.GameStatus;
 import com.nedogeek.holdem.PlayerStatus;
-import com.nedogeek.holdem.connections.PlayersAction;
+import com.nedogeek.holdem.connections.PlayerAction;
 
 /**
  * User: Konstantin Demishev
@@ -51,7 +51,7 @@ public class Desk {
         return 0;
     }
 
-    public PlayersAction getPlayersMove(int playerNumber) {
+    public PlayerAction getPlayersMove(int playerNumber) {
         return null;
     }
 

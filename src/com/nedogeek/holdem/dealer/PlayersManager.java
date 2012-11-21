@@ -34,4 +34,11 @@ public class PlayersManager {
         }
         return false;
     }
+
+    int getMoverNumber() {
+        int lastMovedPlayer = desk.getLastMovedPlayer();
+
+        return (lastMovedPlayer != -1) ?
+                nextPlayer(lastMovedPlayer) : nextPlayer(desk.getDealerPlayerNumber());
+    }
 }
