@@ -60,9 +60,8 @@ public class MoveManager {
     }
 
     private void makeAllIn(int playerNumber) {
-        final int playerAmount = desk.getPlayerAmount(playerNumber);
         desk.setPlayerStatus(playerNumber, PlayerStatus.AllIn);
-        makeBet(playerNumber, playerAmount);
+        makeBet(playerNumber, desk.getPlayerAmount(playerNumber));
     }
 
     private void makeRise(int playerNumber, int riseValue) {
@@ -79,8 +78,7 @@ public class MoveManager {
     }
 
     private boolean isAllInMove(int playerNumber, int bet) {
-        final int playerAmount = desk.getPlayerAmount(playerNumber);
-        return playerAmount <= bet;
+        return desk.getPlayerAmount(playerNumber) <= bet;
     }
 
     private int minimumRiseValue() {
