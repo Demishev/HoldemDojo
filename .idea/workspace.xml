@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="388e9789-c4c7-491f-aae9-9962e0a04901" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/MoveManager.java" />
+    <list default="true" id="388e9789-c4c7-491f-aae9-9962e0a04901" name="Default" comment="Moves extracted to MoveManager class">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/NewGameSetter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/PlayersManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/MoveManager.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/MoveManager.java" />
     </list>
     <ignored path="holdem.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -84,11 +86,33 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Dealer.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Dealer.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="121" column="0" selection-start="3643" selection-end="3643" vertical-scroll-proportion="-0.0952381">
+            <state line="36" column="51" selection-start="1024" selection-end="1024" vertical-scroll-proportion="0.0">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PlayersManager.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/PlayersManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="27" column="4" selection-start="605" selection-end="605" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NewGameSetter.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/NewGameSetter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="35" column="0" selection-start="1082" selection-end="1082" vertical-scroll-proportion="0.1880597">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -96,7 +120,7 @@
       <file leaf-file-name="MoveManager.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/MoveManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="0" selection-start="1335" selection-end="1335" vertical-scroll-proportion="0.0">
+            <state line="54" column="0" selection-start="1787" selection-end="1787" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -149,8 +173,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/connections/PlayerTest.java" />
-        <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/connections/Player.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/engine/Engine.java" />
         <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/engine/EngineTest.java" />
@@ -164,7 +186,9 @@
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Desk.java" />
         <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/MoveManager.java" />
+        <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/PlayersManager.java" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java" />
+        <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/NewGameSetter.java" />
       </list>
     </option>
   </component>
@@ -895,7 +919,11 @@
       <created>1353532430471</created>
       <updated>1353532430471</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Moves extracted to MoveManager class">
+      <created>1353534039038</created>
+      <updated>1353534039038</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -981,7 +1009,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="GameRound is enum." />
+    <option name="LAST_COMMIT_MESSAGE" value="Moves extracted to MoveManager class" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1016,6 +1044,7 @@
     <MESSAGE value="AllInMoveStatus works" />
     <MESSAGE value="AllInMoveStatus works&#10;Test cases changed&#10;Refactored&#10;&#10;" />
     <MESSAGE value="GameRound is enum." />
+    <MESSAGE value="Moves extracted to MoveManager class" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1025,16 +1054,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/.travis.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="98" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/PlayerStatus.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="0" selection-start="137" selection-end="137" vertical-scroll-proportion="0.37777779" />
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.7.0_03/src.zip!/java/lang/Enum.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="142" column="0" selection-start="4359" selection-end="4359" vertical-scroll-proportion="0.2997199" />
@@ -1107,7 +1126,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/MoveManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="0" selection-start="1335" selection-end="1335" vertical-scroll-proportion="0.0">
+        <state line="54" column="0" selection-start="1787" selection-end="1787" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/PlayersManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="4" selection-start="605" selection-end="605" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1116,8 +1144,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="121" column="0" selection-start="3643" selection-end="3643" vertical-scroll-proportion="-0.0952381">
+        <state line="36" column="51" selection-start="1024" selection-end="1024" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/NewGameSetter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="0" selection-start="1082" selection-end="1082" vertical-scroll-proportion="0.1880597">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

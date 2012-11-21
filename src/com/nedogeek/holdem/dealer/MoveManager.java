@@ -53,7 +53,6 @@ public class MoveManager {
         }
     }
 
-
     private boolean isAllInMove(int playerNumber, int bet) {
         final int playerAmount = desk.getPlayerAmount(playerNumber);
         return playerAmount <= bet;
@@ -62,5 +61,4 @@ public class MoveManager {
     private int minimumRiseValue() {
         return desk.getCallValue() + 2 * GameSettings.SMALL_BLIND_AT_START;
     }
-
 }
