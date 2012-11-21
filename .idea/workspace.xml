@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="388e9789-c4c7-491f-aae9-9962e0a04901" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/GameRound.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/MoveManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Desk.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Desk.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java" afterPath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java" />
     </list>
     <ignored path="holdem.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -86,19 +84,30 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Dealer.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Dealer.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="54" column="23" selection-start="1363" selection-end="1363" vertical-scroll-proportion="0.0">
+            <state line="121" column="0" selection-start="3643" selection-end="3643" vertical-scroll-proportion="-0.0952381">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DealerTest.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="MoveManager.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/MoveManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="43" column="0" selection-start="1335" selection-end="1335" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DealerTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="38" selection-start="1193" selection-end="1193" vertical-scroll-proportion="0.47965115">
+            <state line="44" column="63" selection-start="1111" selection-end="1111" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -140,7 +149,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/about.txt" />
         <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/connections/PlayerTest.java" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/connections/Player.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
@@ -154,8 +162,9 @@
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/GameSettings.java" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/GameRound.java" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Desk.java" />
-        <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java" />
         <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java" />
+        <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/MoveManager.java" />
+        <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java" />
       </list>
     </option>
   </component>
@@ -436,6 +445,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.nedogeek.holdem.dealer" />
       <recent name="com.nedogeek.holdem.engine" />
       <recent name="com.nedogeek.holdem.connections" />
     </key>
@@ -881,7 +891,11 @@
       <created>1351163898819</created>
       <updated>1351163898819</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="GameRound is enum.">
+      <created>1353532430471</created>
+      <updated>1353532430471</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -967,7 +981,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="AllInMoveStatus works&#10;Test cases changed&#10;Refactored&#10;&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="GameRound is enum." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1001,6 +1015,7 @@
     <MESSAGE value="Deprecated code replaced.&#10;Player status rise works." />
     <MESSAGE value="AllInMoveStatus works" />
     <MESSAGE value="AllInMoveStatus works&#10;Test cases changed&#10;Refactored&#10;&#10;" />
+    <MESSAGE value="GameRound is enum." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1010,11 +1025,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/org/mockito/mockito-all/1.8.4/mockito-all-1.8.4.jar!/org/mockito/internal/util/ObjectMethodsGuru.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="19" selection-start="672" selection-end="672" vertical-scroll-proportion="-7.2" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.travis.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="98" vertical-scroll-proportion="0.0" />
@@ -1088,16 +1098,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java">
+    <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="23" selection-start="1363" selection-end="1363" vertical-scroll-proportion="0.0">
+        <state line="44" column="63" selection-start="1111" selection-end="1111" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java">
+    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/MoveManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="38" selection-start="1193" selection-end="1193" vertical-scroll-proportion="0.47965115">
+        <state line="43" column="0" selection-start="1335" selection-end="1335" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="121" column="0" selection-start="3643" selection-end="3643" vertical-scroll-proportion="-0.0952381">
           <folding />
         </state>
       </provider>
