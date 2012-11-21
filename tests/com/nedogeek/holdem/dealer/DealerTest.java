@@ -1,13 +1,12 @@
 package com.nedogeek.holdem.dealer;
 
+import com.nedogeek.holdem.GameRound;
 import com.nedogeek.holdem.GameStatus;
 import com.nedogeek.holdem.gamingStuff.Desk;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * User: Konstantin Demishev
@@ -43,4 +42,13 @@ public class DealerTest {
         verify(gameCycleManagerMock).endGameCycle();
     }
 
+    @Test
+    public void shouldNoPlayerManagerHasAvailableMovesWhenGameStatusSTARTEDAndGameRoundINITIAL() throws Exception {
+        when(deskMock.getGameStatus()).thenReturn(GameStatus.STARTED);
+        when(deskMock.getGameRound()).thenReturn(GameRound.INITIAL);
+
+        dealer.tick();
+
+        verify(playersManagerMock, never()).hasAvailableMovers();
+    }
 }

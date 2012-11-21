@@ -42,11 +42,7 @@ public class Dealer implements Runnable {
                 gameCycleManager.prepareNewGameCycle();
                 break;
             case STARTED:
-                if (playersManager.hasAvailableMovers()) {
-                    makeGameAction();
-                } else {
-                    desk.setNextGameRound();
-                }
+                makeGameAction();
                 break;
             case CYCLE_ENDED:
                 gameCycleManager.endGameCycle();
@@ -60,7 +56,11 @@ public class Dealer implements Runnable {
                 newGameSetter.setNewGame();
                 break;
             case BLIND:
-                moveManager.makeMove(playersManager.getMoverNumber(), playersManager.getPlayerMove());
+                if (playersManager.hasAvailableMovers()) {
+                    moveManager.makeMove(playersManager.getMoverNumber(), playersManager.getPlayerMove());
+                } else {
+                    desk.setNextGameRound();
+                }
                 break;
         }
     }
