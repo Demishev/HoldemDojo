@@ -24,4 +24,7 @@ public class GameCycleManager {
             desk.setPlayerAmount(i, GameSettings.COINS_AT_START);
         }
     }
+
+    public void endGameCycle() {
+    }
 }

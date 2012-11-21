@@ -24,6 +24,15 @@ public class Dealer implements Runnable {
         gameCycleManager = new GameCycleManager(desk);
     }
 
+    Dealer(Desk deskMock, MoveManager moveManagerMock, NewGameSetter newGameSetterMock,
+           PlayersManager playersManagerMock, GameCycleManager gameCycleManagerMock) {
+        desk = deskMock;
+        moveManager = moveManagerMock;
+        newGameSetter = newGameSetterMock;
+        playersManager = playersManagerMock;
+        gameCycleManager = gameCycleManagerMock;
+    }
+
     public void run() {
         //TODO not codded yet
     }
@@ -41,6 +50,7 @@ public class Dealer implements Runnable {
                 }
                 break;
             case CYCLE_ENDED:
+                gameCycleManager.endGameCycle();
                 break;
         }
     }
