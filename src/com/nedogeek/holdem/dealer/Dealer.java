@@ -55,7 +55,9 @@ public class Dealer implements Runnable {
             case INITIAL:
                 newGameSetter.setNewGame();
                 break;
-            case BLIND:
+            case FINAL:
+                break;
+            default:
                 if (playersManager.hasAvailableMovers()) {
                     moveManager.makeMove(playersManager.getMoverNumber(), playersManager.getPlayerMove());
                 } else {

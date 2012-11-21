@@ -51,4 +51,26 @@ public class DealerTest {
 
         verify(playersManagerMock, never()).hasAvailableMovers();
     }
+
+    @Test
+    public void shouldMoveManagerMakesMoveWhenGameStatusSTARTEDHasAvailableMovesAndGameRoundTHREE_CARDS() throws Exception {
+        when(deskMock.getGameStatus()).thenReturn(GameStatus.STARTED);
+        when(deskMock.getGameRound()).thenReturn(GameRound.THREE_CARDS);
+        when(playersManagerMock.hasAvailableMovers()).thenReturn(true);
+
+        dealer.tick();
+
+        verify(moveManagerMock).makeMove(0,null);
+    }
+
+    @Test
+    public void shouldNoMoveManagerMakesMoveWhenGameStatusSTARTEDHasAvailableMovesAndGameRoundFINAL() throws Exception {
+        when(deskMock.getGameStatus()).thenReturn(GameStatus.STARTED);
+        when(deskMock.getGameRound()).thenReturn(GameRound.FINAL);
+        when(playersManagerMock.hasAvailableMovers()).thenReturn(true);
+
+        dealer.tick();
+
+        verify(moveManagerMock, never()).makeMove(0,null);
+    }
 }

@@ -87,7 +87,7 @@
       <file leaf-file-name="Dealer.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="64" column="0" selection-start="1951" selection-end="1951" vertical-scroll-proportion="0.72131145">
+            <state line="58" column="22" selection-start="1696" selection-end="1696" vertical-scroll-proportion="0.52380955">
               <folding />
             </state>
           </provider>
@@ -96,7 +96,7 @@
       <file leaf-file-name="DealerTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="51" column="65" selection-start="1641" selection-end="1641" vertical-scroll-proportion="0.0">
+            <state line="73" column="39" selection-start="2487" selection-end="2487" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -900,7 +900,11 @@
       <created>1353539321417</created>
       <updated>1353539321417</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="No movers availability check when gameStatus is INITIAL">
+      <created>1353540327257</created>
+      <updated>1353540327257</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -941,7 +945,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988048" sideWeight="0.6923077" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.6923077" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23609923" sideWeight="0.6666667" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33333334" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33333334" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -986,7 +990,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="PlayerManager refactored." />
+    <option name="LAST_COMMIT_MESSAGE" value="No movers availability check when gameStatus is INITIAL" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -999,7 +1003,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="When 1-st round there is question to user and makes bet." />
     <MESSAGE value="Players can make bets." />
     <MESSAGE value="Dealer asks players about moves.&#10;Some refactorings done.&#10;New issues in test file created." />
     <MESSAGE value="JDK versions added to travis yml file." />
@@ -1024,6 +1027,7 @@
     <MESSAGE value="MoveManager refactored" />
     <MESSAGE value="DealerTest class created.&#10;When game status CYCLE_ENDED - cycle manager ends game." />
     <MESSAGE value="PlayerManager refactored." />
+    <MESSAGE value="No movers availability check when gameStatus is INITIAL" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1133,7 +1137,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="65" selection-start="1641" selection-end="1641" vertical-scroll-proportion="0.0">
+        <state line="73" column="39" selection-start="2487" selection-end="2487" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1142,7 +1146,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="0" selection-start="1951" selection-end="1951" vertical-scroll-proportion="0.72131145">
+        <state line="58" column="22" selection-start="1696" selection-end="1696" vertical-scroll-proportion="0.52380955">
           <folding />
         </state>
       </provider>
