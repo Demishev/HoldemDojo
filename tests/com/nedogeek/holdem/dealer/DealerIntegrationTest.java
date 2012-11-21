@@ -43,7 +43,7 @@ public class DealerIntegrationTest {
 
     private void resetDeskMock() {
         deskMock = mock(Desk.class);
-        setGameStatus(GameStatus.Started);
+        setGameStatus(GameStatus.STARTED);
         setGameRound(GameRound.INITIAL);
         int PLAYERS_QUANTITY = 2;
         setPlayersQuantity(PLAYERS_QUANTITY);
@@ -70,7 +70,7 @@ public class DealerIntegrationTest {
     private void setFirstRound() {
         when(deskMock.getGameRound()).thenReturn(GameRound.BLIND);
         setDealerPlayerNumber(0);
-        setGameStatus(GameStatus.Started);
+        setGameStatus(GameStatus.STARTED);
 
         setPlayersBet(1, SMALL_BLIND);
         setPlayerAmount(1, COINS_AT_START - SMALL_BLIND);
@@ -159,25 +159,25 @@ public class DealerIntegrationTest {
 
     @Test
     public void shouldNotSetGameStatusStartedWhenGameStatusNotReady() throws Exception {
-        setGameStatus(GameStatus.Not_Ready);
+        setGameStatus(GameStatus.NOT_READY);
 
         dealer.run();
 
-        verify(deskMock, never()).setGameStatus(GameStatus.Started);
+        verify(deskMock, never()).setGameStatus(GameStatus.STARTED);
     }
 
     @Test
     public void shouldSetGameStatusStartedWhenGameStatusReady() throws Exception {
-        setGameStatus(GameStatus.Ready);
+        setGameStatus(GameStatus.READY);
 
         dealer.tick();
 
-        verify(deskMock).setGameStatus(GameStatus.Started);
+        verify(deskMock).setGameStatus(GameStatus.STARTED);
     }
 
     @Test
     public void shouldGetPlayersQuantityWhenGameStarted() throws Exception {
-        setGameStatus(GameStatus.Ready);
+        setGameStatus(GameStatus.READY);
 
         dealer.run();
 
@@ -186,7 +186,7 @@ public class DealerIntegrationTest {
 
     @Test
     public void shouldFirstPlayerSetDefaultAmountWhenGameStarted() throws Exception {
-        setGameStatus(GameStatus.Ready);
+        setGameStatus(GameStatus.READY);
 
         dealer.tick();
 
@@ -195,7 +195,7 @@ public class DealerIntegrationTest {
 
     @Test
     public void shouldSecondPlayerSetDefaultAmountWhenGameStarted() throws Exception {
-        setGameStatus(GameStatus.Ready);
+        setGameStatus(GameStatus.READY);
 
         dealer.tick();
 
@@ -225,7 +225,7 @@ public class DealerIntegrationTest {
 
     @Test
     public void shouldFirstPlayerGiveBigBlindWhenGameStarted() throws Exception {
-        setGameStatus(GameStatus.Started);
+        setGameStatus(GameStatus.STARTED);
 
         dealer.tick();
 
@@ -311,7 +311,7 @@ public class DealerIntegrationTest {
 
     @Test
     public void shouldNoGetPlayerMoveWhenStatusNotReadyAndTick() throws Exception {
-        setGameStatus(GameStatus.Not_Ready);
+        setGameStatus(GameStatus.NOT_READY);
 
         dealer.tick();
 
@@ -327,7 +327,7 @@ public class DealerIntegrationTest {
 
     @Test
     public void shouldNotGetGameRoundNumberWhenTickAndGameStatusNotReady() throws Exception {
-        setGameStatus(GameStatus.Not_Ready);
+        setGameStatus(GameStatus.NOT_READY);
 
         dealer.tick();
 
@@ -461,7 +461,7 @@ public class DealerIntegrationTest {
 
     @Test
     public void shouldSetCallValue2SmallBlindsWhenNewGame() throws Exception {
-        setGameStatus(GameStatus.Started);
+        setGameStatus(GameStatus.STARTED);
 
         dealer.tick();
 

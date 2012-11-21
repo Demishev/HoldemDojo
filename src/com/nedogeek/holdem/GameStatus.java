@@ -6,5 +6,8 @@ package com.nedogeek.holdem;
  * Time: 16:02
  */
 public enum GameStatus {
-    Not_Ready, Ready, Started
+    NOT_READY,
+    READY,
+    STARTED,
+    CYCLE_ENDED
 }

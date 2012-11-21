@@ -1,8 +1,5 @@
 package com.nedogeek.holdem.dealer;
 
-import com.nedogeek.holdem.GameRound;
-import com.nedogeek.holdem.GameSettings;
-import com.nedogeek.holdem.GameStatus;
 import com.nedogeek.holdem.connections.PlayerAction;
 import com.nedogeek.holdem.gamingStuff.Desk;
 
@@ -17,12 +14,14 @@ public class Dealer implements Runnable {
     private final MoveManager moveManager;
     private final NewGameSetter newGameSetter;
     private final PlayersManager playersManager;
+    private final GameCycleManager gameCycleManager;
 
     Dealer(Desk desk) {
         this.desk = desk;
         moveManager = new MoveManager(desk);
         newGameSetter = new NewGameSetter(desk);
         playersManager = new PlayersManager(desk);
+        gameCycleManager = new GameCycleManager(desk);
     }
 
     public void run() {
@@ -30,21 +29,24 @@ public class Dealer implements Runnable {
     }
 
     void tick() {
-        if (desk.getGameStatus().equals(GameStatus.Ready)) {
-            prepareNewGameCycle();
-        }
-        if (desk.getGameStatus().equals(GameStatus.Started)) {
-            if (playersManager.hasAvailableMovers()) {
-                makeMove();
-            } else {
-                desk.setNextGameRound();
-            }
+        switch (desk.getGameStatus()) {
+            case READY:
+                gameCycleManager.prepareNewGameCycle();
+                break;
+            case STARTED:
+                if (playersManager.hasAvailableMovers()) {
+                    makeGameAction();
+                } else {
+                    desk.setNextGameRound();
+                }
+                break;
+            case CYCLE_ENDED:
+                break;
         }
     }
 
-    private void makeMove() {
-        GameRound gameRound = desk.getGameRound();
-        switch (gameRound) {
+    private void makeGameAction() {
+        switch (desk.getGameRound()) {
             case INITIAL:
                 newGameSetter.setNewGame();
                 break;
@@ -52,14 +54,6 @@ public class Dealer implements Runnable {
                 PlayerAction answer = desk.getPlayersMove(playersManager.getMoverNumber());
                 moveManager.makeMove(playersManager.getMoverNumber(), answer);
                 break;
-        }
-    }
-
-    private void prepareNewGameCycle() {
-        desk.setGameStatus(GameStatus.Started);
-        int playersQuantity = desk.getPlayersQuantity();
-        for (int i = 0; i < playersQuantity; i++) {
-            desk.setPlayerAmount(i, GameSettings.COINS_AT_START);
         }
     }
 }
