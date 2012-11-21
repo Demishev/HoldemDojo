@@ -14,6 +14,7 @@ public class Dealer implements Runnable {
     private final NewGameSetter newGameSetter;
     private final PlayersManager playersManager;
     private final GameCycleManager gameCycleManager;
+    private final EndGameManager endGameManager;
 
     Dealer(Desk desk) {
         this.desk = desk;
@@ -21,15 +22,18 @@ public class Dealer implements Runnable {
         newGameSetter = new NewGameSetter(desk);
         playersManager = new PlayersManager(desk);
         gameCycleManager = new GameCycleManager(desk);
+        endGameManager = new EndGameManager(desk);
     }
 
     Dealer(Desk deskMock, MoveManager moveManagerMock, NewGameSetter newGameSetterMock,
-           PlayersManager playersManagerMock, GameCycleManager gameCycleManagerMock) {
+           PlayersManager playersManagerMock, GameCycleManager gameCycleManagerMock,
+           EndGameManager endGameManagerMock) {
         desk = deskMock;
         moveManager = moveManagerMock;
         newGameSetter = newGameSetterMock;
         playersManager = playersManagerMock;
         gameCycleManager = gameCycleManagerMock;
+        endGameManager = endGameManagerMock;
     }
 
     public void run() {
@@ -56,6 +60,7 @@ public class Dealer implements Runnable {
                 newGameSetter.setNewGame();
                 break;
             case FINAL:
+                endGameManager.endGame();
                 break;
             default:
                 if (playersManager.hasAvailableMovers()) {

@@ -21,6 +21,7 @@ public class DealerTest {
     private NewGameSetter newGameSetterMock;
     private PlayersManager playersManagerMock;
     private GameCycleManager gameCycleManagerMock;
+    private EndGameManager endGameManagerMock;
 
     @Before
     public void setUp() throws Exception {
@@ -29,8 +30,10 @@ public class DealerTest {
         newGameSetterMock = mock(NewGameSetter.class);
         playersManagerMock = mock(PlayersManager.class);
         gameCycleManagerMock = mock(GameCycleManager.class);
+        endGameManagerMock = mock(EndGameManager.class);
 
-        dealer = new Dealer(deskMock, moveManagerMock, newGameSetterMock, playersManagerMock, gameCycleManagerMock);
+        dealer = new Dealer(deskMock, moveManagerMock, newGameSetterMock, playersManagerMock,
+                gameCycleManagerMock, endGameManagerMock);
     }
 
     @Test
@@ -72,5 +75,15 @@ public class DealerTest {
         dealer.tick();
 
         verify(moveManagerMock, never()).makeMove(0,null);
+    }
+
+    @Test
+    public void shouldEndGameEndGameManagerWhenGameStatusStartedAndGameRoundFinal() throws Exception {
+        when(deskMock.getGameStatus()).thenReturn(GameStatus.STARTED);
+        when(deskMock.getGameRound()).thenReturn(GameRound.FINAL);
+
+        dealer.tick();
+
+        verify(endGameManagerMock).endGame();
     }
 }
