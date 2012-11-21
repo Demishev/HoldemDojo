@@ -1,6 +1,5 @@
 package com.nedogeek.holdem.dealer;
 
-import com.nedogeek.holdem.connections.PlayerAction;
 import com.nedogeek.holdem.gamingStuff.Desk;
 
 /**
@@ -61,8 +60,7 @@ public class Dealer implements Runnable {
                 newGameSetter.setNewGame();
                 break;
             case BLIND:
-                PlayerAction answer = desk.getPlayersMove(playersManager.getMoverNumber());
-                moveManager.makeMove(playersManager.getMoverNumber(), answer);
+                moveManager.makeMove(playersManager.getMoverNumber(), playersManager.getPlayerMove());
                 break;
         }
     }

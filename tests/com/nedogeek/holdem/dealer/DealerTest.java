@@ -42,4 +42,5 @@ public class DealerTest {
 
         verify(gameCycleManagerMock).endGameCycle();
     }
+
 }

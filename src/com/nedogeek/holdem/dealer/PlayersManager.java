@@ -1,6 +1,7 @@
 package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.PlayerStatus;
+import com.nedogeek.holdem.connections.PlayerAction;
 import com.nedogeek.holdem.gamingStuff.Desk;
 
 /**
@@ -33,6 +34,10 @@ public class PlayersManager {
             }
         }
         return false;
+    }
+
+    PlayerAction getPlayerMove() {
+        return desk.getPlayersMove(getMoverNumber());
     }
 
     int getMoverNumber() {
