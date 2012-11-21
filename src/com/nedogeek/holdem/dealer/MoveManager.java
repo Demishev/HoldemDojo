@@ -37,7 +37,11 @@ public class MoveManager {
         desk.setLastMovedPlayer(playerNumber);
     }
 
-    void makeBet(int playerNumber, int betValue) {
+    void makeInitialBet(int playerNumber, int initialBet) {
+        makeBet(playerNumber, initialBet);
+    }
+
+    private void makeBet(int playerNumber, int betValue) {
         final int playerAmount = desk.getPlayerAmount(playerNumber);
         final int previousBet = desk.getPlayerBet(playerNumber);
         desk.setPlayerBet(playerNumber, betValue + previousBet);

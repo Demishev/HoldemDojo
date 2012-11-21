@@ -37,9 +37,9 @@ public class NewGameSetter {
     private void makeStartBet(int playerNumber, int bet) {
         final int playerAmount = desk.getPlayerAmount(playerNumber);
         if (playerAmount > bet) {
-            moveManager.makeBet(playerNumber, bet);
+            moveManager.makeInitialBet(playerNumber, bet);
         } else {
-            moveManager.makeBet(playerNumber, playerAmount);
+            moveManager.makeInitialBet(playerNumber, playerAmount);
         }
     }
 }
