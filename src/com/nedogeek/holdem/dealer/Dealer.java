@@ -1,5 +1,6 @@
 package com.nedogeek.holdem.dealer;
 
+import com.nedogeek.holdem.GameRound;
 import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.GameStatus;
 import com.nedogeek.holdem.PlayerStatus;
@@ -33,13 +34,13 @@ public class Dealer implements Runnable {
             if (hasAvailableMovers()) {
                 makeMove();
             } else {
-                changeGameRound();
+                setNextGameRound();
             }
         }
     }
 
-    private void changeGameRound() {
-        desk.setGameRound(2);
+    private void setNextGameRound() {
+        desk.setNextGameRound();
     }
 
     private boolean hasAvailableMovers() {
@@ -53,12 +54,12 @@ public class Dealer implements Runnable {
     }
 
     private void makeMove() {
-        int gameRound = desk.getGameRound();
+        GameRound gameRound = desk.getGameRound();
         switch (gameRound) {
-            case 0:
+            case INITIAL:
                 newGame();
                 break;
-            case 1:
+            case BLIND:
                 int lastMovedPlayer = desk.getLastMovedPlayer();
                 int moverNumber;
                 if (lastMovedPlayer != -1) {
@@ -92,7 +93,7 @@ public class Dealer implements Runnable {
         int bigBlindPlayerNumber = nextPlayer(smallBlindPlayerNumber);
         makeStartBet(bigBlindPlayerNumber, GameSettings.SMALL_BLIND_AT_START * 2);
 
-        desk.setGameRound(1);
+        desk.setNextGameRound();
     }
 
     private void makeStartBet(int playerNumber, int bet) {

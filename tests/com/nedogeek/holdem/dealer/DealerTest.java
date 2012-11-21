@@ -1,5 +1,6 @@
 package com.nedogeek.holdem.dealer;
 
+import com.nedogeek.holdem.GameRound;
 import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.GameStatus;
 import com.nedogeek.holdem.PlayerStatus;
@@ -43,6 +44,7 @@ public class DealerTest {
     private void resetDeskMock() {
         deskMock = mock(Desk.class);
         setGameStatus(GameStatus.Started);
+        setGameRound(GameRound.INITIAL);
         int PLAYERS_QUANTITY = 2;
         setPlayersQuantity(PLAYERS_QUANTITY);
         resetPlayersMoves();
@@ -66,7 +68,7 @@ public class DealerTest {
     }
 
     private void setFirstRound() {
-        when(deskMock.getGameRound()).thenReturn(1);
+        when(deskMock.getGameRound()).thenReturn(GameRound.BLIND);
         setDealerPlayerNumber(0);
         setGameStatus(GameStatus.Started);
 
@@ -139,7 +141,7 @@ public class DealerTest {
         when(deskMock.getGameStatus()).thenReturn(newGameStatus);
     }
 
-    private void setGameRound(int newGameRound) {
+    private void setGameRound(GameRound newGameRound) {
         when(deskMock.getGameRound()).thenReturn(newGameRound);
     }
 
@@ -243,7 +245,7 @@ public class DealerTest {
     public void shouldSetDealerPlayerNumber1WhenPreviousDealerPlayerNumberWas0() throws Exception {
         setDealerPlayerNumber(0);
 
-        dealer.run();
+        dealer.tick();
 
         verify(deskMock).setDealerPlayer(1);
     }
@@ -289,7 +291,7 @@ public class DealerTest {
 
     @Test
     public void shouldFirstPlayerMoveRequestWhenNewGameStartedAndDealerIsSecond() throws Exception {
-        setGameRound(1);
+        setGameRound(GameRound.BLIND);
         setDealerPlayerNumber(1);
 
         dealer.tick();
@@ -299,7 +301,7 @@ public class DealerTest {
 
     @Test
     public void shouldSecondPlayerMoveRequestWhenTickAndNewGameSet() throws Exception {
-        setGameRound(1);
+        setGameRound(GameRound.BLIND);
         setDealerPlayerNumber(0);
 
         dealer.tick();
@@ -336,16 +338,16 @@ public class DealerTest {
     public void shouldSetGameRound1WhenTick() throws Exception {
         dealer.tick();
 
-        verify(deskMock).setGameRound(1);
+        verify(deskMock).setNextGameRound();
     }
 
     @Test
     public void shouldNotSetGameRound1WhenTickGameRoundIs1() throws Exception {
-        setGameRound(1);
+        setGameRound(GameRound.BLIND);
 
         dealer.tick();
 
-        verify(deskMock, never()).setGameRound(1);
+        verify(deskMock, never()).setNextGameRound();
     }
 
     @Test
@@ -487,7 +489,7 @@ public class DealerTest {
     }
 
     @Test
-    public void shouldGameStage2WhenGameStage1AndAllPlayersMoved() throws Exception {
+    public void shouldSetNextGameRoundWhenGameStage1AndAllPlayersMoved() throws Exception {
         setFirstRound();
 
         setPlayersBet(1, 2 * SMALL_BLIND);
@@ -498,7 +500,7 @@ public class DealerTest {
 
         dealer.tick();
 
-        verify(deskMock).setGameRound(2);
+        verify(deskMock).setNextGameRound();
 
     }
 
