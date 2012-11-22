@@ -37,10 +37,8 @@ public class Card {
 
         Card card = (Card) o;
 
-        if (cardSuit != card.cardSuit) return false;
-        if (cardValue != card.cardValue) return false;
+        return cardSuit == card.cardSuit && cardValue == card.cardValue;
 
-        return true;
     }
 
     @Override

@@ -31,4 +31,11 @@ public class CardDeckTest {
             cardDeck.getCard();
         }
     }
+
+    @Test
+    public void shouldNoThrowIllegalArgumentExceptionExceptionWhenGetting52Card() throws Exception {
+        for (int i = 0; i < 52; i++) {
+            cardDeck.getCard();
+        }
+    }
 }
