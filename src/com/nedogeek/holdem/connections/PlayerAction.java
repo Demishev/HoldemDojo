@@ -14,7 +14,7 @@ public class PlayerAction {
         return null;
     }
 
-    public int getBetQuantity() {
+    public int getRiseAmount() {
         return 0;
     }
 

@@ -28,7 +28,7 @@ public class MoveManager {
                 makeCall(playerNumber);
                 break;
             case Rise:
-                makeRise(playerNumber, playerMove.getBetQuantity());
+                makeRise(playerNumber, playerMove.getRiseAmount());
                 break;
             case AllIn:
                 makeAllIn(playerNumber);
@@ -47,7 +47,7 @@ public class MoveManager {
         desk.setPlayerBet(playerNumber, betValue + previousBet);
         desk.addToPot(betValue);
         desk.setPlayerAmount(playerNumber, playerAmount - betValue);
-        desk.setCallValue(betValue);                  //TODO maybe betValue  + previousBet
+        desk.setCallValue(betValue + previousBet);
     }
 
     private void makeFold(int playerNumber) {

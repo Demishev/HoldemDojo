@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="388e9789-c4c7-491f-aae9-9962e0a04901" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/PlayerManagerTest.java" />
+    <list default="true" id="388e9789-c4c7-491f-aae9-9962e0a04901" name="Default" comment="In PlayersManager defining moving player improved.&#10;Fined new issue to test im MoveManager.">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/MoveManagerTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/connections/PlayerAction.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/connections/PlayerAction.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/MoveManager.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/MoveManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/PlayersManager.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/PlayersManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerIntegrationTest.java" afterPath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerIntegrationTest.java" />
     </list>
     <ignored path="holdem.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -85,30 +86,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="PlayersManager.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/PlayersManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="57" column="21" selection-start="1665" selection-end="1665" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DealerIntegrationTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerIntegrationTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="407" column="30" selection-start="11059" selection-end="11059" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MoveManager.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="MoveManager.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/MoveManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="51" column="0" selection-start="1576" selection-end="1576" vertical-scroll-proportion="0.0">
+            <state line="87" column="39" selection-start="2799" selection-end="2799" vertical-scroll-proportion="0.9047619">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -116,19 +97,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Dealer.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java">
+      <file leaf-file-name="MoveManagerTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/MoveManagerTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="66" column="38" selection-start="2048" selection-end="2048" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlayerManagerTest.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/PlayerManagerTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="57" selection-start="1337" selection-end="1337" vertical-scroll-proportion="0.5714286">
+            <state line="38" column="85" selection-start="1163" selection-end="1163" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -154,7 +126,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/connections/PlayersAction.java" />
         <option value="$PROJECT_DIR$/.travis.yml" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/PlayerStatus.java" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/GameSettings.java" />
@@ -167,9 +138,10 @@
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/EndGameManager.java" />
         <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/PlayerManagerTest.java" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java" />
-        <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/MoveManager.java" />
         <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerIntegrationTest.java" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/PlayersManager.java" />
+        <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/MoveManager.java" />
+        <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/MoveManagerTest.java" />
       </list>
     </option>
   </component>
@@ -456,35 +428,6 @@
     </key>
   </component>
   <component name="RunManager" selected="JUnit.All in holdem">
-    <configuration default="false" name="DealerIntegrationTest.shouldMovedFirstPlayerWhenDefaultFirstRound" type="JUnit" factoryName="JUnit" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="holdem" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.nedogeek.holdem.dealer" />
-      <option name="MAIN_CLASS_NAME" value="com.nedogeek.holdem.dealer.DealerIntegrationTest" />
-      <option name="METHOD_NAME" value="shouldMovedFirstPlayerWhenDefaultFirstRound" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="true" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Debug" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
     <configuration default="false" name="DealerIntegrationTest.shouldSecondPlayerBet2SmallBlindWhenCallInFirstRoundWithCallValue2SmallBlind" type="JUnit" factoryName="JUnit" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="holdem" />
@@ -580,6 +523,35 @@
       <option name="PACKAGE_NAME" value="com.nedogeek.holdem.dealer" />
       <option name="MAIN_CLASS_NAME" value="com.nedogeek.holdem.dealer.PlayerManagerTest" />
       <option name="METHOD_NAME" value="shouldFalseWhenDefaultDeskSecondPlayerFold" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="MoveManagerTest.shouldSetCallValue200WhenCallValue100AndMakeRise100PlayerAmount1000" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="holdem" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.nedogeek.holdem.dealer" />
+      <option name="MAIN_CLASS_NAME" value="com.nedogeek.holdem.dealer.MoveManagerTest" />
+      <option name="METHOD_NAME" value="shouldSetCallValue200WhenCallValue100AndMakeRise100PlayerAmount1000" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -771,12 +743,12 @@
       <method />
     </configuration>
     <list size="6">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.DealerIntegrationTest.shouldMovedFirstPlayerWhenDefaultFirstRound" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.DealerIntegrationTest.shouldSecondPlayerBet2SmallBlindWhenCallInFirstRoundWithCallValue2SmallBlind" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.DealerIntegrationTest.shouldSecondPlayerBet2SmallBlindWhenRiseSmallerThan2SmallBlind" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.DealerIntegrationTest.shouldSetCallValue2SmallBlindsWhenNewGame" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.All in holdem" />
-      <item index="5" class="java.lang.String" itemvalue="JUnit.PlayerManagerTest.shouldFalseWhenDefaultDeskSecondPlayerFold" />
+      <item index="0" class="java.lang.String" itemvalue="JUnit.DealerIntegrationTest.shouldSecondPlayerBet2SmallBlindWhenCallInFirstRoundWithCallValue2SmallBlind" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.DealerIntegrationTest.shouldSecondPlayerBet2SmallBlindWhenRiseSmallerThan2SmallBlind" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.DealerIntegrationTest.shouldSetCallValue2SmallBlindsWhenNewGame" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.All in holdem" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.PlayerManagerTest.shouldFalseWhenDefaultDeskSecondPlayerFold" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.MoveManagerTest.shouldSetCallValue200WhenCallValue100AndMakeRise100PlayerAmount1000" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -944,7 +916,11 @@
       <created>1353541174142</created>
       <updated>1353541174142</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="In PlayersManager defining moving player improved.&#10;Fined new issue to test im MoveManager.">
+      <created>1353547452691</created>
+      <updated>1353547452691</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1030,7 +1006,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="EndGameManager ends game when gameRound is FINAL" />
+    <option name="LAST_COMMIT_MESSAGE" value="In PlayersManager defining moving player improved.&#10;Fined new issue to test im MoveManager." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1043,7 +1019,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="JDK versions added to travis yml file." />
     <MESSAGE value="binary files removed from vcs" />
     <MESSAGE value="Player can folds." />
     <MESSAGE value="Tests refactored." />
@@ -1068,6 +1043,7 @@
     <MESSAGE value="No movers availability check when gameStatus is INITIAL" />
     <MESSAGE value="No movers availability check when gameStatus is FINAL" />
     <MESSAGE value="EndGameManager ends game when gameRound is FINAL" />
+    <MESSAGE value="In PlayersManager defining moving player improved.&#10;Fined new issue to test im MoveManager." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1077,11 +1053,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.10/junit-4.10.jar!/org/junit/internal/runners/model/ReflectiveCallable.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="40" selection-start="397" selection-end="397" vertical-scroll-proportion="0.5483871" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/GameSettings.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="0" selection-start="198" selection-end="198" vertical-scroll-proportion="0.3096539" />
@@ -1163,15 +1134,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/MoveManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="0" selection-start="1576" selection-end="1576" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerIntegrationTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="407" column="30" selection-start="11059" selection-end="11059" vertical-scroll-proportion="0.0">
@@ -1190,7 +1152,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/PlayerManagerTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="57" selection-start="1337" selection-end="1337" vertical-scroll-proportion="0.5714286">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/MoveManagerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="85" selection-start="1163" selection-end="1163" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/MoveManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="87" column="39" selection-start="2799" selection-end="2799" vertical-scroll-proportion="0.9047619">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

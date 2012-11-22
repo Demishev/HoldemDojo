@@ -101,7 +101,7 @@ public class DealerIntegrationTest {
 
     private void setResponseRise(int bet) {
         setResponseType(PlayerAction.ActionType.Rise);
-        when(playerActionMock.getBetQuantity()).thenReturn(bet);
+        when(playerActionMock.getRiseAmount()).thenReturn(bet);
     }
 
     private void setResponseFold() {
