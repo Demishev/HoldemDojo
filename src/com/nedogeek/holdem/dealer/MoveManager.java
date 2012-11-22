@@ -47,7 +47,7 @@ public class MoveManager {
         desk.setPlayerBet(playerNumber, betValue + previousBet);
         desk.addToPot(betValue);
         desk.setPlayerAmount(playerNumber, playerAmount - betValue);
-        desk.setCallValue(betValue);
+        desk.setCallValue(betValue);                  //TODO maybe betValue  + previousBet
     }
 
     private void makeFold(int playerNumber) {

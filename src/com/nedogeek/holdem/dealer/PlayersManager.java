@@ -13,7 +13,7 @@ public class PlayersManager {
     private final Desk desk;
     private final int playersQuantity;
 
-    public PlayersManager(Desk desk) {
+    PlayersManager(Desk desk) {
         this.desk = desk;
         playersQuantity = desk.getPlayersQuantity();
     }
@@ -27,13 +27,17 @@ public class PlayersManager {
     }
 
     boolean hasAvailableMovers() {
-        for (int i = 0; i < desk.getPlayersQuantity(); i++) {
-            PlayerStatus playerStatus = desk.getPlayerStatus(i);
-            if (playerStatus.equals(PlayerStatus.NotMoved)) {
-                return true;
+        return moreThanOnePlayerDoNotFolds() && getMoverNumber() != -1;
+    }
+
+    private boolean moreThanOnePlayerDoNotFolds() {
+        int playersWithoutFold = 0;
+        for (int i = 0; i < playersQuantity; i++) {
+            if (desk.getPlayerStatus(i) != PlayerStatus.Fold) {
+                playersWithoutFold++;
             }
         }
-        return false;
+        return playersWithoutFold > 1;
     }
 
     PlayerAction getPlayerMove() {
@@ -43,7 +47,19 @@ public class PlayersManager {
     int getMoverNumber() {
         int lastMovedPlayer = desk.getLastMovedPlayer();
 
-        return (lastMovedPlayer != -1) ?
-                nextPlayer(lastMovedPlayer) : nextPlayer(desk.getDealerPlayerNumber());
+        if (lastMovedPlayer == -1) {
+            return nextPlayer(desk.getDealerPlayerNumber());
+        }
+        int nextPlayerNumber = nextPlayer(lastMovedPlayer);
+
+        while (nextPlayerNumber != lastMovedPlayer) {
+            if (desk.getPlayerStatus(nextPlayerNumber) == PlayerStatus.NotMoved ||
+                    (desk.getPlayerStatus(nextPlayerNumber) != PlayerStatus.Fold &&
+                            desk.getPlayerBet(nextPlayerNumber) < desk.getCallValue())) {
+                return nextPlayerNumber;
+            }
+            nextPlayerNumber = nextPlayer(nextPlayerNumber);
+        }
+        return -1;
     }
 }
