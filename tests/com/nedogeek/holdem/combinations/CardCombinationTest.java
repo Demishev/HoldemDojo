@@ -52,4 +52,18 @@ public class CardCombinationTest {
 
         assertEquals("High card Ace with kicker King.", cardCombination.getCombination());
     }
+
+    @Test
+    public void shouldPairOfAceWhenHeartsAceAndDiamondsAceGetCombination() throws Exception {
+        CardCombination cardCombination = new CardCombination(new Card[] {HEARTS_ACE, DIAMONDS_ACE});
+
+        assertEquals("Pair of Ace", cardCombination.getCombination());
+    }
+
+    @Test
+    public void shouldPairOfAceHAceDAceWhenHeartsAceAndDiamondsAceToString() throws Exception {
+        CardCombination cardCombination = new CardCombination(new Card[] {HEARTS_ACE, DIAMONDS_ACE});
+
+        assertEquals("Pair of Ace: [♥A, ♦A]", cardCombination.toString());
+    }
 }
