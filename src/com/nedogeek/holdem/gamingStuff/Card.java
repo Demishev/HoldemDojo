@@ -5,7 +5,7 @@ package com.nedogeek.holdem.gamingStuff;
  * Date: 05.10.12
  * Time: 22:13
  */
-public class Card {
+public class Card implements Comparable<Card>{
     private final CardSuit cardSuit;
     private final CardValue cardValue;
 
@@ -18,16 +18,17 @@ public class Card {
         return cardSuit;
     }
 
-    public CardValue getCardValue() {
+    CardValue getCardValue() {
         return cardValue;
+    }
+
+    public String getCardValueName() {
+        return cardValue.getFullName();
     }
 
     @Override
     public String toString() {
-        return "Card{" +
-                "cardSuit=" + cardSuit +
-                ", cardValue=" + cardValue +
-                '}';
+        return "" + cardSuit + cardValue;
     }
 
     @Override
@@ -46,5 +47,10 @@ public class Card {
         int result = cardSuit != null ? cardSuit.hashCode() : 0;
         result = 31 * result + (cardValue != null ? cardValue.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public int compareTo(Card o) {
+        return cardValue.compareTo(o.getCardValue());
     }
 }
