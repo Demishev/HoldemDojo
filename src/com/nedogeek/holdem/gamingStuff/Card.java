@@ -57,4 +57,10 @@ public class Card implements Comparable<Card>{
     public boolean sameSuit(Card otherCard) {
         return cardSuit == otherCard.getCardSuit();
     }
+
+    public boolean isNear(Card otherCard) {
+        int cardValueNumber = cardValue.ordinal();
+        int otherCardValue = otherCard.cardValue.ordinal();
+        return Math.abs(cardValueNumber - otherCardValue) == 1;
+    }
 }

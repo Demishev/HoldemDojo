@@ -46,10 +46,26 @@ public class PlayerCardCombination implements Comparable<PlayerCardCombination>{
     }
 
     private String fiveCardsCombination() {
+        if (hasStraight()) {
+            return Combinations.STRAIGHT.generateMessage(cards[0]);
+        }
+
+
         return (hasFlash()) ? Combinations.FLASH.generateMessage(cards) :
                 Combinations.HIGH_CARD.generateMessage(cards[0]) + " " +
                         Combinations.FOUR_KICKERS.generateMessage(Arrays.copyOfRange(cards, 1, cards.length));
 
+    }
+
+    private boolean hasStraight() {
+        boolean hasStraight = true;
+        for (int i = 0; i < cards.length - 1; i++) {
+            if (!cards[i].isNear(cards[i+1])) {
+                hasStraight = false;
+            }
+        }
+
+        return hasStraight;
     }
 
     private boolean hasFlash() {

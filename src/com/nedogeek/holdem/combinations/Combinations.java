@@ -30,24 +30,15 @@ public enum Combinations {
     }
 
     public String generateMessage(Card card) {
-        return String.format(combinationMessage,card.getCardValueName());
+        return String.format(combinationMessage, card.getCardValueName());
     }
 
     public String generateMessage(Card[] cards) {
-        switch (cards.length) {
-            case (2):
-                return String.format(combinationMessage,cards[0].getCardValueName(), cards[1].getCardValueName());
-            case (3):
-                return String.format(combinationMessage,cards[0].getCardValueName(), cards[1].getCardValueName(),
-                        cards[2].getCardValueName());
-            case (4):
-                return String.format(combinationMessage,cards[0].getCardValueName(), cards[1].getCardValueName(),
-                        cards[2].getCardValueName(), cards[3].getCardValueName());
-            case (5):
-                return String.format(combinationMessage,cards[0].getCardValueName(), cards[1].getCardValueName(),
-                        cards[2].getCardValueName(), cards[3].getCardValueName(), cards[4].getCardValueName());
-            default:
-                return combinationMessage;
+        String[] cardNames = new String[cards.length];
+        for (int i = 0; i < cards.length; i++) {
+            cardNames[i] = cards[i].getCardValueName();
         }
+
+        return String.format(combinationMessage,(Object[]) cardNames);
     }
 }

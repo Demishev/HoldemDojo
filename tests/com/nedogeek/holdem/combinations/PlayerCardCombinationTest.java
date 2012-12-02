@@ -17,6 +17,7 @@ public class PlayerCardCombinationTest {
     private static final Card HEARTS_KING = new Card(CardSuit.HEARTS, CardValue.KING);
     private static final Card HEARTS_QUEEN = new Card(CardSuit.HEARTS, CardValue.QUEEN);
     private static final Card HEARTS_JACK = new Card(CardSuit.HEARTS, CardValue.JACK);
+    private static final Card HEARTS_TEN = new Card(CardSuit.HEARTS, CardValue.TEN);
     private static final Card HEARTS_SIX = new Card(CardSuit.HEARTS, CardValue.SIX);
 
     private static final Card DIAMONDS_ACE = new Card(CardSuit.DIAMONDS, CardValue.ACE);
@@ -98,5 +99,13 @@ public class PlayerCardCombinationTest {
         PlayerCardCombination cardCombination = new PlayerCardCombination(new Card[] {HEARTS_KING, HEARTS_QUEEN});
 
         assertEquals("High card King with kicker Queen", cardCombination.getCombination());
+    }
+
+    @Test
+    public void shouldStraightOnAceWhenHearts10JackQueenKingAndDiamondAceGetCombination() throws Exception {
+        PlayerCardCombination cardCombination = new PlayerCardCombination(
+                new Card[] {HEARTS_TEN, HEARTS_JACK, HEARTS_QUEEN, HEARTS_KING, DIAMONDS_ACE});
+
+        assertEquals("Straight on Ace", cardCombination.getCombination());
     }
 }
