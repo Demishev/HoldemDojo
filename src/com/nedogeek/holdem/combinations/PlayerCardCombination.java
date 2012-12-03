@@ -76,7 +76,35 @@ public class PlayerCardCombination implements Comparable<PlayerCardCombination> 
             return Combinations.FLASH.generateMessage(cards);
         }
 
+        if (hasTwoPairs()) {
+            return Combinations.TWO_PAIRS.generateMessage(getTwoPairsCards());
+        }
+
         return Combinations.HIGH_CARD.generateMessage(cards);
+    }
+
+    private boolean hasTwoPairs() {
+        return sameCardValues(0,1) && sameCardValues(2,3) ||
+                sameCardValues(1,2) && sameCardValues(3,4) ||
+                sameCardValues(0,1) && sameCardValues(3,4);
+    }
+
+    private Card[] getTwoPairsCards() {
+        Card[] setCards = new Card[3];
+        if (!sameCardValues(0,1)) {
+            setCards[0] = cards[2];
+            setCards[1] = cards[4];
+            setCards[2] = cards[0];
+        } else if (!sameCardValues(3,4)) {
+            setCards[0] = cards[0];
+            setCards[1] = cards[2];
+            setCards[2] = cards[4];
+        } else {
+            setCards[0] = cards[0];
+            setCards[1] = cards[4];
+            setCards[2] = cards[2];
+        }
+        return setCards;
     }
 
     private Card[] getSetCards() {
@@ -142,17 +170,16 @@ public class PlayerCardCombination implements Comparable<PlayerCardCombination> 
     }
 
     private boolean hasFlash() {
-        boolean hasFlash = true;
         for (Card card : cards) {
             if (!card.sameSuit(cards[0])) {
-                hasFlash = false;
+                return false;
             }
         }
-        return hasFlash;
+        return true;
     }
 
     private String twoCardsCombination() {
-        if (cards[0].compareTo(cards[1]) == 0) {
+        if (sameCardValues(0,1)) {
             return Combinations.PAIR_TWO_CARDS.generateMessage(cards[0]);
         }
 

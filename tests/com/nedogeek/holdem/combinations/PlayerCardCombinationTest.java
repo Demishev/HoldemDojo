@@ -190,4 +190,28 @@ public class PlayerCardCombinationTest {
 
         assertEquals("Set of Queen with Ace and King", cardCombination.getCombination());
     }
+
+    @Test
+    public void shouldTwoPairsAKWhenQKKAAGetCombination() throws Exception {
+        PlayerCardCombination cardCombination = new PlayerCardCombination(
+                HEARTS_QUEEN, HEARTS_KING, CLUBS_KING, HEARTS_ACE, CLUBS_ACE);
+
+        assertEquals("Two pairs of Ace and King with Queen", cardCombination.getCombination());
+    }
+
+    @Test
+    public void shouldTwoPairsKQWhenQQKKAGetCombination() throws Exception {
+        PlayerCardCombination cardCombination = new PlayerCardCombination(
+                HEARTS_QUEEN, CLUBS_QUEEN, CLUBS_KING, HEARTS_KING, CLUBS_ACE);
+
+        assertEquals("Two pairs of King and Queen with Ace", cardCombination.getCombination());
+    }
+
+    @Test
+    public void shouldTwoPairsAQWhenQQKAAGetCombination() throws Exception {
+        PlayerCardCombination cardCombination = new PlayerCardCombination(
+                HEARTS_QUEEN, CLUBS_QUEEN, CLUBS_KING, HEARTS_ACE, CLUBS_ACE);
+
+        assertEquals("Two pairs of Ace and Queen with King", cardCombination.getCombination());
+    }
 }

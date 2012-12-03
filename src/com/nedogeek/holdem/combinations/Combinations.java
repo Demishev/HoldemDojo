@@ -12,7 +12,7 @@ public enum Combinations {
     PAIR_TWO_CARDS("Pair of %s"),
     HIGH_CARD("High card %s with %s, %s, %s and %s"),
     PAIR("Pair of %s with %s, %s and %s"),
-    TWO_PAIRS("Pairs of %s with %s"),
+    TWO_PAIRS("Two pairs of %s and %s with %s"),
     SET("Set of %s with %s and %s"),
     STRAIGHT("Straight on %s"),
     FLASH("Flash on %s with %s, %s, %s and %s"),
