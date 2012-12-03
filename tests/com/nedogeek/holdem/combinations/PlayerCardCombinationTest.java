@@ -24,6 +24,8 @@ public class PlayerCardCombinationTest {
     private static final Card DIAMONDS_ACE = new Card(CardSuit.DIAMONDS, CardValue.ACE);
     private static final Card DIAMONDS_KING = new Card(CardSuit.DIAMONDS, CardValue.KING);
     private static final Card DIAMONDS_QUEEN = new Card(CardSuit.DIAMONDS, CardValue.QUEEN);
+    private static final Card DIAMONDS_JACK = new Card(CardSuit.DIAMONDS, CardValue.JACK);
+
 
     private static final Card CLUBS_ACE = new Card(CardSuit.CLUBS, CardValue.ACE);
     private static final Card CLUBS_KING = new Card(CardSuit.CLUBS, CardValue.KING);
@@ -213,5 +215,39 @@ public class PlayerCardCombinationTest {
                 HEARTS_QUEEN, CLUBS_QUEEN, CLUBS_KING, HEARTS_ACE, CLUBS_ACE);
 
         assertEquals("Two pairs of Ace and Queen with King", cardCombination.getCombination());
+    }
+
+    @Test
+    public void shouldPairWhenOnAWithKQJWhenAAKQJ() throws Exception {
+        PlayerCardCombination cardCombination = new PlayerCardCombination(
+                HEARTS_JACK, CLUBS_QUEEN, CLUBS_KING, HEARTS_ACE, CLUBS_ACE);
+
+        assertEquals("Pair of Ace with King, Queen and Jack", cardCombination.getCombination());
+    }
+
+
+    @Test
+    public void shouldPairWhenOnKWithAQJWhenAKKQJ() throws Exception {
+        PlayerCardCombination cardCombination = new PlayerCardCombination(
+                HEARTS_JACK, CLUBS_QUEEN, CLUBS_KING, HEARTS_KING, CLUBS_ACE);
+
+        assertEquals("Pair of King with Ace, Queen and Jack", cardCombination.getCombination());
+    }
+
+    @Test
+    public void shouldPairWhenOnQWithAKJWhenAKQQJ() throws Exception {
+        PlayerCardCombination cardCombination = new PlayerCardCombination(
+                HEARTS_JACK, CLUBS_QUEEN, DIAMONDS_QUEEN, HEARTS_KING, CLUBS_ACE);
+
+        assertEquals("Pair of Queen with Ace, King and Jack", cardCombination.getCombination());
+    }
+
+
+    @Test
+    public void shouldPairWhenOnJWithAKQWhenAKKQJ() throws Exception {
+        PlayerCardCombination cardCombination = new PlayerCardCombination(
+                HEARTS_JACK, DIAMONDS_JACK, DIAMONDS_QUEEN, HEARTS_KING, CLUBS_ACE);
+
+        assertEquals("Pair of Jack with Ace, King and Queen", cardCombination.getCombination());
     }
 }

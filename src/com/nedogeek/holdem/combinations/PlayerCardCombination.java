@@ -80,7 +80,46 @@ public class PlayerCardCombination implements Comparable<PlayerCardCombination> 
             return Combinations.TWO_PAIRS.generateMessage(getTwoPairsCards());
         }
 
+        if (hasPair()) {
+            return Combinations.PAIR.generateMessage(getPairsCards());
+        }
+
         return Combinations.HIGH_CARD.generateMessage(cards);
+    }
+
+    private Card[] getPairsCards() {
+        Card[] pairCards = new Card[4];
+        for (int i = 0; i < cards.length - 1; i++) {
+            if (sameCardValues(i, i + 1)) {
+                pairCards[0] = cards[i];
+                if (i == 0) {
+                    System.arraycopy(cards, 2, pairCards, 1, 3);
+                    return pairCards;
+                }
+                if (i == 1) {
+                    pairCards[1] = cards[0];
+                    System.arraycopy(cards, 3, pairCards, 2, 2);
+                    return pairCards;
+                }
+                if (i == 3) {
+                    System.arraycopy(cards, 0, pairCards, 1, 3);
+                    return pairCards;
+                }
+                System.arraycopy(cards, 0, pairCards, 1, 2);
+                pairCards[3] = cards[4];
+                return pairCards;
+            }
+        }
+        return new Card[0];
+    }
+
+    private boolean hasPair() {
+        for (int i = 0; i < cards.length - 1; i++) {
+            if (cards[i].sameValue(cards[i + 1])) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean hasTwoPairs() {
