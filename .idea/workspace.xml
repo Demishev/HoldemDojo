@@ -97,7 +97,7 @@
       <file leaf-file-name="Combination.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/combinations/Combination.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="217" column="0" selection-start="6958" selection-end="6958" vertical-scroll-proportion="0.6903553">
+            <state line="34" column="48" selection-start="1139" selection-end="1139" vertical-scroll-proportion="0.39593908">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -1068,7 +1068,11 @@
       <created>1354538867228</created>
       <updated>1354538867228</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="definePairCards simplify">
+      <created>1354539706416</created>
+      <updated>1354539706416</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1105,11 +1109,11 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328125" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.23609923" sideWeight="0.19444445" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988048" sideWeight="0.6923077" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.6923077" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23609923" sideWeight="0.7309028" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2690972" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2690972" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1154,7 +1158,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="More refactored.&#10;Four of kind fixed." />
+    <option name="LAST_COMMIT_MESSAGE" value="definePairCards simplify" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1167,7 +1171,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="PlayerManager refactored." />
     <MESSAGE value="No movers availability check when gameStatus is INITIAL" />
     <MESSAGE value="No movers availability check when gameStatus is FINAL" />
     <MESSAGE value="EndGameManager ends game when gameRound is FINAL" />
@@ -1192,6 +1195,7 @@
     <MESSAGE value="Pair can be determined." />
     <MESSAGE value="5 cards combinations defining moved into Combination enum" />
     <MESSAGE value="More refactored.&#10;Four of kind fixed." />
+    <MESSAGE value="definePairCards simplify" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1288,15 +1292,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/combinations/PlayerCardCombinationTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="220" column="16" selection-start="9784" selection-end="9784" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/combinations/PlayerCardCombination.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="16" column="0" selection-start="372" selection-end="372" vertical-scroll-proportion="0.0">
@@ -1306,9 +1301,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/combinations/PlayerCardCombinationTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="220" column="16" selection-start="9784" selection-end="9784" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/combinations/Combination.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="217" column="0" selection-start="6958" selection-end="6958" vertical-scroll-proportion="0.6903553">
+        <state line="34" column="48" selection-start="1139" selection-end="1139" vertical-scroll-proportion="0.39593908">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

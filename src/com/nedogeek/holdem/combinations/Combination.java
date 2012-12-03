@@ -23,23 +23,13 @@ enum Combination {
     PAIR_TWO_CARDS("Pair of %s", 2),
     HIGH_CARD_TWO_CARDS("High card %s with %s", 2);
 
-
     private final String combinationMessage;
     private final int combinationType;
 
-    Combination(String combinationMessage, int combinationType) {
+    private Combination(String combinationMessage, int combinationType) {
         this.combinationMessage = combinationMessage;
         this.combinationType = combinationType;
     }
-
-    public String generateMessage(Card... cards) {
-        String[] cardNames = new String[cards.length];
-        for (int i = 0; i < cards.length; i++) {
-            cardNames[i] = cards[i].getCardValueName();
-        }
-        return String.format(combinationMessage, (Object[]) cardNames);
-    }
-
 
     static String cardsCombination(Card[] cards) {
         for (Combination combination : Combination.values()) {
@@ -48,6 +38,26 @@ enum Combination {
             }
         }
         return "";
+    }
+
+    private String generateMessage(Card... cards) {
+        String[] cardNames = new String[cards.length];
+        for (int i = 0; i < cards.length; i++) {
+            cardNames[i] = cards[i].getCardValueName();
+        }
+        return String.format(combinationMessage, (Object[]) cardNames);
+    }
+
+    private static void downSort(Card[] cards) {
+        for (int n = 0; n < cards.length; n++) {
+            for (int i = 0; i < cards.length - n - 1; i++) {
+                if (cards[i].compareTo(cards[i + 1]) < 0) {
+                    Card tempCard = cards[i];
+                    cards[i] = cards[i + 1];
+                    cards[i + 1] = tempCard;
+                }
+            }
+        }
     }
 
     private static boolean hasCombination(Card[] cards, Combination combination) {
@@ -79,18 +89,6 @@ enum Combination {
                 return hasRoyalFlash(cards);
         }
         return false;
-    }
-
-    private static void downSort(Card[] cards) {
-        for (int n = 0; n < cards.length; n++) {
-            for (int i = 0; i < cards.length - n - 1; i++) {
-                if (cards[i].compareTo(cards[i + 1]) < 0) {
-                    Card tempCard = cards[i];
-                    cards[i] = cards[i + 1];
-                    cards[i + 1] = tempCard;
-                }
-            }
-        }
     }
 
 
@@ -185,7 +183,6 @@ enum Combination {
         return setCards;
     }
 
-
     private static Card[] defineTwoPairsCards(Card[] cards) {
         Card[] setCards = new Card[3];
         if (!sameCardValues(cards, 0, 1)) {
@@ -230,7 +227,6 @@ enum Combination {
         }
         return false;
     }
-
 
     private static boolean hasFullHouse(Card[] cards) {
         return sameCardValues(cards, 0, 1) && sameCardValues(cards, 3, 4) &&
