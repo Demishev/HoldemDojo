@@ -3,8 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="388e9789-c4c7-491f-aae9-9962e0a04901" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/combinations/Combination.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/combinations/Combination.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/combinations/PlayerCardCombination.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/combinations/PlayerCardCombination.java" />
-      <change type="MOVED" beforePath="D:\java_projects\HoldemDojo\src\com\nedogeek\holdem\combinations\Combinations.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/combinations/Combination.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/com/nedogeek/holdem/combinations/PlayerCardCombinationTest.java" afterPath="$PROJECT_DIR$/tests/com/nedogeek/holdem/combinations/PlayerCardCombinationTest.java" />
     </list>
     <ignored path="holdem.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -87,7 +88,7 @@
       <file leaf-file-name="PlayerCardCombinationTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/combinations/PlayerCardCombinationTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="250" column="59" selection-start="11065" selection-end="11065" vertical-scroll-proportion="0.0">
+            <state line="168" column="43" selection-start="7655" selection-end="7655" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -95,10 +96,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Combination.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Combination.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/combinations/Combination.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="64" column="44" selection-start="2085" selection-end="2085" vertical-scroll-proportion="0.0">
+            <state line="149" column="45" selection-start="4956" selection-end="4956" vertical-scroll-proportion="0.5939086">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -106,10 +107,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PlayerCardCombination.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="PlayerCardCombination.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/combinations/PlayerCardCombination.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="170" column="19" selection-start="5174" selection-end="5174" vertical-scroll-proportion="0.40898877">
+            <state line="16" column="0" selection-start="372" selection-end="372" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -147,10 +148,10 @@
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/combinations/CardCombination.java" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/CardValue.java" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Card.java" />
-        <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/combinations/PlayerCardCombinationTest.java" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/combinations/Combinations.java" />
-        <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/combinations/Combination.java" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/combinations/PlayerCardCombination.java" />
+        <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/combinations/PlayerCardCombinationTest.java" />
+        <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/combinations/Combination.java" />
       </list>
     </option>
   </component>
@@ -1061,7 +1062,11 @@
       <created>1354534360802</created>
       <updated>1354534360803</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="5 cards combinations defining moved into Combination enum">
+      <created>1354535861396</created>
+      <updated>1354535861397</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1101,8 +1106,8 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988048" sideWeight="0.6923077" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.6923077" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23609923" sideWeight="0.8194444" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18055555" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23609923" sideWeight="0.7309028" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2690972" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1147,7 +1152,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Pair can be determined." />
+    <option name="LAST_COMMIT_MESSAGE" value="5 cards combinations defining moved into Combination enum" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1160,7 +1165,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="MoveManager refactored" />
     <MESSAGE value="DealerTest class created.&#10;When game status CYCLE_ENDED - cycle manager ends game." />
     <MESSAGE value="PlayerManager refactored." />
     <MESSAGE value="No movers availability check when gameStatus is INITIAL" />
@@ -1185,6 +1189,7 @@
     <MESSAGE value="Refactored" />
     <MESSAGE value="Two pairs determoned" />
     <MESSAGE value="Pair can be determined." />
+    <MESSAGE value="5 cards combinations defining moved into Combination enum" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1281,9 +1286,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/combinations/PlayerCardCombination.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="0" selection-start="372" selection-end="372" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/combinations/PlayerCardCombinationTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="250" column="59" selection-start="11065" selection-end="11065" vertical-scroll-proportion="0.0">
+        <state line="168" column="43" selection-start="7655" selection-end="7655" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1292,16 +1306,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/combinations/Combination.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="44" selection-start="2085" selection-end="2085" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/combinations/PlayerCardCombination.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="170" column="19" selection-start="5174" selection-end="5174" vertical-scroll-proportion="0.40898877">
+        <state line="149" column="45" selection-start="4956" selection-end="4956" vertical-scroll-proportion="0.5939086">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

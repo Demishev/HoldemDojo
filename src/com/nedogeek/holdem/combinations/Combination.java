@@ -9,23 +9,27 @@ import com.nedogeek.holdem.gamingStuff.CardValue;
  * Time: 22:56
  */
 enum Combination {
-    HIGH_CARD_TWO_CARDS("High card %s with %s"),
-    PAIR_TWO_CARDS("Pair of %s"),
-    HIGH_CARD("High card %s with %s, %s, %s and %s"),
-    PAIR("Pair of %s with %s, %s and %s"),
-    TWO_PAIRS("Two pairs of %s and %s with %s"),
-    SET("Set of %s with %s and %s"),
-    STRAIGHT("Straight on %s"),
-    FLASH("Flash on %s with %s, %s, %s and %s"),
-    FULL_HOUSE("Full house on %s and %s"),
-    FOUR_OF_KIND("Four of %s"),
-    STRAIGHT_FLASH("Straight flash on %s"),
-    ROYAL_FLASH("Royal flash");
+    ROYAL_FLASH("Royal flash", 5),
+    STRAIGHT_FLASH("Straight flash on %s", 5),
+    FOUR_OF_KIND("Four of %s with %s", 5),
+    FULL_HOUSE("Full house on %s and %s", 5),
+    FLASH("Flash on %s with %s, %s, %s and %s", 5),
+    STRAIGHT("Straight on %s", 5),
+    SET("Set of %s with %s and %s", 5),
+    TWO_PAIRS("Two pairs of %s and %s with %s", 5),
+    PAIR("Pair of %s with %s, %s and %s", 5),
+    HIGH_CARD("High card %s with %s, %s, %s and %s", 5),
+
+    PAIR_TWO_CARDS("Pair of %s", 2),
+    HIGH_CARD_TWO_CARDS("High card %s with %s", 2);
+
 
     private final String combinationMessage;
+    private final int combinationType;
 
-    Combination(String combinationMessage) {
+    Combination(String combinationMessage, int combinationType) {
         this.combinationMessage = combinationMessage;
+        this.combinationType = combinationType;
     }
 
     public String generateMessage(Card... cards) {
@@ -37,14 +41,24 @@ enum Combination {
     }
 
 
-    static boolean hasCombination(Card[] cards, Combination combination) {
+    static String cardsCombination(Card[] cards) {
+        for (Combination combination : Combination.values()) {
+            if (cards.length == combination.combinationType && hasCombination(cards, combination)) {
+                return combination.generateMessage(defineCombinationCards(cards, combination));
+            }
+        }
+        return "";
+    }
+
+    private static boolean hasCombination(Card[] cards, Combination combination) {
+        downSort(cards);
         switch (combination) {
             case HIGH_CARD_TWO_CARDS:
-                break;
+                return true;
             case PAIR_TWO_CARDS:
-                break;
+                return hasPairTwoCardsCombination(cards);
             case HIGH_CARD:
-                break;
+                return true;
             case PAIR:
                 return hasPair(cards);
             case TWO_PAIRS:
@@ -65,6 +79,160 @@ enum Combination {
                 return hasRoyalFlash(cards);
         }
         return false;
+    }
+
+    private static void downSort(Card[] cards) {
+        for (int n = 0; n < cards.length; n++) {
+            for (int i = 0; i < cards.length - n - 1; i++) {
+                if (cards[i].compareTo(cards[i + 1]) < 0) {
+                    Card tempCard = cards[i];
+                    cards[i] = cards[i + 1];
+                    cards[i + 1] = tempCard;
+                }
+            }
+        }
+    }
+
+
+    private static Card[] defineCombinationCards(Card[] cards, Combination combination) {
+        switch (combination) {
+            case HIGH_CARD_TWO_CARDS:
+                return DefineHighCardTwoCardsCards(cards);
+            case PAIR_TWO_CARDS:
+                return definePairTwoCardsCards(cards);
+            case HIGH_CARD:
+                return defineHighCardCards(cards);
+            case PAIR:
+                return definePairsCards(cards);
+            case TWO_PAIRS:
+                return defineTwoPairsCards(cards);
+            case SET:
+                return defineSetCards(cards);
+            case STRAIGHT:
+                return defineStraightCards(cards);
+            case FLASH:
+                return defineFlashCards(cards);
+            case FULL_HOUSE:
+                return defineFullHouseCards(cards);
+            case FOUR_OF_KIND:
+                return defineFourOfKindCards(cards);
+            case STRAIGHT_FLASH:
+                return defineStraightFlashCards(cards);
+            case ROYAL_FLASH:
+                return defineRoyalFlashCards();
+        }
+        return new Card[0];
+    }
+
+    private static Card[] definePairTwoCardsCards(Card[] cards) {
+        return new Card[] {cards[0]};
+    }
+
+    private static Card[] DefineHighCardTwoCardsCards(Card[] cards) {
+        return cards;
+    }
+
+    private static Card[] defineHighCardCards(Card[] cards) {
+        return cards;
+    }
+
+    private static Card[] defineFlashCards(Card[] cards) {
+        return cards;
+    }
+
+    private static Card[] defineStraightCards(Card[] cards) {
+        return new Card[] {cards[0]};
+    }
+
+    private static Card[] defineFourOfKindCards(Card[] cards) {
+        return (sameCardValues(cards, 0,1)) ?
+                new Card[] {cards[0], cards[4]} :
+                new Card[] {cards[4], cards[0]};
+    }
+
+    private static Card[] defineStraightFlashCards(Card[] cards) {
+        return new Card[] {cards[0]};
+    }
+
+    private static Card[] defineRoyalFlashCards() {
+        return new Card[0];
+    }
+
+    private static Card[] defineFullHouseCards(Card[] cards) {
+        return (sameCardValues(cards, 1, 2)) ? new Card[] {cards[0], cards[4]} :
+                new Card[] {cards[4], cards[0]};
+    }
+
+    private static Card[] defineSetCards(Card[] cards) {
+        Card[] setCards = new Card[3];
+        setCards[0] = cards[2];
+
+        if (sameCardValues(cards, 0, 1, 2)) {
+            setCards[1] = cards[3];
+            setCards[2] = cards[4];
+        }
+
+        if (sameCardValues(cards, 1, 2, 3)) {
+            setCards[1] = cards[0];
+            setCards[2] = cards[4];
+        }
+
+        if (sameCardValues(cards, 2, 3, 4)) {
+            setCards[1] = cards[0];
+            setCards[2] = cards[1];
+        }
+
+        return setCards;
+    }
+
+
+    private static Card[] defineTwoPairsCards(Card[] cards) {
+        Card[] setCards = new Card[3];
+        if (!sameCardValues(cards, 0, 1)) {
+            setCards[0] = cards[2];
+            setCards[1] = cards[4];
+            setCards[2] = cards[0];
+        } else if (!sameCardValues(cards, 3, 4)) {
+            setCards[0] = cards[0];
+            setCards[1] = cards[2];
+            setCards[2] = cards[4];
+        } else {
+            setCards[0] = cards[0];
+            setCards[1] = cards[4];
+            setCards[2] = cards[2];
+        }
+        return setCards;
+    }
+
+    private static Card[] definePairsCards(Card[] cards) {
+        Card[] pairCards = new Card[4];
+        for (int i = 0; i < cards.length - 1; i++) {
+            if (sameCardValues(cards, i, i + 1)) {
+                pairCards[0] = cards[i];
+                if (i == 0) {
+                    System.arraycopy(cards, 2, pairCards, 1, 3);
+                    return pairCards;
+                }
+                if (i == 1) {
+                    pairCards[1] = cards[0];
+                    System.arraycopy(cards, 3, pairCards, 2, 2);
+                    return pairCards;
+                }
+                if (i == 3) {
+                    System.arraycopy(cards, 0, pairCards, 1, 3);
+                    return pairCards;
+                }
+                System.arraycopy(cards, 0, pairCards, 1, 2);
+                pairCards[3] = cards[4];
+                return pairCards;
+            }                        //TODO simplify method
+        }
+        return new Card[0];
+    }
+
+
+    private static boolean hasPairTwoCardsCombination(Card[] cards) {
+        return sameCardValues(cards, 0, 1);
     }
 
     private static boolean hasPair(Card[] cards) {

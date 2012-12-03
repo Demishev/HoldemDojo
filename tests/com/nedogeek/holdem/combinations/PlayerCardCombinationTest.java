@@ -158,7 +158,7 @@ public class PlayerCardCombinationTest {
         PlayerCardCombination cardCombination = new PlayerCardCombination(
                 HEARTS_ACE, DIAMONDS_ACE, SPADES_ACE, CLUBS_ACE, DIAMONDS_KING);
 
-        assertEquals("Four of Ace", cardCombination.getCombination());
+        assertEquals("Four of Ace with King", cardCombination.getCombination());
     }
 
     @Test
@@ -166,7 +166,7 @@ public class PlayerCardCombinationTest {
         PlayerCardCombination cardCombination = new PlayerCardCombination(
                 HEARTS_KING, DIAMONDS_KING, SPADES_KING, CLUBS_KING, DIAMONDS_ACE);
 
-        assertEquals("Four of King", cardCombination.getCombination());
+        assertEquals("Four of King with Ace", cardCombination.getCombination());
     }
 
     @Test
