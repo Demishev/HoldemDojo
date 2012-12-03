@@ -68,8 +68,38 @@ public class PlayerCardCombination implements Comparable<PlayerCardCombination> 
                     Combinations.FULL_HOUSE.generateMessage(cards[4], cards[0]);
         }
 
+        if (hasSet()) {
+            return Combinations.SET.generateMessage(getSetCards());
+        }
+
         return (hasFlash()) ? Combinations.FLASH.generateMessage(cards) :
                 Combinations.HIGH_CARD.generateMessage(cards);
+    }
+
+    private Card[] getSetCards() {
+        Card[] setCards = new Card[3];
+        setCards[0] = cards[2];
+
+        if (sameCardValues(0,1,2)) {
+            setCards[1] = cards[3];
+            setCards[2] = cards[4];
+        }
+
+        if (sameCardValues(1,2,3)) {
+            setCards[1] = cards[0];
+            setCards[2] = cards[4];
+        }
+
+        if (sameCardValues(2,3,4)) {
+            setCards[1] = cards[0];
+            setCards[2] = cards[1];
+        }
+
+        return setCards;
+    }
+
+    private boolean hasSet() {
+        return sameCardValues(0,1,2) || sameCardValues(1,2,3) || sameCardValues(2,3,4);
     }
 
     private boolean hasFourOfKind() {
@@ -88,7 +118,7 @@ public class PlayerCardCombination implements Comparable<PlayerCardCombination> 
 
     private boolean hasFullHouse() {
         return sameCardValues(0,1) && sameCardValues(3,4) &&
-                sameCardValues(1,2) || sameCardValues(2,3);
+                (sameCardValues(1,2) || sameCardValues(2,3));
     }
 
     private boolean hasRoyalFlash() {

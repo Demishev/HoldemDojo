@@ -23,9 +23,12 @@ public class PlayerCardCombinationTest {
 
     private static final Card DIAMONDS_ACE = new Card(CardSuit.DIAMONDS, CardValue.ACE);
     private static final Card DIAMONDS_KING = new Card(CardSuit.DIAMONDS, CardValue.KING);
+    private static final Card DIAMONDS_QUEEN = new Card(CardSuit.DIAMONDS, CardValue.QUEEN);
 
     private static final Card CLUBS_ACE = new Card(CardSuit.CLUBS, CardValue.ACE);
     private static final Card CLUBS_KING = new Card(CardSuit.CLUBS, CardValue.KING);
+    private static final Card CLUBS_QUEEN = new Card(CardSuit.CLUBS, CardValue.QUEEN);
+
 
     private static final Card SPADES_ACE = new Card(CardSuit.SPADES, CardValue.ACE);
     private static final Card SPADES_KING = new Card(CardSuit.SPADES, CardValue.KING);
@@ -159,8 +162,32 @@ public class PlayerCardCombinationTest {
     @Test
     public void shouldFourOfKindKWhenKKKKAGetCombination() throws Exception {
         PlayerCardCombination cardCombination = new PlayerCardCombination(
-                new Card[] {HEARTS_KING, DIAMONDS_KING, SPADES_KING, CLUBS_KING, DIAMONDS_ACE});
+                HEARTS_KING, DIAMONDS_KING, SPADES_KING, CLUBS_KING, DIAMONDS_ACE);
 
         assertEquals("Four of King", cardCombination.getCombination());
+    }
+
+    @Test
+    public void shouldSetOfAWhenQKAAAGetCombination() throws Exception {
+        PlayerCardCombination cardCombination = new PlayerCardCombination(
+                HEARTS_QUEEN, DIAMONDS_KING, SPADES_ACE, CLUBS_ACE, DIAMONDS_ACE);
+
+        assertEquals("Set of Ace with King and Queen", cardCombination.getCombination());
+    }
+
+    @Test
+    public void shouldSetOfKWhenQKKAAGetCombination() throws Exception {
+        PlayerCardCombination cardCombination = new PlayerCardCombination(
+                HEARTS_QUEEN, DIAMONDS_KING, SPADES_KING, CLUBS_KING, DIAMONDS_ACE);
+
+        assertEquals("Set of King with Ace and Queen", cardCombination.getCombination());
+    }
+
+    @Test
+    public void shouldSetOfQWhenQQQKAGetCombination() throws Exception {
+        PlayerCardCombination cardCombination = new PlayerCardCombination(
+                HEARTS_QUEEN, DIAMONDS_QUEEN, CLUBS_QUEEN, CLUBS_KING, DIAMONDS_ACE);
+
+        assertEquals("Set of Queen with Ace and King", cardCombination.getCombination());
     }
 }
