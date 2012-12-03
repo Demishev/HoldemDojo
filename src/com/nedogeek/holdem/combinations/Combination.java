@@ -3,6 +3,7 @@ package com.nedogeek.holdem.combinations;
 import com.nedogeek.holdem.gamingStuff.Card;
 import com.nedogeek.holdem.gamingStuff.CardValue;
 
+
 /**
  * User: Konstantin Demishev
  * Date: 02.12.12
@@ -19,10 +20,9 @@ enum Combination {
     TWO_PAIRS("Two pairs of %s and %s with %s", 5),
     PAIR("Pair of %s with %s, %s and %s", 5),
     HIGH_CARD("High card %s with %s, %s, %s and %s", 5),
-
     PAIR_TWO_CARDS("Pair of %s", 2),
-    HIGH_CARD_TWO_CARDS("High card %s with %s", 2);
 
+    HIGH_CARD_TWO_CARDS("High card %s with %s", 2);
     private final String combinationMessage;
     private final int combinationType;
 
@@ -31,13 +31,19 @@ enum Combination {
         this.combinationType = combinationType;
     }
 
-    static String cardsCombination(Card[] cards) {
+    static Combination getCombinationType(Card[] cards) {
         for (Combination combination : Combination.values()) {
             if (cards.length == combination.combinationType && hasCombination(cards, combination)) {
-                return combination.generateMessage(defineCombinationCards(cards, combination));
+                return combination;
             }
         }
-        return "";
+        return null;
+    }
+
+    static String cardsCombination(Card[] cards) {
+        Combination combination = getCombinationType(cards);
+        Card[] combinationCards = defineCombinationCards(cards, combination);
+        return combination.generateMessage(combinationCards);
     }
 
     private String generateMessage(Card... cards) {
@@ -91,7 +97,6 @@ enum Combination {
         return false;
     }
 
-
     private static Card[] defineCombinationCards(Card[] cards, Combination combination) {
         switch (combination) {
             case HIGH_CARD_TWO_CARDS:
@@ -123,7 +128,7 @@ enum Combination {
     }
 
     private static Card[] definePairTwoCardsCards(Card[] cards) {
-        return new Card[] {cards[0]};
+        return new Card[]{cards[0]};
     }
 
     private static Card[] DefineHighCardTwoCardsCards(Card[] cards) {
@@ -139,17 +144,17 @@ enum Combination {
     }
 
     private static Card[] defineStraightCards(Card[] cards) {
-        return new Card[] {cards[0]};
+        return new Card[]{cards[0]};
     }
 
     private static Card[] defineFourOfKindCards(Card[] cards) {
-        return (sameCardValues(cards, 0,1)) ?
-                new Card[] {cards[0], cards[4]} :
-                new Card[] {cards[4], cards[0]};
+        return (sameCardValues(cards, 0, 1)) ?
+                new Card[]{cards[0], cards[4]} :
+                new Card[]{cards[4], cards[0]};
     }
 
     private static Card[] defineStraightFlashCards(Card[] cards) {
-        return new Card[] {cards[0]};
+        return new Card[]{cards[0]};
     }
 
     private static Card[] defineRoyalFlashCards() {
@@ -157,8 +162,8 @@ enum Combination {
     }
 
     private static Card[] defineFullHouseCards(Card[] cards) {
-        return (sameCardValues(cards, 1, 2)) ? new Card[] {cards[0], cards[4]} :
-                new Card[] {cards[4], cards[0]};
+        return (sameCardValues(cards, 1, 2)) ? new Card[]{cards[0], cards[4]} :
+                new Card[]{cards[4], cards[0]};
     }
 
     private static Card[] defineSetCards(Card[] cards) {
@@ -201,6 +206,7 @@ enum Combination {
         return setCards;
     }
 
+
     private static Card[] definePairsCards(Card[] cards) {
         Card[] pairCards = new Card[4];
         for (int i = 0; i < cards.length - 1; i++) {
@@ -213,7 +219,6 @@ enum Combination {
         }
         return new Card[0];
     }
-
 
     private static boolean hasPairTwoCardsCombination(Card[] cards) {
         return sameCardValues(cards, 0, 1);
@@ -281,5 +286,10 @@ enum Combination {
             }
         }
         return true;
+    }
+
+    static Card[] getCombinationCards(Card[] cards) {
+        Combination combination = getCombinationType(cards);
+        return defineCombinationCards(cards, combination);
     }
 }

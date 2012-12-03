@@ -79,7 +79,7 @@ public class PlayerCardCombinationTest {
     public void shouldPairOfAceHAceDAceWhenHeartsAceAndDiamondsAceToString() throws Exception {
         PlayerCardCombination cardCombination = new PlayerCardCombination(HEARTS_ACE, DIAMONDS_ACE);
 
-        assertEquals("Pair of Ace: [♥A, ♦A]", cardCombination.toString());
+        assertEquals("Pair of Ace: [A♥, A♦]", cardCombination.toString());
     }
 
     @Test
@@ -235,7 +235,7 @@ public class PlayerCardCombinationTest {
     }
 
     @Test
-    public void shouldPairWhenOnQWithAKJWhenAKQQJ() throws Exception {
+    public void shouldPairOnQWithAKJWhenAKQQJ() throws Exception {
         PlayerCardCombination cardCombination = new PlayerCardCombination(
                 HEARTS_JACK, CLUBS_QUEEN, DIAMONDS_QUEEN, HEARTS_KING, CLUBS_ACE);
 
@@ -244,7 +244,7 @@ public class PlayerCardCombinationTest {
 
 
     @Test
-    public void shouldPairWhenOnJWithAKQWhenAKKQJ() throws Exception {
+    public void shouldPairOnJWithAKQWhenAKKQJ() throws Exception {
         PlayerCardCombination cardCombination = new PlayerCardCombination(
                 HEARTS_JACK, DIAMONDS_JACK, DIAMONDS_QUEEN, HEARTS_KING, CLUBS_ACE);
 

@@ -13,6 +13,6 @@ public class CardTest {
 
     @Test
     public void shouldHeartsAceToStringProperlyWhenCreatingNewCard() throws Exception {
-        assertEquals("♥A", new Card(CardSuit.HEARTS, CardValue.ACE).toString());
+        assertEquals("A♥", new Card(CardSuit.HEARTS, CardValue.ACE).toString());
     }
 }

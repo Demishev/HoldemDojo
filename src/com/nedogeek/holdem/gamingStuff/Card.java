@@ -28,7 +28,7 @@ public class Card implements Comparable<Card>{
 
     @Override
     public String toString() {
-        return "" + cardSuit + cardValue;
+        return "" + cardValue + cardSuit;
     }
 
     @Override
