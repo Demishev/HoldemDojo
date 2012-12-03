@@ -10,7 +10,7 @@ import java.util.Arrays;
  * Date: 27.11.12
  * Time: 14:23
  */
-public class PlayerCardCombination implements Comparable<PlayerCardCombination>{
+public class PlayerCardCombination implements Comparable<PlayerCardCombination> {
     private Card[] cards;
 
     public PlayerCardCombination(Card[] cards) {
@@ -60,7 +60,8 @@ public class PlayerCardCombination implements Comparable<PlayerCardCombination>{
         }
 
         if (hasFullHouse()) {
-            return Combinations.FULL_HOUSE.generateMessage(new Card[] {cards[0], cards[4]});
+            return (cards[1].sameValue(cards[2])) ? Combinations.FULL_HOUSE.generateMessage(cards[0], cards[4]) :
+                    Combinations.FULL_HOUSE.generateMessage(cards[4], cards[0]);
         }
 
         return (hasFlash()) ? Combinations.FLASH.generateMessage(cards) :
@@ -68,8 +69,8 @@ public class PlayerCardCombination implements Comparable<PlayerCardCombination>{
     }
 
     private boolean hasFullHouse() {
-        return cards[0].sameValue(cards[1]) && cards[0].sameValue(cards[2]) &&
-                cards[3].sameValue(cards[4]);
+        return cards[0].sameValue(cards[1]) && cards[3].sameValue(cards[4]) &&
+                (cards[1].sameValue(cards[2]) || cards[2].sameValue(cards[3]));
     }
 
     private boolean hasRoyalFlash() {
@@ -83,7 +84,7 @@ public class PlayerCardCombination implements Comparable<PlayerCardCombination>{
     private boolean hasStraight() {
         boolean hasStraight = true;
         for (int i = 0; i < cards.length - 1; i++) {
-            if (!cards[i].isNear(cards[i+1])) {
+            if (!cards[i].isNear(cards[i + 1])) {
                 hasStraight = false;
             }
         }
@@ -93,8 +94,8 @@ public class PlayerCardCombination implements Comparable<PlayerCardCombination>{
 
     private boolean hasFlash() {
         boolean hasFlash = true;
-        for (Card card:cards) {
-            if (!card.sameSuit(cards[0])){
+        for (Card card : cards) {
+            if (!card.sameSuit(cards[0])) {
                 hasFlash = false;
             }
         }

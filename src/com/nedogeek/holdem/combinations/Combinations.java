@@ -32,7 +32,6 @@ public enum Combinations {
         for (int i = 0; i < cards.length; i++) {
             cardNames[i] = cards[i].getCardValueName();
         }
-
         return String.format(combinationMessage, (Object[]) cardNames);
     }
 }

@@ -4,6 +4,8 @@
     <list default="true" id="388e9789-c4c7-491f-aae9-9962e0a04901" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/combinations/Combinations.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/combinations/Combinations.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/combinations/PlayerCardCombination.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/combinations/PlayerCardCombination.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/com/nedogeek/holdem/combinations/PlayerCardCombinationTest.java" afterPath="$PROJECT_DIR$/tests/com/nedogeek/holdem/combinations/PlayerCardCombinationTest.java" />
     </list>
     <ignored path="holdem.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -86,7 +88,7 @@
       <file leaf-file-name="PlayerCardCombinationTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/combinations/PlayerCardCombinationTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="135" column="48" selection-start="6284" selection-end="6284" vertical-scroll-proportion="0.0">
+            <state line="132" column="16" selection-start="6088" selection-end="6088" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -94,19 +96,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Combinations.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Combinations.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/combinations/Combinations.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="0" selection-start="1127" selection-end="1127" vertical-scroll-proportion="0.6666667">
+            <state line="15" column="0" selection-start="404" selection-end="404" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PlayerCardCombination.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="PlayerCardCombination.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/combinations/PlayerCardCombination.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="62" column="89" selection-start="1704" selection-end="1704" vertical-scroll-proportion="0.0">
+            <state line="62" column="49" selection-start="1665" selection-end="1665" vertical-scroll-proportion="0.28851542">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -144,10 +146,10 @@
         <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/combinations/CardCombinationTest.java" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/combinations/CardCombination.java" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/CardValue.java" />
-        <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/combinations/PlayerCardCombinationTest.java" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Card.java" />
-        <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/combinations/PlayerCardCombination.java" />
+        <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/combinations/PlayerCardCombinationTest.java" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/combinations/Combinations.java" />
+        <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/combinations/PlayerCardCombination.java" />
       </list>
     </option>
   </component>
@@ -1034,7 +1036,11 @@
       <created>1354501164525</created>
       <updated>1354501164525</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="Combinations uses varargs.">
+      <created>1354501302909</created>
+      <updated>1354501302909</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1120,7 +1126,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="FullHouse type 3,2 codded." />
+    <option name="LAST_COMMIT_MESSAGE" value="Combinations uses varargs." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1133,7 +1139,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="Deprecated code replaced.&#10;Player status rise works." />
     <MESSAGE value="AllInMoveStatus works" />
     <MESSAGE value="AllInMoveStatus works&#10;Test cases changed&#10;Refactored&#10;&#10;" />
     <MESSAGE value="GameRound is enum." />
@@ -1158,6 +1163,7 @@
     <MESSAGE value="Kickers formation in Combinations changed." />
     <MESSAGE value="Royal flash, straight flash, flash detection codded." />
     <MESSAGE value="FullHouse type 3,2 codded." />
+    <MESSAGE value="Combinations uses varargs." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1247,24 +1253,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/combinations/PlayerCardCombination.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="89" selection-start="1704" selection-end="1704" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/combinations/PlayerCardCombinationTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="135" column="48" selection-start="6284" selection-end="6284" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.7.0_03/src.zip!/java/lang/String.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2843" column="25" selection-start="113164" selection-end="113164" vertical-scroll-proportion="0.33139536">
@@ -1272,10 +1260,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/combinations/PlayerCardCombinationTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="132" column="16" selection-start="6088" selection-end="6088" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/combinations/Combinations.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="0" selection-start="1127" selection-end="1127" vertical-scroll-proportion="0.6666667">
+        <state line="15" column="0" selection-start="404" selection-end="404" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/combinations/PlayerCardCombination.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="62" column="49" selection-start="1665" selection-end="1665" vertical-scroll-proportion="0.28851542">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

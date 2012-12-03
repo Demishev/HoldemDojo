@@ -25,6 +25,7 @@ public class PlayerCardCombinationTest {
     private static final Card DIAMONDS_KING = new Card(CardSuit.DIAMONDS, CardValue.KING);
 
     private static final Card CLUBS_ACE = new Card(CardSuit.CLUBS, CardValue.ACE);
+    private static final Card CLUBS_KING = new Card(CardSuit.CLUBS, CardValue.KING);
 
     private void assertCardsEquals(Card[] firstCards, Card[] secondCards) {
         PlayerCardCombination firstCombination = new PlayerCardCombination(firstCards);
@@ -134,5 +135,13 @@ public class PlayerCardCombinationTest {
                 new Card[] {HEARTS_ACE, DIAMONDS_ACE, CLUBS_ACE, HEARTS_KING, DIAMONDS_KING});
 
         assertEquals("Full house on Ace and King", cardCombination.getCombination());
+    }
+
+    @Test
+    public void shouldFullHouseKAWhenAAKKKGetCombination() throws Exception {
+        PlayerCardCombination cardCombination = new PlayerCardCombination(
+                new Card[] {HEARTS_ACE, DIAMONDS_ACE, CLUBS_KING, HEARTS_KING, DIAMONDS_KING});
+
+        assertEquals("Full house on King and Ace", cardCombination.getCombination());
     }
 }
