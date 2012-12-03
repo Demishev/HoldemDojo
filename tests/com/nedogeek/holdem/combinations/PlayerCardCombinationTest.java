@@ -27,6 +27,9 @@ public class PlayerCardCombinationTest {
     private static final Card CLUBS_ACE = new Card(CardSuit.CLUBS, CardValue.ACE);
     private static final Card CLUBS_KING = new Card(CardSuit.CLUBS, CardValue.KING);
 
+    private static final Card SPADES_ACE = new Card(CardSuit.SPADES, CardValue.ACE);
+    private static final Card SPADES_KING = new Card(CardSuit.SPADES, CardValue.KING);
+
     private void assertCardsEquals(Card[] firstCards, Card[] secondCards) {
         PlayerCardCombination firstCombination = new PlayerCardCombination(firstCards);
         PlayerCardCombination secondCombination = new PlayerCardCombination(secondCards);
@@ -143,5 +146,21 @@ public class PlayerCardCombinationTest {
                 new Card[] {HEARTS_ACE, DIAMONDS_ACE, CLUBS_KING, HEARTS_KING, DIAMONDS_KING});
 
         assertEquals("Full house on King and Ace", cardCombination.getCombination());
+    }
+
+    @Test
+    public void shouldFourOfKindAWhenAAAAKGetCombination() throws Exception {
+        PlayerCardCombination cardCombination = new PlayerCardCombination(
+                new Card[] {HEARTS_ACE, DIAMONDS_ACE, SPADES_ACE, CLUBS_ACE, DIAMONDS_KING});
+
+        assertEquals("Four of Ace", cardCombination.getCombination());
+    }
+
+    @Test
+    public void shouldFourOfKindKWhenKKKKAGetCombination() throws Exception {
+        PlayerCardCombination cardCombination = new PlayerCardCombination(
+                new Card[] {HEARTS_KING, DIAMONDS_KING, SPADES_KING, CLUBS_KING, DIAMONDS_ACE});
+
+        assertEquals("Four of King", cardCombination.getCombination());
     }
 }
