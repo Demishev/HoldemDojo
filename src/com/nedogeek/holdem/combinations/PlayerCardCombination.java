@@ -47,44 +47,44 @@ public class PlayerCardCombination implements Comparable<PlayerCardCombination> 
     }
 
     private String fiveCardsCombination() {
-        if (hasRoyalFlash()) {
-            return Combinations.ROYAL_FLASH.generateMessage();
+        if (Combination.hasCombination(cards, Combination.ROYAL_FLASH)) {
+            return Combination.ROYAL_FLASH.generateMessage();
         }
 
-        if (hasStraightFlash()) {
-            return Combinations.STRAIGHT_FLASH.generateMessage(cards[0]);
+        if (Combination.hasCombination(cards, Combination.STRAIGHT_FLASH)) {
+            return Combination.STRAIGHT_FLASH.generateMessage(cards[0]);
         }
 
-        if (hasFourOfKind()) {
-            return Combinations.FOUR_OF_KIND.generateMessage(cards[2]);
+        if (Combination.hasCombination(cards, Combination.FOUR_OF_KIND)) {
+            return Combination.FOUR_OF_KIND.generateMessage(cards[2]);
         }
 
-        if (hasStraight()) {
-            return Combinations.STRAIGHT.generateMessage(cards[0]);
+        if (Combination.hasCombination(cards, Combination.STRAIGHT)) {
+            return Combination.STRAIGHT.generateMessage(cards[0]);
         }
 
-        if (hasFullHouse()) {
-            return (sameCardValues(1, 2)) ? Combinations.FULL_HOUSE.generateMessage(cards[0], cards[4]) :
-                    Combinations.FULL_HOUSE.generateMessage(cards[4], cards[0]);
+        if (Combination.hasCombination(cards, Combination.FULL_HOUSE)) {
+            return (sameCardValues(1, 2)) ? Combination.FULL_HOUSE.generateMessage(cards[0], cards[4]) :
+                    Combination.FULL_HOUSE.generateMessage(cards[4], cards[0]);
         }
 
-        if (hasSet()) {
-            return Combinations.SET.generateMessage(getSetCards());
+        if (Combination.hasCombination(cards, Combination.SET)) {
+            return Combination.SET.generateMessage(getSetCards());
         }
 
-        if (hasFlash()) {
-            return Combinations.FLASH.generateMessage(cards);
+        if (Combination.hasCombination(cards, Combination.FLASH)) {
+            return Combination.FLASH.generateMessage(cards);
         }
 
-        if (hasTwoPairs()) {
-            return Combinations.TWO_PAIRS.generateMessage(getTwoPairsCards());
+        if (Combination.hasCombination(cards, Combination.TWO_PAIRS)) {
+            return Combination.TWO_PAIRS.generateMessage(getTwoPairsCards());
         }
 
-        if (hasPair()) {
-            return Combinations.PAIR.generateMessage(getPairsCards());
+        if (Combination.hasCombination(cards, Combination.PAIR)) {
+            return Combination.PAIR.generateMessage(getPairsCards());
         }
 
-        return Combinations.HIGH_CARD.generateMessage(cards);
+        return Combination.HIGH_CARD.generateMessage(cards);
     }
 
     private Card[] getPairsCards() {
@@ -113,20 +113,7 @@ public class PlayerCardCombination implements Comparable<PlayerCardCombination> 
         return new Card[0];
     }
 
-    private boolean hasPair() {
-        for (int i = 0; i < cards.length - 1; i++) {
-            if (cards[i].sameValue(cards[i + 1])) {
-                return true;
-            }
-        }
-        return false;
-    }
 
-    private boolean hasTwoPairs() {
-        return sameCardValues(0,1) && sameCardValues(2,3) ||
-                sameCardValues(1,2) && sameCardValues(3,4) ||
-                sameCardValues(0,1) && sameCardValues(3,4);
-    }
 
     private Card[] getTwoPairsCards() {
         Card[] setCards = new Card[3];
@@ -168,14 +155,6 @@ public class PlayerCardCombination implements Comparable<PlayerCardCombination> 
         return setCards;
     }
 
-    private boolean hasSet() {
-        return sameCardValues(0, 1, 2) || sameCardValues(1, 2, 3) || sameCardValues(2, 3, 4);
-    }
-
-    private boolean hasFourOfKind() {
-        return sameCardValues(0, 1, 2, 3) || sameCardValues(1, 2, 3, 4);
-    }
-
     private boolean sameCardValues(int... cardNumbers) {
         CardValue valueNeeded = cards[cardNumbers[0]].getCardValue();
         for (int cardNumber : cardNumbers) {
@@ -186,43 +165,13 @@ public class PlayerCardCombination implements Comparable<PlayerCardCombination> 
         return true;
     }
 
-    private boolean hasFullHouse() {
-        return sameCardValues(0, 1) && sameCardValues(3, 4) &&
-                (sameCardValues(1, 2) || sameCardValues(2, 3));
-    }
-
-    private boolean hasRoyalFlash() {
-        return hasStraightFlash() && cards[0].getCardValue().equals(CardValue.ACE);
-    }
-
-    private boolean hasStraightFlash() {
-        return hasFlash() && hasStraight();
-    }
-
-    private boolean hasStraight() {
-        for (int i = 0; i < cards.length - 1; i++) {
-            if (!cards[i].isNear(cards[i + 1])) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private boolean hasFlash() {
-        for (Card card : cards) {
-            if (!card.sameSuit(cards[0])) {
-                return false;
-            }
-        }
-        return true;
-    }
 
     private String twoCardsCombination() {
         if (sameCardValues(0,1)) {
-            return Combinations.PAIR_TWO_CARDS.generateMessage(cards[0]);
+            return Combination.PAIR_TWO_CARDS.generateMessage(cards[0]);
         }
 
-        return Combinations.HIGH_CARD_TWO_CARDS.generateMessage(cards);
+        return Combination.HIGH_CARD_TWO_CARDS.generateMessage(cards);
     }
 
     @Override
