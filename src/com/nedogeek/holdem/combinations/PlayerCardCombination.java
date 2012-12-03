@@ -52,9 +52,7 @@ public class PlayerCardCombination implements Comparable<PlayerCardCombination>{
 
 
         return (hasFlash()) ? Combinations.FLASH.generateMessage(cards) :
-                Combinations.HIGH_CARD.generateMessage(cards[0]) + " " +
-                        Combinations.FOUR_KICKERS.generateMessage(Arrays.copyOfRange(cards, 1, cards.length));
-
+                Combinations.HIGH_CARD.generateMessage(cards);
     }
 
     private boolean hasStraight() {
@@ -80,11 +78,10 @@ public class PlayerCardCombination implements Comparable<PlayerCardCombination>{
 
     private String twoCardsCombination() {
         if (cards[0].compareTo(cards[1]) == 0) {
-            return Combinations.PAIR.generateMessage(cards[0]);
+            return Combinations.PAIR_TWO_CARDS.generateMessage(cards[0]);
         }
 
-        return Combinations.HIGH_CARD.generateMessage(cards[0]) + " " +
-                Combinations.KICKER.generateMessage(cards[1]);
+        return Combinations.HIGH_CARD_TWO_CARDS.generateMessage(cards);
     }
 
     @Override

@@ -8,14 +8,12 @@ import com.nedogeek.holdem.gamingStuff.Card;
  * Time: 22:56
  */
 public enum Combinations {
-    KICKER ("with kicker %s"),
-    TWO_KICKERS ("with kickers %s and %s"),
-    THREE_KICKERS ("with kickers: %s, %s and %s"),
-    FOUR_KICKERS ("with kickers: %s, %s, %s and %s"),
-    HIGH_CARD ("High card %s"),
-    PAIR ("Pair of %s"),
-    TWO_PAIRS ("Pairs of %s and %s"),
-    SET ("Set of %s"),
+    HIGH_CARD_TWO_CARDS("High card %s with %s"),
+    PAIR_TWO_CARDS ("Pair of %s"),
+    HIGH_CARD ("High card %s with %s, %s, %s and %s"),
+    PAIR ("Pair of %s with %s, %s and %s"),
+    TWO_PAIRS ("Pairs of %s with %s"),
+    SET ("Set of %s with %s and %s"),
     STRAIGHT ("Straight on %s"),
     FLASH ("Flash on %s with %s, %s, %s and %s"),
     FULL_HOUSE ("Full house on %s and %s"),

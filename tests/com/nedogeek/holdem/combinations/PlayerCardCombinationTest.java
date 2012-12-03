@@ -39,21 +39,21 @@ public class PlayerCardCombinationTest {
     public void shouldHighCardAceWithKickerKingWhenGetCombinationHeartsAceHeartsKing() throws Exception {
         PlayerCardCombination cardCombination = new PlayerCardCombination(new Card[] {HEARTS_ACE, HEARTS_KING});
 
-        assertEquals("High card Ace with kicker King", cardCombination.getCombination());
+        assertEquals("High card Ace with King", cardCombination.getCombination());
     }
 
     @Test
     public void shouldHighCardAceWithKickerQueenWhenGetCombinationHeartsAceHeartsQueen() throws Exception {
         PlayerCardCombination cardCombination = new PlayerCardCombination(new Card[] {HEARTS_ACE, HEARTS_QUEEN});
 
-        assertEquals("High card Ace with kicker Queen", cardCombination.getCombination());
+        assertEquals("High card Ace with Queen", cardCombination.getCombination());
     }
 
     @Test
     public void shouldHighCardAceWithKickerKingWhenGetCombinationHeartsKingHeartsAce() throws Exception {
         PlayerCardCombination cardCombination = new PlayerCardCombination(new Card[] {HEARTS_KING, HEARTS_ACE});
 
-        assertEquals("High card Ace with kicker King", cardCombination.getCombination());
+        assertEquals("High card Ace with King", cardCombination.getCombination());
     }
 
     @Test
@@ -91,14 +91,14 @@ public class PlayerCardCombinationTest {
         PlayerCardCombination cardCombination = new PlayerCardCombination(
                 new Card[] {HEARTS_SIX, HEARTS_JACK, HEARTS_QUEEN, HEARTS_KING, DIAMONDS_ACE});
 
-        assertEquals("High card Ace with kickers: King, Queen, Jack and 6", cardCombination.getCombination());
+        assertEquals("High card Ace with King, Queen, Jack and 6", cardCombination.getCombination());
     }
 
     @Test
     public void shouldHighCardKingWithKickerQueenWhenGetCombinationHeartsKingHeartsQueen() throws Exception {
         PlayerCardCombination cardCombination = new PlayerCardCombination(new Card[] {HEARTS_KING, HEARTS_QUEEN});
 
-        assertEquals("High card King with kicker Queen", cardCombination.getCombination());
+        assertEquals("High card King with Queen", cardCombination.getCombination());
     }
 
     @Test
@@ -108,4 +108,6 @@ public class PlayerCardCombinationTest {
 
         assertEquals("Straight on Ace", cardCombination.getCombination());
     }
+
+
 }
