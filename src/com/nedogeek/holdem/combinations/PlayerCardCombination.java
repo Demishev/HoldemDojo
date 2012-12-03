@@ -1,6 +1,7 @@
 package com.nedogeek.holdem.combinations;
 
 import com.nedogeek.holdem.gamingStuff.Card;
+import com.nedogeek.holdem.gamingStuff.CardValue;
 
 import java.util.Arrays;
 
@@ -46,6 +47,14 @@ public class PlayerCardCombination implements Comparable<PlayerCardCombination>{
     }
 
     private String fiveCardsCombination() {
+        if (hasRoyalFlash()) {
+            return Combinations.ROYAL_FLASH.generateMessage();
+        }
+
+        if (hasStraightFlash()) {
+            return Combinations.STRAIGHT_FLASH.generateMessage(cards[0]);
+        }
+
         if (hasStraight()) {
             return Combinations.STRAIGHT.generateMessage(cards[0]);
         }
@@ -53,6 +62,14 @@ public class PlayerCardCombination implements Comparable<PlayerCardCombination>{
 
         return (hasFlash()) ? Combinations.FLASH.generateMessage(cards) :
                 Combinations.HIGH_CARD.generateMessage(cards);
+    }
+
+    private boolean hasRoyalFlash() {
+        return hasStraightFlash() && cards[0].getCardValue().equals(CardValue.ACE);
+    }
+
+    private boolean hasStraightFlash() {
+        return hasFlash() && hasStraight();
     }
 
     private boolean hasStraight() {

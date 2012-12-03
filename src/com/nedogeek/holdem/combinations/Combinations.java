@@ -39,4 +39,8 @@ public enum Combinations {
 
         return String.format(combinationMessage,(Object[]) cardNames);
     }
+
+    public String generateMessage() {
+        return combinationMessage;
+    }
 }

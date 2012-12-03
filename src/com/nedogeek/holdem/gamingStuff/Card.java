@@ -18,7 +18,7 @@ public class Card implements Comparable<Card>{
         return cardSuit;
     }
 
-    CardValue getCardValue() {
+    public CardValue getCardValue() {
         return cardValue;
     }
 
