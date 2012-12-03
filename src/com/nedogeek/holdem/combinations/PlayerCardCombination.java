@@ -59,9 +59,17 @@ public class PlayerCardCombination implements Comparable<PlayerCardCombination>{
             return Combinations.STRAIGHT.generateMessage(cards[0]);
         }
 
+        if (hasFullHouse()) {
+            return Combinations.FULL_HOUSE.generateMessage(new Card[] {cards[0], cards[4]});
+        }
 
         return (hasFlash()) ? Combinations.FLASH.generateMessage(cards) :
                 Combinations.HIGH_CARD.generateMessage(cards);
+    }
+
+    private boolean hasFullHouse() {
+        return cards[0].sameValue(cards[1]) && cards[0].sameValue(cards[2]) &&
+                cards[3].sameValue(cards[4]);
     }
 
     private boolean hasRoyalFlash() {

@@ -63,4 +63,8 @@ public class Card implements Comparable<Card>{
         int otherCardValue = otherCard.cardValue.ordinal();
         return Math.abs(cardValueNumber - otherCardValue) == 1;
     }
+
+    public boolean sameValue(Card otherCard) {
+        return cardValue == otherCard.getCardValue();
+    }
 }
