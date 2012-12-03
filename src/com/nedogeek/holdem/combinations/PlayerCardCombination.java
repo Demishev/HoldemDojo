@@ -13,7 +13,7 @@ import java.util.Arrays;
 public class PlayerCardCombination implements Comparable<PlayerCardCombination> {
     private Card[] cards;
 
-    public PlayerCardCombination(Card[] cards) {
+    public PlayerCardCombination(Card ... cards) {
         this.cards = cards;
         downSort(cards);
     }
