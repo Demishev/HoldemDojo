@@ -209,23 +209,10 @@ enum Combination {
         for (int i = 0; i < cards.length - 1; i++) {
             if (sameCardValues(cards, i, i + 1)) {
                 pairCards[0] = cards[i];
-                if (i == 0) {
-                    System.arraycopy(cards, 2, pairCards, 1, 3);
-                    return pairCards;
-                }
-                if (i == 1) {
-                    pairCards[1] = cards[0];
-                    System.arraycopy(cards, 3, pairCards, 2, 2);
-                    return pairCards;
-                }
-                if (i == 3) {
-                    System.arraycopy(cards, 0, pairCards, 1, 3);
-                    return pairCards;
-                }
-                System.arraycopy(cards, 0, pairCards, 1, 2);
-                pairCards[3] = cards[4];
+                System.arraycopy(cards, 0, pairCards, 1, i);
+                System.arraycopy(cards, i + 2, pairCards, i + 1, 3 - i);
                 return pairCards;
-            }                        //TODO simplify method
+            }
         }
         return new Card[0];
     }
