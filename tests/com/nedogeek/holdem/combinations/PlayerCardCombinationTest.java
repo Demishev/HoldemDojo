@@ -35,18 +35,6 @@ public class PlayerCardCombinationTest {
     private static final Card SPADES_ACE = new Card(CardSuit.SPADES, CardValue.ACE);
     private static final Card SPADES_KING = new Card(CardSuit.SPADES, CardValue.KING);
 
-    private void assertCardsEquals(Card[] firstCards, Card[] secondCards) {
-        PlayerCardCombination firstCombination = new PlayerCardCombination(firstCards);
-        PlayerCardCombination secondCombination = new PlayerCardCombination(secondCards);
-
-        assertEquals(0, firstCombination.compareTo(secondCombination));
-    }
-
-    @Test
-    public void shouldCardCombinationsEqualsWhenHeartsAceHeartsKingDiamondsAceDiamondsKing() throws Exception {
-        assertCardsEquals(new Card[]{HEARTS_ACE, HEARTS_KING}, new Card[]{DIAMONDS_ACE, DIAMONDS_KING});
-    }
-
     @Test
     public void shouldHighCardAceWithKickerKingWhenGetCombinationHeartsAceHeartsKing() throws Exception {
         PlayerCardCombination cardCombination = new PlayerCardCombination(HEARTS_ACE, HEARTS_KING);
@@ -249,5 +237,37 @@ public class PlayerCardCombinationTest {
                 HEARTS_JACK, DIAMONDS_JACK, DIAMONDS_QUEEN, HEARTS_KING, CLUBS_ACE);
 
         assertEquals("Pair of Jack with Ace, King and Queen", cardCombination.getCombination());
+    }
+
+    @Test
+    public void should0WhenFirstCombinationKAAndSecondKA() throws Exception {
+        PlayerCardCombination firstCombination = new PlayerCardCombination(DIAMONDS_ACE, DIAMONDS_KING);
+        PlayerCardCombination secondCombination = new PlayerCardCombination(HEARTS_ACE, HEARTS_KING);
+
+        assertEquals(0, firstCombination.compareTo(secondCombination));
+    }
+
+    @Test
+    public void should1WhenFirstCombinationJJAndSecondKA() throws Exception {
+        PlayerCardCombination firstCombination = new PlayerCardCombination(HEARTS_JACK, DIAMONDS_JACK);
+        PlayerCardCombination secondCombination = new PlayerCardCombination(HEARTS_ACE, HEARTS_KING);
+
+        assertEquals(1, firstCombination.compareTo(secondCombination));
+    }
+
+    @Test
+    public void shouldMinus1WhenFirstCombinationKAAndSecondJJ() throws Exception {
+        PlayerCardCombination firstCombination = new PlayerCardCombination(HEARTS_ACE, HEARTS_KING);
+        PlayerCardCombination secondCombination = new PlayerCardCombination(HEARTS_JACK, DIAMONDS_JACK);
+
+        assertEquals(-1, firstCombination.compareTo(secondCombination));
+    }
+
+    @Test
+    public void should2WhenFirstCombinationKKAndSecondJJ() throws Exception {
+        PlayerCardCombination firstCombination = new PlayerCardCombination(HEARTS_KING, HEARTS_KING);
+        PlayerCardCombination secondCombination = new PlayerCardCombination(HEARTS_JACK, DIAMONDS_JACK);
+
+        assertEquals(2, firstCombination.compareTo(secondCombination));
     }
 }
