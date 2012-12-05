@@ -14,21 +14,18 @@ public class PlayerCardCombination implements Comparable<PlayerCardCombination> 
 
 
     public PlayerCardCombination(Card... cards) {
-        this.cards = findBestCards(cards);
-    }
-
-    private Card[] findBestCards(Card[] cards) {
-        switch (cards.length) {
-            case 6:
-                return bestFromCards(new CardsChooser(cards));
+        if (cards.length > 5) {
+            this.cards = bestFromCards(new CardsChooser(cards));
+        } else {
+            this.cards = cards;
         }
-        return cards;
     }
 
-    private Card[] bestFromCards(Iterable<Card[]> cardsIterable) {
+
+    private Card[] bestFromCards(Iterable<Card[]> cardsChooser) {
         Card[] bestCards = null;
 
-        for (Card[] currentCards : cardsIterable) {
+        for (Card[] currentCards : cardsChooser) {
             if (bestCards == null) {
                 bestCards = currentCards;
             } else {

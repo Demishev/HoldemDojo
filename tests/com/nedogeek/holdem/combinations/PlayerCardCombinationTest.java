@@ -280,4 +280,13 @@ public class PlayerCardCombinationTest {
 
         assertEquals(Combination.STRAIGHT_FLASH, playerCardCombination.getCombinationType());
     }
+
+    @Test
+    public void shouldStraightFlashWhenHearts8910DiamondKHeartsJQA() throws Exception {
+        PlayerCardCombination playerCardCombination = new PlayerCardCombination(
+                HEARTS_EIGHT, HEARTS_NINE,HEARTS_TEN, DIAMONDS_KING, HEARTS_JACK, HEARTS_QUEEN, HEARTS_ACE
+        );
+
+        assertEquals(Combination.STRAIGHT_FLASH, playerCardCombination.getCombinationType());
+    }
 }
