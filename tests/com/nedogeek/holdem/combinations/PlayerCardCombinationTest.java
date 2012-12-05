@@ -19,6 +19,7 @@ public class PlayerCardCombinationTest {
     private static final Card HEARTS_JACK = new Card(CardSuit.HEARTS, CardValue.JACK);
     private static final Card HEARTS_TEN = new Card(CardSuit.HEARTS, CardValue.TEN);
     private static final Card HEARTS_NINE = new Card(CardSuit.HEARTS, CardValue.NINE);
+    private static final Card HEARTS_EIGHT = new Card(CardSuit.HEARTS, CardValue.EIGHT);
     private static final Card HEARTS_SIX = new Card(CardSuit.HEARTS, CardValue.SIX);
 
     private static final Card DIAMONDS_ACE = new Card(CardSuit.DIAMONDS, CardValue.ACE);
@@ -270,4 +271,13 @@ public class PlayerCardCombinationTest {
 
         assertEquals(2, firstCombination.compareTo(secondCombination));
     }
+//
+//    @Test
+//    public void shouldStraightFlashWhenHearts8910JQA() throws Exception {
+//        PlayerCardCombination playerCardCombination = new PlayerCardCombination(
+//                HEARTS_EIGHT, HEARTS_NINE,HEARTS_TEN, HEARTS_JACK, HEARTS_QUEEN, HEARTS_ACE
+//        );
+//
+//        assertEquals(Combination.STRAIGHT_FLASH, playerCardCombination.getCombinationType());
+//    }
 }
