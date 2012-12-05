@@ -12,10 +12,12 @@ import com.nedogeek.holdem.gamingStuff.CardValue;
 enum Combination {
     ROYAL_FLASH("Royal flash", 5),
     STRAIGHT_FLASH("Straight flash on %s", 5),
+    SMALLER_STRAIGHT_FLUSH("Straight flash on 5", 5),
     FOUR_OF_KIND("Four of %s with %s", 5),
     FULL_HOUSE("Full house on %s and %s", 5),
     FLASH("Flash on %s with %s, %s, %s and %s", 5),
     STRAIGHT("Straight on %s", 5),
+    SMALLER_STRAIGHT("Straight on 5", 5),
     SET("Set of %s with %s and %s", 5),
     TWO_PAIRS("Two pairs of %s and %s with %s", 5),
     PAIR("Pair of %s with %s, %s and %s", 5),
@@ -83,18 +85,34 @@ enum Combination {
                 return hasSet(cards);
             case STRAIGHT:
                 return hasStraight(cards);
+            case SMALLER_STRAIGHT:
+                return hasSmallerStraight(cards);
             case FLASH:
                 return hasFlash(cards);
             case FULL_HOUSE:
                 return hasFullHouse(cards);
             case FOUR_OF_KIND:
                 return hasFourOfKind(cards);
+            case SMALLER_STRAIGHT_FLUSH:
+                return hasSmallerStraightFlash(cards);
             case STRAIGHT_FLASH:
                 return hasStraightFlash(cards);
             case ROYAL_FLASH:
                 return hasRoyalFlash(cards);
         }
         return false;
+    }
+
+    private static boolean hasSmallerStraightFlash(Card[] cards) {
+        return hasFlash(cards) && hasSmallerStraight(cards);
+    }
+
+    private static boolean hasSmallerStraight(Card[] cards) {
+        return (cards[0].getCardValue() == CardValue.ACE) &&
+                (cards[1].getCardValue() == CardValue.FIVE) &&
+                (cards[2].getCardValue() == CardValue.FOUR) &&
+                (cards[3].getCardValue() == CardValue.THREE) &&
+                (cards[4].getCardValue() == CardValue.TWO);
     }
 
     private static Card[] defineCombinationCards(Card[] cards, Combination combination) {

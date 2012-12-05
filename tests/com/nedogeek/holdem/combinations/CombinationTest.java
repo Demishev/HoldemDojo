@@ -22,6 +22,11 @@ public class CombinationTest {
     private static final Card HEARTS_JACK = new Card(CardSuit.HEARTS, CardValue.JACK);
     private static final Card HEARTS_TEN = new Card(CardSuit.HEARTS, CardValue.TEN);
 
+    private static final Card HEARTS_TWO = new Card(CardSuit.HEARTS, CardValue.TWO);
+    private static final Card HEARTS_THREE = new Card(CardSuit.HEARTS, CardValue.THREE);
+    private static final Card HEARTS_FOUR = new Card(CardSuit.HEARTS, CardValue.FOUR);
+    private static final Card HEARTS_FIVE = new Card(CardSuit.HEARTS, CardValue.FIVE);
+
     private static final Card DIAMONDS_ACE = new Card(CardSuit.DIAMONDS, CardValue.ACE);
 
     @Test
@@ -52,5 +57,19 @@ public class CombinationTest {
 
         Card[] expectedCards = new Card[] {HEARTS_ACE, HEARTS_KING, HEARTS_QUEEN, HEARTS_JACK};
         assertTrue(Arrays.deepEquals(expectedCards, Combination.getCombinationCards(cards)));
+    }
+
+    @Test
+    public void shouldSmallerStraightWhenDiamondsAHearts2345() throws Exception {
+        Card[] cards = new Card[] {DIAMONDS_ACE, HEARTS_TWO, HEARTS_THREE, HEARTS_FOUR, HEARTS_FIVE};
+
+        assertEquals(Combination.SMALLER_STRAIGHT, Combination.getCombinationType(cards));
+    }
+
+    @Test
+    public void shouldSmallerStraightFlashWhenHeartsA2345() throws Exception {
+        Card[] cards = new Card[] {HEARTS_ACE, HEARTS_TWO, HEARTS_THREE, HEARTS_FOUR, HEARTS_FIVE};
+
+        assertEquals(Combination.SMALLER_STRAIGHT_FLUSH, Combination.getCombinationType(cards));
     }
 }
