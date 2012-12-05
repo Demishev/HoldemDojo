@@ -20,7 +20,7 @@ public class PlayerCardCombination implements Comparable<PlayerCardCombination> 
     private Card[] findBestCards(Card[] cards) {
         switch (cards.length) {
             case 6:
-                return bestFromCards(new FiveFromSixCardsIterable(cards));
+                return bestFromCards(new CardsChooser(cards));
         }
         return cards;
     }
