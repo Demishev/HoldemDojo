@@ -9,11 +9,42 @@ import java.util.Arrays;
  * Date: 27.11.12
  * Time: 14:23
  */
-public class PlayerCardCombination implements Comparable<PlayerCardCombination>{
-    private Card[] cards;
+public class PlayerCardCombination implements Comparable<PlayerCardCombination> {
+    private final Card[] cards;
+
 
     public PlayerCardCombination(Card... cards) {
-        this.cards = cards;
+        this.cards = findBestCards(cards);
+    }
+
+    private Card[] findBestCards(Card[] cards) {
+        switch (cards.length) {
+            case 6:
+                return bestFromCards(new FiveFromSixCardsIterable(cards));
+        }
+        return cards;
+    }
+
+    private Card[] bestFromCards(Iterable<Card[]> cardsIterable) {
+        Card[] bestCards = null;
+
+        for (Card[] currentCards : cardsIterable) {
+            if (bestCards == null) {
+                bestCards = currentCards;
+            } else {
+                Combination currentCombinationType = Combination.getCombinationType(currentCards);
+                Card[] currentCombinationCards = Combination.getCombinationCards(currentCards);
+
+                Combination bestCombinationType = Combination.getCombinationType(bestCards);
+                Card[] bestCombinationCards = Combination.getCombinationCards(bestCards);
+
+                if (compareCombinations(currentCombinationType, bestCombinationType,
+                        currentCombinationCards, bestCombinationCards) > 0) {
+                    bestCards = currentCards;
+                }
+            }
+        }
+        return bestCards;
     }
 
     public String getCombination() {
@@ -40,8 +71,13 @@ public class PlayerCardCombination implements Comparable<PlayerCardCombination>{
         final Card[] firstCombinationCards = getCombinationCards();
         final Card[] secondCombinationCards = o.getCombinationCards();
 
+        return compareCombinations(
+                firstCombinationType, secondCombinationType, firstCombinationCards, secondCombinationCards);
+    }
+
+    private int compareCombinations(Combination firstCombinationType, Combination secondCombinationType, Card[] firstCombinationCards, Card[] secondCombinationCards) {
         if (firstCombinationType != secondCombinationType) {
-            return -1*firstCombinationType.compareTo(secondCombinationType);
+            return -1 * firstCombinationType.compareTo(secondCombinationType);
         } else {
             for (int i = 0; i < firstCombinationCards.length; i++) {
                 int firstCardRelatedToSecond = firstCombinationCards[i].compareTo(secondCombinationCards[i]);

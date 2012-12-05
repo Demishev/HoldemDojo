@@ -271,13 +271,13 @@ public class PlayerCardCombinationTest {
 
         assertEquals(2, firstCombination.compareTo(secondCombination));
     }
-//
-//    @Test
-//    public void shouldStraightFlashWhenHearts8910JQA() throws Exception {
-//        PlayerCardCombination playerCardCombination = new PlayerCardCombination(
-//                HEARTS_EIGHT, HEARTS_NINE,HEARTS_TEN, HEARTS_JACK, HEARTS_QUEEN, HEARTS_ACE
-//        );
-//
-//        assertEquals(Combination.STRAIGHT_FLASH, playerCardCombination.getCombinationType());
-//    }
+
+    @Test
+    public void shouldStraightFlashWhenHearts8910JQA() throws Exception {
+        PlayerCardCombination playerCardCombination = new PlayerCardCombination(
+                HEARTS_EIGHT, HEARTS_NINE,HEARTS_TEN, HEARTS_JACK, HEARTS_QUEEN, HEARTS_ACE
+        );
+
+        assertEquals(Combination.STRAIGHT_FLASH, playerCardCombination.getCombinationType());
+    }
 }
