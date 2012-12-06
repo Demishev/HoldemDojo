@@ -75,10 +75,6 @@ public class Desk {
     public void setLastMovedPlayer(int playerNumber) {
     }
 
-    @Deprecated
-    public void setPlayerFold(int playerNumber) {
-    }
-
     public int getCallValue() {
         return 0;
     }
@@ -91,5 +87,8 @@ public class Desk {
     }
 
     public void setPlayerStatus(int playerNumber, PlayerStatus playerStatus) {
+    }
+
+    public void setNewGameRound() {
     }
 }

@@ -15,5 +15,7 @@ public class EndGameManager {
     }
 
     public void endGame() {
+
+        desk.setNewGameRound();
     }
 }
