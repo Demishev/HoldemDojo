@@ -89,6 +89,9 @@ public class Desk {
     public void setPlayerStatus(int playerNumber, PlayerStatus playerStatus) {
     }
 
-    public void setNewGameRound() {
+    public void setGameEnded() {
+    }
+
+    public void setPlayerWin(int playerNumber) {
     }
 }

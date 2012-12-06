@@ -1,5 +1,6 @@
 package com.nedogeek.holdem.dealer;
 
+import com.nedogeek.holdem.PlayerStatus;
 import com.nedogeek.holdem.gamingStuff.Desk;
 
 /**
@@ -15,7 +16,17 @@ public class EndGameManager {
     }
 
     public void endGame() {
+        int winnerNumber = findWinner();
 
-        desk.setNewGameRound();
+        desk.setPlayerWin(winnerNumber);
+        desk.setGameEnded();
+    }
+
+    private int findWinner() {
+        if (desk.getPlayerStatus(1) == PlayerStatus.Fold) {
+            return 0;
+        } else {
+            return 1;
+        }
     }
 }
