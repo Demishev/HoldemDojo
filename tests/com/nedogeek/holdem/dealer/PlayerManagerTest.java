@@ -43,4 +43,12 @@ public class PlayerManagerTest {
 
         assertFalse(playersManager.hasAvailableMovers());
     }
+
+    @Test
+    public void shouldFalseWhenDefaultDeskSecondPlayerLost() throws Exception {
+        when(deskMock.getLastMovedPlayer()).thenReturn(1);
+        when(deskMock.getPlayerStatus(1)).thenReturn(PlayerStatus.Lost);
+
+        assertFalse(playersManager.hasAvailableMovers());
+    }
 }

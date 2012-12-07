@@ -27,17 +27,18 @@ public class PlayersManager {
     }
 
     boolean hasAvailableMovers() {
-        return moreThanOnePlayerDoNotFolds() && getMoverNumber() != -1;
+        return moreThanOnePlayerDoNotFoldsOrLost() && getMoverNumber() != -1;
     }
 
-    private boolean moreThanOnePlayerDoNotFolds() {
-        int playersWithoutFold = 0;
+    private boolean moreThanOnePlayerDoNotFoldsOrLost() {
+        int availableMoverStatusQuantity = 0;
         for (int i = 0; i < playersQuantity; i++) {
-            if (desk.getPlayerStatus(i) != PlayerStatus.Fold) {
-                playersWithoutFold++;
+            final PlayerStatus playerStatus = desk.getPlayerStatus(i);
+            if (playerStatus != PlayerStatus.Fold && playerStatus != PlayerStatus.Lost) {
+                availableMoverStatusQuantity++;
             }
         }
-        return playersWithoutFold > 1;
+        return availableMoverStatusQuantity > 1;
     }
 
     PlayerAction getPlayerMove() {
