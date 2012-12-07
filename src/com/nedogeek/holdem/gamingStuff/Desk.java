@@ -23,6 +23,7 @@ public class Desk {
 
     public Desk() {
         gameStatus = GameStatus.NOT_READY;
+        gameRound = GameRound.INITIAL;
     }
 
     public GameStatus getGameStatus() {
@@ -40,7 +41,7 @@ public class Desk {
         dealerPlayerNumber = playerNumber;
     }
 
-    public void shuffleCards() {
+    public void resetCards() {
     }
 
     public void setPlayerBet(int playerNumber, int bet) {
@@ -66,7 +67,7 @@ public class Desk {
     }
 
     public void setNextGameRound() {
-
+        gameRound = GameRound.values()[gameRound.ordinal() + 1];
     }
 
     public int getLastMovedPlayer() {

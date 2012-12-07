@@ -1,5 +1,6 @@
 package com.nedogeek.holdem.gamingStuff;
 
+import com.nedogeek.holdem.GameRound;
 import com.nedogeek.holdem.GameStatus;
 import org.junit.Before;
 import org.junit.Test;
@@ -159,5 +160,25 @@ public class DeskTest {
         desk.setDealerPlayer(1);
 
         assertEquals(1, desk.getDealerPlayerNumber());
+    }
+
+    @Test
+    public void shouldGameRoundInitialWhenNewDesk() throws Exception {
+        assertEquals(GameRound.INITIAL, desk.getGameRound());
+    }
+
+    @Test
+    public void shouldBlindGameRoundWhenNext() throws Exception {
+        desk.setNextGameRound();
+
+        assertEquals(GameRound.BLIND, desk.getGameRound());
+    }
+
+    @Test
+    public void should3CardsGameRoundWhenNext2Times() throws Exception {
+        desk.setNextGameRound();
+        desk.setNextGameRound();
+
+        assertEquals(GameRound.THREE_CARDS, desk.getGameRound());
     }
 }

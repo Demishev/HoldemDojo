@@ -213,7 +213,7 @@ public class DealerIntegrationTest {
     public void shouldShuffleCardsWhenStartGaming() throws Exception {
         dealer.tick();
 
-        verify(deskMock).shuffleCards();
+        verify(deskMock).resetCards();
     }
 
     @Test

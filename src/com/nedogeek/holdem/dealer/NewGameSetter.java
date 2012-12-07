@@ -21,7 +21,7 @@ public class NewGameSetter {
     }
 
     void setNewGame() {
-        desk.shuffleCards();
+        desk.resetCards();
         int dealerPlayerNumber = defineDealer();
         makeInitialBets(dealerPlayerNumber);
 
