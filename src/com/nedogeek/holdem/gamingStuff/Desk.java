@@ -130,7 +130,9 @@ public class Desk {
     }
 
     public void setReady() {
-        gameStatus = GameStatus.READY;
+        if (players.size() > 1) {
+            gameStatus = GameStatus.READY;
+        }
     }
 
     public void setGameCycleEnded() {

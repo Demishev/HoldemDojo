@@ -2,23 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="388e9789-c4c7-491f-aae9-9962e0a04901" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/tests/com/nedogeek/holdem/gamingStuff/DeskTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerIntegrationTest.java" afterPath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerIntegrationTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Desk.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Desk.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/MoveManager.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/MoveManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/MoveManagerTest.java" afterPath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/MoveManagerTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/PlayersManager.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/PlayersManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/com/nedogeek/holdem/gamingStuff/DeskTest.java" afterPath="$PROJECT_DIR$/tests/com/nedogeek/holdem/gamingStuff/DeskTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="D:\java_projects\HoldemDojo\src\com\nedogeek\holdem\connections\Player.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Player.java" />
-      <change type="MOVED" beforePath="D:\java_projects\HoldemDojo\src\com\nedogeek\holdem\connections\PlayerAction.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/PlayerAction.java" />
     </list>
     <ignored path="holdem.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1354849674099" ignored="false" />
+    <file path="/Dummy.txt" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1354852141414" ignored="false" />
     <file path="/EndGameManager.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1354849641047" ignored="false" />
     <file path="/EndGameManagerTest.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1354849579703" ignored="false" />
-    <file path="/Desk.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1354852123611" ignored="false" />
-    <file path="/DeskTest.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1354852093488" ignored="false" />
+    <file path="/Desk.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1354852238804" ignored="false" />
+    <file path="/DeskTest.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1354852326419" ignored="false" />
     <file path="/fragment.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1354850965633" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -101,10 +95,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Desk.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Desk.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Desk.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="144" column="38" selection-start="3095" selection-end="3095" vertical-scroll-proportion="0.73913044">
+            <state line="134" column="9" selection-start="2856" selection-end="2856" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="e#519#527#0" expanded="true" />
                 <element signature="e#586#594#0" expanded="true" />
@@ -113,10 +107,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DeskTest.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="DeskTest.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/gamingStuff/DeskTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="104" column="22" selection-start="2818" selection-end="2818" vertical-scroll-proportion="0.0">
+            <state line="123" column="34" selection-start="3405" selection-end="3405" vertical-scroll-proportion="0.82608694">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -163,8 +157,8 @@
         <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/EndGameManagerTest.java" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/EndGameManager.java" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Player.java" />
-        <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/gamingStuff/DeskTest.java" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Desk.java" />
+        <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/gamingStuff/DeskTest.java" />
       </list>
     </option>
   </component>
@@ -1106,7 +1100,11 @@
       <created>1354849684263</created>
       <updated>1354849684263</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="Desk test coding started.">
+      <created>1354852147936</created>
+      <updated>1354852147936</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1193,7 +1191,7 @@
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Can find winner between two unfold players" />
+    <option name="LAST_COMMIT_MESSAGE" value="Desk test coding started." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1206,7 +1204,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="Kickers formation in Combinations changed." />
     <MESSAGE value="Royal flash, straight flash, flash detection codded." />
     <MESSAGE value="FullHouse type 3,2 codded." />
     <MESSAGE value="Combinations uses varargs." />
@@ -1231,6 +1228,7 @@
     <MESSAGE value="EndGameManager coding started.&#10;@deprecated code removed from desk class" />
     <MESSAGE value="EndGameManager can define winner in 2 player game with one fold" />
     <MESSAGE value="Can find winner between two unfold players" />
+    <MESSAGE value="Desk test coding started." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1326,21 +1324,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/gamingStuff/DeskTest.java">
+    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Desk.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="104" column="22" selection-start="2818" selection-end="2818" vertical-scroll-proportion="0.0">
+        <state line="134" column="9" selection-start="2856" selection-end="2856" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#519#527#0" expanded="true" />
+            <element signature="e#586#594#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Desk.java">
+    <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/gamingStuff/DeskTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="144" column="38" selection-start="3095" selection-end="3095" vertical-scroll-proportion="0.73913044">
+        <state line="123" column="34" selection-start="3405" selection-end="3405" vertical-scroll-proportion="0.82608694">
           <folding>
-            <element signature="e#519#527#0" expanded="true" />
-            <element signature="e#586#594#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

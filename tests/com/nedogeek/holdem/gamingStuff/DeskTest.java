@@ -13,6 +13,7 @@ import static junit.framework.Assert.assertEquals;
  */
 public class DeskTest {
     final Player SOME_PLAYER = new Player("Some player");
+    final Player SOME_OTHER_PLAYER = new Player("Some other player");
 
     private Desk desk;
 
@@ -56,6 +57,8 @@ public class DeskTest {
 
     @Test
     public void shouldGameStatusReadyWhenDeskSetReady() throws Exception {
+        desk.addPlayer(SOME_PLAYER);
+        desk.addPlayer(SOME_OTHER_PLAYER);
         desk.setReady();
 
         assertEquals(GameStatus.READY, desk.getGameStatus());
@@ -103,5 +106,20 @@ public class DeskTest {
         desk.setGameCycleEnded();
 
         assertEquals(0, desk.getPlayersQuantity());
+    }
+
+    @Test
+    public void shouldNotGameReadyWhen0PlayersOnDesk() throws Exception {
+        desk.setReady();
+
+        assertEquals(GameStatus.NOT_READY, desk.getGameStatus());
+    }
+
+    @Test
+    public void shouldNotGameReadyWhen1PlayerOnDesk() throws Exception {
+        desk.addPlayer(SOME_PLAYER);
+        desk.setReady();
+
+        assertEquals(GameStatus.NOT_READY, desk.getGameStatus());
     }
 }
