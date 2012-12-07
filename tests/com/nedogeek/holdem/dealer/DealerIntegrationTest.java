@@ -4,7 +4,7 @@ import com.nedogeek.holdem.GameRound;
 import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.GameStatus;
 import com.nedogeek.holdem.PlayerStatus;
-import com.nedogeek.holdem.connections.PlayerAction;
+import com.nedogeek.holdem.gamingStuff.PlayerAction;
 import com.nedogeek.holdem.gamingStuff.Desk;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,6 +1,6 @@
 package com.nedogeek.holdem.dealer;
 
-import com.nedogeek.holdem.connections.PlayerAction;
+import com.nedogeek.holdem.gamingStuff.PlayerAction;
 import com.nedogeek.holdem.gamingStuff.Desk;
 import org.junit.Before;
 import org.junit.Test;

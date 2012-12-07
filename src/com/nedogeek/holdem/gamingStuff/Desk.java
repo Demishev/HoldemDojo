@@ -4,7 +4,9 @@ import com.nedogeek.holdem.GameRound;
 import com.nedogeek.holdem.GameStatus;
 import com.nedogeek.holdem.PlayerStatus;
 import com.nedogeek.holdem.combinations.PlayerCardCombination;
-import com.nedogeek.holdem.connections.PlayerAction;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * User: Konstantin Demishev
@@ -14,18 +16,26 @@ import com.nedogeek.holdem.connections.PlayerAction;
 public class Desk {
     private int dealerPlayerNumber;
     private GameRound gameRound;
+    private GameStatus gameStatus;
 
+    private List<Player> players = new ArrayList<Player>();
+    private List<Player> waitingPlayers = new ArrayList<Player>();
 
-
-    public GameStatus getGameStatus() {
-        return null;
+    public Desk() {
+        gameStatus = GameStatus.NOT_READY;
     }
 
-    public void setGameStatus(GameStatus started) {
+    public GameStatus getGameStatus() {
+        return gameStatus;
+    }
+
+    @Deprecated
+    public void setGameStatus(GameStatus gameStatus) {
+        this.gameStatus = gameStatus;
     }
 
     public int getPlayersQuantity() {
-        return 0;
+        return players.size();
     }
 
     public void setPlayerAmount(int playerNumber, int amount) {
@@ -105,5 +115,33 @@ public class Desk {
 
     public boolean isFirstCombinationBiggerThanSecond(int firstCombination, int secondCombination) {
         return false;
+    }
+
+    public void addPlayer(Player player) {
+        if (gameStatus != GameStatus.STARTED) {
+            players.add(player);
+        } else {
+            waitingPlayers.add(player);
+        }
+    }
+
+    public void setGameStarted() {
+        gameStatus = GameStatus.STARTED;
+    }
+
+    public void setReady() {
+        gameStatus = GameStatus.READY;
+    }
+
+    public void setGameCycleEnded() {
+        players.addAll(waitingPlayers);
+        waitingPlayers.clear();
+
+        gameStatus = GameStatus.CYCLE_ENDED;
+    }
+
+    public void removePlayer(Player player) {
+        players.remove(player);
+        waitingPlayers.remove(player);
     }
 }

@@ -1,4 +1,4 @@
-package com.nedogeek.holdem.connections;
+package com.nedogeek.holdem.gamingStuff;
 
 /**
  * User: Konstantin Demishev
