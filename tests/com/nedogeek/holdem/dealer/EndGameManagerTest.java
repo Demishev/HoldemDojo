@@ -6,9 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * User: Konstantin Demishev
@@ -36,10 +34,18 @@ public class EndGameManagerTest {
     private void makeDefault2PlayersDesk() {
         desk = mock(Desk.class);
         setPlayersQuantity(2);
+
         setPlayerBet(0,DEFAULT_AMOUNT);
         setPlayerBet(1, DEFAULT_AMOUNT);
         setPlayerStatus(0, PlayerStatus.NotMoved);
         setPlayerStatus(1, PlayerStatus.NotMoved);
+
+        setCombinationsRelations(0,1);
+    }
+
+    private void setCombinationsRelations(int biggerCombination, int smallerCombination) {
+        when(desk.isFirstCombinationBiggerThanSecond(biggerCombination, smallerCombination)).thenReturn(true);
+        when(desk.isFirstCombinationBiggerThanSecond(smallerCombination, biggerCombination)).thenReturn(false);
     }
 
     private void setPlayerStatus(int playerNumber, PlayerStatus playerStatus) {
@@ -86,5 +92,21 @@ public class EndGameManagerTest {
         endGameManager.endGame();
 
         verify(desk).setPlayerWin(0);
+    }
+
+    @Test
+    public void shouldSecondPlayerWinWhenNoPlayerFoldsAndFirstHasWinningCombination() throws Exception {
+        endGameManager.endGame();
+
+        verify(desk).setPlayerWin(0);
+    }
+
+    @Test
+    public void shouldFirstPlayerWinWhenNoPlayerFoldsAndSecondHasWinningCombination() throws Exception {
+        setCombinationsRelations(1,0);
+
+        endGameManager.endGame();
+
+        verify(desk).setPlayerWin(1);
     }
 }

@@ -3,6 +3,7 @@ package com.nedogeek.holdem.gamingStuff;
 import com.nedogeek.holdem.GameRound;
 import com.nedogeek.holdem.GameStatus;
 import com.nedogeek.holdem.PlayerStatus;
+import com.nedogeek.holdem.combinations.PlayerCardCombination;
 import com.nedogeek.holdem.connections.PlayerAction;
 
 /**
@@ -63,7 +64,6 @@ public class Desk {
 
     }
 
-
     public int getLastMovedPlayer() {
         return 0;
     }
@@ -82,7 +82,7 @@ public class Desk {
     public void setCallValue(int callValue) {
     }
 
-    public PlayerStatus getPlayerStatus(int i) {
+    public PlayerStatus getPlayerStatus(int playerNumber) {
         return null;
     }
 
@@ -93,5 +93,17 @@ public class Desk {
     }
 
     public void setPlayerWin(int playerNumber) {
+    }
+
+    public PlayerCardCombination getPlayerCardCombination(int playerNumber) {
+        return null;
+    }
+
+    public Card[] getDeskCards() {
+        return new Card[0];
+    }
+
+    public boolean isFirstCombinationBiggerThanSecond(int firstCombination, int secondCombination) {
+        return false;
     }
 }

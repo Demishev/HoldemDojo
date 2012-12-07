@@ -23,10 +23,19 @@ public class EndGameManager {
     }
 
     private int findWinner() {
-        if (desk.getPlayerStatus(1) == PlayerStatus.Fold) {
-            return 0;
-        } else {
-            return 1;
+        int winnerNumber = -1;
+        for (int i = 0; i < desk.getPlayersQuantity(); i++) {
+            if (desk.getPlayerStatus(i) != PlayerStatus.Fold) {
+                if (winnerNumber == -1) {
+                    winnerNumber = i;
+                } else {
+                    if (desk.isFirstCombinationBiggerThanSecond(i, winnerNumber)) {
+                        winnerNumber = i;
+                    }
+                }
+            }
         }
+
+        return winnerNumber;
     }
 }
