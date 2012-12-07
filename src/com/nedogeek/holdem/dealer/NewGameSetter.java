@@ -26,8 +26,17 @@ public class NewGameSetter {
         makeInitialBets(dealerPlayerNumber);
 
         setInitialPlayerStatuses();
+        giveCardsToPlayers();
 
         desk.setNextGameRound();
+    }
+
+    private void giveCardsToPlayers() {
+        for (int i = 0; i < desk.getPlayersQuantity(); i++) {
+            if (desk.getPlayerStatus(i) != PlayerStatus.Lost) {
+                desk.giveCardsToPlayer(i);
+            }
+        }
     }
 
     private void setInitialPlayerStatuses() {

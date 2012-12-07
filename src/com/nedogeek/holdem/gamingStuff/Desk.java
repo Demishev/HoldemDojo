@@ -145,4 +145,8 @@ public class Desk {
             gameStatus = GameStatus.NOT_READY;
         }
     }
+
+    public void giveCardsToPlayer(int playerNumber) {
+
+    }
 }

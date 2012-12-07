@@ -65,4 +65,45 @@ public class NewGameSetterTest {
 
         verify(deskMock, never()).setPlayerStatus(0, PlayerStatus.NotMoved);
     }
+
+    @Test
+    public void shouldBeGivenCardsToFirstPlayerWhenDefaultNewGame() throws Exception {
+        newGameSetter.setNewGame();
+
+        verify(deskMock).giveCardsToPlayer(0);
+    }
+
+    @Test
+    public void shouldBeGivenCardsToSecondPlayerWhenDefaultNewGame() throws Exception {
+        newGameSetter.setNewGame();
+
+        verify(deskMock).giveCardsToPlayer(1);
+    }
+
+    @Test
+    public void shouldBeGivenCardsToThirdPlayerWhen3PlayersNewGame() throws Exception {
+        setPlayersQuantity(3);
+        setPlayerStatus(3, PlayerStatus.NotMoved);
+
+        newGameSetter.setNewGame();
+
+        verify(deskMock).giveCardsToPlayer(2);
+    }
+
+    @Test
+    public void shouldNotBeGivenCardsToThirdPlayerWhenDefaultNewGame() throws Exception {
+        newGameSetter.setNewGame();
+
+        verify(deskMock, never()).giveCardsToPlayer(2);
+    }
+
+    @Test
+    public void shouldNotBeGivenCardsToThirdPlayerWhen3PlayersAnd3IsLostNewGame() throws Exception {
+        setPlayersQuantity(3);
+        setPlayerStatus(2, PlayerStatus.Lost);
+
+        newGameSetter.setNewGame();
+
+        verify(deskMock, never()).giveCardsToPlayer(2);
+    }
 }
