@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
 
 /**
  * User: Konstantin Demishev
@@ -12,16 +13,22 @@ import static junit.framework.Assert.assertEquals;
  * Time: 5:22
  */
 public class DeskTest {
-    final Player SOME_PLAYER = new Player("Some player");
-    final Player SOME_OTHER_PLAYER = new Player("Some other player");
-    final Player THIRD_PLAYER = new Player("Some third player");
+    Player FIRST_PLAYER_MOCK;
+    Player SECOND_PLAYER_MOCK;
+    Player THIRD_PLAYER_MOCK;
 
     private Desk desk;
 
     @Before
     public void setUp() throws Exception {
         desk = new Desk();
+        resetPlayerMocks();
+    }
 
+    private void resetPlayerMocks() {
+        FIRST_PLAYER_MOCK = mock(Player.class);
+        SECOND_PLAYER_MOCK = mock(Player.class);
+        THIRD_PLAYER_MOCK = mock(Player.class);
     }
 
     @Test
@@ -44,7 +51,7 @@ public class DeskTest {
     @Test
     public void shouldNotPlayerAddedWhenGameStatusSTARTED() throws Exception {
         desk.setGameStarted();
-        desk.addPlayer(SOME_PLAYER);
+        desk.addPlayer(FIRST_PLAYER_MOCK);
 
         assertEquals(0, desk.getPlayersQuantity());
     }
@@ -58,8 +65,8 @@ public class DeskTest {
 
     @Test
     public void shouldGameStatusReadyWhenDeskSetReady() throws Exception {
-        desk.addPlayer(SOME_PLAYER);
-        desk.addPlayer(SOME_OTHER_PLAYER);
+        desk.addPlayer(FIRST_PLAYER_MOCK);
+        desk.addPlayer(SECOND_PLAYER_MOCK);
         desk.setReady();
 
         assertEquals(GameStatus.READY, desk.getGameStatus());
@@ -68,7 +75,7 @@ public class DeskTest {
     @Test
     public void shouldPlayerAddedToDeskWhenAddedWhileStartedAndCycleEnded() throws Exception {
         desk.setGameStarted();
-        desk.addPlayer(SOME_PLAYER);
+        desk.addPlayer(FIRST_PLAYER_MOCK);
         desk.setGameCycleEnded();
 
         assertEquals(1, desk.getPlayersQuantity());
@@ -77,7 +84,7 @@ public class DeskTest {
     @Test
     public void shouldPlayerAddedToDeskWhenAddedWhileStartedAndCycleEnded2Times() throws Exception {
         desk.setGameStarted();
-        desk.addPlayer(SOME_PLAYER);
+        desk.addPlayer(FIRST_PLAYER_MOCK);
         desk.setGameCycleEnded();
         desk.setGameCycleEnded();
 
@@ -93,8 +100,8 @@ public class DeskTest {
 
     @Test
     public void shouldPlayerQuantity0WhenPlayerRemoved() throws Exception {
-        desk.addPlayer(SOME_PLAYER);
-        desk.removePlayer(SOME_PLAYER);
+        desk.addPlayer(FIRST_PLAYER_MOCK);
+        desk.removePlayer(FIRST_PLAYER_MOCK);
 
         assertEquals(0, desk.getPlayersQuantity());
     }
@@ -102,8 +109,8 @@ public class DeskTest {
     @Test
     public void shouldPlayerNotAddedToDeskWhenAddedWhileStartedPlayerRemovedAndCycleEnded() throws Exception {
         desk.setGameStarted();
-        desk.addPlayer(SOME_PLAYER);
-        desk.removePlayer(SOME_PLAYER);
+        desk.addPlayer(FIRST_PLAYER_MOCK);
+        desk.removePlayer(FIRST_PLAYER_MOCK);
         desk.setGameCycleEnded();
 
         assertEquals(0, desk.getPlayersQuantity());
@@ -118,7 +125,7 @@ public class DeskTest {
 
     @Test
     public void shouldNotGameReadyWhen1PlayerOnDesk() throws Exception {
-        desk.addPlayer(SOME_PLAYER);
+        desk.addPlayer(FIRST_PLAYER_MOCK);
         desk.setReady();
 
         assertEquals(GameStatus.NOT_READY, desk.getGameStatus());
@@ -126,23 +133,23 @@ public class DeskTest {
 
     @Test
     public void shouldGameStatusNotReadyWhenSecondPlayerRemoved() throws Exception {
-        desk.addPlayer(SOME_PLAYER);
-        desk.addPlayer(SOME_OTHER_PLAYER);
+        desk.addPlayer(FIRST_PLAYER_MOCK);
+        desk.addPlayer(SECOND_PLAYER_MOCK);
 
         desk.setReady();
-        desk.removePlayer(SOME_PLAYER);
+        desk.removePlayer(FIRST_PLAYER_MOCK);
 
         assertEquals(GameStatus.NOT_READY, desk.getGameStatus());
     }
 
     @Test
     public void shouldGameStatusReadyWhenThirdPlayerRemoved() throws Exception {
-        desk.addPlayer(SOME_PLAYER);
-        desk.addPlayer(SOME_OTHER_PLAYER);
-        desk.addPlayer(THIRD_PLAYER);
+        desk.addPlayer(FIRST_PLAYER_MOCK);
+        desk.addPlayer(SECOND_PLAYER_MOCK);
+        desk.addPlayer(THIRD_PLAYER_MOCK);
 
         desk.setReady();
-        desk.removePlayer(SOME_PLAYER);
+        desk.removePlayer(FIRST_PLAYER_MOCK);
 
         assertEquals(GameStatus.READY, desk.getGameStatus());
     }
