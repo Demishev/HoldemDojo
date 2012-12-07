@@ -163,7 +163,7 @@ public class DealerIntegrationTest {
 
         dealer.run();
 
-        verify(deskMock, never()).setGameStatus(GameStatus.STARTED);
+        verify(deskMock, never()).setGameStarted();
     }
 
     @Test
@@ -172,7 +172,7 @@ public class DealerIntegrationTest {
 
         dealer.tick();
 
-        verify(deskMock).setGameStatus(GameStatus.STARTED);
+        verify(deskMock).setGameStarted();
     }
 
     @Test

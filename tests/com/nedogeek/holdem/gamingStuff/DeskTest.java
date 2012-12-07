@@ -14,6 +14,7 @@ import static junit.framework.Assert.assertEquals;
 public class DeskTest {
     final Player SOME_PLAYER = new Player("Some player");
     final Player SOME_OTHER_PLAYER = new Player("Some other player");
+    final Player THIRD_PLAYER = new Player("Some third player");
 
     private Desk desk;
 
@@ -121,5 +122,35 @@ public class DeskTest {
         desk.setReady();
 
         assertEquals(GameStatus.NOT_READY, desk.getGameStatus());
+    }
+
+    @Test
+    public void shouldGameStatusNotReadyWhenSecondPlayerRemoved() throws Exception {
+        desk.addPlayer(SOME_PLAYER);
+        desk.addPlayer(SOME_OTHER_PLAYER);
+
+        desk.setReady();
+        desk.removePlayer(SOME_PLAYER);
+
+        assertEquals(GameStatus.NOT_READY, desk.getGameStatus());
+    }
+
+    @Test
+    public void shouldGameStatusReadyWhenThirdPlayerRemoved() throws Exception {
+        desk.addPlayer(SOME_PLAYER);
+        desk.addPlayer(SOME_OTHER_PLAYER);
+        desk.addPlayer(THIRD_PLAYER);
+
+        desk.setReady();
+        desk.removePlayer(SOME_PLAYER);
+
+        assertEquals(GameStatus.READY, desk.getGameStatus());
+    }
+
+    @Test
+    public void shouldDealerPlayer1WhenSetDealerPlayer1() throws Exception {
+        desk.setDealerPlayer(1);
+
+        assertEquals(1, desk.getDealerPlayerNumber());
     }
 }

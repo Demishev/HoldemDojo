@@ -29,11 +29,6 @@ public class Desk {
         return gameStatus;
     }
 
-    @Deprecated
-    public void setGameStatus(GameStatus gameStatus) {
-        this.gameStatus = gameStatus;
-    }
-
     public int getPlayersQuantity() {
         return players.size();
     }
@@ -42,7 +37,7 @@ public class Desk {
     }
 
     public void setDealerPlayer(int playerNumber) {
-
+        dealerPlayerNumber = playerNumber;
     }
 
     public void shuffleCards() {
@@ -145,5 +140,9 @@ public class Desk {
     public void removePlayer(Player player) {
         players.remove(player);
         waitingPlayers.remove(player);
+
+        if (players.size() < 2) {
+            gameStatus = GameStatus.NOT_READY;
+        }
     }
 }

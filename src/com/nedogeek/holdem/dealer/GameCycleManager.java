@@ -1,7 +1,6 @@
 package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.GameSettings;
-import com.nedogeek.holdem.GameStatus;
 import com.nedogeek.holdem.gamingStuff.Desk;
 
 /**
@@ -18,7 +17,7 @@ public class GameCycleManager {
 
 
     void prepareNewGameCycle() {
-        desk.setGameStatus(GameStatus.STARTED);
+        desk.setGameStarted();
         int playersQuantity = desk.getPlayersQuantity();
         for (int i = 0; i < playersQuantity; i++) {
             desk.setPlayerAmount(i, GameSettings.COINS_AT_START);
