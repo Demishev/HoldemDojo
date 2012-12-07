@@ -1,6 +1,7 @@
 package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.GameSettings;
+import com.nedogeek.holdem.PlayerStatus;
 import com.nedogeek.holdem.gamingStuff.Desk;
 
 /**
@@ -21,17 +22,34 @@ public class NewGameSetter {
 
     void setNewGame() {
         desk.shuffleCards();
+        int dealerPlayerNumber = defineDealer();
+        makeInitialBets(dealerPlayerNumber);
 
+        setInitialPlayerStatuses();
+
+        desk.setNextGameRound();
+    }
+
+    private void setInitialPlayerStatuses() {
+        for (int i = 0; i < desk.getPlayersQuantity(); i++) {
+            if (desk.getPlayerStatus(i) != PlayerStatus.Lost) {
+                desk.setPlayerStatus(i, PlayerStatus.NotMoved);
+            }
+        }
+    }
+
+    private int defineDealer() {
         int dealerPlayerNumber = playersManager.nextPlayer(desk.getDealerPlayerNumber());
         desk.setDealerPlayer(dealerPlayerNumber);
+        return dealerPlayerNumber;
+    }
 
+    private void makeInitialBets(int dealerPlayerNumber) {
         int smallBlindPlayerNumber = playersManager.nextPlayer(dealerPlayerNumber);
         makeStartBet(smallBlindPlayerNumber, GameSettings.SMALL_BLIND_AT_START);
 
         int bigBlindPlayerNumber = playersManager.nextPlayer(smallBlindPlayerNumber);
         makeStartBet(bigBlindPlayerNumber, GameSettings.SMALL_BLIND_AT_START * 2);
-
-        desk.setNextGameRound();
     }
 
     private void makeStartBet(int playerNumber, int bet) {
