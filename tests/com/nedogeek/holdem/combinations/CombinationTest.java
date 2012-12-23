@@ -34,11 +34,17 @@ public class CombinationTest {
         Card[] cards = new Card[] {HEARTS_TEN, HEARTS_JACK, HEARTS_QUEEN, HEARTS_KING, HEARTS_ACE};
 
         assertEquals(Combination.ROYAL_FLASH, Combination.getCombinationType(cards));
+        
+        
     }
 
     @Test
     public void shouldPairWhenHeartsJQKAAndDiamondsAceGetCombinationType() throws Exception {
         Card[] cards = new Card[] {HEARTS_JACK, HEARTS_QUEEN, HEARTS_KING, HEARTS_ACE, DIAMONDS_ACE};
+
+        assertEquals(Combination.PAIR, Combination.getCombinationType(cards));
+        
+        cards = new Card[] {HEARTS_JACK, HEARTS_QUEEN, HEARTS_KING, new Card(CardSuit.CLUBS, CardValue.FIVE), new Card(CardSuit.SPADES, CardValue.FIVE)};
 
         assertEquals(Combination.PAIR, Combination.getCombinationType(cards));
     }

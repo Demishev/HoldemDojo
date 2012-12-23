@@ -4,6 +4,7 @@ import com.nedogeek.holdem.GameRound;
 import com.nedogeek.holdem.GameStatus;
 import com.nedogeek.holdem.PlayerStatus;
 import com.nedogeek.holdem.combinations.PlayerCardCombination;
+import com.nedogeek.holdem.connections.Player;
 import com.nedogeek.holdem.connections.PlayerAction;
 
 /**
@@ -14,18 +15,22 @@ import com.nedogeek.holdem.connections.PlayerAction;
 public class Desk {
     private int dealerPlayerNumber;
     private GameRound gameRound;
-
-
-
+	private int playerQuantity;
+	private GameStatus  gameStatus = GameStatus.NOT_READY;
+	
+	
     public GameStatus getGameStatus() {
-        return null;
+       
+		return gameStatus;
     }
 
+    //TODO Reduce visibility.
     public void setGameStatus(GameStatus started) {
+		
     }
 
     public int getPlayersQuantity() {
-        return 0;
+        return playerQuantity;
     }
 
     public void setPlayerAmount(int playerNumber, int amount) {
@@ -106,4 +111,13 @@ public class Desk {
     public boolean isFirstCombinationBiggerThanSecond(int firstCombination, int secondCombination) {
         return false;
     }
+
+	public void addPlayer(Player player) {
+		playerQuantity++;		
+	}
+
+	public void setReady() {
+		if(playerQuantity == 2)
+			gameStatus = GameStatus.READY;
+	}
 }
