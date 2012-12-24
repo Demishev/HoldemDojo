@@ -26,12 +26,11 @@ public class CardsChooser implements Iterator<Card[]>, Iterable<Card[]> {
 
     }
 
-    @Override
+
     public boolean hasNext() {
         return hasNext;
     }
 
-    @Override
     public Card[] next() {
         Card[] resultingCardArray = copyCardArray();
 
@@ -80,12 +79,10 @@ public class CardsChooser implements Iterator<Card[]>, Iterable<Card[]> {
         }
     }
 
-    @Override
     public void remove() {
 
     }
 
-    @Override
     public Iterator<Card[]> iterator() {
         return this;
     }

@@ -49,7 +49,7 @@ public class Card implements Comparable<Card>{
         return result;
     }
 
-    @Override
+
     public int compareTo(Card o) {
         return cardValue.compareTo(o.getCardValue());
     }

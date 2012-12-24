@@ -4,9 +4,8 @@ import com.nedogeek.holdem.GameRound;
 import com.nedogeek.holdem.GameStatus;
 import com.nedogeek.holdem.PlayerStatus;
 import com.nedogeek.holdem.combinations.PlayerCardCombination;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.nedogeek.holdem.connections.Player;
+import com.nedogeek.holdem.connections.PlayerAction;
 
 /**
  * User: Konstantin Demishev
@@ -16,32 +15,32 @@ import java.util.List;
 public class Desk {
     private int dealerPlayerNumber;
     private GameRound gameRound;
-    private GameStatus gameStatus;
-
-    private List<Player> players = new ArrayList<Player>();
-    private List<Player> waitingPlayers = new ArrayList<Player>();
-
-    public Desk() {
-        gameStatus = GameStatus.NOT_READY;
-        gameRound = GameRound.INITIAL;
+	private int playerQuantity;
+	private GameStatus  gameStatus = GameStatus.NOT_READY;
+	
+	
+    public GameStatus getGameStatus() {
+       
+		return gameStatus;
     }
 
-    public GameStatus getGameStatus() {
-        return gameStatus;
+    //TODO Reduce visibility.
+    public void setGameStatus(GameStatus started) {
+		
     }
 
     public int getPlayersQuantity() {
-        return players.size();
+        return playerQuantity;
     }
 
     public void setPlayerAmount(int playerNumber, int amount) {
     }
 
     public void setDealerPlayer(int playerNumber) {
-        dealerPlayerNumber = playerNumber;
+
     }
 
-    public void resetCards() {
+    public void shuffleCards() {
     }
 
     public void setPlayerBet(int playerNumber, int bet) {
@@ -67,7 +66,7 @@ public class Desk {
     }
 
     public void setNextGameRound() {
-        gameRound = GameRound.values()[gameRound.ordinal() + 1];
+
     }
 
     public int getLastMovedPlayer() {
@@ -113,41 +112,12 @@ public class Desk {
         return false;
     }
 
-    public void addPlayer(Player player) {
-        if (gameStatus != GameStatus.STARTED) {
-            players.add(player);
-        } else {
-            waitingPlayers.add(player);
-        }
-    }
+	public void addPlayer(Player player) {
+		playerQuantity++;		
+	}
 
-    public void setGameStarted() {
-        gameStatus = GameStatus.STARTED;
-    }
-
-    public void setReady() {
-        if (players.size() > 1) {
-            gameStatus = GameStatus.READY;
-        }
-    }
-
-    public void setGameCycleEnded() {
-        players.addAll(waitingPlayers);
-        waitingPlayers.clear();
-
-        gameStatus = GameStatus.CYCLE_ENDED;
-    }
-
-    public void removePlayer(Player player) {
-        players.remove(player);
-        waitingPlayers.remove(player);
-
-        if (players.size() < 2) {
-            gameStatus = GameStatus.NOT_READY;
-        }
-    }
-
-    public void giveCardsToPlayer(int playerNumber) {
-
-    }
+	public void setReady() {
+		if(playerQuantity == 2)
+			gameStatus = GameStatus.READY;
+	}
 }

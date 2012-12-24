@@ -61,7 +61,7 @@ public class PlayerCardCombination implements Comparable<PlayerCardCombination> 
         return getCombination() + ": " + Arrays.asList(cards);
     }
 
-    @Override
+    
     public int compareTo(PlayerCardCombination o) {
         final Combination firstCombinationType = getCombinationType();
         final Combination secondCombinationType = o.getCombinationType();
