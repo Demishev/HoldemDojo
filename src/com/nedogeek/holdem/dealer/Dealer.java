@@ -1,6 +1,5 @@
 package com.nedogeek.holdem.dealer;
 
-import com.nedogeek.holdem.GameStatus;
 import com.nedogeek.holdem.gamingStuff.Desk;
 
 /**
@@ -38,9 +37,7 @@ public class Dealer implements Runnable {
     }
 
     public void run() {
-    	while (desk.getGameStatus() != GameStatus.NOT_READY){
-    		tick();
-    	}
+        //TODO not codded yet
     }
 
     void tick() {

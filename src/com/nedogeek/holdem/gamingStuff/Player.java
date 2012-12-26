@@ -7,9 +7,8 @@ package com.nedogeek.holdem.gamingStuff;
  */
 public class Player {
     private final String name;
-    
-    //TODO class is a stub
-    public Player(String name) {
+                                         //TODO class is a stub
+    Player(String name) {
         this.name = name;
     }
 }

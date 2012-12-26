@@ -1,10 +1,9 @@
 package com.nedogeek.holdem.gamingStuff;
 
-import static org.junit.Assert.*;
+import com.nedogeek.holdem.GameStatus;
 import org.junit.Test;
 
-import com.nedogeek.holdem.GameStatus;
-import com.nedogeek.holdem.connections.Player;
+import static org.junit.Assert.assertEquals;
 
 public class DeskTest {
 	private final Player FIRST_PLAYER = new Player("First player");
