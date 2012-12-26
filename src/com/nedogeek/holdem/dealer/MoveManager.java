@@ -2,8 +2,8 @@ package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.PlayerStatus;
+import com.nedogeek.holdem.gamingStuff.Bank;
 import com.nedogeek.holdem.gamingStuff.PlayerAction;
-import com.nedogeek.holdem.gamingStuff.Desk;
 
 /**
  * User: Konstantin Demishev
@@ -11,10 +11,12 @@ import com.nedogeek.holdem.gamingStuff.Desk;
  * Time: 23:26
  */
 public class MoveManager {
-    private final Desk desk;
+    private final Bank bank;
+    private final PlayersManager playersManager;
 
-    public MoveManager(Desk desk) {
-        this.desk = desk;
+    public MoveManager(Bank bank, PlayersManager playersManager) {
+        this.bank = bank;
+        this.playersManager = playersManager;
     }
 
     void makeMove(int playerNumber, PlayerAction playerMove) {
@@ -34,7 +36,7 @@ public class MoveManager {
                 makeAllIn(playerNumber);
                 break;
         }
-        desk.setLastMovedPlayer(playerNumber);
+        playersManager.setLastMovedPlayer(playerNumber);
     }
 
     void makeInitialBet(int playerNumber, int initialBet) {
@@ -42,46 +44,46 @@ public class MoveManager {
     }
 
     private void makeBet(int playerNumber, int betValue) {
-        final int playerAmount = desk.getPlayerAmount(playerNumber);
-        final int previousBet = desk.getPlayerBet(playerNumber);
-        desk.setPlayerBet(playerNumber, betValue + previousBet);
-        desk.addToPot(betValue);
-        desk.setPlayerAmount(playerNumber, playerAmount - betValue);
-        desk.setCallValue(betValue + previousBet);
+        final int playerAmount = bank.getPlayerBalance(playerNumber);
+        final int previousBet = bank.getPlayerBet(playerNumber);
+        bank.setPlayerBet(playerNumber, betValue + previousBet);
+        bank.addToPot(betValue);
+        bank.setPlayerAmount(playerNumber, playerAmount - betValue);
+        bank.setCallValue(betValue + previousBet);
     }
 
     private void makeFold(int playerNumber) {
-        desk.setPlayerStatus(playerNumber, PlayerStatus.Fold);
+        playersManager.setPlayerStatus(playerNumber, PlayerStatus.Fold);
     }
 
     private void makeCall(int playerNumber) {
-        desk.setPlayerStatus(playerNumber,PlayerStatus.Call);
-        makeBet(playerNumber, desk.getCallValue() - desk.getPlayerBet(playerNumber));
+        playersManager.setPlayerStatus(playerNumber,PlayerStatus.Call);
+        makeBet(playerNumber, bank.getCallValue() - bank.getPlayerBet(playerNumber));
     }
 
     private void makeAllIn(int playerNumber) {
-        desk.setPlayerStatus(playerNumber, PlayerStatus.AllIn);
-        makeBet(playerNumber, desk.getPlayerAmount(playerNumber));
+        playersManager.setPlayerStatus(playerNumber, PlayerStatus.AllIn);
+        makeBet(playerNumber, bank.getPlayerBalance(playerNumber));
     }
 
     private void makeRise(int playerNumber, int riseValue) {
         if (isAllInMove(playerNumber, riseValue)) {
             makeAllIn(playerNumber);
         } else {
-            desk.setPlayerStatus(playerNumber, PlayerStatus.Rise);
-            if (desk.getPlayerBet(playerNumber) + riseValue >= minimumRiseValue()) {
+            playersManager.setPlayerStatus(playerNumber, PlayerStatus.Rise);
+            if (bank.getPlayerBet(playerNumber) + riseValue >= minimumRiseValue()) {
                 makeBet(playerNumber, riseValue);
             } else {
-                makeBet(playerNumber, minimumRiseValue() - desk.getPlayerBet(playerNumber));
+                makeBet(playerNumber, minimumRiseValue() - bank.getPlayerBet(playerNumber));
             }
         }
     }
 
     private boolean isAllInMove(int playerNumber, int bet) {
-        return desk.getPlayerAmount(playerNumber) <= bet;
+        return bank.getPlayerBalance(playerNumber) <= bet;
     }
 
     private int minimumRiseValue() {
-        return desk.getCallValue() + 2 * GameSettings.SMALL_BLIND_AT_START;
+        return bank.getCallValue() + 2 * GameSettings.SMALL_BLIND_AT_START;
     }
 }

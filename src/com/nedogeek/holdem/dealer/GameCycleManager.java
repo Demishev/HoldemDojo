@@ -1,7 +1,7 @@
 package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.GameSettings;
-import com.nedogeek.holdem.gamingStuff.Desk;
+import com.nedogeek.holdem.gamingStuff.Bank;
 
 /**
  * User: Konstantin Demishev
@@ -9,18 +9,22 @@ import com.nedogeek.holdem.gamingStuff.Desk;
  * Time: 0:36
  */
 public class GameCycleManager {
-    private final Desk desk;
+    private final PlayersManager playersManager;
+    private final Dealer dealer;
+    private final Bank bank;
 
-    public GameCycleManager(Desk desk) {
-        this.desk = desk;
+    public GameCycleManager(Dealer dealer, PlayersManager playersManager, Bank bank) {
+        this.playersManager = playersManager;
+        this.dealer = dealer;
+        this.bank = bank;
     }
 
 
     void prepareNewGameCycle() {
-        desk.setGameStarted();
-        int playersQuantity = desk.getPlayersQuantity();
+        dealer.setGameStarted();
+        int playersQuantity = playersManager.getPlayersQuantity();
         for (int i = 0; i < playersQuantity; i++) {
-            desk.setPlayerAmount(i, GameSettings.COINS_AT_START);
+            bank.setPlayerAmount(i, GameSettings.COINS_AT_START);
         }
     }
 

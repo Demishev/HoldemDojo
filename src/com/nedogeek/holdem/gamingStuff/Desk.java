@@ -30,6 +30,7 @@ public class Desk {
         return gameStatus;
     }
 
+    @Deprecated
     public int getPlayersQuantity() {
         return players.size();
     }
@@ -54,7 +55,7 @@ public class Desk {
     public void addToPot(int bet) {
     }
 
-    public int getPlayerAmount(int playerNumber) {
+    public int getPlayerBallance(int playerNumber) {
         return 0;
     }
 

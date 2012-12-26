@@ -1,13 +1,12 @@
 package com.nedogeek.holdem.dealer;
 
+import com.nedogeek.holdem.gamingStuff.Bank;
 import com.nedogeek.holdem.gamingStuff.PlayerAction;
-import com.nedogeek.holdem.gamingStuff.Desk;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.stubbing.OngoingStubbing;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * User: Konstantin Demishev
@@ -17,28 +16,52 @@ import static org.mockito.Mockito.when;
 public class MoveManagerTest {
     private MoveManager moveManager;
 
-    private Desk deskMock;
     private PlayerAction playerActionMock;
+    private Bank bankMock;
+    private PlayersManager playersManagerMock;
 
     @Before
     public void setUp() throws Exception {
-        deskMock = mock(Desk.class);
         playerActionMock = mock(PlayerAction.class);
 
-        moveManager = new MoveManager(deskMock);
+        resetBank();
+        resetPlayersManager();
+
+        moveManager = new MoveManager(bankMock, playersManagerMock);
+    }
+
+    private void resetBank() {
+        bankMock = mock(Bank.class);
+    }
+
+    private void resetPlayersManager() {
+        playersManagerMock = mock(PlayersManager.class);
     }
 
     @Test
     public void shouldSetCallValue200WhenCallValue100AndMakeCallWhenPlayerBetIs100AndPlayerAmount1000() throws Exception {
-        when(deskMock.getCallValue()).thenReturn(200);
-        when(deskMock.getPlayerAmount(0)).thenReturn(1000);
-        when(deskMock.getPlayerBet(0)).thenReturn(100);
+        when(bankMock.getCallValue()).thenReturn(200);
+        when(bankMock.getPlayerBalance(0)).thenReturn(1000);
+        when(bankMock.getPlayerBet(0)).thenReturn(100);
 
-        when(playerActionMock.getActionType()).thenReturn(PlayerAction.ActionType.Call);
+        setActionType(PlayerAction.ActionType.Call);
 
         moveManager.makeMove(0,playerActionMock);
 
 
-        verify(deskMock).setCallValue(200);
+        verify(bankMock).setCallValue(200);
+    }
+
+    private OngoingStubbing<PlayerAction.ActionType> setActionType(PlayerAction.ActionType actionType) {
+        return when(playerActionMock.getActionType()).thenReturn(actionType);
+    }
+
+    @Test
+    public void shouldPlayersManagerSetLastMovedPlayer1WhenMoveManagerMakeMove1PlayerFold() throws Exception {
+        setActionType(PlayerAction.ActionType.Fold);
+
+        moveManager.makeMove(1, playerActionMock);
+
+        verify(playersManagerMock).setLastMovedPlayer(1);
     }
 }

@@ -1,5 +1,6 @@
 package com.nedogeek.holdem.dealer;
 
+import com.nedogeek.holdem.gamingStuff.Bank;
 import com.nedogeek.holdem.gamingStuff.Desk;
 
 /**
@@ -15,13 +16,15 @@ public class Dealer implements Runnable {
     private final PlayersManager playersManager;
     private final GameCycleManager gameCycleManager;
     private final EndGameManager endGameManager;
+    private final Bank bank;
 
     Dealer(Desk desk) {
+        bank = new Bank();
         this.desk = desk;
-        moveManager = new MoveManager(desk);
+        playersManager = new PlayersManager(bank);
+        moveManager = new MoveManager(bank, playersManager);
         newGameSetter = new NewGameSetter(desk);
-        playersManager = new PlayersManager(desk);
-        gameCycleManager = new GameCycleManager(desk);
+        gameCycleManager = new GameCycleManager(this, playersManager, bank);
         endGameManager = new EndGameManager(desk);
     }
 
@@ -29,6 +32,7 @@ public class Dealer implements Runnable {
            PlayersManager playersManagerMock, GameCycleManager gameCycleManagerMock,
            EndGameManager endGameManagerMock) {
         desk = deskMock;
+        bank = new Bank();
         moveManager = moveManagerMock;
         newGameSetter = newGameSetterMock;
         playersManager = playersManagerMock;
@@ -70,5 +74,9 @@ public class Dealer implements Runnable {
                 }
                 break;
         }
+    }
+
+    public void setGameStarted() {
+
     }
 }

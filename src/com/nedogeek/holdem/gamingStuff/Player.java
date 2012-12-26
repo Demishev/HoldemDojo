@@ -1,5 +1,7 @@
 package com.nedogeek.holdem.gamingStuff;
 
+import com.nedogeek.holdem.PlayerStatus;
+
 /**
  * User: Konstantin Demishev
  * Date: 05.10.12
@@ -7,8 +9,22 @@ package com.nedogeek.holdem.gamingStuff;
  */
 public class Player {
     private final String name;
-                                         //TODO class is a stub
-    Player(String name) {
+
+    private PlayerStatus status;
+    //TODO class is a stub
+    public Player(String name) {
         this.name = name;
+    }
+
+    public PlayerStatus getStatus() {
+        return status;
+    }
+
+    public PlayerAction getMove() {
+        return null;
+    }
+
+    public void setStatus(PlayerStatus status) {
+        this.status = status;
     }
 }

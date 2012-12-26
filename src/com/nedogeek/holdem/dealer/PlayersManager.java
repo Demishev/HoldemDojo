@@ -1,25 +1,40 @@
 package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.PlayerStatus;
+import com.nedogeek.holdem.gamingStuff.Bank;
+import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayerAction;
-import com.nedogeek.holdem.gamingStuff.Desk;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * User: Konstantin Demishev
  * Date: 21.11.12
  * Time: 23:48
  */
-public class PlayersManager {
-    private final Desk desk;
-    private final int playersQuantity;
+class PlayersManager {
+    private final Bank bank;
 
-    PlayersManager(Desk desk) {
-        this.desk = desk;
-        playersQuantity = desk.getPlayersQuantity();
+    private int dealerNumber;
+
+    List<Player> players = new ArrayList<Player>();
+    private int lastMovedPlayer;
+
+    PlayersManager(Bank bank) {
+        this.bank = bank;
     }
 
-    int nextPlayer(int playerNumber) {
-        if (playerNumber == playersQuantity - 1) {
+    public void setDealerNumber(int dealerNumber) {
+        this.dealerNumber = dealerNumber;
+    }
+
+    public void setLastMovedPlayer(int lastMovedPlayer) {
+        this.lastMovedPlayer = lastMovedPlayer;
+    }
+
+    int nextPlayer(int playerNumber) { //TODO make it private
+        if (playerNumber == getPlayersQuantity() - 1) {
             return 0;
         } else {
             return playerNumber + 1;
@@ -32,8 +47,8 @@ public class PlayersManager {
 
     private boolean moreThanOnePlayerDoNotFoldsOrLost() {
         int availableMoverStatusQuantity = 0;
-        for (int i = 0; i < playersQuantity; i++) {
-            final PlayerStatus playerStatus = desk.getPlayerStatus(i);
+        for (Player player : players) {
+            final PlayerStatus playerStatus = player.getStatus();
             if (playerStatus != PlayerStatus.Fold && playerStatus != PlayerStatus.Lost) {
                 availableMoverStatusQuantity++;
             }
@@ -42,25 +57,45 @@ public class PlayersManager {
     }
 
     PlayerAction getPlayerMove() {
-        return desk.getPlayersMove(getMoverNumber());
+        return players.get(getMoverNumber()).getMove();
     }
 
-    int getMoverNumber() {
-        int lastMovedPlayer = desk.getLastMovedPlayer();
-
+    int getMoverNumber() {      //TODO replace with getMover
         if (lastMovedPlayer == -1) {
-            return nextPlayer(desk.getDealerPlayerNumber());
+            return nextPlayer(dealerNumber);
         }
         int nextPlayerNumber = nextPlayer(lastMovedPlayer);
 
         while (nextPlayerNumber != lastMovedPlayer) {
-            if (desk.getPlayerStatus(nextPlayerNumber) == PlayerStatus.NotMoved ||
-                    (desk.getPlayerStatus(nextPlayerNumber) != PlayerStatus.Fold &&
-                            desk.getPlayerBet(nextPlayerNumber) < desk.getCallValue())) {
+            final Player currentPlayer = players.get(nextPlayerNumber);
+            if (currentPlayer.getStatus() == PlayerStatus.NotMoved ||
+                    isActiveNotRisePlayer(currentPlayer)) {
                 return nextPlayerNumber;
             }
             nextPlayerNumber = nextPlayer(nextPlayerNumber);
         }
         return -1;
+    }
+
+    private boolean isActiveNotRisePlayer(Player player) {
+        return (player.getStatus() != PlayerStatus.Fold &&
+                bank.riseNeeded(player));
+    }
+
+    void addPlayer(Player player) {
+        if (!players.contains(player))
+            players.add(player);
+    }
+
+    int getPlayersQuantity() {
+        return players.size();
+    }
+
+    public void removePlayer(Player player) {
+        players.remove(player);
+    }
+
+    public void setPlayerStatus(int playerNumber, PlayerStatus playerStatus) {
+        //TODO removeMe
     }
 }

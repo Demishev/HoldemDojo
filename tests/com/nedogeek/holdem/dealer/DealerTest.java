@@ -86,4 +86,13 @@ public class DealerTest {
 
         verify(endGameManagerMock).endGame();
     }
+
+    @Test
+    public void shouldGameCycleManagerPrepareNewGameCycleWhenGameStatusReady() throws Exception {
+        when(deskMock.getGameStatus()).thenReturn(GameStatus.READY);
+
+        dealer.tick();
+
+        verify(gameCycleManagerMock).prepareNewGameCycle();
+    }
 }
