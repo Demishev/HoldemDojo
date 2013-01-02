@@ -48,6 +48,7 @@ public class Desk {
     public void setPlayerBet(int playerNumber, int bet) {
     }
 
+    @Deprecated
     public int getDealerPlayerNumber() {
         return dealerPlayerNumber;
     }

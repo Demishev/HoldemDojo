@@ -1,11 +1,12 @@
 package com.nedogeek.holdem.dealer;
 
+import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.PlayerStatus;
+import com.nedogeek.holdem.gamingStuff.Bank;
 import com.nedogeek.holdem.gamingStuff.Desk;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.*;
 
 /**
@@ -17,53 +18,73 @@ public class NewGameSetterTest {
     private NewGameSetter newGameSetter;
 
     private Desk deskMock;
+    private PlayersManager playersManagerMock;
+    private Bank bankMock;
 
     @Before
     public void setUp() throws Exception {
         resetDeskMock();
+        resetPlayerManagerMock();
+        resetBankMock();
 
-        newGameSetter = new NewGameSetter(deskMock);
+        newGameSetter = new NewGameSetter(deskMock, playersManagerMock, bankMock);
 
+    }
+
+    private void resetBankMock() {
+        bankMock = mock(Bank.class);
+
+        when(bankMock.getPlayerBalance(anyInt())).thenReturn(GameSettings.COINS_AT_START);
+    }
+
+    private void resetPlayerManagerMock() {
+        playersManagerMock = mock(PlayersManager.class);
+
+        setPlayersQuantity(2);
+        setDealerNumber(0);
+
+        setPlayerStatus(anyInt(), PlayerStatus.NotMoved);
     }
 
     private void resetDeskMock() {
         deskMock = mock(Desk.class);
-
-        setPlayersQuantity(2);
-        setPlayerStatus(anyInt(), PlayerStatus.NotMoved);
     }
 
     private void setPlayerStatus(int playerNumber, PlayerStatus playerStatus) {
-        when(deskMock.getPlayerStatus(playerNumber)).thenReturn(playerStatus);
+        when(playersManagerMock.getPlayerStatus(playerNumber)).thenReturn(playerStatus);
+    }
+
+    private void setDealerNumber(int dealerNumber) {
+        when(playersManagerMock.getDealerNumber()).thenReturn(dealerNumber);
     }
 
     private void setPlayersQuantity(int playersQuantity) {
-        when(deskMock.getPlayersQuantity()).thenReturn(playersQuantity);
+        when(playersManagerMock.getPlayersQuantity()).thenReturn(playersQuantity);
     }
 
     @Test
     public void shouldSetFirstPlayerStatusNotMovedWhenDefaultNewGameSet() throws Exception {
         newGameSetter.setNewGame();
 
-        verify(deskMock).setPlayerStatus(0, PlayerStatus.NotMoved);
+        verify(playersManagerMock).setPlayerStatus(0, PlayerStatus.NotMoved);
     }
 
     @Test
     public void shouldSetSecondPlayerStatusNotMovedWhenDefaultNewGameSet() throws Exception {
         newGameSetter.setNewGame();
 
-        verify(deskMock).setPlayerStatus(1, PlayerStatus.NotMoved);
+        verify(playersManagerMock).setPlayerStatus(1, PlayerStatus.NotMoved);
     }
 
     @Test
-    public void shouldNameWhen() throws Exception {
+    public void shouldNotLostPlayerSetNotMoves() throws Exception {
         setPlayersQuantity(3);
         setPlayerStatus(0, PlayerStatus.Lost);
         setPlayerStatus(2, PlayerStatus.NotMoved);
 
         newGameSetter.setNewGame();
 
-        verify(deskMock, never()).setPlayerStatus(0, PlayerStatus.NotMoved);
+        verify(playersManagerMock, never()).setPlayerStatus(0, PlayerStatus.NotMoved);
     }
 
     @Test
@@ -105,5 +126,19 @@ public class NewGameSetterTest {
         newGameSetter.setNewGame();
 
         verify(deskMock, never()).giveCardsToPlayer(2);
+    }
+
+    @Test
+    public void shouldFirstPlayerGiveBigBlindWhenGameStarted() throws Exception {
+        newGameSetter.setNewGame();
+
+        verify(bankMock).setPlayerBet(0, GameSettings.SMALL_BLIND_AT_START * 2);
+    }
+
+    @Test
+    public void shouldSetDealerPlayerNumber1WhenPreviousDealerPlayerNumberWas0() throws Exception {
+        newGameSetter.setNewGame();
+
+        verify(playersManagerMock).changeDealer();
     }
 }

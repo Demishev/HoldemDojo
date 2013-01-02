@@ -23,7 +23,7 @@ public class Dealer implements Runnable {
         this.desk = desk;
         playersManager = new PlayersManager(bank);
         moveManager = new MoveManager(bank, playersManager);
-        newGameSetter = new NewGameSetter(desk);
+        newGameSetter = new NewGameSetter(desk, playersManager, bank);
         gameCycleManager = new GameCycleManager(this, playersManager, bank);
         endGameManager = new EndGameManager(desk);
     }

@@ -17,8 +17,8 @@ import static org.mockito.Mockito.when;
  * Time: 1:55
  */
 public class PlayerManagerTest {
-    final Player FIRST_PLAYER = new Player("First player");
-    final Player SECOND_PLAYER = new Player("Second player");
+    final Player firstPlayer = new Player("First player");
+    final Player secondPlayer = new Player("Second player");
 
     private PlayersManager playersManager;
     private Bank bank;
@@ -28,24 +28,23 @@ public class PlayerManagerTest {
         resetPlayers();
         bank = mock(Bank.class);
 
-        clearPlayerManager();
-        setDefaultTwoPlayersDesk();
+        resetPlayerManager();
+        setDefaultTwoPlayersGame();
     }
 
     private void resetPlayers() {
-        FIRST_PLAYER.setStatus(PlayerStatus.NotMoved);
-        SECOND_PLAYER.setStatus(PlayerStatus.NotMoved);
+        firstPlayer.setStatus(PlayerStatus.NotMoved);
+        secondPlayer.setStatus(PlayerStatus.NotMoved);
     }
 
-    private void setDefaultTwoPlayersDesk() {
-        playersManager.addPlayer(FIRST_PLAYER);
-        playersManager.addPlayer(SECOND_PLAYER);
+    private void setDefaultTwoPlayersGame() {
+        playersManager.addPlayer(firstPlayer);
+        playersManager.addPlayer(secondPlayer);
     }
 
     @Test
     public void shouldFalseWhenDefaultDeskSecondPlayerFold() throws Exception {
-        playersManager.setDealerNumber(1);
-        SECOND_PLAYER.setStatus(PlayerStatus.Fold);
+        secondPlayer.setStatus(PlayerStatus.Fold);
 
         assertFalse(playersManager.hasAvailableMovers());
     }
@@ -53,18 +52,18 @@ public class PlayerManagerTest {
     @Test
     public void shouldFalseWhenDefaultDeskSecondPlayerLost() throws Exception {
         playersManager.setLastMovedPlayer(1);
-        SECOND_PLAYER.setStatus(PlayerStatus.Fold);
+        secondPlayer.setStatus(PlayerStatus.Fold);
 
         assertFalse(playersManager.hasAvailableMovers());
     }
 
     @Test
     public void shouldMoveWhen() throws Exception {
-        FIRST_PLAYER.setStatus(PlayerStatus.Rise);
-        SECOND_PLAYER.setStatus(PlayerStatus.Rise);
+        firstPlayer.setStatus(PlayerStatus.Rise);
+        secondPlayer.setStatus(PlayerStatus.Rise);
         playersManager.setLastMovedPlayer(0);
 
-        when(bank.riseNeeded(SECOND_PLAYER)).thenReturn(true);
+        when(bank.riseNeeded(secondPlayer)).thenReturn(true);
 
         assertEquals(1, playersManager.getMoverNumber());
     }
@@ -76,52 +75,73 @@ public class PlayerManagerTest {
 
     @Test
     public void should1PlayerWhenNewPlayerAddedToNewPlayersManager() throws Exception {
-        clearPlayerManager();
-        playersManager.addPlayer(FIRST_PLAYER);
+        resetPlayerManager();
+        playersManager.addPlayer(firstPlayer);
 
         assertEquals(1, playersManager.getPlayersQuantity());
     }
 
     @Test
     public void should2PlayersWhen2NewPlayerAddedToNewPlayersManager() throws Exception {
-        clearPlayerManager();
-        playersManager.addPlayer(FIRST_PLAYER);
-        playersManager.addPlayer(SECOND_PLAYER);
+        resetPlayerManager();
+        playersManager.addPlayer(firstPlayer);
+        playersManager.addPlayer(secondPlayer);
 
         assertEquals(2, playersManager.getPlayersQuantity());
     }
 
-    private void clearPlayerManager() {
+    private void resetPlayerManager() {
         playersManager = new PlayersManager(bank);
 
-        playersManager.setDealerNumber(0);
         playersManager.setLastMovedPlayer(-1);
     }
 
     @Test
     public void should1PlayerWhenSameNewPlayerAddedToNewPlayersManagerTwice() throws Exception {
-        clearPlayerManager();
-        playersManager.addPlayer(FIRST_PLAYER);
-        playersManager.addPlayer(FIRST_PLAYER);
+        resetPlayerManager();
+        playersManager.addPlayer(firstPlayer);
+        playersManager.addPlayer(firstPlayer);
 
         assertEquals(1, playersManager.getPlayersQuantity());
     }
 
     @Test
     public void should0PlayersWhenAddFirstPlayerAndRemoveItFromPlayersManager() throws Exception {
-        clearPlayerManager();
-        playersManager.addPlayer(FIRST_PLAYER);
-        playersManager.removePlayer(FIRST_PLAYER);
+        resetPlayerManager();
+        playersManager.addPlayer(firstPlayer);
+        playersManager.removePlayer(firstPlayer);
 
         assertEquals(0, playersManager.getPlayersQuantity());
     }
 
     @Test
     public void should1PlayerWhenAddFirstPlayerAndRemoveSecondPlayerFromPlayersManager() throws Exception {
-        clearPlayerManager();
-        playersManager.addPlayer(FIRST_PLAYER);
-        playersManager.removePlayer(SECOND_PLAYER);
+        resetPlayerManager();
+        playersManager.addPlayer(firstPlayer);
+        playersManager.removePlayer(secondPlayer);
 
         assertEquals(1, playersManager.getPlayersQuantity());
     }
+
+    @Test
+    public void shouldMinus1WhenNewPlayerManagerGetDealerNumber() throws Exception {
+
+        assertEquals(-1, playersManager.getDealerNumber());
+    }
+
+    @Test
+    public void should0WhenNewPlayerManagerChangeDealerNumberAndGetDealerNumber() throws Exception {
+        playersManager.changeDealer();
+
+        assertEquals(0, playersManager.getDealerNumber());
+    }
+
+    @Test
+    public void should1WhenNewPlayerManagerChangeDealerNumberTwiceAndGetDealerNumber() throws Exception {
+        playersManager.changeDealer();
+        playersManager.changeDealer();
+
+        assertEquals(1, playersManager.getDealerNumber());
+    }
+
 }

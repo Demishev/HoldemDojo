@@ -14,7 +14,7 @@ public class MoveManager {
     private final Bank bank;
     private final PlayersManager playersManager;
 
-    public MoveManager(Bank bank, PlayersManager playersManager) {
+    MoveManager(Bank bank, PlayersManager playersManager) {
         this.bank = bank;
         this.playersManager = playersManager;
     }

@@ -14,17 +14,18 @@ public class NewGameSetter {
     private final Desk desk;
     private final MoveManager moveManager;
     private final PlayersManager playersManager;
+    private final Bank bank;
 
-    public NewGameSetter(Desk desk) {
+    public NewGameSetter(Desk desk, PlayersManager playersManager, Bank bank) {
         this.desk = desk;
-        moveManager = new MoveManager(new Bank(), new PlayersManager(new Bank()));
-        playersManager = new PlayersManager(new Bank());
+        this.playersManager = playersManager;
+        this.bank = bank;
+        moveManager = new MoveManager(bank, new PlayersManager(bank));
     }
 
     void setNewGame() {
         desk.resetCards();
-        int dealerPlayerNumber = defineDealer();
-        makeInitialBets(dealerPlayerNumber);
+        makeInitialBets(defineDealer());
 
         setInitialPlayerStatuses();
         giveCardsToPlayers();
@@ -33,25 +34,25 @@ public class NewGameSetter {
     }
 
     private void giveCardsToPlayers() {
-        for (int i = 0; i < desk.getPlayersQuantity(); i++) {
-            if (desk.getPlayerStatus(i) != PlayerStatus.Lost) {
+        for (int i = 0; i < playersManager.getPlayersQuantity(); i++) {
+            if (playersManager.getPlayerStatus(i) != PlayerStatus.Lost) {
                 desk.giveCardsToPlayer(i);
             }
         }
     }
 
     private void setInitialPlayerStatuses() {
-        for (int i = 0; i < desk.getPlayersQuantity(); i++) {
-            if (desk.getPlayerStatus(i) != PlayerStatus.Lost) {
-                desk.setPlayerStatus(i, PlayerStatus.NotMoved);
+        for (int i = 0; i < playersManager.getPlayersQuantity(); i++) {
+            if (playersManager.getPlayerStatus(i) != PlayerStatus.Lost) {
+                playersManager.setPlayerStatus(i, PlayerStatus.NotMoved);
             }
         }
     }
 
     private int defineDealer() {
-        int dealerPlayerNumber = playersManager.nextPlayer(desk.getDealerPlayerNumber());
-        desk.setDealerPlayer(dealerPlayerNumber);
-        return dealerPlayerNumber;
+        playersManager.changeDealer();
+
+        return playersManager.getDealerNumber();
     }
 
     private void makeInitialBets(int dealerPlayerNumber) {
@@ -63,7 +64,7 @@ public class NewGameSetter {
     }
 
     private void makeStartBet(int playerNumber, int bet) {
-        final int playerAmount = desk.getPlayerBallance(playerNumber);
+        final int playerAmount = bank.getPlayerBalance(playerNumber);
         if (playerAmount > bet) {
             moveManager.makeInitialBet(playerNumber, bet);
         } else {

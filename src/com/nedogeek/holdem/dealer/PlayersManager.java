@@ -23,8 +23,10 @@ class PlayersManager {
 
     PlayersManager(Bank bank) {
         this.bank = bank;
+        dealerNumber = -1;
     }
 
+    @Deprecated
     public void setDealerNumber(int dealerNumber) {
         this.dealerNumber = dealerNumber;
     }
@@ -97,5 +99,17 @@ class PlayersManager {
 
     public void setPlayerStatus(int playerNumber, PlayerStatus playerStatus) {
         //TODO removeMe
+    }
+
+    public int getDealerNumber() {
+        return dealerNumber;
+    }
+
+    public PlayerStatus getPlayerStatus(int playerNumber) {
+        return null; //TODO And remove me too
+    }
+
+    public void changeDealer() {
+        dealerNumber = nextPlayer(dealerNumber);
     }
 }

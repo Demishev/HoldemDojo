@@ -31,7 +31,7 @@ public class Card implements Comparable<Card>{
         return "" + cardValue + cardSuit;
     }
 
-    @Override
+    @Override //TODO Simplify this method
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
