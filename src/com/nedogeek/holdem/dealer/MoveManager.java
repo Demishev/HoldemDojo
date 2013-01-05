@@ -49,7 +49,7 @@ public class MoveManager {
         bank.setPlayerBet(playerNumber, betValue + previousBet);
         bank.addToPot(betValue);
         bank.setPlayerAmount(playerNumber, playerAmount - betValue);
-        bank.setCallValue(betValue + previousBet);
+        bank.setCallValue(betValue + previousBet);           //TODO Check increase of call value.
     }
 
     private void makeFold(int playerNumber) {

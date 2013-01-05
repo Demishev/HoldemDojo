@@ -2,7 +2,6 @@ package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.PlayerStatus;
-import com.nedogeek.holdem.gamingStuff.Bank;
 import com.nedogeek.holdem.gamingStuff.Desk;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,13 +19,11 @@ public class NewGameSetterTest {
     private Desk deskMock;
     private PlayersManager playersManagerMock;
     private MoveManager moveManagerMock;
-    private Bank bankMock;
 
     @Before
     public void setUp() throws Exception {
         resetDeskMock();
         resetPlayerManagerMock();
-        resetBankMock();
         resetMoveManagerMock();
 
         newGameSetter = new NewGameSetter(deskMock, playersManagerMock, moveManagerMock);
@@ -38,12 +35,6 @@ public class NewGameSetterTest {
 
         when(playersManagerMock.nextPlayer(0)).thenReturn(1);
         when(playersManagerMock.nextPlayer(1)).thenReturn(0);
-    }
-
-    private void resetBankMock() {
-        bankMock = mock(Bank.class);
-
-        when(bankMock.getPlayerBalance(anyInt())).thenReturn(GameSettings.COINS_AT_START);
     }
 
     private void resetPlayerManagerMock() {
@@ -187,5 +178,12 @@ public class NewGameSetterTest {
         newGameSetter.setNewGame();
 
         verify(moveManagerMock).makeInitialBet(2, GameSettings.SMALL_BLIND_AT_START * 2);
+    }
+
+    @Test
+    public void shouldNotSetGameRound1WhenTickGameRoundIs1() throws Exception {
+        newGameSetter.setNewGame();
+
+        verify(deskMock).setNextGameRound();
     }
 }

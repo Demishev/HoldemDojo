@@ -1,13 +1,11 @@
 package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.GameRound;
-import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.GameStatus;
 import com.nedogeek.holdem.PlayerStatus;
-import com.nedogeek.holdem.gamingStuff.PlayerAction;
 import com.nedogeek.holdem.gamingStuff.Desk;
+import com.nedogeek.holdem.gamingStuff.PlayerAction;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
@@ -168,42 +166,6 @@ public class DealerIntegrationTest {
     }
 
     @Test
-    @Ignore
-    public void shouldSecondPlayerGiveSmallBlindWhenGameStarted() throws Exception {
-        dealer.tick();
-
-        verify(deskMock).setPlayerBet(1, GameSettings.SMALL_BLIND_AT_START);
-    }
-
-    @Test
-    @Ignore
-    public void shouldSecondPlayerAmountMinusSmallBlindWhenGameStarted() throws Exception {
-        dealer.tick();
-
-        verify(deskMock).setPlayerAmount(1, GameSettings.COINS_AT_START - GameSettings.SMALL_BLIND_AT_START);
-    }
-
-    @Test
-    @Ignore
-    public void shouldBet5WhenFirstPlayerHasOnly5Coins() throws Exception {
-        setPlayerAmount(0, 5);
-
-        dealer.tick();
-
-        verify(deskMock).setPlayerBet(0, 5);
-    }
-
-    @Test
-    @Ignore
-    public void shouldFirstPlayerAmountIs0HasOnly5Coins() throws Exception {
-        setPlayerAmount(0, 5);
-
-        dealer.tick();
-
-        verify(deskMock).setPlayerAmount(0, 0);
-    }
-
-    @Test
     public void shouldGetGameRoundNumberWhenTick() throws Exception {
         dealer.tick();
 
@@ -227,28 +189,6 @@ public class DealerIntegrationTest {
     }
 
     @Test
-    @Ignore
-    public void shouldNotSetGameRound1WhenTickGameRoundIs1() throws Exception {
-        setGameRound(GameRound.BLIND);
-
-        dealer.tick();
-
-        verify(deskMock, never()).setNextGameRound();
-    }
-
-    @Test
-    @Ignore
-    public void shouldSecondPlayerBet1WhenFirstRoundAndSecondCalls() throws Exception {
-        setFirstRound();
-
-        setResponseCall();
-
-        dealer.tick();
-
-        verify(deskMock).setPlayerBet(1, 2 * SMALL_BLIND);
-    }
-
-    @Test
     public void shouldNoSecondPlayerBet0WhenFirstRoundAndHeFolds() throws Exception {
         setFirstRound();
 
@@ -257,83 +197,6 @@ public class DealerIntegrationTest {
         dealer.tick();
 
         verify(deskMock, never()).setPlayerBet(1, 0);
-    }
-
-    @Test
-    @Ignore
-    public void shouldSecondPlayerBet2SmallBlindWhenCallInFirstRoundWithCallValue2SmallBlind() throws Exception {
-        setFirstRound();
-        setCallValue(2 * SMALL_BLIND);
-
-        setResponseCall();
-
-        dealer.tick();
-
-        verify(deskMock).setPlayerBet(1, 2 * SMALL_BLIND);
-    }
-
-    @Test
-    @Ignore
-    public void shouldSetCallValue2SmallBlindsWhenNewGame() throws Exception {
-        setGameStatus(GameStatus.STARTED);
-
-        dealer.tick();
-
-        verify(deskMock).setCallValue(2 * GameSettings.SMALL_BLIND_AT_START);
-    }
-
-    @Test
-    @Ignore
-    public void shouldSecondPlayerBet2SmallBlindWhenRiseSmallerThan2SmallBlind() throws Exception {
-        setFirstRound();
-        setResponseRise(SMALL_BLIND / 2);
-
-        dealer.tick();
-
-        verify(deskMock).setPlayerBet(1, 4 * SMALL_BLIND);
-    }
-
-    @Test
-    @Ignore
-    public void shouldFirstPlayerCallWhenFirstRoundWithSecondPlayerDealerAndFirstCalls() throws Exception {
-        setFirstRoundSecondPlayerDealer();
-        setResponseCall();
-
-        dealer.tick();
-
-        verify(deskMock).setPlayerStatus(0,PlayerStatus.Call);
-    }
-
-    @Test
-    public void shouldNoSecondPlayerSetMoveStatusCallWhenFirstRoundGameSecondPlayerFold() throws Exception {
-        setFirstRound();
-        setResponseFold();
-
-        dealer.tick();
-
-        verify(deskMock, never()).setPlayerStatus(1, PlayerStatus.Call);
-    }
-
-    @Test
-    @Ignore
-    public void shouldSecondPlayerSetFoldStatusCallWhenFirstRoundGameSecondPlayerFold() throws Exception {
-        setFirstRound();
-        setResponseFold();
-
-        dealer.tick();
-
-        verify(deskMock).setPlayerStatus(1, PlayerStatus.Fold);
-    }
-
-    @Test
-    @Ignore
-    public void shouldSecondPlayerSetStatusBetWhenFirstGameRoundSecondPlayerBet() throws Exception {
-        setFirstRound();
-        setResponseRise(0);
-
-        dealer.tick();
-
-        verify(deskMock).setPlayerStatus(1, PlayerStatus.Rise);
     }
 
     @Test
@@ -347,17 +210,6 @@ public class DealerIntegrationTest {
     }
 
     @Test
-    @Ignore
-    public void shouldSetAllInMoveSecondPlayerWhenFirstRoundGameAndSecondRise2CoinsAtStart() throws Exception {
-        setFirstRound();
-        setResponseRise(2 * COINS_AT_START);
-
-        dealer.tick();
-
-        verify(deskMock).setPlayerStatus(1, PlayerStatus.AllIn);
-    }
-
-    @Test
     public void shouldDoNotSetAllInSecondPlayerWhenFirstRoundGameAndSecondPlayerRise0() throws Exception {
         setFirstRound();
         setResponseRise(0);
@@ -367,25 +219,4 @@ public class DealerIntegrationTest {
         verify(deskMock, never()).setPlayerStatus(1, PlayerStatus.AllIn);
     }
 
-    @Test
-    @Ignore
-    public void shouldSetAllInSecondPlayerWhenFirstRoundGameAndSecondPlayerAllIn() throws Exception {
-        setFirstRound();
-        setResponseAllIn();
-
-        dealer.tick();
-
-        verify(deskMock).setPlayerStatus(1, PlayerStatus.AllIn);
-    }
-
-    @Test
-    @Ignore
-    public void shouldNameWhen() throws Exception {
-        setFirstRound();
-        setResponseAllIn();
-
-        dealer.tick();
-
-        verify(deskMock).setPlayerBet(1, COINS_AT_START);
-    }
 }

@@ -28,9 +28,19 @@ public class MoveManagerTest {
         playerActionMock = mock(PlayerAction.class);
 
         resetBank();
+        giveStartMoneyToPlayers();
         resetPlayersManager();
 
         moveManager = new MoveManager(bankMock, playersManagerMock);
+    }
+
+
+    private void setPlayerBet(int playerNumber, int playerBet) {
+        when(bankMock.getPlayerBet(playerNumber)).thenReturn(playerBet);
+    }
+
+    private void giveStartMoneyToPlayers() {
+        when(bankMock.getPlayerBalance(anyInt())).thenReturn(GameSettings.COINS_AT_START);
     }
 
     private void resetBank() {
@@ -247,4 +257,104 @@ public class MoveManagerTest {
         when(bankMock.getCallValue()).thenReturn(callValue);
     }
 
+
+    @Test
+    public void shouldNoSecondPlayerSetMoveStatusCallWhenFirstRoundGameSecondPlayerFold() throws Exception {
+        setPlayerAction(PlayerAction.ActionType.Fold);
+
+        moveManager.makeMove(0, playerActionMock);
+
+        verify(playersManagerMock, never()).setPlayerStatus(0, PlayerStatus.Call);
+    }
+
+    //TODO If not enough for check - AllIn.
+    //TODO If AllIn and Balance is smaller than callValue - do not change call value!
+    @Test
+    public void shouldSetCallValue2SmallBlindsWhenInitialBlindFirstPlayer2SmallBlinds() throws Exception {
+        moveManager.makeInitialBet(0, 2 * SMALL_BLIND);
+
+        verify(bankMock).setCallValue(2 * SMALL_BLIND);
+    }
+
+    @Test
+    public void shouldSetCallValue2SmallBlindsWhenInitialBlindSecondPlayer2SmallBlinds() throws Exception {
+        moveManager.makeInitialBet(1, 2 * SMALL_BLIND);
+
+        verify(bankMock).setCallValue(2 * SMALL_BLIND);
+    }
+
+    @Test
+    public void shouldSetCallValueSmallBlindsWhenInitialBlindFirstPlayerSmallBlinds() throws Exception {
+        moveManager.makeInitialBet(0,SMALL_BLIND);
+
+        verify(bankMock).setCallValue(SMALL_BLIND);
+    }
+
+    @Test
+    public void shouldSecondPlayerBet2SmallBlindWhenRiseSmallerThan2SmallBlind() throws Exception {
+        setPlayerAction(PlayerAction.ActionType.Rise, SMALL_BLIND);
+        setCallValue(2 * SMALL_BLIND);
+
+        moveManager.makeMove(1, playerActionMock);
+
+        verify(bankMock).setPlayerBet(1, 4 * SMALL_BLIND);
+    }
+
+    @Test
+    public void shouldSecondPlayerBet500WhenRise500() throws Exception {
+        setPlayerAction(PlayerAction.ActionType.Rise, 500);
+        setCallValue(2 * SMALL_BLIND);
+
+        moveManager.makeMove(1, playerActionMock);
+
+        verify(bankMock).setPlayerBet(1, 500);
+    }
+
+    @Test
+    public void shouldSecondPlayerBet500WhenRise800AndPlayerBetWas300() throws Exception {
+        setPlayerAction(PlayerAction.ActionType.Rise, 500);
+        setPlayerBet(1, 300);
+        setCallValue(2 * SMALL_BLIND);
+
+        moveManager.makeMove(1, playerActionMock);
+
+        verify(bankMock).setPlayerBet(1, 800);
+    }
+
+    @Test
+    public void shouldFirstPlayerAllInWhenPlayerBet2000WithDefaultBalance() throws Exception {
+        setPlayerAction(PlayerAction.ActionType.Rise, 2000);
+
+        moveManager.makeMove(0, playerActionMock);
+
+        verify(playersManagerMock).setPlayerStatus(0, PlayerStatus.AllIn);
+    }
+
+
+    @Test
+    public void shouldSecondPlayerAllInWhenPlayerBet2000WithDefaultBalance() throws Exception {
+        setPlayerAction(PlayerAction.ActionType.Rise, 2000);
+
+        moveManager.makeMove(1, playerActionMock);
+
+        verify(playersManagerMock).setPlayerStatus(1, PlayerStatus.AllIn);
+    }
+
+    @Test
+    public void shouldFirstPlayerBatAllHisMoneyWhenAllIn() throws Exception {
+        setPlayerAction(PlayerAction.ActionType.AllIn);
+
+        moveManager.makeMove(0, playerActionMock);
+
+        verify(bankMock).setPlayerBet(0, GameSettings.COINS_AT_START);
+    }
+
+    @Test
+    public void shouldSecondPlayerBatAllHisMoneyWhenAllIn() throws Exception {
+        setPlayerAction(PlayerAction.ActionType.AllIn);
+
+        moveManager.makeMove(1, playerActionMock);
+
+        verify(bankMock).setPlayerBet(1, GameSettings.COINS_AT_START);
+    }
 }
