@@ -19,6 +19,7 @@ public class NewGameSetterTest {
 
     private Desk deskMock;
     private PlayersManager playersManagerMock;
+    private MoveManager moveManagerMock;
     private Bank bankMock;
 
     @Before
@@ -26,9 +27,17 @@ public class NewGameSetterTest {
         resetDeskMock();
         resetPlayerManagerMock();
         resetBankMock();
+        resetMoveManagerMock();
 
-        newGameSetter = new NewGameSetter(deskMock, playersManagerMock, bankMock);
+        newGameSetter = new NewGameSetter(deskMock, playersManagerMock, moveManagerMock);
 
+    }
+
+    private void resetMoveManagerMock() {
+        moveManagerMock = mock(MoveManager.class);
+
+        when(playersManagerMock.nextPlayer(0)).thenReturn(1);
+        when(playersManagerMock.nextPlayer(1)).thenReturn(0);
     }
 
     private void resetBankMock() {
@@ -128,17 +137,55 @@ public class NewGameSetterTest {
         verify(deskMock, never()).giveCardsToPlayer(2);
     }
 
-    @Test
-    public void shouldFirstPlayerGiveBigBlindWhenGameStarted() throws Exception {
-        newGameSetter.setNewGame();
+//    @Test
+//    public void shouldFirstPlayerGiveBigBlindWhenGameStarted() throws Exception {
+//        newGameSetter.setNewGame();
+//
+//        verify(bankMock).setPlayerBet(0, GameSettings.SMALL_BLIND_AT_START * 2);
+//    }
 
-        verify(bankMock).setPlayerBet(0, GameSettings.SMALL_BLIND_AT_START * 2);
-    }
-
     @Test
-    public void shouldSetDealerPlayerNumber1WhenPreviousDealerPlayerNumberWas0() throws Exception {
+    public void shouldChangeDealerInPlayersManagerMockWhenNewGameSetterSetNewGame() throws Exception {
         newGameSetter.setNewGame();
 
         verify(playersManagerMock).changeDealer();
+    }
+
+    @Test
+    public void shouldSmallBlindAddedToPotWhenGameStarted() throws Exception {
+        newGameSetter.setNewGame();
+
+        verify(moveManagerMock).makeInitialBet(1, GameSettings.SMALL_BLIND_AT_START);
+    }
+
+    @Test
+    public void shouldBigBlindAddedToPotWhenGameStarted() throws Exception {
+        newGameSetter.setNewGame();
+
+        verify(moveManagerMock).makeInitialBet(0, GameSettings.SMALL_BLIND_AT_START * 2);
+    }
+
+    @Test
+    public void shouldFirstPlayerSmallBlindAddedToPotWhenGameStartedAndDealerIsSecondPlayer() throws Exception {
+        setDealerNumber(1);
+        newGameSetter.setNewGame();
+
+        verify(moveManagerMock).makeInitialBet(0, GameSettings.SMALL_BLIND_AT_START);
+    }
+
+    @Test
+    public void shouldSecondPlayerBigBlindAddedToPotWhenGameStartedAndDealerIsSecondPlayer() throws Exception {
+        setDealerNumber(1);
+        newGameSetter.setNewGame();
+
+        verify(moveManagerMock).makeInitialBet(1, GameSettings.SMALL_BLIND_AT_START * 2);
+    }
+
+    @Test
+    public void shouldThirdPlayerGiveBigBlindWhenGameStartedWith3Players() throws Exception {
+        when(playersManagerMock.nextPlayer(1)).thenReturn(2);
+        newGameSetter.setNewGame();
+
+        verify(moveManagerMock).makeInitialBet(2, GameSettings.SMALL_BLIND_AT_START * 2);
     }
 }

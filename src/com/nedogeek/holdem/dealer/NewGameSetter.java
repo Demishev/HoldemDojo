@@ -2,7 +2,6 @@ package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.PlayerStatus;
-import com.nedogeek.holdem.gamingStuff.Bank;
 import com.nedogeek.holdem.gamingStuff.Desk;
 
 /**
@@ -14,13 +13,11 @@ public class NewGameSetter {
     private final Desk desk;
     private final MoveManager moveManager;
     private final PlayersManager playersManager;
-    private final Bank bank;
 
-    public NewGameSetter(Desk desk, PlayersManager playersManager, Bank bank) {
+    public NewGameSetter(Desk desk, PlayersManager playersManager, MoveManager moveManager) {
         this.desk = desk;
         this.playersManager = playersManager;
-        this.bank = bank;
-        moveManager = new MoveManager(bank, new PlayersManager(bank));
+        this.moveManager = moveManager;
     }
 
     void setNewGame() {
@@ -64,11 +61,6 @@ public class NewGameSetter {
     }
 
     private void makeStartBet(int playerNumber, int bet) {
-        final int playerAmount = bank.getPlayerBalance(playerNumber);
-        if (playerAmount > bet) {
-            moveManager.makeInitialBet(playerNumber, bet);
-        } else {
-            moveManager.makeInitialBet(playerNumber, playerAmount);
-        }
+        moveManager.makeInitialBet(playerNumber, bet);
     }
 }

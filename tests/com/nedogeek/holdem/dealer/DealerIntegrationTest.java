@@ -175,42 +175,6 @@ public class DealerIntegrationTest {
         verify(deskMock).setPlayerBet(1, GameSettings.SMALL_BLIND_AT_START);
     }
 
-//    @Test
-//    @Ignore
-//    public void shouldFirstPlayerGiveBigBlindWhenGameStarted() throws Exception {
-//        setGameStatus(GameStatus.STARTED);
-//
-//        dealer.tick();
-//
-//        verify(deskMock).setPlayerBet(0, GameSettings.SMALL_BLIND_AT_START * 2);
-//    }
-
-    @Test
-    @Ignore
-    public void shouldThirdPlayerGiveBigBlindWhenGameStartedWith3Players() throws Exception {
-        setPlayersQuantity(3);
-
-        dealer.tick();
-
-        verify(deskMock).setPlayerBet(2, GameSettings.SMALL_BLIND_AT_START * 2);
-    }
-
-    @Test
-    @Ignore
-    public void shouldSmallBlindAddedToPotWhenGameStarted() throws Exception {
-        dealer.tick();
-
-        verify(deskMock).addToPot(GameSettings.SMALL_BLIND_AT_START);
-    }
-
-    @Test
-    @Ignore
-    public void shouldBigBlindAddedToPotWhenGameStarted() throws Exception {
-        dealer.tick();
-
-        verify(deskMock).addToPot(GameSettings.SMALL_BLIND_AT_START * 2);
-    }
-
     @Test
     @Ignore
     public void shouldSecondPlayerAmountMinusSmallBlindWhenGameStarted() throws Exception {
@@ -237,37 +201,6 @@ public class DealerIntegrationTest {
         dealer.tick();
 
         verify(deskMock).setPlayerAmount(0, 0);
-    }
-
-    @Test
-    @Ignore
-    public void shouldFirstPlayerMoveRequestWhenNewGameStartedAndDealerIsSecond() throws Exception {
-        setGameRound(GameRound.BLIND);
-        setDealerPlayerNumber(1);
-
-        dealer.tick();
-
-        verify(deskMock).getPlayersMove(0);
-    }
-
-    @Test
-    @Ignore
-    public void shouldSecondPlayerMoveRequestWhenTickAndNewGameSet() throws Exception {
-        setGameRound(GameRound.BLIND);
-        setDealerPlayerNumber(0);
-
-        dealer.tick();
-
-        verify(deskMock).getPlayersMove(1);
-    }
-
-    @Test
-    public void shouldNoGetPlayerMoveWhenStatusNotReadyAndTick() throws Exception {
-        setGameStatus(GameStatus.NOT_READY);
-
-        dealer.tick();
-
-        verify(deskMock, never()).getPlayersMove(1);
     }
 
     @Test
@@ -351,17 +284,6 @@ public class DealerIntegrationTest {
 
     @Test
     @Ignore
-    public void shouldFirstPlayerBetSmallBlindWhenFirstRoundWithSecondPlayerDealer() throws Exception {
-        setFirstRoundSecondPlayerDealer();
-        setResponseCall();
-
-        dealer.tick();
-
-        verify(deskMock).setPlayerBet(0,2 * SMALL_BLIND);
-    }
-
-    @Test
-    @Ignore
     public void shouldSecondPlayerBet2SmallBlindWhenRiseSmallerThan2SmallBlind() throws Exception {
         setFirstRound();
         setResponseRise(SMALL_BLIND / 2);
@@ -369,17 +291,6 @@ public class DealerIntegrationTest {
         dealer.tick();
 
         verify(deskMock).setPlayerBet(1, 4 * SMALL_BLIND);
-    }
-
-    @Test
-    @Ignore
-    public void shouldSetSecondPlayerCallStatusWhenFirstRoundAndHeCall() throws Exception {
-        setFirstRound();
-        setResponseCall();
-
-        dealer.tick();
-
-        verify(deskMock).setPlayerStatus(1, PlayerStatus.Call);
     }
 
     @Test
@@ -437,17 +348,6 @@ public class DealerIntegrationTest {
 
     @Test
     @Ignore
-    public void shouldFirstPlayerSetStatusBetWhenFirstGameRoundWithDealerSecondPlayerSecondPlayerBet() throws Exception {
-        setFirstRoundSecondPlayerDealer();
-        setResponseRise(0);
-
-        dealer.tick();
-
-        verify(deskMock).setPlayerStatus(0, PlayerStatus.Rise);
-    }
-
-    @Test
-    @Ignore
     public void shouldSetAllInMoveSecondPlayerWhenFirstRoundGameAndSecondRise2CoinsAtStart() throws Exception {
         setFirstRound();
         setResponseRise(2 * COINS_AT_START);
@@ -455,17 +355,6 @@ public class DealerIntegrationTest {
         dealer.tick();
 
         verify(deskMock).setPlayerStatus(1, PlayerStatus.AllIn);
-    }
-
-    @Test
-    @Ignore
-    public void shouldSetAllInMoveFirstPlayerWhenFirstRoundGameWithSecondPlayerDealerAndSecondRise2CoinsAtStart() throws Exception {
-        setFirstRoundSecondPlayerDealer();
-        setResponseRise(2 * COINS_AT_START);
-
-        dealer.tick();
-
-        verify(deskMock).setPlayerStatus(0, PlayerStatus.AllIn);
     }
 
     @Test

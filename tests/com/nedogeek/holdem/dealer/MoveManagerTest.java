@@ -6,7 +6,6 @@ import com.nedogeek.holdem.gamingStuff.Bank;
 import com.nedogeek.holdem.gamingStuff.PlayerAction;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.stubbing.OngoingStubbing;
 
 import static org.mockito.Mockito.*;
 
@@ -42,27 +41,36 @@ public class MoveManagerTest {
         playersManagerMock = mock(PlayersManager.class);
     }
 
+    private void setPlayerAction(PlayerAction.ActionType actionType, int actionValue) {
+        when(playerActionMock.getRiseAmount()).thenReturn(actionValue);
+        setPlayerAction(actionType);
+    }
+
+    private void setPlayerAction(PlayerAction.ActionType actionType) {
+        when(playerActionMock.getActionType()).thenReturn(actionType);
+    }
+
+    private void setPlayerBalance(int playerNumber, int playerBalance) {
+        when(bankMock.getPlayerBalance(playerNumber)).thenReturn(playerBalance);
+    }
+
     @Test
     public void shouldSetCallValue200WhenCallValue100AndMakeCallWhenPlayerBetIs100AndPlayerAmount1000() throws Exception {
         when(bankMock.getCallValue()).thenReturn(200);
         when(bankMock.getPlayerBalance(0)).thenReturn(1000);
         when(bankMock.getPlayerBet(0)).thenReturn(100);
 
-        setActionType(PlayerAction.ActionType.Call);
+        setPlayerAction(PlayerAction.ActionType.Call);
 
-        moveManager.makeMove(0,playerActionMock);
+        moveManager.makeMove(0, playerActionMock);
 
 
         verify(bankMock).setCallValue(200);
     }
 
-    private OngoingStubbing<PlayerAction.ActionType> setActionType(PlayerAction.ActionType actionType) {
-        return when(playerActionMock.getActionType()).thenReturn(actionType);
-    }
-
     @Test
     public void shouldPlayersManagerSetLastMovedPlayer1WhenMoveManagerMakeMove1PlayerFold() throws Exception {
-        setActionType(PlayerAction.ActionType.Fold);
+        setPlayerAction(PlayerAction.ActionType.Fold);
 
         moveManager.makeMove(1, playerActionMock);
 
@@ -71,7 +79,7 @@ public class MoveManagerTest {
 
     @Test
     public void shouldPlayersManagerSetLastMovedPlayer1WhenMoveManagerMakeMove1PlayerCheck() throws Exception {
-        setActionType(PlayerAction.ActionType.Check);
+        setPlayerAction(PlayerAction.ActionType.Check);
 
         moveManager.makeMove(1, playerActionMock);
 
@@ -80,7 +88,7 @@ public class MoveManagerTest {
 
     @Test
     public void shouldPlayersManagerSetLastMovedPlayer0WhenMoveManagerMakeMove0PlayerCheck() throws Exception {
-        setActionType(PlayerAction.ActionType.Check);
+        setPlayerAction(PlayerAction.ActionType.Check);
 
         moveManager.makeMove(0, playerActionMock);
 
@@ -168,19 +176,75 @@ public class MoveManagerTest {
     }
 
 
+    @Test
+    public void shouldSetAllInMoveFirstPlayerWhenFirstRise2CoinsAtStart() throws Exception {
+        setPlayerAction(PlayerAction.ActionType.Rise, 2 * GameSettings.COINS_AT_START);
 
+        moveManager.makeMove(0, playerActionMock);
 
-    private void setPlayerAction(PlayerAction.ActionType actionType, int actionValue) {
-        when(playerActionMock.getRiseAmount()).thenReturn(actionValue);
-        setPlayerAction(actionType);
+        verify(playersManagerMock).setPlayerStatus(0, PlayerStatus.AllIn);
     }
 
-    private void setPlayerAction(PlayerAction.ActionType actionType) {
-        when(playerActionMock.getActionType()).thenReturn(actionType);
+    @Test
+    public void shouldSetAllInMoveSecondPlayerWhenSecondRise2CoinsAtStart() throws Exception {
+        setPlayerAction(PlayerAction.ActionType.Rise, 2 * GameSettings.COINS_AT_START);
+
+        moveManager.makeMove(1, playerActionMock);
+
+        verify(playersManagerMock).setPlayerStatus(1, PlayerStatus.AllIn);
     }
 
-    private void setPlayerBalance(int playerNumber, int playerBalance) {
-        when(bankMock.getPlayerBalance(playerNumber)).thenReturn(playerBalance);
+    @Test
+    public void shouldSetFirstPlayerCallStatusWhenCall() throws Exception {
+        setPlayerAction(PlayerAction.ActionType.Call);
+
+        moveManager.makeMove(0, playerActionMock);
+
+        verify(playersManagerMock).setPlayerStatus(0, PlayerStatus.Call);
+    }
+
+    @Test
+    public void shouldSetSecondPlayerCallStatusWhenCall() throws Exception {
+        setPlayerAction(PlayerAction.ActionType.Call);
+
+        moveManager.makeMove(1, playerActionMock);
+
+        verify(playersManagerMock).setPlayerStatus(1, PlayerStatus.Call);
+
+    }
+
+    @Test
+    public void shouldFirstPlayerBet250WhenCallValueIs250() throws Exception {
+        setPlayerAction(PlayerAction.ActionType.Call);
+        setCallValue(250);
+
+        moveManager.makeMove(0, playerActionMock);
+
+        verify(bankMock).setPlayerBet(0, 250);
+    }
+
+    @Test
+    public void shouldFirstPlayerBet500WhenCallValueIs500() throws Exception {
+        setPlayerAction(PlayerAction.ActionType.Call);
+        setCallValue(500);
+
+        moveManager.makeMove(0, playerActionMock);
+
+        verify(bankMock).setPlayerBet(0, 500);
+    }
+
+    @Test
+    public void shouldSecondPlayerBet500WhenCallValueIs500() throws Exception {
+        setPlayerAction(PlayerAction.ActionType.Call);
+        setCallValue(500);
+
+        moveManager.makeMove(1, playerActionMock);
+
+        verify(bankMock).setPlayerBet(1, 500);
+    }
+
+    private void setCallValue(int callValue) {
+        when(bankMock.getCallValue()).thenReturn(callValue);
     }
 
 }
