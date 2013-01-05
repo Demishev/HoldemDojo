@@ -22,7 +22,8 @@ public class NewGameSetter {
 
     void setNewGame() {
         desk.resetCards();
-        makeInitialBets(defineDealer());
+        playersManager.changeDealer();
+        makeInitialBets();
 
         setInitialPlayerStatuses();
         giveCardsToPlayers();
@@ -46,18 +47,10 @@ public class NewGameSetter {
         }
     }
 
-    private int defineDealer() {
-        playersManager.changeDealer();
+    private void makeInitialBets() {
+        makeStartBet(playersManager.smallBlindPlayerNumber(), GameSettings.SMALL_BLIND_AT_START);
 
-        return playersManager.getDealerNumber();
-    }
-
-    private void makeInitialBets(int dealerPlayerNumber) {
-        int smallBlindPlayerNumber = playersManager.nextPlayer(dealerPlayerNumber);
-        makeStartBet(smallBlindPlayerNumber, GameSettings.SMALL_BLIND_AT_START);
-
-        int bigBlindPlayerNumber = playersManager.nextPlayer(smallBlindPlayerNumber);
-        makeStartBet(bigBlindPlayerNumber, GameSettings.SMALL_BLIND_AT_START * 2);
+        makeStartBet(playersManager.bigBlindPlayerNumber(), GameSettings.SMALL_BLIND_AT_START * 2);
     }
 
     private void makeStartBet(int playerNumber, int bet) {

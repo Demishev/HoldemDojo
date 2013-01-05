@@ -26,17 +26,13 @@ class PlayersManager {
         dealerNumber = -1;
     }
 
-    @Deprecated
-    public void setDealerNumber(int dealerNumber) {
-        this.dealerNumber = dealerNumber;
-    }
 
     public void setLastMovedPlayer(int lastMovedPlayer) {
         this.lastMovedPlayer = lastMovedPlayer;
     }
 
     int nextPlayer(int playerNumber) { //TODO make it private
-        if (playerNumber == getPlayersQuantity() - 1) {
+        if (playerNumber == players.size() - 1) {
             return 0;
         } else {
             return playerNumber + 1;
@@ -58,6 +54,7 @@ class PlayersManager {
         return availableMoverStatusQuantity > 1;
     }
 
+    @Deprecated
     PlayerAction getPlayerMove() {
         return players.get(getMoverNumber()).getMove();
     }
@@ -89,6 +86,7 @@ class PlayersManager {
             players.add(player);
     }
 
+    @Deprecated
     int getPlayersQuantity() {
         return players.size();
     }
@@ -97,23 +95,38 @@ class PlayersManager {
         players.remove(player);
     }
 
+    @Deprecated
     public void setPlayerStatus(int playerNumber, PlayerStatus playerStatus) {
         //TODO removeMe
     }
 
-    public int getDealerNumber() {
-        return dealerNumber;
-    }
-
+    @Deprecated
     public PlayerStatus getPlayerStatus(int playerNumber) {
-        return null; //TODO And remove me too
+        return null;
     }
 
     public void changeDealer() {
         dealerNumber = nextPlayer(dealerNumber);
     }
 
+    @Deprecated
     public boolean isFirstCombinationBiggerThanSecond(int biggerCombination, int smallerCombination) {
         return false;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public Player getDealer() {
+        return (dealerNumber == -1) ? null : players.get(dealerNumber);
+    }
+
+    public int smallBlindPlayerNumber() {
+        return 0;
+    }
+
+    public int bigBlindPlayerNumber() {
+        return 0;
     }
 }

@@ -41,9 +41,21 @@ public class NewGameSetterTest {
         playersManagerMock = mock(PlayersManager.class);
 
         setPlayersQuantity(2);
-        setDealerNumber(0);
+        setDealerIs(0);
 
         setPlayerStatus(anyInt(), PlayerStatus.NotMoved);
+    }
+
+    private void setDealerIs(int dealerNumber) {
+        if (dealerNumber == 0) {
+            when(playersManagerMock.smallBlindPlayerNumber()).thenReturn(1);
+            when(playersManagerMock.bigBlindPlayerNumber()).thenReturn(0);
+        }
+
+        if (dealerNumber == 1) {
+            when(playersManagerMock.smallBlindPlayerNumber()).thenReturn(0);
+            when(playersManagerMock.bigBlindPlayerNumber()).thenReturn(1);
+        }
     }
 
     private void resetDeskMock() {
@@ -52,10 +64,6 @@ public class NewGameSetterTest {
 
     private void setPlayerStatus(int playerNumber, PlayerStatus playerStatus) {
         when(playersManagerMock.getPlayerStatus(playerNumber)).thenReturn(playerStatus);
-    }
-
-    private void setDealerNumber(int dealerNumber) {
-        when(playersManagerMock.getDealerNumber()).thenReturn(dealerNumber);
     }
 
     private void setPlayersQuantity(int playersQuantity) {
@@ -128,13 +136,6 @@ public class NewGameSetterTest {
         verify(deskMock, never()).giveCardsToPlayer(2);
     }
 
-//    @Test
-//    public void shouldFirstPlayerGiveBigBlindWhenGameStarted() throws Exception {
-//        newGameSetter.setNewGame();
-//
-//        verify(bankMock).setPlayerBet(0, GameSettings.SMALL_BLIND_AT_START * 2);
-//    }
-
     @Test
     public void shouldChangeDealerInPlayersManagerMockWhenNewGameSetterSetNewGame() throws Exception {
         newGameSetter.setNewGame();
@@ -158,7 +159,7 @@ public class NewGameSetterTest {
 
     @Test
     public void shouldFirstPlayerSmallBlindAddedToPotWhenGameStartedAndDealerIsSecondPlayer() throws Exception {
-        setDealerNumber(1);
+        setDealerIs(1);
         newGameSetter.setNewGame();
 
         verify(moveManagerMock).makeInitialBet(0, GameSettings.SMALL_BLIND_AT_START);
@@ -166,18 +167,10 @@ public class NewGameSetterTest {
 
     @Test
     public void shouldSecondPlayerBigBlindAddedToPotWhenGameStartedAndDealerIsSecondPlayer() throws Exception {
-        setDealerNumber(1);
+        setDealerIs(1);
         newGameSetter.setNewGame();
 
         verify(moveManagerMock).makeInitialBet(1, GameSettings.SMALL_BLIND_AT_START * 2);
-    }
-
-    @Test
-    public void shouldThirdPlayerGiveBigBlindWhenGameStartedWith3Players() throws Exception {
-        when(playersManagerMock.nextPlayer(1)).thenReturn(2);
-        newGameSetter.setNewGame();
-
-        verify(moveManagerMock).makeInitialBet(2, GameSettings.SMALL_BLIND_AT_START * 2);
     }
 
     @Test

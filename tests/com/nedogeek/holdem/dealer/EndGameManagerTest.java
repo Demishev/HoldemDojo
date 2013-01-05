@@ -15,7 +15,6 @@ import static org.mockito.Mockito.*;
  * Time: 14:24
  */
 public class EndGameManagerTest {
-    private final int DEFAULT_AMOUNT = 100;
 
     private Desk deskMock;
     private PlayersManager playersManagerMock;
@@ -46,7 +45,8 @@ public class EndGameManagerTest {
         playersManagerMock = mock(PlayersManager.class);
         setPlayersQuantity(2);
 
-        setPlayerBet(0,DEFAULT_AMOUNT);
+        int DEFAULT_AMOUNT = 100;
+        setPlayerBet(0, DEFAULT_AMOUNT);
         setPlayerBet(1, DEFAULT_AMOUNT);
         setPlayerStatus(0, PlayerStatus.NotMoved);
         setPlayerStatus(1, PlayerStatus.NotMoved);

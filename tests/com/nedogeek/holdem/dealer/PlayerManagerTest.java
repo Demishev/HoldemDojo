@@ -70,7 +70,7 @@ public class PlayerManagerTest {
 
     @Test
     public void should0PlayersWhenNewPlayersManager() throws Exception {
-        assertEquals(0, new PlayersManager(bank).getPlayersQuantity());
+        assertEquals(0, new PlayersManager(bank).getPlayers().size());
     }
 
     @Test
@@ -78,7 +78,7 @@ public class PlayerManagerTest {
         resetPlayerManager();
         playersManager.addPlayer(firstPlayer);
 
-        assertEquals(1, playersManager.getPlayersQuantity());
+        assertEquals(1, playersManager.getPlayers().size());
     }
 
     @Test
@@ -87,7 +87,7 @@ public class PlayerManagerTest {
         playersManager.addPlayer(firstPlayer);
         playersManager.addPlayer(secondPlayer);
 
-        assertEquals(2, playersManager.getPlayersQuantity());
+        assertEquals(2, playersManager.getPlayers().size());
     }
 
     private void resetPlayerManager() {
@@ -102,7 +102,7 @@ public class PlayerManagerTest {
         playersManager.addPlayer(firstPlayer);
         playersManager.addPlayer(firstPlayer);
 
-        assertEquals(1, playersManager.getPlayersQuantity());
+        assertEquals(1, playersManager.getPlayers().size());
     }
 
     @Test
@@ -111,7 +111,7 @@ public class PlayerManagerTest {
         playersManager.addPlayer(firstPlayer);
         playersManager.removePlayer(firstPlayer);
 
-        assertEquals(0, playersManager.getPlayersQuantity());
+        assertEquals(0, playersManager.getPlayers().size());
     }
 
     @Test
@@ -120,28 +120,33 @@ public class PlayerManagerTest {
         playersManager.addPlayer(firstPlayer);
         playersManager.removePlayer(secondPlayer);
 
-        assertEquals(1, playersManager.getPlayersQuantity());
+        assertEquals(1, playersManager.getPlayers().size());
     }
 
     @Test
-    public void shouldMinus1WhenNewPlayerManagerGetDealerNumber() throws Exception {
+    public void shouldNullWhenNewPlayerManagerGetDealerNumber() throws Exception {
 
-        assertEquals(-1, playersManager.getDealerNumber());
+        assertEquals(null, playersManager.getDealer());
     }
 
     @Test
-    public void should0WhenNewPlayerManagerChangeDealerNumberAndGetDealerNumber() throws Exception {
+    public void shouldFirstPlayerWhenNewPlayerManagerChangeDealerNumberAndGetDealerNumber() throws Exception {
         playersManager.changeDealer();
 
-        assertEquals(0, playersManager.getDealerNumber());
+        assertEquals(firstPlayer, playersManager.getDealer());
     }
 
     @Test
-    public void should1WhenNewPlayerManagerChangeDealerNumberTwiceAndGetDealerNumber() throws Exception {
+    public void shouldSecondPlayerWhenNewPlayerManagerChangeDealerNumberTwiceAndGetDealerNumber() throws Exception {
         playersManager.changeDealer();
         playersManager.changeDealer();
 
-        assertEquals(1, playersManager.getDealerNumber());
+        assertEquals(secondPlayer, playersManager.getDealer());
     }
 
+    @Test
+    public void should2PlayersListWhenPlayersManagerGetPlayers() throws Exception {
+        assertEquals(2, playersManager.getPlayers().size());
+
+    }
 }
