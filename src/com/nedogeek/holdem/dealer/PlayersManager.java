@@ -112,4 +112,8 @@ class PlayersManager {
     public void changeDealer() {
         dealerNumber = nextPlayer(dealerNumber);
     }
+
+    public boolean isFirstCombinationBiggerThanSecond(int biggerCombination, int smallerCombination) {
+        return false;
+    }
 }

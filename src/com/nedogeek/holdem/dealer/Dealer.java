@@ -25,7 +25,7 @@ public class Dealer implements Runnable {
         moveManager = new MoveManager(bank, playersManager);
         newGameSetter = new NewGameSetter(desk, playersManager, moveManager);
         gameCycleManager = new GameCycleManager(this, playersManager, bank);
-        endGameManager = new EndGameManager(desk);
+        endGameManager = new EndGameManager(desk, playersManager, bank);
     }
 
     Dealer(Desk deskMock, MoveManager moveManagerMock, NewGameSetter newGameSetterMock,

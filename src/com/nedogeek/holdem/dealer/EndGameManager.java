@@ -1,6 +1,7 @@
 package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.PlayerStatus;
+import com.nedogeek.holdem.gamingStuff.Bank;
 import com.nedogeek.holdem.gamingStuff.Desk;
 
 /**
@@ -10,9 +11,14 @@ import com.nedogeek.holdem.gamingStuff.Desk;
  */
 public class EndGameManager {
     private final Desk desk;
+    private final PlayersManager playersManager;
+    private final Bank bank;
 
-    public EndGameManager(Desk desk) {
+
+    public EndGameManager(Desk desk, PlayersManager playersManager, Bank bank) {
         this.desk = desk;
+        this.playersManager = playersManager;
+        this.bank = bank;
     }
 
     public void endGame() {
@@ -24,12 +30,12 @@ public class EndGameManager {
 
     private int findWinner() {
         int winnerNumber = -1;
-        for (int i = 0; i < desk.getPlayersQuantity(); i++) {
-            if (desk.getPlayerStatus(i) != PlayerStatus.Fold) {
+        for (int i = 0; i < playersManager.getPlayersQuantity(); i++) {
+            if (playersManager.getPlayerStatus(i) != PlayerStatus.Fold) {
                 if (winnerNumber == -1) {
                     winnerNumber = i;
                 } else {
-                    if (desk.isFirstCombinationBiggerThanSecond(i, winnerNumber)) {
+                    if (playersManager.isFirstCombinationBiggerThanSecond(i, winnerNumber)) {
                         winnerNumber = i;
                     }
                 }

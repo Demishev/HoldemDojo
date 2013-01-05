@@ -1,6 +1,7 @@
 package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.PlayerStatus;
+import com.nedogeek.holdem.gamingStuff.Bank;
 import com.nedogeek.holdem.gamingStuff.Desk;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,23 +17,33 @@ import static org.mockito.Mockito.*;
 public class EndGameManagerTest {
     private final int DEFAULT_AMOUNT = 100;
 
+    private Desk deskMock;
+    private PlayersManager playersManagerMock;
+    private Bank bankMock;
+
     private EndGameManager endGameManager;
 
-    private Desk desk;
+
 
     @Before
     public void setUp() throws Exception {
+        resetBankMock();
         resetDeskMock();
+        resetPlayerManagerMock();
 
-        endGameManager = new EndGameManager(desk);
+        endGameManager = new EndGameManager(deskMock, playersManagerMock, bankMock);
     }
 
     private void resetDeskMock() {
-        makeDefault2PlayersDesk();
+        deskMock = mock(Desk.class);
     }
 
-    private void makeDefault2PlayersDesk() {
-        desk = mock(Desk.class);
+    private void resetBankMock() {
+        bankMock = mock(Bank.class);
+    }
+
+    private void resetPlayerManagerMock() {
+        playersManagerMock = mock(PlayersManager.class);
         setPlayersQuantity(2);
 
         setPlayerBet(0,DEFAULT_AMOUNT);
@@ -44,24 +55,24 @@ public class EndGameManagerTest {
     }
 
     private void setCombinationsRelations(int biggerCombination, int smallerCombination) {
-        when(desk.isFirstCombinationBiggerThanSecond(biggerCombination, smallerCombination)).thenReturn(true);
-        when(desk.isFirstCombinationBiggerThanSecond(smallerCombination, biggerCombination)).thenReturn(false);
+        when(playersManagerMock.isFirstCombinationBiggerThanSecond(biggerCombination, smallerCombination)).thenReturn(true);
+        when(playersManagerMock.isFirstCombinationBiggerThanSecond(smallerCombination, biggerCombination)).thenReturn(false);
     }
 
     private void setPlayerStatus(int playerNumber, PlayerStatus playerStatus) {
-        when(desk.getPlayerStatus(playerNumber)).thenReturn(playerStatus);
+        when(playersManagerMock.getPlayerStatus(playerNumber)).thenReturn(playerStatus);
     }
 
     private void setPlayerBet(int playerNumber, int playerBet) {
-        when(desk.getPlayerBet(playerNumber)).thenReturn(playerBet);
+        when(bankMock.getPlayerBet(playerNumber)).thenReturn(playerBet);
     }
 
     private void setPlayersQuantity(int playersQuantity) {
-        when(desk.getPlayersQuantity()).thenReturn(playersQuantity);
+        when(playersManagerMock.getPlayersQuantity()).thenReturn(playersQuantity);
     }
 
     private void setPlayerFold(int playerNumber) {
-        when(desk.getPlayerStatus(playerNumber)).thenReturn(PlayerStatus.Fold);
+        when(playersManagerMock.getPlayerStatus(playerNumber)).thenReturn(PlayerStatus.Fold);
     }
 
     @Test
@@ -73,7 +84,7 @@ public class EndGameManagerTest {
     public void shouldDeskSetNewGameRoundWhenEGMEndGame() throws Exception {
         endGameManager.endGame();
 
-        verify(desk).setGameEnded();
+        verify(deskMock).setGameEnded();
     }
 
     @Test
@@ -82,7 +93,7 @@ public class EndGameManagerTest {
 
         endGameManager.endGame();
 
-        verify(desk).setPlayerWin(1);
+        verify(deskMock).setPlayerWin(1);
     }
 
     @Test
@@ -91,14 +102,14 @@ public class EndGameManagerTest {
 
         endGameManager.endGame();
 
-        verify(desk).setPlayerWin(0);
+        verify(deskMock).setPlayerWin(0);
     }
 
     @Test
     public void shouldSecondPlayerWinWhenNoPlayerFoldsAndFirstHasWinningCombination() throws Exception {
         endGameManager.endGame();
 
-        verify(desk).setPlayerWin(0);
+        verify(deskMock).setPlayerWin(0);
     }
 
     @Test
@@ -107,6 +118,6 @@ public class EndGameManagerTest {
 
         endGameManager.endGame();
 
-        verify(desk).setPlayerWin(1);
+        verify(deskMock).setPlayerWin(1);
     }
 }
