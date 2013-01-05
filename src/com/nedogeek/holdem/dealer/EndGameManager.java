@@ -1,7 +1,6 @@
 package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.PlayerStatus;
-import com.nedogeek.holdem.gamingStuff.Bank;
 import com.nedogeek.holdem.gamingStuff.Desk;
 
 /**
@@ -12,13 +11,11 @@ import com.nedogeek.holdem.gamingStuff.Desk;
 public class EndGameManager {
     private final Desk desk;
     private final PlayersManager playersManager;
-    private final Bank bank;
 
 
-    public EndGameManager(Desk desk, PlayersManager playersManager, Bank bank) {
+    public EndGameManager(Desk desk, PlayersManager playersManager) {
         this.desk = desk;
         this.playersManager = playersManager;
-        this.bank = bank;
     }
 
     public void endGame() {

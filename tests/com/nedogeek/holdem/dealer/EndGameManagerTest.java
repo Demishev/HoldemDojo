@@ -30,7 +30,7 @@ public class EndGameManagerTest {
         resetDeskMock();
         resetPlayerManagerMock();
 
-        endGameManager = new EndGameManager(deskMock, playersManagerMock, bankMock);
+        endGameManager = new EndGameManager(deskMock, playersManagerMock);
     }
 
     private void resetDeskMock() {
