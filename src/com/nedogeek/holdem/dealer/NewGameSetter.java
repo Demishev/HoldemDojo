@@ -3,6 +3,7 @@ package com.nedogeek.holdem.dealer;
 import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.PlayerStatus;
 import com.nedogeek.holdem.gamingStuff.Desk;
+import com.nedogeek.holdem.gamingStuff.Player;
 
 /**
  * User: Konstantin Demishev
@@ -23,26 +24,18 @@ public class NewGameSetter {
     void setNewGame() {
         desk.resetCards();
         playersManager.changeDealer();
-        makeInitialBets();
 
-        setInitialPlayerStatuses();
-        giveCardsToPlayers();
+        resetPlayers();
+        makeInitialBets();
 
         desk.setNextGameRound();
     }
 
-    private void giveCardsToPlayers() {
-        for (int i = 0; i < playersManager.getPlayersQuantity(); i++) {
-            if (playersManager.getPlayerStatus(i) != PlayerStatus.Lost) {
-                desk.giveCardsToPlayer(i);
-            }
-        }
-    }
-
-    private void setInitialPlayerStatuses() {
-        for (int i = 0; i < playersManager.getPlayersQuantity(); i++) {
-            if (playersManager.getPlayerStatus(i) != PlayerStatus.Lost) {
-                playersManager.setPlayerStatus(i, PlayerStatus.NotMoved);
+    private void resetPlayers() {
+        for (Player player: playersManager.getPlayers()) {
+            if (player.getStatus() != PlayerStatus.Lost) {
+                desk.giveCardsToPlayer(player);
+                player.setStatus(PlayerStatus.NotMoved);
             }
         }
     }

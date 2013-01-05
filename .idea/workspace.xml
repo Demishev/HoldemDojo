@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="388e9789-c4c7-491f-aae9-9962e0a04901" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/EndGameManagerTest.java" afterPath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/EndGameManagerTest.java" />
+    <list default="true" id="388e9789-c4c7-491f-aae9-9962e0a04901" name="Default" comment="NewGameSetter refactoring started.">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Desk.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Desk.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/NewGameSetter.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/NewGameSetter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/NewGameSetterTest.java" afterPath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/NewGameSetterTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/PlayerManagerTest.java" afterPath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/PlayerManagerTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/PlayersManager.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/PlayersManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Player.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Player.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="holdem.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357417891656" ignored="false" />
+    <file path="/Dummy.txt" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357422402746" ignored="false" />
     <file path="/EndGameManager.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357417790472" ignored="false" />
     <file path="/EndGameManagerTest.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357417589238" ignored="false" />
     <file path="/Desk.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357155531432" ignored="false" />
     <file path="/DeskTest.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1354860227446" ignored="false" />
-    <file path="/fragment.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1354850965633" ignored="false" />
+    <file path="/fragment.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357422225627" ignored="false" />
     <file path="/GameCycleManager.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1354852786427" ignored="false" />
     <file path="/DealerIntegrationTest.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357150623462" ignored="false" />
     <file path="/PlayerStatus.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1354857454043" ignored="false" />
     <file path="/PlayerManagerTest.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357418958290" ignored="false" />
     <file path="/PlayersManager.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357418982937" ignored="false" />
-    <file path="/NewGameSetterTest.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357419327163" ignored="false" />
-    <file path="/NewGameSetter.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357419418682" ignored="false" />
+    <file path="/NewGameSetterTest.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357421611603" ignored="false" />
+    <file path="/NewGameSetter.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357422327905" ignored="false" />
     <file path="/MoveManagerTest.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357416515645" ignored="false" />
     <file path="/Card.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357151181968" ignored="false" />
     <file path="/Dealer.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357155248438" ignored="false" />
     <file path="/MoveManager.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357416650148" ignored="false" />
+    <file path="/Player.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357421007488" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,28 +91,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="PlayerCardCombination.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/combinations/PlayerCardCombination.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="64" column="47" selection-start="1904" selection-end="1904" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlayersManager.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/PlayersManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="129" column="8" selection-start="3426" selection-end="3435" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="NewGameSetter.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/NewGameSetter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="38" selection-start="688" selection-end="688" vertical-scroll-proportion="-0.22474748">
+            <state line="36" column="0" selection-start="981" selection-end="981" vertical-scroll-proportion="1.4166666">
               <folding />
             </state>
           </provider>
@@ -121,16 +103,16 @@
       <file leaf-file-name="NewGameSetterTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/NewGameSetterTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="94" column="49" selection-start="2800" selection-end="2800" vertical-scroll-proportion="0.0">
+            <state line="84" column="23" selection-start="2375" selection-end="2375" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PlayerManagerTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/PlayerManagerTest.java">
+      <file leaf-file-name="Player.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="72" column="68" selection-start="2124" selection-end="2124" vertical-scroll-proportion="0.0">
+            <state line="31" column="0" selection-start="591" selection-end="591" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -162,7 +144,6 @@
       <list>
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/PlayerStatus.java" />
         <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/gamingStuff/DeskTest.java" />
-        <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Player.java" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Card.java" />
         <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/gamingStuff/NewGameSetterTest.java" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Desk.java" />
@@ -174,8 +155,9 @@
         <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/EndGameManagerTest.java" />
         <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/PlayerManagerTest.java" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/PlayersManager.java" />
-        <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/NewGameSetter.java" />
         <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/NewGameSetterTest.java" />
+        <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/NewGameSetter.java" />
+        <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Player.java" />
       </list>
     </option>
   </component>
@@ -512,29 +494,6 @@
     </key>
   </component>
   <component name="RunManager" selected="JUnit.All in holdem">
-    <configuration default="false" name="PlayerCardCombinationTest" type="JUnit" factoryName="JUnit" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="holdem" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.nedogeek.holdem.combinations" />
-      <option name="MAIN_CLASS_NAME" value="com.nedogeek.holdem.combinations.PlayerCardCombinationTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
     <configuration default="false" name="PlayerCardCombinationTest.shouldPairWhenOnKWithAQJWhenAKKQJ" type="JUnit" factoryName="JUnit" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="holdem" />
@@ -640,6 +599,35 @@
       <envs />
       <patterns />
       <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="NewGameSetterTest.shouldNotBeGivenCardsToThirdPlayerWhen3PlayersAnd3IsLostNewGame" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="holdem" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.nedogeek.holdem.dealer" />
+      <option name="MAIN_CLASS_NAME" value="com.nedogeek.holdem.dealer.NewGameSetterTest" />
+      <option name="METHOD_NAME" value="shouldNotBeGivenCardsToThirdPlayerWhen3PlayersAnd3IsLostNewGame" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
@@ -780,17 +768,18 @@
     </configuration>
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="JUnit.All in holdem" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.PlayerCardCombinationTest" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.PlayerCardCombinationTest.shouldPairWhenOnKWithAQJWhenAKKQJ" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.EndGameManagerTest.shouldFirstPlayerWinWhenNoPlayerFoldsAndSecondHasWinningCombination" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.MoveManagerTest" />
-      <item index="5" class="java.lang.String" itemvalue="JUnit.DealerIntegrationTest" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.PlayerCardCombinationTest.shouldPairWhenOnKWithAQJWhenAKKQJ" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.EndGameManagerTest.shouldFirstPlayerWinWhenNoPlayerFoldsAndSecondHasWinningCombination" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.MoveManagerTest" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.DealerIntegrationTest" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.NewGameSetterTest.shouldNotBeGivenCardsToThirdPlayerWhen3PlayersAnd3IsLostNewGame" />
     </list>
     <recent_temporary>
-      <list size="3">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.DealerIntegrationTest" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.MoveManagerTest" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.EndGameManagerTest.shouldFirstPlayerWinWhenNoPlayerFoldsAndSecondHasWinningCombination" />
+      <list size="4">
+        <item index="0" class="java.lang.String" itemvalue="JUnit.NewGameSetterTest.shouldNotBeGivenCardsToThirdPlayerWhen3PlayersAnd3IsLostNewGame" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.DealerIntegrationTest" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.MoveManagerTest" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.EndGameManagerTest.shouldFirstPlayerWinWhenNoPlayerFoldsAndSecondHasWinningCombination" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
@@ -1151,7 +1140,11 @@
       <created>1357417897600</created>
       <updated>1357417897600</updated>
     </task>
-    <option name="localTasksCounter" value="83" />
+    <task id="LOCAL-00083" summary="NewGameSetter refactoring started.">
+      <created>1357419546220</created>
+      <updated>1357419546220</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1194,7 +1187,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.6923077" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23549488" sideWeight="0.72884285" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39896372" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27115718" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27115718" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -1238,7 +1231,7 @@
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="EndGameManager refactored." />
+    <option name="LAST_COMMIT_MESSAGE" value="NewGameSetter refactoring started." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1251,7 +1244,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="Deck and value switched.&#10;CardCombination type and cardCombinationCards can be found." />
     <MESSAGE value="PlayerCardCombination is comparable." />
     <MESSAGE value="FiveToSixCardIterable codded and tested" />
     <MESSAGE value="Best combination from 6 can be found" />
@@ -1276,6 +1268,7 @@
     <MESSAGE value="AllIn if balance is ton enough to call" />
     <MESSAGE value="If AllIn and Balance is smaller than callValue - do not change call value!" />
     <MESSAGE value="EndGameManager refactored." />
+    <MESSAGE value="NewGameSetter refactoring started." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1285,41 +1278,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/EndGameManagerTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="8" selection-start="1085" selection-end="1085" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/GameCycleManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="13" selection-start="206" selection-end="206" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/MoveManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="9" selection-start="1845" selection-end="1845" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Bank.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="13" selection-start="124" selection-end="124" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Card.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="16" selection-start="706" selection-end="706" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/CardDeck.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="15" column="13" selection-start="296" selection-end="296" vertical-scroll-proportion="0.0">
@@ -1383,16 +1341,51 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.10/junit-4.10.jar!/org/junit/internal/runners/model/ReflectiveCallable.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="40" selection-start="388" selection-end="388" vertical-scroll-proportion="0.33530572">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.7.0_03/src.zip!/java/lang/reflect/Method.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="171" column="0" selection-start="5855" selection-end="5855" vertical-scroll-proportion="0.18264015">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/mockito/mockito-all/1.8.4/mockito-all-1.8.4-sources.jar!/org/mockito/internal/util/ObjectMethodsGuru.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="0" selection-start="835" selection-end="835" vertical-scroll-proportion="0.59814817">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/mockito/mockito-all/1.8.4/mockito-all-1.8.4-sources.jar!/org/mockito/internal/creation/MethodInterceptorFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="0" selection-start="1338" selection-end="1338" vertical-scroll-proportion="0.18264015">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="0" selection-start="591" selection-end="591" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/NewGameSetterTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="94" column="49" selection-start="2800" selection-end="2800" vertical-scroll-proportion="0.0">
+        <state line="84" column="23" selection-start="2375" selection-end="2375" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/NewGameSetter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="38" selection-start="688" selection-end="688" vertical-scroll-proportion="-0.22474748">
+        <state line="36" column="0" selection-start="981" selection-end="981" vertical-scroll-proportion="1.4166666">
           <folding />
         </state>
       </provider>

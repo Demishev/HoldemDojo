@@ -11,6 +11,8 @@ public class Player {
     private final String name;
 
     private PlayerStatus status;
+    private PlayerStatus playerStatus;
+
     //TODO class is a stub
     public Player(String name) {
         this.name = name;

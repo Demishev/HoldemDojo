@@ -3,8 +3,12 @@ package com.nedogeek.holdem.dealer;
 import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.PlayerStatus;
 import com.nedogeek.holdem.gamingStuff.Desk;
+import com.nedogeek.holdem.gamingStuff.Player;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.mockito.Mockito.*;
 
@@ -19,10 +23,14 @@ public class NewGameSetterTest {
     private Desk deskMock;
     private PlayersManager playersManagerMock;
     private MoveManager moveManagerMock;
+    private List<Player> players;
+    private Player firstPlayerMock;
+    private Player secondPlayerMock;
+    private Player thirdPlayerMock;
 
     @Before
     public void setUp() throws Exception {
-        resetDeskMock();
+        deskMock = mock(Desk.class);
         resetPlayerManagerMock();
         resetMoveManagerMock();
 
@@ -32,18 +40,33 @@ public class NewGameSetterTest {
 
     private void resetMoveManagerMock() {
         moveManagerMock = mock(MoveManager.class);
-
-        when(playersManagerMock.nextPlayer(0)).thenReturn(1);
-        when(playersManagerMock.nextPlayer(1)).thenReturn(0);
     }
 
     private void resetPlayerManagerMock() {
         playersManagerMock = mock(PlayersManager.class);
 
-        setPlayersQuantity(2);
-        setDealerIs(0);
+        resetPlayers();
 
-        setPlayerStatus(anyInt(), PlayerStatus.NotMoved);
+        when(playersManagerMock.getPlayers()).thenReturn(players);
+        setDealerIs(0);
+    }
+
+    private void resetPlayers() {
+        firstPlayerMock = mock(Player.class);
+        secondPlayerMock = mock(Player.class);
+        thirdPlayerMock = mock(Player.class);
+
+        players = new ArrayList<Player>();
+        players.add(firstPlayerMock);
+        players.add(secondPlayerMock);
+        players.add(thirdPlayerMock);
+
+        for (Player player : players) {
+            setPlayerStatus(player, PlayerStatus.NotMoved);
+        }
+
+        players.remove(thirdPlayerMock);
+
     }
 
     private void setDealerIs(int dealerNumber) {
@@ -58,82 +81,73 @@ public class NewGameSetterTest {
         }
     }
 
-    private void resetDeskMock() {
-        deskMock = mock(Desk.class);
-    }
-
-    private void setPlayerStatus(int playerNumber, PlayerStatus playerStatus) {
-        when(playersManagerMock.getPlayerStatus(playerNumber)).thenReturn(playerStatus);
-    }
-
-    private void setPlayersQuantity(int playersQuantity) {
-        when(playersManagerMock.getPlayersQuantity()).thenReturn(playersQuantity);
+    private void setPlayerStatus(Player player, PlayerStatus playerStatus) {
+        when(player.getStatus()).thenReturn(playerStatus);
     }
 
     @Test
     public void shouldSetFirstPlayerStatusNotMovedWhenDefaultNewGameSet() throws Exception {
         newGameSetter.setNewGame();
 
-        verify(playersManagerMock).setPlayerStatus(0, PlayerStatus.NotMoved);
+        verify(firstPlayerMock).setStatus(PlayerStatus.NotMoved);
     }
 
     @Test
     public void shouldSetSecondPlayerStatusNotMovedWhenDefaultNewGameSet() throws Exception {
         newGameSetter.setNewGame();
 
-        verify(playersManagerMock).setPlayerStatus(1, PlayerStatus.NotMoved);
+        verify(secondPlayerMock).setStatus(PlayerStatus.NotMoved);
     }
 
     @Test
     public void shouldNotLostPlayerSetNotMoves() throws Exception {
-        setPlayersQuantity(3);
-        setPlayerStatus(0, PlayerStatus.Lost);
-        setPlayerStatus(2, PlayerStatus.NotMoved);
+        players.add(thirdPlayerMock);
+
+        setPlayerStatus(firstPlayerMock, PlayerStatus.Lost);
 
         newGameSetter.setNewGame();
 
-        verify(playersManagerMock, never()).setPlayerStatus(0, PlayerStatus.NotMoved);
+        verify(firstPlayerMock, never()).setStatus(PlayerStatus.NotMoved);
     }
 
     @Test
     public void shouldBeGivenCardsToFirstPlayerWhenDefaultNewGame() throws Exception {
         newGameSetter.setNewGame();
 
-        verify(deskMock).giveCardsToPlayer(0);
+        verify(deskMock).giveCardsToPlayer(firstPlayerMock);
     }
 
     @Test
     public void shouldBeGivenCardsToSecondPlayerWhenDefaultNewGame() throws Exception {
         newGameSetter.setNewGame();
 
-        verify(deskMock).giveCardsToPlayer(1);
+        verify(deskMock).giveCardsToPlayer(secondPlayerMock);
     }
 
     @Test
     public void shouldBeGivenCardsToThirdPlayerWhen3PlayersNewGame() throws Exception {
-        setPlayersQuantity(3);
-        setPlayerStatus(3, PlayerStatus.NotMoved);
+        players.add(thirdPlayerMock);
 
         newGameSetter.setNewGame();
 
-        verify(deskMock).giveCardsToPlayer(2);
+        verify(deskMock).giveCardsToPlayer(thirdPlayerMock);
     }
 
     @Test
     public void shouldNotBeGivenCardsToThirdPlayerWhenDefaultNewGame() throws Exception {
         newGameSetter.setNewGame();
 
-        verify(deskMock, never()).giveCardsToPlayer(2);
+        verify(deskMock, never()).giveCardsToPlayer(thirdPlayerMock);
     }
 
     @Test
     public void shouldNotBeGivenCardsToThirdPlayerWhen3PlayersAnd3IsLostNewGame() throws Exception {
-        setPlayersQuantity(3);
-        setPlayerStatus(2, PlayerStatus.Lost);
+        setPlayerStatus(secondPlayerMock, PlayerStatus.Lost);
+        players.add(thirdPlayerMock);
 
         newGameSetter.setNewGame();
 
-        verify(deskMock, never()).giveCardsToPlayer(2);
+        verify(deskMock, never()).giveCardsToPlayer(secondPlayerMock);
     }
 
     @Test

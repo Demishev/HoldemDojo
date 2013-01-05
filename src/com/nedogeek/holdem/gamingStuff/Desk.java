@@ -149,7 +149,7 @@ public class Desk {
         }
     }
 
-    public void giveCardsToPlayer(int playerNumber) {
+    public void giveCardsToPlayer(Player playerNumber) {
 
     }
 }
