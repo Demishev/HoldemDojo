@@ -267,8 +267,6 @@ public class MoveManagerTest {
         verify(playersManagerMock, never()).setPlayerStatus(0, PlayerStatus.Call);
     }
 
-    //TODO If not enough for check - AllIn.
-    //TODO If AllIn and Balance is smaller than callValue - do not change call value!
     @Test
     public void shouldSetCallValue2SmallBlindsWhenInitialBlindFirstPlayer2SmallBlinds() throws Exception {
         moveManager.makeInitialBet(0, 2 * SMALL_BLIND);
@@ -357,4 +355,49 @@ public class MoveManagerTest {
 
         verify(bankMock).setPlayerBet(1, GameSettings.COINS_AT_START);
     }
+
+
+    @Test
+    public void shouldAllInWhenBalanceIs1000AndCallValueIs2000() throws Exception {
+        setCallValue(2000);
+        setPlayerAction(PlayerAction.ActionType.Call);
+
+        moveManager.makeMove(0, playerActionMock);
+
+        verify(playersManagerMock).setPlayerStatus(0, PlayerStatus.AllIn);
+    }
+
+    @Test
+    public void shouldNoAllInWhenBalanceIs1000AndCallValueIs500() throws Exception {
+        setCallValue(500);
+        setPlayerAction(PlayerAction.ActionType.Call);
+
+        moveManager.makeMove(0, playerActionMock);
+
+        verify(playersManagerMock, never()).setPlayerStatus(0, PlayerStatus.AllIn);
+    }
+
+    @Test
+    public void shouldNoSetPlayerStatusCallWhenBalanceIs1000AndCallValueIs2000() throws Exception {
+        setCallValue(2000);
+        setPlayerAction(PlayerAction.ActionType.Call);
+
+        moveManager.makeMove(0, playerActionMock);
+
+        verify(playersManagerMock, never()).setPlayerStatus(0, PlayerStatus.Call);
+    }
+
+    @Test
+    public void shouldAddToPot1000WhenBalanceIs1000AndCallValueIs2000() throws Exception {
+        setCallValue(2000);
+        setPlayerAction(PlayerAction.ActionType.Call);
+
+        moveManager.makeMove(0, playerActionMock);
+
+        verify(bankMock).addToPot(GameSettings.COINS_AT_START);
+    }
+
+    //TODO Check increase of call value.
+
+    //TODO If AllIn and Balance is smaller than callValue - do not change call value!
 }

@@ -49,7 +49,7 @@ public class MoveManager {
         bank.setPlayerBet(playerNumber, betValue + previousBet);
         bank.addToPot(betValue);
         bank.setPlayerAmount(playerNumber, playerAmount - betValue);
-        bank.setCallValue(betValue + previousBet);           //TODO Check increase of call value.
+        bank.setCallValue(betValue + previousBet);
     }
 
     private void makeFold(int playerNumber) {
@@ -57,8 +57,12 @@ public class MoveManager {
     }
 
     private void makeCall(int playerNumber) {
-        playersManager.setPlayerStatus(playerNumber,PlayerStatus.Call);
-        makeBet(playerNumber, bank.getCallValue() - bank.getPlayerBet(playerNumber));
+        if (bank.getPlayerBalance(playerNumber) < bank.getCallValue() - bank.getPlayerBet(playerNumber)) {
+            makeAllIn(playerNumber);
+        } else {
+            playersManager.setPlayerStatus(playerNumber, PlayerStatus.Call);
+            makeBet(playerNumber, bank.getCallValue() - bank.getPlayerBet(playerNumber));
+        }
     }
 
     private void makeAllIn(int playerNumber) {
