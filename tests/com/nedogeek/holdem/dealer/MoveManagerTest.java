@@ -65,20 +65,6 @@ public class MoveManagerTest {
     }
 
     @Test
-    public void shouldSetCallValue200WhenCallValue100AndMakeCallWhenPlayerBetIs100AndPlayerAmount1000() throws Exception {
-        when(bankMock.getCallValue()).thenReturn(200);
-        when(bankMock.getPlayerBalance(0)).thenReturn(1000);
-        when(bankMock.getPlayerBet(0)).thenReturn(100);
-
-        setPlayerAction(PlayerAction.ActionType.Call);
-
-        moveManager.makeMove(0, playerActionMock);
-
-
-        verify(bankMock).setCallValue(200);
-    }
-
-    @Test
     public void shouldPlayersManagerSetLastMovedPlayer1WhenMoveManagerMakeMove1PlayerFold() throws Exception {
         setPlayerAction(PlayerAction.ActionType.Fold);
 
@@ -397,7 +383,13 @@ public class MoveManagerTest {
         verify(bankMock).addToPot(GameSettings.COINS_AT_START);
     }
 
-    //TODO Check increase of call value.
+    @Test
+    public void shouldNotCallValue1000WhenCallValueWas2000() throws Exception {
+        setCallValue(2000);
+        setPlayerAction(PlayerAction.ActionType.Call);
 
-    //TODO If AllIn and Balance is smaller than callValue - do not change call value!
+        moveManager.makeMove(0, playerActionMock);
+
+        verify(bankMock, never()).setCallValue(1000);
+    }
 }

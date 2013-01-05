@@ -46,10 +46,18 @@ public class MoveManager {
     private void makeBet(int playerNumber, int betValue) {
         final int playerAmount = bank.getPlayerBalance(playerNumber);
         final int previousBet = bank.getPlayerBet(playerNumber);
-        bank.setPlayerBet(playerNumber, betValue + previousBet);
+        final int playerBet = betValue + previousBet;
+
+        bank.setPlayerBet(playerNumber, playerBet);
         bank.addToPot(betValue);
         bank.setPlayerAmount(playerNumber, playerAmount - betValue);
-        bank.setCallValue(betValue + previousBet);
+        checkCallValue(playerBet);
+    }
+
+    private void checkCallValue(int playerBet) {
+        if (bank.getCallValue() < playerBet) {
+            bank.setCallValue(playerBet);
+        }
     }
 
     private void makeFold(int playerNumber) {
