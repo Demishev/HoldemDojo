@@ -2,16 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="388e9789-c4c7-491f-aae9-9962e0a04901" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Desk.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Desk.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/EndGameManager.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/EndGameManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/EndGameManagerTest.java" afterPath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/EndGameManagerTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Player.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Player.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="holdem.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357422419286" ignored="false" />
-    <file path="/EndGameManager.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357417790472" ignored="false" />
-    <file path="/EndGameManagerTest.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357417589238" ignored="false" />
+    <file path="/Dummy.txt" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357424129351" ignored="false" />
+    <file path="/EndGameManager.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357424856445" ignored="false" />
+    <file path="/EndGameManagerTest.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357424800620" ignored="false" />
     <file path="/Desk.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357155531432" ignored="false" />
     <file path="/DeskTest.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1354860227446" ignored="false" />
     <file path="/fragment.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357422225627" ignored="false" />
@@ -26,7 +27,7 @@
     <file path="/Card.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357151181968" ignored="false" />
     <file path="/Dealer.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357155248438" ignored="false" />
     <file path="/MoveManager.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357416650148" ignored="false" />
-    <file path="/Player.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357421007488" ignored="false" />
+    <file path="/Player.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357423544353" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,29 +91,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="EndGameManager.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="EndGameManager.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/EndGameManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="45" selection-start="660" selection-end="660" vertical-scroll-proportion="0.0">
+            <state line="46" column="97" selection-start="1315" selection-end="1315" vertical-scroll-proportion="0.69949496">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Dealer.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="64" selection-start="949" selection-end="949" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EndGameManagerTest.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="EndGameManagerTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/EndGameManagerTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="72" selection-start="766" selection-end="766" vertical-scroll-proportion="0.30548304">
+            <state line="103" column="54" selection-start="3521" selection-end="3521" vertical-scroll-proportion="0.0">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Player.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Player.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="34" column="8" selection-start="719" selection-end="731" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -152,11 +155,11 @@
         <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/PlayerManagerTest.java" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/PlayersManager.java" />
         <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/NewGameSetterTest.java" />
-        <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Player.java" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/NewGameSetter.java" />
-        <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/EndGameManager.java" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java" />
+        <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Player.java" />
         <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/EndGameManagerTest.java" />
+        <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/EndGameManager.java" />
       </list>
     </option>
   </component>
@@ -1147,7 +1150,11 @@
       <created>1357422427753</created>
       <updated>1357422427753</updated>
     </task>
-    <option name="localTasksCounter" value="85" />
+    <task id="LOCAL-00085" summary="EndGameManager not used bank anymore">
+      <created>1357422552338</created>
+      <updated>1357422552338</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1234,7 +1241,7 @@
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="NewGameSetter refactored." />
+    <option name="LAST_COMMIT_MESSAGE" value="EndGameManager not used bank anymore" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1247,7 +1254,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="FiveToSixCardIterable codded and tested" />
     <MESSAGE value="Best combination from 6 can be found" />
     <MESSAGE value="CardChooser works for 7 cards" />
     <MESSAGE value="Best combination from 7 cards can be found" />
@@ -1272,6 +1278,7 @@
     <MESSAGE value="EndGameManager refactored." />
     <MESSAGE value="NewGameSetter refactoring started." />
     <MESSAGE value="NewGameSetter refactored." />
+    <MESSAGE value="EndGameManager not used bank anymore" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1365,20 +1372,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="0" selection-start="591" selection-end="591" vertical-scroll-proportion="0.69949496">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/EndGameManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="45" selection-start="660" selection-end="660" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="27" column="64" selection-start="949" selection-end="949" vertical-scroll-proportion="0.0">
@@ -1386,9 +1379,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="8" selection-start="719" selection-end="731" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/EndGameManagerTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="72" selection-start="766" selection-end="766" vertical-scroll-proportion="0.30548304">
+        <state line="103" column="54" selection-start="3521" selection-end="3521" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/EndGameManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="97" selection-start="1315" selection-end="1315" vertical-scroll-proportion="0.69949496">
           <folding />
         </state>
       </provider>

@@ -1,6 +1,7 @@
 package com.nedogeek.holdem.gamingStuff;
 
 import com.nedogeek.holdem.PlayerStatus;
+import com.nedogeek.holdem.combinations.PlayerCardCombination;
 
 /**
  * User: Konstantin Demishev
@@ -28,5 +29,9 @@ public class Player {
 
     public void setStatus(PlayerStatus status) {
         this.status = status;
+    }
+
+    public PlayerCardCombination getCardCombination() {
+        return null;
     }
 }

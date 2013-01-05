@@ -2,6 +2,9 @@ package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.PlayerStatus;
 import com.nedogeek.holdem.gamingStuff.Desk;
+import com.nedogeek.holdem.gamingStuff.Player;
+
+import java.util.List;
 
 /**
  * User: Konstantin Demishev
@@ -19,26 +22,28 @@ public class EndGameManager {
     }
 
     public void endGame() {
-        int winnerNumber = findWinner();
-
-        desk.setPlayerWin(winnerNumber);
+        desk.setPlayerWin(findWinner());
         desk.setGameEnded();
     }
 
-    private int findWinner() {
-        int winnerNumber = -1;
-        for (int i = 0; i < playersManager.getPlayersQuantity(); i++) {
-            if (playersManager.getPlayerStatus(i) != PlayerStatus.Fold) {
-                if (winnerNumber == -1) {
-                    winnerNumber = i;
+    private Player findWinner() {
+        List<Player> players = playersManager.getPlayers();
+        Player winner = null;
+        for (Player player: players) {
+            if (isActivePlayer(player)) {
+                if (winner == null) {
+                    winner = player;
                 } else {
-                    if (playersManager.isFirstCombinationBiggerThanSecond(i, winnerNumber)) {
-                        winnerNumber = i;
+                    if (winner.getCardCombination().compareTo(player.getCardCombination()) < 0) {
+                        winner = player;
                     }
                 }
             }
         }
+        return winner;
+    }
 
-        return winnerNumber;
+    private boolean isActivePlayer(Player player) {
+        return player.getStatus() != PlayerStatus.Fold && player.getStatus() != PlayerStatus.Lost;
     }
 }

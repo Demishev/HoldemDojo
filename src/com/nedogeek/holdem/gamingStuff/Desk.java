@@ -100,7 +100,7 @@ public class Desk {
     public void setGameEnded() {
     }
 
-    public void setPlayerWin(int playerNumber) {
+    public void setPlayerWin(Player player) {
     }
 
     public PlayerCardCombination getPlayerCardCombination(int playerNumber) {
