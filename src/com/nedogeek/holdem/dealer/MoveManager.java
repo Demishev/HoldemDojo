@@ -20,39 +20,39 @@ public class MoveManager {
         this.playersManager = playersManager;
     }
 
-    void makeMove(int playerNumber) {
-        PlayerAction playerMove = getMover(playerNumber).getMove();
+    void makeMove(Player mover) {
+        PlayerAction playerMove = mover.getMove();
         switch (playerMove.getActionType()) {
             case Fold:
-                makeFold(playerNumber);
+                makeFold(mover);
                 break;
             case Check:
                 break;
             case Call:
-                makeCall(playerNumber);
+                makeCall(mover);
                 break;
             case Rise:
-                makeRise(playerNumber, playerMove.getRiseAmount());
+                makeRise(mover);
                 break;
             case AllIn:
-                makeAllIn(playerNumber);
+                makeAllIn(mover);
                 break;
         }
-        playersManager.setLastMovedPlayer(playerNumber);
+        playersManager.setLastMovedPlayer(mover); //TODO test me
     }
 
-    void makeInitialBet(int playerNumber, int initialBet) {
+    void makeInitialBet(Player playerNumber, int initialBet) {
         makeBet(playerNumber, initialBet);
     }
 
-    private void makeBet(int playerNumber, int betValue) {
-        final int playerAmount = bank.getPlayerBalance(playerNumber);
-        final int previousBet = bank.getPlayerBet(playerNumber);
+    private void makeBet(Player player, int betValue) {
+        final int playerAmount = player.getBalance();
+        final int previousBet = player.getBet();
         final int playerBet = betValue + previousBet;
 
-        bank.setPlayerBet(playerNumber, playerBet);
+        player.setBet(playerBet);
         bank.addToPot(betValue);
-        bank.setPlayerAmount(playerNumber, playerAmount - betValue);
+        player.setBalance(playerAmount - betValue);
         checkCallValue(playerBet);
     }
 
@@ -62,46 +62,40 @@ public class MoveManager {
         }
     }
 
-    private void makeFold(int playerNumber) {
-        Player mover = getMover(playerNumber);
-
-        mover.setStatus(PlayerStatus.Fold);
+    private void makeFold(Player player) {
+        player.setStatus(PlayerStatus.Fold);
     }
 
-    private Player getMover(int playerNumber) {
-        return playersManager.getPlayers().get(playerNumber);
-    }
-
-    private void makeCall(int playerNumber) {
-        if (bank.getPlayerBalance(playerNumber) < bank.getCallValue() - bank.getPlayerBet(playerNumber)) {
-            makeAllIn(playerNumber);
+    private void makeCall(Player player) {
+        if (player.getBalance() < bank.getCallValue() - player.getBet()) {
+            makeAllIn(player);
         } else {
-            getMover(playerNumber).setStatus(PlayerStatus.Call);
-            makeBet(playerNumber, bank.getCallValue() - bank.getPlayerBet(playerNumber));
+            player.setStatus(PlayerStatus.Call);
+            makeBet(player, bank.getCallValue() - player.getBet());
         }
     }
 
-    private void makeAllIn(int playerNumber) {
-        getMover(playerNumber).setStatus(PlayerStatus.AllIn);
-        makeBet(playerNumber, bank.getPlayerBalance(playerNumber));
+    private void makeAllIn(Player player) {
+        player.setStatus(PlayerStatus.AllIn);
+        makeBet(player, player.getBalance());
     }
 
-    private void makeRise(int playerNumber, int riseValue) {
-        if (isAllInMove(playerNumber, riseValue)) {
-            makeAllIn(playerNumber);
+    private void makeRise(Player player) {
+        int riseValue = player.getMove().getRiseAmount();
+        if (isAllInMove(player, riseValue)) {
+            makeAllIn(player);
         } else {
-            Player mover = getMover(playerNumber);
-            mover.setStatus(PlayerStatus.Rise);
-            if (bank.getPlayerBet(playerNumber) + riseValue >= minimumRiseValue()) {
-                makeBet(playerNumber, riseValue);
+            player.setStatus(PlayerStatus.Rise);
+            if (riseValue >= minimumRiseValue()) {
+                makeBet(player, riseValue);
             } else {
-                makeBet(playerNumber, minimumRiseValue() - bank.getPlayerBet(playerNumber));
+                makeBet(player, minimumRiseValue());
             }
         }
     }
 
-    private boolean isAllInMove(int playerNumber, int bet) {
-        return bank.getPlayerBalance(playerNumber) <= bet;
+    private boolean isAllInMove(Player player, int bet) {
+        return player.getBalance() <= bet;
     }
 
     private int minimumRiseValue() {

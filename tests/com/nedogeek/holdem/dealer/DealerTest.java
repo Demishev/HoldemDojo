@@ -3,6 +3,7 @@ package com.nedogeek.holdem.dealer;
 import com.nedogeek.holdem.GameRound;
 import com.nedogeek.holdem.GameStatus;
 import com.nedogeek.holdem.gamingStuff.Desk;
+import com.nedogeek.holdem.gamingStuff.Player;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,17 +24,26 @@ public class DealerTest {
     private GameCycleManager gameCycleManagerMock;
     private EndGameManager endGameManagerMock;
 
+    private Player mover;
+
     @Before
     public void setUp() throws Exception {
         deskMock = mock(Desk.class);
         moveManagerMock = mock(MoveManager.class);
         newGameSetterMock = mock(NewGameSetter.class);
-        playersManagerMock = mock(PlayersManager.class);
+        resetPlayerManager();
         gameCycleManagerMock = mock(GameCycleManager.class);
         endGameManagerMock = mock(EndGameManager.class);
 
         dealer = new Dealer(deskMock, moveManagerMock, newGameSetterMock, playersManagerMock,
                 gameCycleManagerMock, endGameManagerMock);
+    }
+
+    private void resetPlayerManager() {
+        playersManagerMock = mock(PlayersManager.class);
+        mover = mock(Player.class);
+
+        when(playersManagerMock.getMover()).thenReturn(mover);
     }
 
     @Test
@@ -63,7 +73,7 @@ public class DealerTest {
 
         dealer.tick();
 
-        verify(moveManagerMock).makeMove(0);
+        verify(moveManagerMock).makeMove(mover);
     }
 
     @Test
@@ -74,7 +84,7 @@ public class DealerTest {
 
         dealer.tick();
 
-        verify(moveManagerMock, never()).makeMove(0);
+        verify(moveManagerMock, never()).makeMove(mover);
     }
 
     @Test

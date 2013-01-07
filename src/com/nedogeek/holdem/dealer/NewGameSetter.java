@@ -47,6 +47,6 @@ public class NewGameSetter {
     }
 
     private void makeStartBet(int playerNumber, int bet) {
-        moveManager.makeInitialBet(playerNumber, bet);
+        moveManager.makeInitialBet(playersManager.getPlayers().get(playerNumber), bet); //TODO refactor me, please.
     }
 }

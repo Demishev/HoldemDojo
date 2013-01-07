@@ -161,14 +161,14 @@ public class NewGameSetterTest {
     public void shouldSmallBlindAddedToPotWhenGameStarted() throws Exception {
         newGameSetter.setNewGame();
 
-        verify(moveManagerMock).makeInitialBet(1, GameSettings.SMALL_BLIND_AT_START);
+        verify(moveManagerMock).makeInitialBet(secondPlayerMock, GameSettings.SMALL_BLIND_AT_START);
     }
 
     @Test
     public void shouldBigBlindAddedToPotWhenGameStarted() throws Exception {
         newGameSetter.setNewGame();
 
-        verify(moveManagerMock).makeInitialBet(0, GameSettings.SMALL_BLIND_AT_START * 2);
+        verify(moveManagerMock).makeInitialBet(firstPlayerMock, GameSettings.SMALL_BLIND_AT_START * 2);
     }
 
     @Test
@@ -176,7 +176,7 @@ public class NewGameSetterTest {
         setDealerIs(1);
         newGameSetter.setNewGame();
 
-        verify(moveManagerMock).makeInitialBet(0, GameSettings.SMALL_BLIND_AT_START);
+        verify(moveManagerMock).makeInitialBet(firstPlayerMock, GameSettings.SMALL_BLIND_AT_START);
     }
 
     @Test
@@ -184,7 +184,7 @@ public class NewGameSetterTest {
         setDealerIs(1);
         newGameSetter.setNewGame();
 
-        verify(moveManagerMock).makeInitialBet(1, GameSettings.SMALL_BLIND_AT_START * 2);
+        verify(moveManagerMock).makeInitialBet(secondPlayerMock, GameSettings.SMALL_BLIND_AT_START * 2);
     }
 
     @Test

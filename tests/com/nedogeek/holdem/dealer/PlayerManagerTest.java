@@ -63,9 +63,9 @@ public class PlayerManagerTest {
         secondPlayer.setStatus(PlayerStatus.Rise);
         playersManager.setLastMovedPlayer(0);
 
-        when(bank.riseNeeded(secondPlayer)).thenReturn(true);
+        when(bank.riseNeeded(secondPlayer)).thenReturn(true);      //TODO fixIt
 
-        assertEquals(1, playersManager.getMoverNumber());
+        assertEquals(secondPlayer, playersManager.getMover());
     }
 
     @Test

@@ -26,8 +26,12 @@ class PlayersManager {
     }
 
 
-    public void setLastMovedPlayer(int lastMovedPlayer) {
+    public void setLastMovedPlayer(int lastMovedPlayer) { //TODO remove me
         this.lastMovedPlayer = lastMovedPlayer;
+    }
+
+    public void setLastMovedPlayer(Player lastMovedPlayer) {
+        //TODO code me
     }
 
     private int nextPlayer(int playerNumber) {
@@ -51,6 +55,10 @@ class PlayersManager {
             }
         }
         return availableMoverStatusQuantity > 1;
+    }
+
+    Player getMover() {
+        return players.get(getMoverNumber()); //TODO test it
     }
 
     int getMoverNumber() {      //TODO replace with getMover

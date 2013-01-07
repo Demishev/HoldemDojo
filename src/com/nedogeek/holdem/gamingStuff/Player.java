@@ -13,6 +13,8 @@ public class Player {
 
     private PlayerStatus status;
     private PlayerStatus playerStatus;
+    private int bet;
+    private int balance;
 
     //TODO class is a stub
     public Player(String name) {
@@ -33,5 +35,21 @@ public class Player {
 
     public PlayerCardCombination getCardCombination() {
         return null;
+    }
+
+    public int getBet() {
+        return bet;
+    }
+
+    public int getBalance() {
+        return balance;
+    }
+
+    public void setBet(int bet) {
+        this.bet = bet;
+    }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
     }
 }
