@@ -53,11 +53,6 @@ class PlayersManager {
         return availableMoverStatusQuantity > 1;
     }
 
-//    @Deprecated
-//    PlayerAction getPlayerMove() {
-//        return players.get(getMoverNumber()).getMove();
-//    }
-
     int getMoverNumber() {      //TODO replace with getMover
         if (lastMovedPlayer == -1) {
             return nextPlayer(dealerNumber);
@@ -85,32 +80,12 @@ class PlayersManager {
             players.add(player);
     }
 
-    @Deprecated
-    int getPlayersQuantity() {
-        return players.size();
-    }
-
     public void removePlayer(Player player) {
         players.remove(player);
     }
 
-    @Deprecated
-    public void setPlayerStatus(int playerNumber, PlayerStatus playerStatus) {
-        //TODO removeMe
-    }
-
-    @Deprecated
-    public PlayerStatus getPlayerStatus(int playerNumber) {
-        return null;
-    }
-
     public void changeDealer() {
         dealerNumber = nextPlayer(dealerNumber);
-    }
-
-    @Deprecated
-    public boolean isFirstCombinationBiggerThanSecond(int biggerCombination, int smallerCombination) {
-        return false;
     }
 
     public List<Player> getPlayers() {

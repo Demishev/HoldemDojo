@@ -22,7 +22,7 @@ public class GameCycleManager {
 
     void prepareNewGameCycle() {
         dealer.setGameStarted();
-        int playersQuantity = playersManager.getPlayersQuantity();
+        int playersQuantity = playersManager.getPlayers().size();
         for (int i = 0; i < playersQuantity; i++) {
             bank.setPlayerAmount(i, GameSettings.COINS_AT_START);
         }
