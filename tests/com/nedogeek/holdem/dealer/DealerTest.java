@@ -95,4 +95,13 @@ public class DealerTest {
 
         verify(gameCycleManagerMock).prepareNewGameCycle();
     }
+
+    @Test
+    public void shouldNotSetGameStatusStartedWhenGameStatusNotReady() throws Exception {
+        when(deskMock.getGameStatus()).thenReturn(GameStatus.NOT_READY);
+
+        dealer.run();
+
+        verify(deskMock, never()).setGameStarted();
+    }
 }

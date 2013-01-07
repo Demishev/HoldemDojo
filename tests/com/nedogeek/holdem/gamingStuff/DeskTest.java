@@ -9,16 +9,7 @@ public class DeskTest {
 	private final Player FIRST_PLAYER = new Player("First player");
 	private final Player SECOND_PLAYER = new Player("Second player");
 	private Desk desk = new Desk();
-	
-	@Test
-	public void addPalyer() throws Exception {
-		Desk desk = new Desk();
-		assertEquals(0, desk.getPlayersQuantity());
-		desk.addPlayer(new Player(""));
-		assertEquals(1, desk.getPlayersQuantity());
-		desk.addPlayer(new Player(""));
-		assertEquals(2, desk.getPlayersQuantity());
-	}
+
 	
 	@Test
 	public void shouldNotReadyWhenNoPlayers() throws Exception {
@@ -40,13 +31,4 @@ public class DeskTest {
 		assertEquals(GameStatus.NOT_READY, desk.getGameStatus());	
 	}
 	
-	
-	@Test
-	public void shouldDeskStatusReadyWhenNewDeskAdd2PlayersAndSetReady() throws Exception {
-		Desk desk = new Desk();
-		desk.addPlayer(FIRST_PLAYER);
-		desk.addPlayer(SECOND_PLAYER);
-		desk.setReady();
-		assertEquals(GameStatus.READY, desk.getGameStatus());
-	}
 }

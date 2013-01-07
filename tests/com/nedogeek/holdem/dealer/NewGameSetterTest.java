@@ -193,4 +193,20 @@ public class NewGameSetterTest {
 
         verify(deskMock).setNextGameRound();
     }
+
+    @Test
+    public void shouldShuffleCardsWhenStartGaming() throws Exception {
+        newGameSetter.setNewGame();
+
+        verify(deskMock).resetCards();
+    }
+
+    @Test
+    public void shouldSetGameRound1WhenTick() throws Exception {
+        newGameSetter.setNewGame();
+
+        verify(deskMock).setNextGameRound();
+    }
+
+
 }
