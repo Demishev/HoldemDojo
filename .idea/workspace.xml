@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="388e9789-c4c7-491f-aae9-9962e0a04901" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/PlayersManager.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/PlayersManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Desk.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Desk.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="holdem.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357563298462" ignored="false" />
+    <file path="/Dummy.txt" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357563376777" ignored="false" />
     <file path="/EndGameManager.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357424856445" ignored="false" />
     <file path="/EndGameManagerTest.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357424800620" ignored="false" />
     <file path="/Desk.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357155531432" ignored="false" />
@@ -107,10 +107,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PlayersManager.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="PlayersManager.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/PlayersManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="45" selection-start="714" selection-end="714" vertical-scroll-proportion="0.63383836">
+            <state line="55" column="34" selection-start="1441" selection-end="1441" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Desk.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Desk.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="43" column="16" selection-start="951" selection-end="951" vertical-scroll-proportion="0.33333334">
               <folding />
             </state>
           </provider>
@@ -141,7 +150,6 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/gamingStuff/NewGameSetterTest.java" />
-        <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Desk.java" />
         <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerIntegrationTest.java" />
         <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/PlayerManagerTest.java" />
         <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/NewGameSetterTest.java" />
@@ -156,6 +164,7 @@
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/GameCycleManager.java" />
         <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/GameCycleManagerTest.java" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/PlayersManager.java" />
+        <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Desk.java" />
       </list>
     </option>
   </component>
@@ -931,7 +940,11 @@
       <created>1357563303586</created>
       <updated>1357563303586</updated>
     </task>
-    <option name="localTasksCounter" value="90" />
+    <task id="LOCAL-00090" summary="nextPlayer(int playerNumber) in PlayersManager made private">
+      <created>1357563381956</created>
+      <updated>1357563381956</updated>
+    </task>
+    <option name="localTasksCounter" value="91" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1018,7 +1031,7 @@
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="PlayerManager deprecated code removed." />
+    <option name="LAST_COMMIT_MESSAGE" value="nextPlayer(int playerNumber) in PlayersManager made private" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1031,7 +1044,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="Straight on 5 and straight flash on 5 can be defined." />
     <MESSAGE value="EndGameManager coding started.&#10;@deprecated code removed from desk class" />
     <MESSAGE value="EndGameManager can define winner in 2 player game with one fold" />
     <MESSAGE value="Can find winner between two unfold players" />
@@ -1056,6 +1068,7 @@
     <MESSAGE value="Small refactor in MoveManaager" />
     <MESSAGE value="MoveManager.makeMove() signature changed." />
     <MESSAGE value="PlayerManager deprecated code removed." />
+    <MESSAGE value="nextPlayer(int playerNumber) in PlayersManager made private" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1065,11 +1078,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://C:/Program Files/Java/jdk1.7.0_03/src.zip!/java/lang/reflect/Method.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="171" column="0" selection-start="5855" selection-end="5855" vertical-scroll-proportion="0.18264015" />
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/mockito/mockito-all/1.8.4/mockito-all-1.8.4-sources.jar!/org/mockito/internal/util/ObjectMethodsGuru.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="26" column="0" selection-start="835" selection-end="835" vertical-scroll-proportion="0.59814817" />
@@ -1171,7 +1179,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/PlayersManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="45" selection-start="714" selection-end="714" vertical-scroll-proportion="0.63383836">
+        <state line="55" column="34" selection-start="1441" selection-end="1441" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Desk.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="16" selection-start="951" selection-end="951" vertical-scroll-proportion="0.33333334">
           <folding />
         </state>
       </provider>

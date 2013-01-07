@@ -3,7 +3,6 @@ package com.nedogeek.holdem.gamingStuff;
 import com.nedogeek.holdem.GameRound;
 import com.nedogeek.holdem.GameStatus;
 import com.nedogeek.holdem.PlayerStatus;
-import com.nedogeek.holdem.combinations.PlayerCardCombination;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +13,6 @@ import java.util.List;
  * Time: 22:21
  */
 public class Desk {
-    private int dealerPlayerNumber;
     private GameRound gameRound;
     private GameStatus gameStatus;
 
@@ -35,13 +33,6 @@ public class Desk {
         return players.size();
     }
 
-    public void setPlayerAmount(int playerNumber, int amount) {
-    }
-
-    public void setDealerPlayer(int playerNumber) {
-        dealerPlayerNumber = playerNumber;
-    }
-
     public void resetCards() {
     }
 
@@ -50,10 +41,7 @@ public class Desk {
 
     @Deprecated
     public int getDealerPlayerNumber() {
-        return dealerPlayerNumber;
-    }
-
-    public void addToPot(int bet) {
+        return 0;
     }
 
     public int getPlayerBallance(int playerNumber) {
@@ -80,14 +68,8 @@ public class Desk {
         return 0;
     }
 
-    public void setLastMovedPlayer(int playerNumber) {
-    }
-
     public int getCallValue() {
         return 0;
-    }
-
-    public void setCallValue(int callValue) {
     }
 
     public PlayerStatus getPlayerStatus(int playerNumber) {
@@ -101,18 +83,6 @@ public class Desk {
     }
 
     public void setPlayerWin(Player player) {
-    }
-
-    public PlayerCardCombination getPlayerCardCombination(int playerNumber) {
-        return null;
-    }
-
-    public Card[] getDeskCards() {
-        return new Card[0];
-    }
-
-    public boolean isFirstCombinationBiggerThanSecond(int firstCombination, int secondCombination) {
-        return false;
     }
 
     public void addPlayer(Player player) {
@@ -130,22 +100,6 @@ public class Desk {
     public void setReady() {
         if (players.size() > 1) {
             gameStatus = GameStatus.READY;
-        }
-    }
-
-    public void setGameCycleEnded() {
-        players.addAll(waitingPlayers);
-        waitingPlayers.clear();
-
-        gameStatus = GameStatus.CYCLE_ENDED;
-    }
-
-    public void removePlayer(Player player) {
-        players.remove(player);
-        waitingPlayers.remove(player);
-
-        if (players.size() < 2) {
-            gameStatus = GameStatus.NOT_READY;
         }
     }
 
