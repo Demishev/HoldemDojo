@@ -3,6 +3,7 @@ package com.nedogeek.holdem.dealer;
 import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.PlayerStatus;
 import com.nedogeek.holdem.gamingStuff.Bank;
+import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayerAction;
 
 /**
@@ -61,20 +62,26 @@ public class MoveManager {
     }
 
     private void makeFold(int playerNumber) {
-        playersManager.setPlayerStatus(playerNumber, PlayerStatus.Fold);
+        Player mover = getMover(playerNumber);
+
+        mover.setStatus(PlayerStatus.Fold);
+    }
+
+    private Player getMover(int playerNumber) {
+        return playersManager.getPlayers().get(playerNumber);
     }
 
     private void makeCall(int playerNumber) {
         if (bank.getPlayerBalance(playerNumber) < bank.getCallValue() - bank.getPlayerBet(playerNumber)) {
             makeAllIn(playerNumber);
         } else {
-            playersManager.setPlayerStatus(playerNumber, PlayerStatus.Call);
+            getMover(playerNumber).setStatus(PlayerStatus.Call);
             makeBet(playerNumber, bank.getCallValue() - bank.getPlayerBet(playerNumber));
         }
     }
 
     private void makeAllIn(int playerNumber) {
-        playersManager.setPlayerStatus(playerNumber, PlayerStatus.AllIn);
+        getMover(playerNumber).setStatus(PlayerStatus.AllIn);
         makeBet(playerNumber, bank.getPlayerBalance(playerNumber));
     }
 
@@ -82,7 +89,8 @@ public class MoveManager {
         if (isAllInMove(playerNumber, riseValue)) {
             makeAllIn(playerNumber);
         } else {
-            playersManager.setPlayerStatus(playerNumber, PlayerStatus.Rise);
+            Player mover = getMover(playerNumber);
+            mover.setStatus(PlayerStatus.Rise);
             if (bank.getPlayerBet(playerNumber) + riseValue >= minimumRiseValue()) {
                 makeBet(playerNumber, riseValue);
             } else {

@@ -3,9 +3,13 @@ package com.nedogeek.holdem.dealer;
 import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.PlayerStatus;
 import com.nedogeek.holdem.gamingStuff.Bank;
+import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayerAction;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.mockito.Mockito.*;
 
@@ -17,11 +21,14 @@ import static org.mockito.Mockito.*;
 public class MoveManagerTest {
     private final int SMALL_BLIND = GameSettings.SMALL_BLIND_AT_START;
 
-    private MoveManager moveManager;
-
     private PlayerAction playerActionMock;
+    private Player firstPlayerMock;
+    private Player secondPlayerMock;
+
     private Bank bankMock;
     private PlayersManager playersManagerMock;
+
+    private MoveManager moveManager;
 
     @Before
     public void setUp() throws Exception {
@@ -49,6 +56,22 @@ public class MoveManagerTest {
 
     private void resetPlayersManager() {
         playersManagerMock = mock(PlayersManager.class);
+
+        setPlayers();
+    }
+
+    private void setPlayers() {
+        firstPlayerMock = mock(Player.class);
+        secondPlayerMock = mock(Player.class);
+
+        List<Player> players = new ArrayList<Player>();
+        players.add(firstPlayerMock);
+        players.add(secondPlayerMock);
+        when(playersManagerMock.getPlayers()).thenReturn(players);
+
+        for (Player player: players) {
+            when(player.getMove()).thenReturn(playerActionMock);
+        }
     }
 
     private void setPlayerAction(PlayerAction.ActionType actionType, int actionValue) {
@@ -124,13 +147,12 @@ public class MoveManagerTest {
 
 
     @Test
-    public void shouldPlayerStatusRiseWhenPlayerActionIsDefaultRise() throws Exception {
-        setPlayerBalance(1, 1000);
+    public void shouldFirstPlayerStatusRiseWhenPlayerActionIsDefaultRise() throws Exception {
         setPlayerAction(PlayerAction.ActionType.Rise);
 
-        moveManager.makeMove(1, playerActionMock);
+        moveManager.makeMove(0, playerActionMock);
 
-        verify(playersManagerMock).setPlayerStatus(1, PlayerStatus.Rise);
+        verify(firstPlayerMock).setStatus(PlayerStatus.Rise);
     }
 
     @Test
@@ -139,7 +161,7 @@ public class MoveManagerTest {
 
         moveManager.makeMove(1, playerActionMock);
 
-        verify(playersManagerMock).setPlayerStatus(1, PlayerStatus.Fold);
+        verify(secondPlayerMock).setStatus(PlayerStatus.Fold);
     }
 
     @Test
@@ -149,7 +171,7 @@ public class MoveManagerTest {
 
         moveManager.makeMove(1, playerActionMock);
 
-        verify(playersManagerMock).setPlayerStatus(1, PlayerStatus.AllIn);
+        verify(secondPlayerMock).setStatus(PlayerStatus.AllIn);
     }
 
     @Test
@@ -159,7 +181,7 @@ public class MoveManagerTest {
 
         moveManager.makeMove(0, playerActionMock);
 
-        verify(playersManagerMock).setPlayerStatus(0, PlayerStatus.AllIn);
+        verify(firstPlayerMock).setStatus(PlayerStatus.AllIn);
     }
 
     @Test
@@ -168,7 +190,7 @@ public class MoveManagerTest {
 
         moveManager.makeMove(0, playerActionMock);
 
-        verify(playersManagerMock).setPlayerStatus(0, PlayerStatus.Fold);
+        verify(firstPlayerMock).setStatus(PlayerStatus.Fold);
     }
 
 
@@ -178,7 +200,7 @@ public class MoveManagerTest {
 
         moveManager.makeMove(0, playerActionMock);
 
-        verify(playersManagerMock).setPlayerStatus(0, PlayerStatus.AllIn);
+        verify(firstPlayerMock).setStatus(PlayerStatus.AllIn);
     }
 
     @Test
@@ -187,7 +209,7 @@ public class MoveManagerTest {
 
         moveManager.makeMove(1, playerActionMock);
 
-        verify(playersManagerMock).setPlayerStatus(1, PlayerStatus.AllIn);
+        verify(secondPlayerMock).setStatus(PlayerStatus.AllIn);
     }
 
     @Test
@@ -196,7 +218,7 @@ public class MoveManagerTest {
 
         moveManager.makeMove(0, playerActionMock);
 
-        verify(playersManagerMock).setPlayerStatus(0, PlayerStatus.Call);
+        verify(firstPlayerMock).setStatus(PlayerStatus.Call);
     }
 
     @Test
@@ -205,7 +227,7 @@ public class MoveManagerTest {
 
         moveManager.makeMove(1, playerActionMock);
 
-        verify(playersManagerMock).setPlayerStatus(1, PlayerStatus.Call);
+        verify(secondPlayerMock).setStatus(PlayerStatus.Call);
 
     }
 
@@ -250,7 +272,7 @@ public class MoveManagerTest {
 
         moveManager.makeMove(0, playerActionMock);
 
-        verify(playersManagerMock, never()).setPlayerStatus(0, PlayerStatus.Call);
+        verify(firstPlayerMock, never()).setStatus(PlayerStatus.Call);
     }
 
     @Test
@@ -311,7 +333,7 @@ public class MoveManagerTest {
 
         moveManager.makeMove(0, playerActionMock);
 
-        verify(playersManagerMock).setPlayerStatus(0, PlayerStatus.AllIn);
+        verify(firstPlayerMock).setStatus(PlayerStatus.AllIn);
     }
 
 
@@ -321,7 +343,7 @@ public class MoveManagerTest {
 
         moveManager.makeMove(1, playerActionMock);
 
-        verify(playersManagerMock).setPlayerStatus(1, PlayerStatus.AllIn);
+        verify(secondPlayerMock).setStatus(PlayerStatus.AllIn);
     }
 
     @Test
@@ -350,7 +372,7 @@ public class MoveManagerTest {
 
         moveManager.makeMove(0, playerActionMock);
 
-        verify(playersManagerMock).setPlayerStatus(0, PlayerStatus.AllIn);
+        verify(firstPlayerMock).setStatus(PlayerStatus.AllIn);
     }
 
     @Test
@@ -360,7 +382,7 @@ public class MoveManagerTest {
 
         moveManager.makeMove(0, playerActionMock);
 
-        verify(playersManagerMock, never()).setPlayerStatus(0, PlayerStatus.AllIn);
+        verify(firstPlayerMock, never()).setStatus(PlayerStatus.AllIn);
     }
 
     @Test
@@ -370,7 +392,7 @@ public class MoveManagerTest {
 
         moveManager.makeMove(0, playerActionMock);
 
-        verify(playersManagerMock, never()).setPlayerStatus(0, PlayerStatus.Call);
+        verify(firstPlayerMock, never()).setStatus(PlayerStatus.Call);
     }
 
     @Test
