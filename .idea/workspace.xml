@@ -4,14 +4,8 @@
     <list default="true" id="388e9789-c4c7-491f-aae9-9962e0a04901" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Bank.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Bank.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java" afterPath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/MoveManager.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/MoveManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/MoveManagerTest.java" afterPath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/MoveManagerTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/NewGameSetter.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/NewGameSetter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/NewGameSetterTest.java" afterPath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/NewGameSetterTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Player.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Player.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/PlayerManagerTest.java" afterPath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/PlayerManagerTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/PlayersManager.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/PlayersManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/GameCycleManager.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/GameCycleManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/GameCycleManagerTest.java" afterPath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/GameCycleManagerTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="holdem.iws" />
@@ -22,7 +16,7 @@
     <file path="/Desk.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357564448570" ignored="false" />
     <file path="/DeskTest.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1354860227446" ignored="false" />
     <file path="/fragment.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357422225627" ignored="false" />
-    <file path="/GameCycleManager.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357563208425" ignored="false" />
+    <file path="/GameCycleManager.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357597203676" ignored="false" />
     <file path="/DealerIntegrationTest.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357150623462" ignored="false" />
     <file path="/PlayerStatus.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1354857454043" ignored="false" />
     <file path="/PlayerManagerTest.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357566160704" ignored="false" />
@@ -34,7 +28,7 @@
     <file path="/Dealer.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357155248438" ignored="false" />
     <file path="/MoveManager.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357567883860" ignored="false" />
     <file path="/Player.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357564797494" ignored="false" />
-    <file path="/GameCycleManagerTest.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357563237029" ignored="false" />
+    <file path="/GameCycleManagerTest.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357597140391" ignored="false" />
     <file path="/DealerTest.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357566067649" ignored="false" />
     <file path="/Bank.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357564585593" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -100,11 +94,49 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MoveManagerTest.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="MoveManagerTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/MoveManagerTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="113" column="69" selection-start="3310" selection-end="3310" vertical-scroll-proportion="1.0631313">
+            <state line="300" column="93" selection-start="9030" selection-end="9030" vertical-scroll-proportion="0.0">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Bank.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Bank.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="8" column="0" selection-start="131" selection-end="131" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameCycleManager.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/GameCycleManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="14" column="72" selection-start="382" selection-end="382" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Dealer.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="26" column="68" selection-start="876" selection-end="876" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameCycleManagerTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/GameCycleManagerTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="29" column="0" selection-start="658" selection-end="658" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#1080#1088#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -118,10 +150,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NewGameSetter.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="NewGameSetter.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/NewGameSetter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="49" column="115" selection-start="1534" selection-end="1534" vertical-scroll-proportion="0.0">
+            <state line="49" column="115" selection-start="1534" selection-end="1534" vertical-scroll-proportion="0.6136364">
               <folding />
             </state>
           </provider>
@@ -152,13 +184,9 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/EndGameManager.java" />
-        <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java" />
-        <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/GameCycleManager.java" />
-        <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/GameCycleManagerTest.java" />
         <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerIntegrationTest.java" />
         <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/gamingStuff/DeskTest.java" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Desk.java" />
-        <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Bank.java" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Player.java" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/PlayersManager.java" />
         <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java" />
@@ -167,6 +195,10 @@
         <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/NewGameSetterTest.java" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/MoveManager.java" />
         <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/MoveManagerTest.java" />
+        <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Bank.java" />
+        <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/GameCycleManager.java" />
+        <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java" />
+        <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/GameCycleManagerTest.java" />
       </list>
     </option>
   </component>
@@ -226,7 +258,7 @@
     <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+    <navigator proportions="" version="1" splitterProportion="0.5">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -237,242 +269,7 @@
       <autoscrollFromSource />
       <sortByType />
     </navigator>
-    <panes>
-      <pane id="Scope">
-        <subPane subId="Default">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="HoldemDojo">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-        <subPane subId="Production">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="HoldemDojo">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-        <subPane subId="Changed Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-        <subPane subId="All">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="HoldemDojo">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="holdem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="holdem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HoldemDojo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="holdem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HoldemDojo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tests" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="holdem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gamingStuff" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="holdem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HoldemDojo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tests" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="holdem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dealer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="holdem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HoldemDojo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tests" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="holdem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="holdem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HoldemDojo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="holdem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="holdem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HoldemDojo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="holdem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gamingStuff" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="holdem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HoldemDojo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="holdem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dealer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="holdem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="HoldemDojo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="holdem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="combinations" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="PackagesPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="holdem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="holdem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff" />
@@ -1193,7 +990,11 @@
       <created>1357564488165</created>
       <updated>1357564488165</updated>
     </task>
-    <option name="localTasksCounter" value="94" />
+    <task id="LOCAL-00094" summary="MOveManager refactored with balance in players">
+      <created>1357596825160</created>
+      <updated>1357596825160</updated>
+    </task>
+    <option name="localTasksCounter" value="95" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1348,22 +1149,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/GameCycleManagerTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="68" column="51" selection-start="1906" selection-end="1906" vertical-scroll-proportion="0.82828283">
-          <folding>
-            <element signature="e#1199#1207#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/GameCycleManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="64" selection-start="664" selection-end="664" vertical-scroll-proportion="0.75252527">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Desk.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="33" column="8" selection-start="555" selection-end="555" vertical-scroll-proportion="0.82828283">
@@ -1371,23 +1156,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Bank.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="15" selection-start="268" selection-end="268" vertical-scroll-proportion="-0.760101">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Player.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="52" column="41" selection-start="1037" selection-end="1037" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="73" selection-start="2289" selection-end="2289" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -1413,17 +1184,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/NewGameSetter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="115" selection-start="1534" selection-end="1534" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/NewGameSetterTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="186" column="63" selection-start="5547" selection-end="5547" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/MoveManagerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="300" column="93" selection-start="9030" selection-end="9030" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Bank.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="0" selection-start="131" selection-end="131" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/GameCycleManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="72" selection-start="382" selection-end="382" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="68" selection-start="876" selection-end="876" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/GameCycleManagerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="0" selection-start="658" selection-end="658" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#1080#1088#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1434,9 +1235,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/MoveManagerTest.java">
+    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/NewGameSetter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="113" column="69" selection-start="3310" selection-end="3310" vertical-scroll-proportion="1.0631313">
+        <state line="49" column="115" selection-start="1534" selection-end="1534" vertical-scroll-proportion="0.6136364">
           <folding />
         </state>
       </provider>

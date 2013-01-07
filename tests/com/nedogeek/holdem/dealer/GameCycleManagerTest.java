@@ -1,7 +1,6 @@
 package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.GameSettings;
-import com.nedogeek.holdem.gamingStuff.Bank;
 import com.nedogeek.holdem.gamingStuff.Player;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +19,6 @@ public class GameCycleManagerTest {
 
     private Dealer dealerMock;
     private PlayersManager playersManagerMock;
-    private Bank bankMock;
     GameCycleManager gameCycleManager;
 
     private Player firstPlayerMock;
@@ -29,10 +27,9 @@ public class GameCycleManagerTest {
     @Before
     public void setUp() throws Exception {
         dealerMock = mock(Dealer.class);
-        bankMock = mock(Bank.class);
         resetPlayersManager();
 
-        gameCycleManager = new GameCycleManager(dealerMock, playersManagerMock, bankMock);
+        gameCycleManager = new GameCycleManager(dealerMock, playersManagerMock);
     }
 
     private void resetPlayersManager() {
@@ -63,9 +60,7 @@ public class GameCycleManagerTest {
     public void shouldBothPlayersSetDefaultAmountWhenGameStarted() throws Exception {
         gameCycleManager.prepareNewGameCycle();
 
-        verify(bankMock).setPlayerAmount(0, GameSettings.COINS_AT_START);
-        verify(bankMock).setPlayerAmount(1, GameSettings.COINS_AT_START);
-
-        verify(bankMock, never()).setPlayerAmount(2, GameSettings.COINS_AT_START);
+        verify(firstPlayerMock).setBalance(GameSettings.COINS_AT_START);
+        verify(secondPlayerMock).setBalance(GameSettings.COINS_AT_START);
     }
 }

@@ -24,7 +24,7 @@ public class Dealer implements Runnable {
         playersManager = new PlayersManager(bank);
         moveManager = new MoveManager(bank, playersManager);
         newGameSetter = new NewGameSetter(desk, playersManager, moveManager);
-        gameCycleManager = new GameCycleManager(this, playersManager, bank);
+        gameCycleManager = new GameCycleManager(this, playersManager);
         endGameManager = new EndGameManager(desk, playersManager);
     }
 
