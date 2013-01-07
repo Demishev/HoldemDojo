@@ -30,7 +30,7 @@ class PlayersManager {
         this.lastMovedPlayer = lastMovedPlayer;
     }
 
-    int nextPlayer(int playerNumber) { //TODO make it private
+    private int nextPlayer(int playerNumber) {
         if (playerNumber == players.size() - 1) {
             return 0;
         } else {
