@@ -104,11 +104,11 @@ class PlayersManager {
         return (dealerNumber == -1) ? null : players.get(dealerNumber);
     }
 
-    public int smallBlindPlayerNumber() {
-        return 0;
+    public Player smallBlindPlayer() {
+        return null;
     }
 
-    public int bigBlindPlayerNumber() {
-        return 0;
+    public Player bigBlindPlayer() {
+        return null;  //TODO code me!
     }
 }

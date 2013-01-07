@@ -71,13 +71,13 @@ public class NewGameSetterTest {
 
     private void setDealerIs(int dealerNumber) {
         if (dealerNumber == 0) {
-            when(playersManagerMock.smallBlindPlayerNumber()).thenReturn(1);
-            when(playersManagerMock.bigBlindPlayerNumber()).thenReturn(0);
+            when(playersManagerMock.smallBlindPlayer()).thenReturn(secondPlayerMock);
+            when(playersManagerMock.bigBlindPlayer()).thenReturn(firstPlayerMock);
         }
 
         if (dealerNumber == 1) {
-            when(playersManagerMock.smallBlindPlayerNumber()).thenReturn(0);
-            when(playersManagerMock.bigBlindPlayerNumber()).thenReturn(1);
+            when(playersManagerMock.smallBlindPlayer()).thenReturn(firstPlayerMock);
+            when(playersManagerMock.bigBlindPlayer()).thenReturn(secondPlayerMock);
         }
     }
 

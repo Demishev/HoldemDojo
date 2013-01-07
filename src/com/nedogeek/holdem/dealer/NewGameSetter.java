@@ -41,12 +41,8 @@ public class NewGameSetter {
     }
 
     private void makeInitialBets() {
-        makeStartBet(playersManager.smallBlindPlayerNumber(), GameSettings.SMALL_BLIND_AT_START);
+        moveManager.makeInitialBet(playersManager.smallBlindPlayer(), GameSettings.SMALL_BLIND_AT_START);
 
-        makeStartBet(playersManager.bigBlindPlayerNumber(), GameSettings.SMALL_BLIND_AT_START * 2);
-    }
-
-    private void makeStartBet(int playerNumber, int bet) {
-        moveManager.makeInitialBet(playersManager.getPlayers().get(playerNumber), bet); //TODO refactor me, please.
+        moveManager.makeInitialBet(playersManager.bigBlindPlayer(), 2 * GameSettings.SMALL_BLIND_AT_START);
     }
 }

@@ -41,8 +41,8 @@ public class MoveManager {
         playersManager.setLastMovedPlayer(mover); //TODO test me
     }
 
-    void makeInitialBet(Player playerNumber, int initialBet) {
-        makeBet(playerNumber, initialBet);
+    void makeInitialBet(Player player, int initialBet) {
+        makeBet(player, initialBet);
     }
 
     private void makeBet(Player player, int betValue) {
