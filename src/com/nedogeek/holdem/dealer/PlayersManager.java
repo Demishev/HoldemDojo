@@ -3,7 +3,6 @@ package com.nedogeek.holdem.dealer;
 import com.nedogeek.holdem.PlayerStatus;
 import com.nedogeek.holdem.gamingStuff.Bank;
 import com.nedogeek.holdem.gamingStuff.Player;
-import com.nedogeek.holdem.gamingStuff.PlayerAction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,10 +53,10 @@ class PlayersManager {
         return availableMoverStatusQuantity > 1;
     }
 
-    @Deprecated
-    PlayerAction getPlayerMove() {
-        return players.get(getMoverNumber()).getMove();
-    }
+//    @Deprecated
+//    PlayerAction getPlayerMove() {
+//        return players.get(getMoverNumber()).getMove();
+//    }
 
     int getMoverNumber() {      //TODO replace with getMover
         if (lastMovedPlayer == -1) {

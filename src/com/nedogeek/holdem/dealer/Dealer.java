@@ -68,7 +68,7 @@ public class Dealer implements Runnable {
                 break;
             default:
                 if (playersManager.hasAvailableMovers()) {
-                    moveManager.makeMove(playersManager.getMoverNumber(), playersManager.getPlayerMove());
+                    moveManager.makeMove(playersManager.getMoverNumber());
                 } else {
                     desk.setNextGameRound();
                 }

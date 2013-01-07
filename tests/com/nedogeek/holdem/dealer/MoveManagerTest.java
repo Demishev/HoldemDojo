@@ -91,7 +91,7 @@ public class MoveManagerTest {
     public void shouldPlayersManagerSetLastMovedPlayer1WhenMoveManagerMakeMove1PlayerFold() throws Exception {
         setPlayerAction(PlayerAction.ActionType.Fold);
 
-        moveManager.makeMove(1, playerActionMock);
+        moveManager.makeMove(1);
 
         verify(playersManagerMock).setLastMovedPlayer(1);
     }
@@ -100,7 +100,7 @@ public class MoveManagerTest {
     public void shouldPlayersManagerSetLastMovedPlayer1WhenMoveManagerMakeMove1PlayerCheck() throws Exception {
         setPlayerAction(PlayerAction.ActionType.Check);
 
-        moveManager.makeMove(1, playerActionMock);
+        moveManager.makeMove(1);
 
         verify(playersManagerMock).setLastMovedPlayer(1);
     }
@@ -109,7 +109,7 @@ public class MoveManagerTest {
     public void shouldPlayersManagerSetLastMovedPlayer0WhenMoveManagerMakeMove0PlayerCheck() throws Exception {
         setPlayerAction(PlayerAction.ActionType.Check);
 
-        moveManager.makeMove(0, playerActionMock);
+        moveManager.makeMove(0);
 
         verify(playersManagerMock).setLastMovedPlayer(0);
     }
@@ -120,7 +120,7 @@ public class MoveManagerTest {
         setPlayerBalance(1, 1000);
         setPlayerAction(PlayerAction.ActionType.Rise, 2 * SMALL_BLIND);
 
-        moveManager.makeMove(1, playerActionMock);
+        moveManager.makeMove(1);
 
         verify(bankMock).setPlayerBet(1, 2 * SMALL_BLIND);
     }
@@ -130,7 +130,7 @@ public class MoveManagerTest {
         setPlayerBalance(1, 1000);
         setPlayerAction(PlayerAction.ActionType.Rise, SMALL_BLIND);
 
-        moveManager.makeMove(1, playerActionMock);
+        moveManager.makeMove(1);
 
         verify(bankMock).setPlayerBet(1, 2 * SMALL_BLIND);
     }
@@ -140,7 +140,7 @@ public class MoveManagerTest {
         setPlayerBalance(1, 1000);
         setPlayerAction(PlayerAction.ActionType.Rise);
 
-        moveManager.makeMove(1, playerActionMock);
+        moveManager.makeMove(1);
 
         verify(bankMock).setPlayerBet(1, 2 * SMALL_BLIND);
     }
@@ -150,7 +150,7 @@ public class MoveManagerTest {
     public void shouldFirstPlayerStatusRiseWhenPlayerActionIsDefaultRise() throws Exception {
         setPlayerAction(PlayerAction.ActionType.Rise);
 
-        moveManager.makeMove(0, playerActionMock);
+        moveManager.makeMove(0);
 
         verify(firstPlayerMock).setStatus(PlayerStatus.Rise);
     }
@@ -159,7 +159,7 @@ public class MoveManagerTest {
     public void shouldSecondPlayerFoldWhenHeFolds() throws Exception {
         setPlayerAction(PlayerAction.ActionType.Fold);
 
-        moveManager.makeMove(1, playerActionMock);
+        moveManager.makeMove(1);
 
         verify(secondPlayerMock).setStatus(PlayerStatus.Fold);
     }
@@ -169,7 +169,7 @@ public class MoveManagerTest {
         setPlayerBalance(1, 1000);
         setPlayerAction(PlayerAction.ActionType.Rise, 2000);
 
-        moveManager.makeMove(1, playerActionMock);
+        moveManager.makeMove(1);
 
         verify(secondPlayerMock).setStatus(PlayerStatus.AllIn);
     }
@@ -179,7 +179,7 @@ public class MoveManagerTest {
         setPlayerBalance(0, 1000);
         setPlayerAction(PlayerAction.ActionType.Rise, 2000);
 
-        moveManager.makeMove(0, playerActionMock);
+        moveManager.makeMove(0);
 
         verify(firstPlayerMock).setStatus(PlayerStatus.AllIn);
     }
@@ -188,7 +188,7 @@ public class MoveManagerTest {
     public void shouldFirstPlayerFoldWhenHeFolds() throws Exception {
         setPlayerAction(PlayerAction.ActionType.Fold);
 
-        moveManager.makeMove(0, playerActionMock);
+        moveManager.makeMove(0);
 
         verify(firstPlayerMock).setStatus(PlayerStatus.Fold);
     }
@@ -198,7 +198,7 @@ public class MoveManagerTest {
     public void shouldSetAllInMoveFirstPlayerWhenFirstRise2CoinsAtStart() throws Exception {
         setPlayerAction(PlayerAction.ActionType.Rise, 2 * GameSettings.COINS_AT_START);
 
-        moveManager.makeMove(0, playerActionMock);
+        moveManager.makeMove(0);
 
         verify(firstPlayerMock).setStatus(PlayerStatus.AllIn);
     }
@@ -207,7 +207,7 @@ public class MoveManagerTest {
     public void shouldSetAllInMoveSecondPlayerWhenSecondRise2CoinsAtStart() throws Exception {
         setPlayerAction(PlayerAction.ActionType.Rise, 2 * GameSettings.COINS_AT_START);
 
-        moveManager.makeMove(1, playerActionMock);
+        moveManager.makeMove(1);
 
         verify(secondPlayerMock).setStatus(PlayerStatus.AllIn);
     }
@@ -216,7 +216,7 @@ public class MoveManagerTest {
     public void shouldSetFirstPlayerCallStatusWhenCall() throws Exception {
         setPlayerAction(PlayerAction.ActionType.Call);
 
-        moveManager.makeMove(0, playerActionMock);
+        moveManager.makeMove(0);
 
         verify(firstPlayerMock).setStatus(PlayerStatus.Call);
     }
@@ -225,7 +225,7 @@ public class MoveManagerTest {
     public void shouldSetSecondPlayerCallStatusWhenCall() throws Exception {
         setPlayerAction(PlayerAction.ActionType.Call);
 
-        moveManager.makeMove(1, playerActionMock);
+        moveManager.makeMove(1);
 
         verify(secondPlayerMock).setStatus(PlayerStatus.Call);
 
@@ -236,7 +236,7 @@ public class MoveManagerTest {
         setPlayerAction(PlayerAction.ActionType.Call);
         setCallValue(250);
 
-        moveManager.makeMove(0, playerActionMock);
+        moveManager.makeMove(0);
 
         verify(bankMock).setPlayerBet(0, 250);
     }
@@ -246,7 +246,7 @@ public class MoveManagerTest {
         setPlayerAction(PlayerAction.ActionType.Call);
         setCallValue(500);
 
-        moveManager.makeMove(0, playerActionMock);
+        moveManager.makeMove(0);
 
         verify(bankMock).setPlayerBet(0, 500);
     }
@@ -256,7 +256,7 @@ public class MoveManagerTest {
         setPlayerAction(PlayerAction.ActionType.Call);
         setCallValue(500);
 
-        moveManager.makeMove(1, playerActionMock);
+        moveManager.makeMove(1);
 
         verify(bankMock).setPlayerBet(1, 500);
     }
@@ -270,7 +270,7 @@ public class MoveManagerTest {
     public void shouldNoSecondPlayerSetMoveStatusCallWhenFirstRoundGameSecondPlayerFold() throws Exception {
         setPlayerAction(PlayerAction.ActionType.Fold);
 
-        moveManager.makeMove(0, playerActionMock);
+        moveManager.makeMove(0);
 
         verify(firstPlayerMock, never()).setStatus(PlayerStatus.Call);
     }
@@ -301,7 +301,7 @@ public class MoveManagerTest {
         setPlayerAction(PlayerAction.ActionType.Rise, SMALL_BLIND);
         setCallValue(2 * SMALL_BLIND);
 
-        moveManager.makeMove(1, playerActionMock);
+        moveManager.makeMove(1);
 
         verify(bankMock).setPlayerBet(1, 4 * SMALL_BLIND);
     }
@@ -311,7 +311,7 @@ public class MoveManagerTest {
         setPlayerAction(PlayerAction.ActionType.Rise, 500);
         setCallValue(2 * SMALL_BLIND);
 
-        moveManager.makeMove(1, playerActionMock);
+        moveManager.makeMove(1);
 
         verify(bankMock).setPlayerBet(1, 500);
     }
@@ -322,7 +322,7 @@ public class MoveManagerTest {
         setPlayerBet(1, 300);
         setCallValue(2 * SMALL_BLIND);
 
-        moveManager.makeMove(1, playerActionMock);
+        moveManager.makeMove(1);
 
         verify(bankMock).setPlayerBet(1, 800);
     }
@@ -331,7 +331,7 @@ public class MoveManagerTest {
     public void shouldFirstPlayerAllInWhenPlayerBet2000WithDefaultBalance() throws Exception {
         setPlayerAction(PlayerAction.ActionType.Rise, 2000);
 
-        moveManager.makeMove(0, playerActionMock);
+        moveManager.makeMove(0);
 
         verify(firstPlayerMock).setStatus(PlayerStatus.AllIn);
     }
@@ -341,7 +341,7 @@ public class MoveManagerTest {
     public void shouldSecondPlayerAllInWhenPlayerBet2000WithDefaultBalance() throws Exception {
         setPlayerAction(PlayerAction.ActionType.Rise, 2000);
 
-        moveManager.makeMove(1, playerActionMock);
+        moveManager.makeMove(1);
 
         verify(secondPlayerMock).setStatus(PlayerStatus.AllIn);
     }
@@ -350,7 +350,7 @@ public class MoveManagerTest {
     public void shouldFirstPlayerBatAllHisMoneyWhenAllIn() throws Exception {
         setPlayerAction(PlayerAction.ActionType.AllIn);
 
-        moveManager.makeMove(0, playerActionMock);
+        moveManager.makeMove(0);
 
         verify(bankMock).setPlayerBet(0, GameSettings.COINS_AT_START);
     }
@@ -359,7 +359,7 @@ public class MoveManagerTest {
     public void shouldSecondPlayerBatAllHisMoneyWhenAllIn() throws Exception {
         setPlayerAction(PlayerAction.ActionType.AllIn);
 
-        moveManager.makeMove(1, playerActionMock);
+        moveManager.makeMove(1);
 
         verify(bankMock).setPlayerBet(1, GameSettings.COINS_AT_START);
     }
@@ -370,7 +370,7 @@ public class MoveManagerTest {
         setCallValue(2000);
         setPlayerAction(PlayerAction.ActionType.Call);
 
-        moveManager.makeMove(0, playerActionMock);
+        moveManager.makeMove(0);
 
         verify(firstPlayerMock).setStatus(PlayerStatus.AllIn);
     }
@@ -380,7 +380,7 @@ public class MoveManagerTest {
         setCallValue(500);
         setPlayerAction(PlayerAction.ActionType.Call);
 
-        moveManager.makeMove(0, playerActionMock);
+        moveManager.makeMove(0);
 
         verify(firstPlayerMock, never()).setStatus(PlayerStatus.AllIn);
     }
@@ -390,7 +390,7 @@ public class MoveManagerTest {
         setCallValue(2000);
         setPlayerAction(PlayerAction.ActionType.Call);
 
-        moveManager.makeMove(0, playerActionMock);
+        moveManager.makeMove(0);
 
         verify(firstPlayerMock, never()).setStatus(PlayerStatus.Call);
     }
@@ -400,7 +400,7 @@ public class MoveManagerTest {
         setCallValue(2000);
         setPlayerAction(PlayerAction.ActionType.Call);
 
-        moveManager.makeMove(0, playerActionMock);
+        moveManager.makeMove(0);
 
         verify(bankMock).addToPot(GameSettings.COINS_AT_START);
     }
@@ -410,7 +410,7 @@ public class MoveManagerTest {
         setCallValue(2000);
         setPlayerAction(PlayerAction.ActionType.Call);
 
-        moveManager.makeMove(0, playerActionMock);
+        moveManager.makeMove(0);
 
         verify(bankMock, never()).setCallValue(1000);
     }

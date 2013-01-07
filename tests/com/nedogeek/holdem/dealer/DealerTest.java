@@ -63,7 +63,7 @@ public class DealerTest {
 
         dealer.tick();
 
-        verify(moveManagerMock).makeMove(0,null);
+        verify(moveManagerMock).makeMove(0);
     }
 
     @Test
@@ -74,7 +74,7 @@ public class DealerTest {
 
         dealer.tick();
 
-        verify(moveManagerMock, never()).makeMove(0,null);
+        verify(moveManagerMock, never()).makeMove(0);
     }
 
     @Test

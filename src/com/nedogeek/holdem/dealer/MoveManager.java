@@ -20,7 +20,8 @@ public class MoveManager {
         this.playersManager = playersManager;
     }
 
-    void makeMove(int playerNumber, PlayerAction playerMove) {
+    void makeMove(int playerNumber) {
+        PlayerAction playerMove = getMover(playerNumber).getMove();
         switch (playerMove.getActionType()) {
             case Fold:
                 makeFold(playerNumber);
