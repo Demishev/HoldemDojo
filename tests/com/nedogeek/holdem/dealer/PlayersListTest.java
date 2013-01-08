@@ -8,6 +8,7 @@ import org.junit.Test;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
@@ -15,11 +16,11 @@ import static org.mockito.Mockito.when;
  * Date: 22.11.12
  * Time: 1:55
  */
-public class PlayerManagerTest {
+public class PlayersListTest {
     final Player firstPlayer = new Player("First player");
     final Player secondPlayer = new Player("Second player");
 
-    private PlayersList playersManager;
+    private PlayersList playersList;
     private Dealer dealerMock;
 
     @Before
@@ -37,34 +38,34 @@ public class PlayerManagerTest {
     }
 
     private void setDefaultTwoPlayersGame() {
-        playersManager.addPlayer(firstPlayer);
-        playersManager.addPlayer(secondPlayer);
+        playersList.addPlayer(firstPlayer);
+        playersList.addPlayer(secondPlayer);
     }
 
     @Test
     public void shouldFalseWhenDefaultDeskSecondPlayerFold() throws Exception {
         secondPlayer.setStatus(PlayerStatus.Fold);
 
-        assertFalse(playersManager.hasAvailableMovers());
+        assertFalse(playersList.hasAvailableMovers());
     }
 
     @Test
     public void shouldFalseWhenDefaultDeskSecondPlayerLost() throws Exception {
-        playersManager.setLastMovedPlayer(1);
+        playersList.playerMoved(secondPlayer);
         secondPlayer.setStatus(PlayerStatus.Fold);
 
-        assertFalse(playersManager.hasAvailableMovers());
+        assertFalse(playersList.hasAvailableMovers());
     }
 
     @Test
     public void shouldMoveWhen() throws Exception {
         firstPlayer.setStatus(PlayerStatus.Rise);
         secondPlayer.setStatus(PlayerStatus.Rise);
-        playersManager.setLastMovedPlayer(0);
+        playersList.playerMoved(firstPlayer);
 
         when(dealerMock.riseNeeded(secondPlayer)).thenReturn(true);
 
-        assertEquals(secondPlayer, playersManager.getMover());
+        assertEquals(secondPlayer, playersList.getMover());
     }
 
     @Test
@@ -75,77 +76,80 @@ public class PlayerManagerTest {
     @Test
     public void should1PlayerWhenNewPlayerAddedToNewPlayersManager() throws Exception {
         resetPlayerManager();
-        playersManager.addPlayer(firstPlayer);
+        playersList.addPlayer(firstPlayer);
 
-        assertEquals(1, playersManager.size());
+        assertEquals(1, playersList.size());
     }
 
     @Test
     public void should2PlayersWhen2NewPlayerAddedToNewPlayersManager() throws Exception {
         resetPlayerManager();
-        playersManager.addPlayer(firstPlayer);
-        playersManager.addPlayer(secondPlayer);
+        playersList.addPlayer(firstPlayer);
+        playersList.addPlayer(secondPlayer);
 
-        assertEquals(2, playersManager.size());
+        assertEquals(2, playersList.size());
     }
 
     private void resetPlayerManager() {
-        playersManager = new PlayersList(dealerMock);
-
-        playersManager.setLastMovedPlayer(-1);
+        playersList = new PlayersList(dealerMock);
     }
 
     @Test
     public void should1PlayerWhenSameNewPlayerAddedToNewPlayersManagerTwice() throws Exception {
         resetPlayerManager();
-        playersManager.addPlayer(firstPlayer);
-        playersManager.addPlayer(firstPlayer);
+        playersList.addPlayer(firstPlayer);
+        playersList.addPlayer(firstPlayer);
 
-        assertEquals(1, playersManager.size());
-    }
-
-    @Test
-    public void should0PlayersWhenAddFirstPlayerAndRemoveItFromPlayersManager() throws Exception {
-        resetPlayerManager();
-        playersManager.addPlayer(firstPlayer);
-        playersManager.removePlayer(firstPlayer);
-
-        assertEquals(0, playersManager.size());
-    }
-
-    @Test
-    public void should1PlayerWhenAddFirstPlayerAndRemoveSecondPlayerFromPlayersManager() throws Exception {
-        resetPlayerManager();
-        playersManager.addPlayer(firstPlayer);
-        playersManager.removePlayer(secondPlayer);
-
-        assertEquals(1, playersManager.size());
+        assertEquals(1, playersList.size());
     }
 
     @Test
     public void shouldNullWhenNewPlayerManagerGetDealerNumber() throws Exception {
 
-        assertEquals(null, playersManager.getDealer());
+        assertEquals(null, playersList.getDealer());
     }
 
     @Test
     public void shouldFirstPlayerWhenNewPlayerManagerChangeDealerNumberAndGetDealerNumber() throws Exception {
-        playersManager.changeDealer();
+        playersList.changeDealer();
 
-        assertEquals(firstPlayer, playersManager.getDealer());
+        assertEquals(firstPlayer, playersList.getDealer());
     }
 
     @Test
     public void shouldSecondPlayerWhenNewPlayerManagerChangeDealerNumberTwiceAndGetDealerNumber() throws Exception {
-        playersManager.changeDealer();
-        playersManager.changeDealer();
+        playersList.changeDealer();
+        playersList.changeDealer();
 
-        assertEquals(secondPlayer, playersManager.getDealer());
+        assertEquals(secondPlayer, playersList.getDealer());
     }
 
     @Test
     public void should2PlayersListWhenPlayersManagerGetPlayers() throws Exception {
-        assertEquals(2, playersManager.size());
+        assertEquals(2, playersList.size());
+    }
 
+    @Test
+    public void shouldPlayersListRegisteredInPlayerWhenPlayerAddedToList() throws Exception {
+        final Player playerMock = mock(Player.class);
+
+        playersList.add(playerMock);
+
+        verify(playerMock).registerList(playersList);
+    }
+
+    @Test
+    public void shouldMoverSecondPlayer0WhenMovedFirstPlayer() throws Exception {
+        playersList.playerMoved(firstPlayer);
+
+        assertEquals(secondPlayer, playersList.getMover());
+    }
+
+
+    @Test
+    public void shouldMoverFirstPlayer0WhenMovedSecondPlayer() throws Exception {
+        playersList.playerMoved(secondPlayer);
+
+        assertEquals(firstPlayer, playersList.getMover());
     }
 }

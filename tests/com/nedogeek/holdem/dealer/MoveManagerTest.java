@@ -87,34 +87,6 @@ public class MoveManagerTest {
     }
 
     @Test
-    public void shouldPlayersManagerSetLastMovedPlayer1WhenMoveManagerMakeMove1PlayerFold() throws Exception {
-        setPlayerAction(PlayerAction.ActionType.Fold);
-
-        moveManager.makeMove(secondPlayerMock);
-
-        verify(playersManagerMock).setLastMovedPlayer(secondPlayerMock);
-    }
-
-    @Test
-    public void shouldPlayersManagerSetLastMovedPlayer1WhenMoveManagerMakeMove1PlayerCheck() throws Exception {
-        setPlayerAction(PlayerAction.ActionType.Check);
-
-        moveManager.makeMove(secondPlayerMock);
-
-        verify(playersManagerMock).setLastMovedPlayer(secondPlayerMock);
-    }
-
-    @Test
-    public void shouldPlayersManagerSetLastMovedPlayer0WhenMoveManagerMakeMove0PlayerCheck() throws Exception {
-        setPlayerAction(PlayerAction.ActionType.Check);
-
-        moveManager.makeMove(firstPlayerMock);
-
-        verify(playersManagerMock).setLastMovedPlayer(firstPlayerMock);
-    }
-
-
-    @Test
     public void shouldBet40WhenFirstPlayerMovedLastFirstRoundFirstPlayerBet50Second50AndPlayerActionIsBet2SB() throws Exception {
         setPlayerAction(PlayerAction.ActionType.Rise, 2 * SMALL_BLIND);
 

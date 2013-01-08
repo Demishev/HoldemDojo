@@ -10,11 +10,10 @@ import java.util.ArrayList;
  * Date: 21.11.12
  * Time: 23:48
  */
-class PlayersList extends ArrayList<Player> {
+public class PlayersList extends ArrayList<Player> {
     private final Dealer dealer;
 
     private int dealerNumber;
-
     private int lastMovedPlayer;
 
     PlayersList(Dealer dealer) {
@@ -22,12 +21,15 @@ class PlayersList extends ArrayList<Player> {
         dealerNumber = -1;
     }
 
-    public void setLastMovedPlayer(int lastMovedPlayer) { //TODO remove me
-        this.lastMovedPlayer = lastMovedPlayer;
+    @Override
+    public boolean add(Player player) {
+        player.registerList(this);
+
+        return super.add(player);
     }
 
-    public void setLastMovedPlayer(Player lastMovedPlayer) {
-        //TODO code me
+    public void playerMoved(Player player) {
+        lastMovedPlayer = indexOf(player);
     }
 
     private int nextPlayer(int playerNumber) {
@@ -57,7 +59,7 @@ class PlayersList extends ArrayList<Player> {
         return get(getMoverNumber()); //TODO test it
     }
 
-    int getMoverNumber() {      //TODO replace with getMover
+    private int getMoverNumber() {
         if (lastMovedPlayer == -1) {
             return nextPlayer(dealerNumber);
         }
@@ -84,18 +86,9 @@ class PlayersList extends ArrayList<Player> {
             add(player);
     }
 
-    public void removePlayer(Player player) {
-        remove(player);      //TODO remove
-    }
-
     public void changeDealer() {
         dealerNumber = nextPlayer(dealerNumber);
     }
-
-//    @Deprecated
-//    public List<Player> getPlayers() {
-//        return this;
-//    }
 
     public Player getDealer() {
         return (dealerNumber == -1) ? null : get(dealerNumber);

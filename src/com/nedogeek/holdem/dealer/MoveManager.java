@@ -37,7 +37,6 @@ public class MoveManager {
                 makeAllIn(mover);
                 break;
         }
-        playersManager.setLastMovedPlayer(mover); //TODO test me
     }
 
     void makeInitialBet(Player player, int initialBet) {
