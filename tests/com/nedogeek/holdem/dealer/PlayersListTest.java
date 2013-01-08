@@ -38,8 +38,8 @@ public class PlayersListTest {
     }
 
     private void setDefaultTwoPlayersGame() {
-        playersList.addPlayer(firstPlayer);
-        playersList.addPlayer(secondPlayer);
+        playersList.add(firstPlayer);
+        playersList.add(secondPlayer);
     }
 
     @Test
@@ -76,7 +76,7 @@ public class PlayersListTest {
     @Test
     public void should1PlayerWhenNewPlayerAddedToNewPlayersManager() throws Exception {
         resetPlayerManager();
-        playersList.addPlayer(firstPlayer);
+        playersList.add(firstPlayer);
 
         assertEquals(1, playersList.size());
     }
@@ -84,8 +84,8 @@ public class PlayersListTest {
     @Test
     public void should2PlayersWhen2NewPlayerAddedToNewPlayersManager() throws Exception {
         resetPlayerManager();
-        playersList.addPlayer(firstPlayer);
-        playersList.addPlayer(secondPlayer);
+        playersList.add(firstPlayer);
+        playersList.add(secondPlayer);
 
         assertEquals(2, playersList.size());
     }
@@ -97,31 +97,10 @@ public class PlayersListTest {
     @Test
     public void should1PlayerWhenSameNewPlayerAddedToNewPlayersManagerTwice() throws Exception {
         resetPlayerManager();
-        playersList.addPlayer(firstPlayer);
-        playersList.addPlayer(firstPlayer);
+        playersList.add(firstPlayer);
+        playersList.add(firstPlayer);
 
         assertEquals(1, playersList.size());
-    }
-
-    @Test
-    public void shouldNullWhenNewPlayerManagerGetDealerNumber() throws Exception {
-
-        assertEquals(null, playersList.getDealer());
-    }
-
-    @Test
-    public void shouldFirstPlayerWhenNewPlayerManagerChangeDealerNumberAndGetDealerNumber() throws Exception {
-        playersList.changeDealer();
-
-        assertEquals(firstPlayer, playersList.getDealer());
-    }
-
-    @Test
-    public void shouldSecondPlayerWhenNewPlayerManagerChangeDealerNumberTwiceAndGetDealerNumber() throws Exception {
-        playersList.changeDealer();
-        playersList.changeDealer();
-
-        assertEquals(secondPlayer, playersList.getDealer());
     }
 
     @Test
@@ -151,5 +130,37 @@ public class PlayersListTest {
         playersList.playerMoved(secondPlayer);
 
         assertEquals(firstPlayer, playersList.getMover());
+    }
+
+    @Test
+    public void shouldSecondPlayerWhenSmallBlindPlayer() throws Exception {
+        assertEquals(secondPlayer, playersList.smallBlindPlayer());
+    }
+
+    @Test
+    public void shouldFirstPlayerWhenBigBlindPlayer() throws Exception {
+        assertEquals(firstPlayer, playersList.bigBlindPlayer());
+    }
+
+    @Test
+    public void shouldFirstPlayerWhenSmallBlindPlayerAfterSwitchingDealer() throws Exception {
+        playersList.changeDealer();
+
+        assertEquals(firstPlayer, playersList.smallBlindPlayer());
+    }
+
+    @Test
+    public void shouldSecondPlayerWhenBigBlindPlayerAfterSwitchingDealer() throws Exception {
+        playersList.changeDealer();
+
+        assertEquals(secondPlayer, playersList.bigBlindPlayer());
+    }
+
+    @Test
+    public void shouldThirdPlayerWhenAddThirdPlayerAndGetBigBlindPlayer() throws Exception {
+        Player thirdPlayer = mock(Player.class);
+        playersList.add(thirdPlayer);
+
+        assertEquals(thirdPlayer, playersList.bigBlindPlayer());
     }
 }

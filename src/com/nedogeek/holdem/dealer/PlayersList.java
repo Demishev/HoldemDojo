@@ -18,14 +18,16 @@ public class PlayersList extends ArrayList<Player> {
 
     PlayersList(Dealer dealer) {
         this.dealer = dealer;
-        dealerNumber = -1;
+        dealerNumber = 0;
     }
 
     @Override
     public boolean add(Player player) {
-        player.registerList(this);
-
-        return super.add(player);
+        if (!contains(player)) {
+            player.registerList(this);
+            return super.add(player);
+        }
+        return false;
     }
 
     public void playerMoved(Player player) {
@@ -81,24 +83,15 @@ public class PlayersList extends ArrayList<Player> {
                 dealer.riseNeeded(player));
     }
 
-    void addPlayer(Player player) {
-        if (!contains(player))
-            add(player);
-    }
-
     public void changeDealer() {
         dealerNumber = nextPlayer(dealerNumber);
     }
 
-    public Player getDealer() {
-        return (dealerNumber == -1) ? null : get(dealerNumber);
-    }
-
     public Player smallBlindPlayer() {
-        return null;   //TODO code me!
+        return get(nextPlayer(dealerNumber));
     }
 
     public Player bigBlindPlayer() {
-        return null;  //TODO code me!
+        return get(nextPlayer(nextPlayer(dealerNumber)));
     }
 }
