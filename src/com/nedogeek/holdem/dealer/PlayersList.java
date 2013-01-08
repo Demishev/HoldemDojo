@@ -58,7 +58,7 @@ public class PlayersList extends ArrayList<Player> {
     }
 
     Player getMover() {
-        return get(getMoverNumber()); //TODO test it
+        return get(getMoverNumber());
     }
 
     private int getMoverNumber() {

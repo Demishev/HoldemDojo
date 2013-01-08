@@ -16,10 +16,11 @@ public class Player {
     private PlayerStatus playerStatus;
     private int bet;
     private int balance;
+    private PlayersList playersList;
 
-    //TODO class is a stub
     public Player(String name) {
         this.name = name;
+        status = PlayerStatus.NotMoved;
     }
 
     public PlayerStatus getStatus() {
@@ -55,6 +56,14 @@ public class Player {
     }
 
     public void registerList(PlayersList playersList) {
+        this.playersList = playersList;
+    }
 
+    public String getName() {
+        return name;
+    }
+
+    public void makeBet(int bet) {
+        playersList.playerMoved(this);
     }
 }
