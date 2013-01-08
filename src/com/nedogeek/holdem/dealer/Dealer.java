@@ -1,6 +1,7 @@
 package com.nedogeek.holdem.dealer;
 
-import com.nedogeek.holdem.gamingStuff.Desk;
+import com.nedogeek.holdem.GameRound;
+import com.nedogeek.holdem.GameStatus;
 import com.nedogeek.holdem.gamingStuff.Player;
 
 /**
@@ -9,32 +10,27 @@ import com.nedogeek.holdem.gamingStuff.Player;
  * Time: 22:02
  */
 public class Dealer implements Runnable {
-    private final Desk desk;
-
     private final MoveManager moveManager;
     private final NewGameSetter newGameSetter;
     private final PlayersManager playersManager;
     private final GameCycleManager gameCycleManager;
     private final EndGameManager endGameManager;
 
-    Dealer(Desk desk) {
-        this.desk = desk;
-        playersManager = new PlayersManager(this);
-        moveManager = new MoveManager(this, playersManager);
-        newGameSetter = new NewGameSetter(desk, playersManager, moveManager);
-        gameCycleManager = new GameCycleManager(this, playersManager);
-        endGameManager = new EndGameManager(desk, playersManager);
-    }
+    private GameStatus gameStatus;
+    private GameRound gameRound;
 
-    Dealer(Desk deskMock, MoveManager moveManagerMock, NewGameSetter newGameSetterMock,
+
+    Dealer(MoveManager moveManagerMock, NewGameSetter newGameSetterMock,
            PlayersManager playersManagerMock, GameCycleManager gameCycleManagerMock,
-           EndGameManager endGameManagerMock) {
-        desk = deskMock;
+           EndGameManager endGameManagerMock, GameStatus gameStatus, GameRound gameRound) {
         moveManager = moveManagerMock;
         newGameSetter = newGameSetterMock;
         playersManager = playersManagerMock;
         gameCycleManager = gameCycleManagerMock;
         endGameManager = endGameManagerMock;
+
+        this.gameStatus = gameStatus;
+        this.gameRound = gameRound;
     }
 
     public void run() {
@@ -42,7 +38,7 @@ public class Dealer implements Runnable {
     }
 
     void tick() {
-        switch (desk.getGameStatus()) {
+        switch (gameStatus) {
             case READY:
                 gameCycleManager.prepareNewGameCycle();
                 break;
@@ -56,7 +52,7 @@ public class Dealer implements Runnable {
     }
 
     private void makeGameAction() {
-        switch (desk.getGameRound()) {
+        switch (gameRound) {
             case INITIAL:
                 newGameSetter.setNewGame();
                 break;
@@ -67,7 +63,7 @@ public class Dealer implements Runnable {
                 if (playersManager.hasAvailableMovers()) {
                     moveManager.makeMove(playersManager.getMover());
                 } else {
-                    desk.setNextGameRound();
+                    setNextGameRound();
                 }
                 break;
         }
@@ -90,6 +86,26 @@ public class Dealer implements Runnable {
     }
 
     public void setCallValue(int playerBet) {
+
+    }
+
+    public void resetCards() {
+
+    }
+
+    public void setNextGameRound() {
+
+    }
+
+    public void giveCardsToPlayer(Player player) {
+
+    }
+
+    public void setPlayerWin(Player winner) {
+
+    }
+
+    public void setGameEnded() {
 
     }
 }

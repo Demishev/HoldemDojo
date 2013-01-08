@@ -2,7 +2,6 @@ package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.PlayerStatus;
-import com.nedogeek.holdem.gamingStuff.Desk;
 import com.nedogeek.holdem.gamingStuff.Player;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +19,7 @@ import static org.mockito.Mockito.*;
 public class NewGameSetterTest {
     private NewGameSetter newGameSetter;
 
-    private Desk deskMock;
+    private Dealer dealerMock;
     private PlayersManager playersManagerMock;
     private MoveManager moveManagerMock;
     private List<Player> players;
@@ -30,11 +29,11 @@ public class NewGameSetterTest {
 
     @Before
     public void setUp() throws Exception {
-        deskMock = mock(Desk.class);
+        dealerMock = mock(Dealer.class);
         resetPlayerManagerMock();
         resetMoveManagerMock();
 
-        newGameSetter = new NewGameSetter(deskMock, playersManagerMock, moveManagerMock);
+        newGameSetter = new NewGameSetter(dealerMock, playersManagerMock, moveManagerMock);
 
     }
 
@@ -114,14 +113,14 @@ public class NewGameSetterTest {
     public void shouldBeGivenCardsToFirstPlayerWhenDefaultNewGame() throws Exception {
         newGameSetter.setNewGame();
 
-        verify(deskMock).giveCardsToPlayer(firstPlayerMock);
+        verify(dealerMock).giveCardsToPlayer(firstPlayerMock);
     }
 
     @Test
     public void shouldBeGivenCardsToSecondPlayerWhenDefaultNewGame() throws Exception {
         newGameSetter.setNewGame();
 
-        verify(deskMock).giveCardsToPlayer(secondPlayerMock);
+        verify(dealerMock).giveCardsToPlayer(secondPlayerMock);
     }
 
     @Test
@@ -130,14 +129,14 @@ public class NewGameSetterTest {
 
         newGameSetter.setNewGame();
 
-        verify(deskMock).giveCardsToPlayer(thirdPlayerMock);
+        verify(dealerMock).giveCardsToPlayer(thirdPlayerMock);
     }
 
     @Test
     public void shouldNotBeGivenCardsToThirdPlayerWhenDefaultNewGame() throws Exception {
         newGameSetter.setNewGame();
 
-        verify(deskMock, never()).giveCardsToPlayer(thirdPlayerMock);
+        verify(dealerMock, never()).giveCardsToPlayer(thirdPlayerMock);
     }
 
     @Test
@@ -147,7 +146,7 @@ public class NewGameSetterTest {
 
         newGameSetter.setNewGame();
 
-        verify(deskMock, never()).giveCardsToPlayer(secondPlayerMock);
+        verify(dealerMock, never()).giveCardsToPlayer(secondPlayerMock);
     }
 
     @Test
@@ -191,21 +190,21 @@ public class NewGameSetterTest {
     public void shouldNotSetGameRound1WhenTickGameRoundIs1() throws Exception {
         newGameSetter.setNewGame();
 
-        verify(deskMock).setNextGameRound();
+        verify(dealerMock).setNextGameRound();
     }
 
     @Test
     public void shouldShuffleCardsWhenStartGaming() throws Exception {
         newGameSetter.setNewGame();
 
-        verify(deskMock).resetCards();
+        verify(dealerMock).resetCards();
     }
 
     @Test
     public void shouldSetGameRound1WhenTick() throws Exception {
         newGameSetter.setNewGame();
 
-        verify(deskMock).setNextGameRound();
+        verify(dealerMock).setNextGameRound();
     }
 
 

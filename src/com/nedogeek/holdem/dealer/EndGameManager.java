@@ -1,7 +1,6 @@
 package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.PlayerStatus;
-import com.nedogeek.holdem.gamingStuff.Desk;
 import com.nedogeek.holdem.gamingStuff.Player;
 
 import java.util.List;
@@ -12,18 +11,18 @@ import java.util.List;
  * Time: 1:35
  */
 public class EndGameManager {
-    private final Desk desk;
+    private final Dealer dealer;
     private final PlayersManager playersManager;
 
 
-    public EndGameManager(Desk desk, PlayersManager playersManager) {
-        this.desk = desk;
+    public EndGameManager(Dealer dealer, PlayersManager playersManager) {
+        this.dealer = dealer;
         this.playersManager = playersManager;
     }
 
     public void endGame() {
-        desk.setPlayerWin(findWinner());
-        desk.setGameEnded();
+        dealer.setPlayerWin(findWinner());
+        dealer.setGameEnded();
     }
 
     private Player findWinner() {

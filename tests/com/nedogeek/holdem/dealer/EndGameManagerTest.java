@@ -2,7 +2,6 @@ package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.PlayerStatus;
 import com.nedogeek.holdem.combinations.PlayerCardCombination;
-import com.nedogeek.holdem.gamingStuff.Desk;
 import com.nedogeek.holdem.gamingStuff.Player;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +18,7 @@ import static org.mockito.Mockito.*;
  * Time: 14:24
  */
 public class EndGameManagerTest {
-    private Desk deskMock;
+    private Dealer dealerMock;
     private PlayersManager playersManagerMock;
 
     private List<Player> players;
@@ -41,7 +40,7 @@ public class EndGameManagerTest {
         resetPlayersMocks();
         resetPlayerManagerMock();
 
-        endGameManager = new EndGameManager(deskMock, playersManagerMock);
+        endGameManager = new EndGameManager(dealerMock, playersManagerMock);
     }
 
     private void resetPlayersMocks() {
@@ -83,7 +82,7 @@ public class EndGameManagerTest {
     }
 
     private void resetDeskMock() {
-        deskMock = mock(Desk.class);
+        dealerMock = mock(Dealer.class);
     }
 
     private void resetPlayerManagerMock() {
@@ -119,7 +118,7 @@ public class EndGameManagerTest {
     public void shouldDeskSetNewGameRoundWhenEGMEndGame() throws Exception {
         endGameManager.endGame();
 
-        verify(deskMock).setGameEnded();
+        verify(dealerMock).setGameEnded();
     }
 
     @Test
@@ -128,7 +127,7 @@ public class EndGameManagerTest {
 
         endGameManager.endGame();
 
-        verify(deskMock).setPlayerWin(secondPlayerMock);
+        verify(dealerMock).setPlayerWin(secondPlayerMock);
     }
 
     @Test
@@ -137,7 +136,7 @@ public class EndGameManagerTest {
 
         endGameManager.endGame();
 
-        verify(deskMock).setPlayerWin(secondPlayerMock);
+        verify(dealerMock).setPlayerWin(secondPlayerMock);
     }
 
     @Test
@@ -146,14 +145,14 @@ public class EndGameManagerTest {
 
         endGameManager.endGame();
 
-        verify(deskMock).setPlayerWin(firstPlayerMock);
+        verify(dealerMock).setPlayerWin(firstPlayerMock);
     }
 
     @Test
     public void shouldSecondPlayerWinWhenNoPlayerFoldsAndFirstHasWinningCombination() throws Exception {
         endGameManager.endGame();
 
-        verify(deskMock).setPlayerWin(firstPlayerMock);
+        verify(dealerMock).setPlayerWin(firstPlayerMock);
     }
 
     @Test
@@ -162,6 +161,6 @@ public class EndGameManagerTest {
 
         endGameManager.endGame();
 
-        verify(deskMock).setPlayerWin(secondPlayerMock);
+        verify(dealerMock).setPlayerWin(secondPlayerMock);
     }
 }

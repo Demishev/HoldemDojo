@@ -2,7 +2,6 @@ package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.PlayerStatus;
-import com.nedogeek.holdem.gamingStuff.Desk;
 import com.nedogeek.holdem.gamingStuff.Player;
 
 /**
@@ -11,30 +10,30 @@ import com.nedogeek.holdem.gamingStuff.Player;
  * Time: 23:42
  */
 public class NewGameSetter {
-    private final Desk desk;
+    private final Dealer dealer;
     private final MoveManager moveManager;
     private final PlayersManager playersManager;
 
-    public NewGameSetter(Desk desk, PlayersManager playersManager, MoveManager moveManager) {
-        this.desk = desk;
+    public NewGameSetter(Dealer dealer, PlayersManager playersManager, MoveManager moveManager) {
+        this.dealer = dealer;
         this.playersManager = playersManager;
         this.moveManager = moveManager;
     }
 
     void setNewGame() {
-        desk.resetCards();
+        dealer.resetCards();
         playersManager.changeDealer();
 
         resetPlayers();
         makeInitialBets();
 
-        desk.setNextGameRound();
+        dealer.setNextGameRound();
     }
 
     private void resetPlayers() {
         for (Player player: playersManager.getPlayers()) {
             if (player.getStatus() != PlayerStatus.Lost) {
-                desk.giveCardsToPlayer(player);
+                dealer.giveCardsToPlayer(player);
                 player.setStatus(PlayerStatus.NotMoved);
             }
         }
