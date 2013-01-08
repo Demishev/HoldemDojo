@@ -2,7 +2,6 @@ package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.PlayerStatus;
-import com.nedogeek.holdem.gamingStuff.Bank;
 import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayerAction;
 
@@ -12,11 +11,11 @@ import com.nedogeek.holdem.gamingStuff.PlayerAction;
  * Time: 23:26
  */
 public class MoveManager {
-    private final Bank bank;
+    private final Dealer dealer;
     private final PlayersManager playersManager;
 
-    MoveManager(Bank bank, PlayersManager playersManager) {
-        this.bank = bank;
+    MoveManager(Dealer dealer, PlayersManager playersManager) {
+        this.dealer = dealer;
         this.playersManager = playersManager;
     }
 
@@ -51,14 +50,14 @@ public class MoveManager {
         final int playerBet = betValue + previousBet;
 
         player.setBet(playerBet);
-        bank.addToPot(betValue);
+        dealer.addToPot(betValue);
         player.setBalance(playerAmount - betValue);
         checkCallValue(playerBet);
     }
 
     private void checkCallValue(int playerBet) {
-        if (bank.getCallValue() < playerBet) {
-            bank.setCallValue(playerBet);
+        if (dealer.getCallValue() < playerBet) {
+            dealer.setCallValue(playerBet);
         }
     }
 
@@ -67,11 +66,11 @@ public class MoveManager {
     }
 
     private void makeCall(Player player) {
-        if (player.getBalance() < bank.getCallValue() - player.getBet()) {
+        if (player.getBalance() < dealer.getCallValue() - player.getBet()) {
             makeAllIn(player);
         } else {
             player.setStatus(PlayerStatus.Call);
-            makeBet(player, bank.getCallValue() - player.getBet());
+            makeBet(player, dealer.getCallValue() - player.getBet());
         }
     }
 
@@ -99,6 +98,6 @@ public class MoveManager {
     }
 
     private int minimumRiseValue() {
-        return bank.getCallValue() + 2 * GameSettings.SMALL_BLIND_AT_START;
+        return dealer.getCallValue() + 2 * GameSettings.SMALL_BLIND_AT_START;
     }
 }

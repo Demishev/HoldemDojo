@@ -1,7 +1,6 @@
 package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.PlayerStatus;
-import com.nedogeek.holdem.gamingStuff.Bank;
 import com.nedogeek.holdem.gamingStuff.Player;
 
 import java.util.ArrayList;
@@ -13,18 +12,17 @@ import java.util.List;
  * Time: 23:48
  */
 class PlayersManager {
-    private final Bank bank;
+    private final Dealer dealer;
 
     private int dealerNumber;
 
     List<Player> players = new ArrayList<Player>();
     private int lastMovedPlayer;
 
-    PlayersManager(Bank bank) {
-        this.bank = bank;
+    PlayersManager(Dealer dealer) {
+        this.dealer = dealer;
         dealerNumber = -1;
     }
-
 
     public void setLastMovedPlayer(int lastMovedPlayer) { //TODO remove me
         this.lastMovedPlayer = lastMovedPlayer;
@@ -80,7 +78,7 @@ class PlayersManager {
 
     private boolean isActiveNotRisePlayer(Player player) {
         return (player.getStatus() != PlayerStatus.Fold &&
-                bank.riseNeeded(player));
+                dealer.riseNeeded(player));
     }
 
     void addPlayer(Player player) {
@@ -105,7 +103,7 @@ class PlayersManager {
     }
 
     public Player smallBlindPlayer() {
-        return null;
+        return null;   //TODO code me!
     }
 
     public Player bigBlindPlayer() {

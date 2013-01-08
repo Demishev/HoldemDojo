@@ -1,7 +1,7 @@
 package com.nedogeek.holdem.dealer;
 
-import com.nedogeek.holdem.gamingStuff.Bank;
 import com.nedogeek.holdem.gamingStuff.Desk;
+import com.nedogeek.holdem.gamingStuff.Player;
 
 /**
  * User: Konstantin Demishev
@@ -16,13 +16,11 @@ public class Dealer implements Runnable {
     private final PlayersManager playersManager;
     private final GameCycleManager gameCycleManager;
     private final EndGameManager endGameManager;
-    private final Bank bank;
 
     Dealer(Desk desk) {
-        bank = new Bank();
         this.desk = desk;
-        playersManager = new PlayersManager(bank);
-        moveManager = new MoveManager(bank, playersManager);
+        playersManager = new PlayersManager(this);
+        moveManager = new MoveManager(this, playersManager);
         newGameSetter = new NewGameSetter(desk, playersManager, moveManager);
         gameCycleManager = new GameCycleManager(this, playersManager);
         endGameManager = new EndGameManager(desk, playersManager);
@@ -32,7 +30,6 @@ public class Dealer implements Runnable {
            PlayersManager playersManagerMock, GameCycleManager gameCycleManagerMock,
            EndGameManager endGameManagerMock) {
         desk = deskMock;
-        bank = new Bank();
         moveManager = moveManagerMock;
         newGameSetter = newGameSetterMock;
         playersManager = playersManagerMock;
@@ -77,6 +74,22 @@ public class Dealer implements Runnable {
     }
 
     public void setGameStarted() {
+
+    }
+
+    public boolean riseNeeded(Player player) {
+        return false;
+    }
+
+    public void addToPot(int betValue) {
+
+    }
+
+    public int getCallValue() {
+        return 0;
+    }
+
+    public void setCallValue(int playerBet) {
 
     }
 }

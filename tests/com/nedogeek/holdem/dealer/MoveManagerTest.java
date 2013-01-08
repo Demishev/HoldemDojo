@@ -2,7 +2,6 @@ package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.PlayerStatus;
-import com.nedogeek.holdem.gamingStuff.Bank;
 import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayerAction;
 import org.junit.Before;
@@ -26,7 +25,7 @@ public class MoveManagerTest {
     private Player firstPlayerMock;
     private Player secondPlayerMock;
 
-    private Bank bankMock;
+    private Dealer dealerMock;
     private PlayersManager playersManagerMock;
 
     private MoveManager moveManager;
@@ -38,7 +37,7 @@ public class MoveManagerTest {
         resetBank();
         resetPlayersManager();
 
-        moveManager = new MoveManager(bankMock, playersManagerMock);
+        moveManager = new MoveManager(dealerMock, playersManagerMock);
     }
 
 
@@ -53,7 +52,7 @@ public class MoveManagerTest {
     }
 
     private void resetBank() {
-        bankMock = mock(Bank.class);
+        dealerMock = mock(Dealer.class);
     }
 
     private void resetPlayersManager() {
@@ -257,7 +256,7 @@ public class MoveManagerTest {
     }
 
     private void setCallValue(int callValue) {
-        when(bankMock.getCallValue()).thenReturn(callValue);
+        when(dealerMock.getCallValue()).thenReturn(callValue);
     }
 
 
@@ -274,21 +273,21 @@ public class MoveManagerTest {
     public void shouldSetCallValue2SmallBlindsWhenInitialBlindFirstPlayer2SmallBlinds() throws Exception {
         moveManager.makeInitialBet(firstPlayerMock, 2 * SMALL_BLIND);
 
-        verify(bankMock).setCallValue(2 * SMALL_BLIND);
+        verify(dealerMock).setCallValue(2 * SMALL_BLIND);
     }
 
     @Test
     public void shouldSetCallValue2SmallBlindsWhenInitialBlindSecondPlayer2SmallBlinds() throws Exception {
         moveManager.makeInitialBet(secondPlayerMock, 2 * SMALL_BLIND);
 
-        verify(bankMock).setCallValue(2 * SMALL_BLIND);
+        verify(dealerMock).setCallValue(2 * SMALL_BLIND);
     }
 
     @Test
     public void shouldSetCallValueSmallBlindsWhenInitialBlindFirstPlayerSmallBlinds() throws Exception {
         moveManager.makeInitialBet(firstPlayerMock,SMALL_BLIND);
 
-        verify(bankMock).setCallValue(SMALL_BLIND);
+        verify(dealerMock).setCallValue(SMALL_BLIND);
     }
 
     @Test
@@ -397,7 +396,7 @@ public class MoveManagerTest {
 
         moveManager.makeMove(firstPlayerMock);
 
-        verify(bankMock).addToPot(GameSettings.COINS_AT_START);
+        verify(dealerMock).addToPot(GameSettings.COINS_AT_START);
     }
 
     @Test
@@ -407,6 +406,6 @@ public class MoveManagerTest {
 
         moveManager.makeMove(firstPlayerMock);
 
-        verify(bankMock, never()).setCallValue(1000);
+        verify(dealerMock, never()).setCallValue(1000);
     }
 }

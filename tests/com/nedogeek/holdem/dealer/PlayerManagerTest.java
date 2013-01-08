@@ -1,7 +1,6 @@
 package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.PlayerStatus;
-import com.nedogeek.holdem.gamingStuff.Bank;
 import com.nedogeek.holdem.gamingStuff.Player;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,12 +20,12 @@ public class PlayerManagerTest {
     final Player secondPlayer = new Player("Second player");
 
     private PlayersManager playersManager;
-    private Bank bank;
+    private Dealer dealerMock;
 
     @Before
     public void setUp() throws Exception {
         resetPlayers();
-        bank = mock(Bank.class);
+        dealerMock = mock(Dealer.class);
 
         resetPlayerManager();
         setDefaultTwoPlayersGame();
@@ -63,14 +62,14 @@ public class PlayerManagerTest {
         secondPlayer.setStatus(PlayerStatus.Rise);
         playersManager.setLastMovedPlayer(0);
 
-        when(bank.riseNeeded(secondPlayer)).thenReturn(true);      //TODO fixIt
+        when(dealerMock.riseNeeded(secondPlayer)).thenReturn(true);      //TODO fixIt
 
         assertEquals(secondPlayer, playersManager.getMover());
     }
 
     @Test
     public void should0PlayersWhenNewPlayersManager() throws Exception {
-        assertEquals(0, new PlayersManager(bank).getPlayers().size());
+        assertEquals(0, new PlayersManager(dealerMock).getPlayers().size());
     }
 
     @Test
@@ -91,7 +90,7 @@ public class PlayerManagerTest {
     }
 
     private void resetPlayerManager() {
-        playersManager = new PlayersManager(bank);
+        playersManager = new PlayersManager(dealerMock);
 
         playersManager.setLastMovedPlayer(-1);
     }
