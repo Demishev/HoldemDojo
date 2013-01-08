@@ -12,7 +12,7 @@ import com.nedogeek.holdem.gamingStuff.Player;
 public class Dealer implements Runnable {
     private final MoveManager moveManager;
     private final NewGameSetter newGameSetter;
-    private final PlayersManager playersManager;
+    private final PlayersList playersManager;
     private final GameCycleManager gameCycleManager;
     private final EndGameManager endGameManager;
 
@@ -21,7 +21,7 @@ public class Dealer implements Runnable {
 
 
     Dealer(MoveManager moveManagerMock, NewGameSetter newGameSetterMock,
-           PlayersManager playersManagerMock, GameCycleManager gameCycleManagerMock,
+           PlayersList playersManagerMock, GameCycleManager gameCycleManagerMock,
            EndGameManager endGameManagerMock, GameStatus gameStatus, GameRound gameRound) {
         moveManager = moveManagerMock;
         newGameSetter = newGameSetterMock;

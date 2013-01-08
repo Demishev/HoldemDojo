@@ -26,7 +26,7 @@ public class MoveManagerTest {
     private Player secondPlayerMock;
 
     private Dealer dealerMock;
-    private PlayersManager playersManagerMock;
+    private PlayersList playersManagerMock;
 
     private MoveManager moveManager;
 
@@ -56,7 +56,7 @@ public class MoveManagerTest {
     }
 
     private void resetPlayersManager() {
-        playersManagerMock = mock(PlayersManager.class);
+        playersManagerMock = mock(PlayersList.class);
 
         setPlayers();
     }
@@ -68,7 +68,7 @@ public class MoveManagerTest {
         players = new ArrayList<Player>();
         players.add(firstPlayerMock);
         players.add(secondPlayerMock);
-        when(playersManagerMock.getPlayers()).thenReturn(players);
+        when(playersManagerMock.iterator()).thenReturn(players.iterator());
 
         for (Player player: players) {
             when(player.getMove()).thenReturn(playerActionMock);

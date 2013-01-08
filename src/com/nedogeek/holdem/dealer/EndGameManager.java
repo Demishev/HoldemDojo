@@ -3,8 +3,6 @@ package com.nedogeek.holdem.dealer;
 import com.nedogeek.holdem.PlayerStatus;
 import com.nedogeek.holdem.gamingStuff.Player;
 
-import java.util.List;
-
 /**
  * User: Konstantin Demishev
  * Date: 22.11.12
@@ -12,12 +10,12 @@ import java.util.List;
  */
 public class EndGameManager {
     private final Dealer dealer;
-    private final PlayersManager playersManager;
+    private final PlayersList playersList;
 
 
-    public EndGameManager(Dealer dealer, PlayersManager playersManager) {
+    public EndGameManager(Dealer dealer, PlayersList playersList) {
         this.dealer = dealer;
-        this.playersManager = playersManager;
+        this.playersList = playersList;
     }
 
     public void endGame() {
@@ -26,9 +24,8 @@ public class EndGameManager {
     }
 
     private Player findWinner() {
-        List<Player> players = playersManager.getPlayers();
         Player winner = null;
-        for (Player player: players) {
+        for (Player player: playersList) {
             if (isActivePlayer(player)) {
                 if (winner == null) {
                     winner = player;

@@ -19,7 +19,7 @@ import static org.mockito.Mockito.*;
  */
 public class EndGameManagerTest {
     private Dealer dealerMock;
-    private PlayersManager playersManagerMock;
+    private PlayersList playersManagerMock;
 
     private List<Player> players;
     private Player firstPlayerMock;
@@ -86,9 +86,9 @@ public class EndGameManagerTest {
     }
 
     private void resetPlayerManagerMock() {
-        playersManagerMock = mock(PlayersManager.class);
+        playersManagerMock = mock(PlayersList.class);
 
-        when(playersManagerMock.getPlayers()).thenReturn(players);
+        when(playersManagerMock.iterator()).thenReturn(players.iterator());
     }
 
     private void setCombinationsRelations(PlayerCardCombination biggerCombination, PlayerCardCombination smallerCombination) {

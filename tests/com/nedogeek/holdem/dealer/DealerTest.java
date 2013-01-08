@@ -21,7 +21,7 @@ public class DealerTest {
 
     private MoveManager moveManagerMock;
     private NewGameSetter newGameSetterMock;
-    private PlayersManager playersManagerMock;
+    private PlayersList playersManagerMock;
     private GameCycleManager gameCycleManagerMock;
     private EndGameManager endGameManagerMock;
 
@@ -40,7 +40,7 @@ public class DealerTest {
     }
 
     private void resetPlayerManager() {
-        playersManagerMock = mock(PlayersManager.class);
+        playersManagerMock = mock(PlayersList.class);
         mover = mock(Player.class);
 
         when(playersManagerMock.getMover()).thenReturn(mover);

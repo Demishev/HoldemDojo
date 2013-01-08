@@ -18,7 +18,7 @@ import static org.mockito.Mockito.*;
 public class GameCycleManagerTest {
 
     private Dealer dealerMock;
-    private PlayersManager playersManagerMock;
+    private PlayersList playersListMock;
     GameCycleManager gameCycleManager;
 
     private Player firstPlayerMock;
@@ -29,11 +29,11 @@ public class GameCycleManagerTest {
         dealerMock = mock(Dealer.class);
         resetPlayersManager();
 
-        gameCycleManager = new GameCycleManager(dealerMock, playersManagerMock);
+        gameCycleManager = new GameCycleManager(dealerMock, playersListMock);
     }
 
     private void resetPlayersManager() {
-        playersManagerMock = mock(PlayersManager.class);
+        playersListMock = mock(PlayersList.class);
 
         resetPlayers();
     }
@@ -46,7 +46,7 @@ public class GameCycleManagerTest {
         players.add(firstPlayerMock);
         players.add(secondPlayerMock);
 
-        when(playersManagerMock.getPlayers()).thenReturn(players);
+        when(playersListMock.iterator()).thenReturn(players.iterator());
     }
 
     @Test

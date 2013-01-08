@@ -20,7 +20,7 @@ public class NewGameSetterTest {
     private NewGameSetter newGameSetter;
 
     private Dealer dealerMock;
-    private PlayersManager playersManagerMock;
+    private PlayersList playersManagerMock;
     private MoveManager moveManagerMock;
     private List<Player> players;
     private Player firstPlayerMock;
@@ -42,12 +42,16 @@ public class NewGameSetterTest {
     }
 
     private void resetPlayerManagerMock() {
-        playersManagerMock = mock(PlayersManager.class);
+        playersManagerMock = mock(PlayersList.class);
 
         resetPlayers();
 
-        when(playersManagerMock.getPlayers()).thenReturn(players);
+        resetIterator();
         setDealerIs(0);
+    }
+
+    private void resetIterator() {
+        when(playersManagerMock.iterator()).thenReturn(players.iterator());
     }
 
     private void resetPlayers() {
@@ -101,6 +105,7 @@ public class NewGameSetterTest {
     @Test
     public void shouldNotLostPlayerSetNotMoves() throws Exception {
         players.add(thirdPlayerMock);
+        resetIterator();
 
         setPlayerStatus(firstPlayerMock, PlayerStatus.Lost);
 
@@ -126,6 +131,7 @@ public class NewGameSetterTest {
     @Test
     public void shouldBeGivenCardsToThirdPlayerWhen3PlayersNewGame() throws Exception {
         players.add(thirdPlayerMock);
+        resetIterator();
 
         newGameSetter.setNewGame();
 
@@ -143,6 +149,7 @@ public class NewGameSetterTest {
     public void shouldNotBeGivenCardsToThirdPlayerWhen3PlayersAnd3IsLostNewGame() throws Exception {
         setPlayerStatus(secondPlayerMock, PlayerStatus.Lost);
         players.add(thirdPlayerMock);
+        resetIterator();
 
         newGameSetter.setNewGame();
 

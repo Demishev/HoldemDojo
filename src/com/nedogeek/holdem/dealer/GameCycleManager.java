@@ -9,10 +9,10 @@ import com.nedogeek.holdem.gamingStuff.Player;
  * Time: 0:36
  */
 public class GameCycleManager {
-    private final PlayersManager playersManager;
+    private final PlayersList playersManager;
     private final Dealer dealer;
 
-    public GameCycleManager(Dealer dealer, PlayersManager playersManager) {
+    public GameCycleManager(Dealer dealer, PlayersList playersManager) {
         this.playersManager = playersManager;
         this.dealer = dealer;
     }
@@ -21,7 +21,7 @@ public class GameCycleManager {
     void prepareNewGameCycle() {
         dealer.setGameStarted();
 
-        for (Player player: playersManager.getPlayers()) {
+        for (Player player: playersManager) {
             player.setBalance(GameSettings.COINS_AT_START);
         }
     }

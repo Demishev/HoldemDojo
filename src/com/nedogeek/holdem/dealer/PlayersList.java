@@ -4,22 +4,20 @@ import com.nedogeek.holdem.PlayerStatus;
 import com.nedogeek.holdem.gamingStuff.Player;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * User: Konstantin Demishev
  * Date: 21.11.12
  * Time: 23:48
  */
-class PlayersManager {
+class PlayersList extends ArrayList<Player> {
     private final Dealer dealer;
 
     private int dealerNumber;
 
-    List<Player> players = new ArrayList<Player>();
     private int lastMovedPlayer;
 
-    PlayersManager(Dealer dealer) {
+    PlayersList(Dealer dealer) {
         this.dealer = dealer;
         dealerNumber = -1;
     }
@@ -33,7 +31,7 @@ class PlayersManager {
     }
 
     private int nextPlayer(int playerNumber) {
-        if (playerNumber == players.size() - 1) {
+        if (playerNumber == size() - 1) {
             return 0;
         } else {
             return playerNumber + 1;
@@ -46,7 +44,7 @@ class PlayersManager {
 
     private boolean moreThanOnePlayerDoNotFoldsOrLost() {
         int availableMoverStatusQuantity = 0;
-        for (Player player : players) {
+        for (Player player : this) {
             final PlayerStatus playerStatus = player.getStatus();
             if (playerStatus != PlayerStatus.Fold && playerStatus != PlayerStatus.Lost) {
                 availableMoverStatusQuantity++;
@@ -56,7 +54,7 @@ class PlayersManager {
     }
 
     Player getMover() {
-        return players.get(getMoverNumber()); //TODO test it
+        return get(getMoverNumber()); //TODO test it
     }
 
     int getMoverNumber() {      //TODO replace with getMover
@@ -66,7 +64,7 @@ class PlayersManager {
         int nextPlayerNumber = nextPlayer(lastMovedPlayer);
 
         while (nextPlayerNumber != lastMovedPlayer) {
-            final Player currentPlayer = players.get(nextPlayerNumber);
+            final Player currentPlayer = get(nextPlayerNumber);
             if (currentPlayer.getStatus() == PlayerStatus.NotMoved ||
                     isActiveNotRisePlayer(currentPlayer)) {
                 return nextPlayerNumber;
@@ -82,24 +80,25 @@ class PlayersManager {
     }
 
     void addPlayer(Player player) {
-        if (!players.contains(player))
-            players.add(player);
+        if (!contains(player))
+            add(player);
     }
 
     public void removePlayer(Player player) {
-        players.remove(player);
+        remove(player);      //TODO remove
     }
 
     public void changeDealer() {
         dealerNumber = nextPlayer(dealerNumber);
     }
 
-    public List<Player> getPlayers() {
-        return players;
-    }
+//    @Deprecated
+//    public List<Player> getPlayers() {
+//        return this;
+//    }
 
     public Player getDealer() {
-        return (dealerNumber == -1) ? null : players.get(dealerNumber);
+        return (dealerNumber == -1) ? null : get(dealerNumber);
     }
 
     public Player smallBlindPlayer() {

@@ -12,9 +12,9 @@ import com.nedogeek.holdem.gamingStuff.Player;
 public class NewGameSetter {
     private final Dealer dealer;
     private final MoveManager moveManager;
-    private final PlayersManager playersManager;
+    private final PlayersList playersManager;
 
-    public NewGameSetter(Dealer dealer, PlayersManager playersManager, MoveManager moveManager) {
+    public NewGameSetter(Dealer dealer, PlayersList playersManager, MoveManager moveManager) {
         this.dealer = dealer;
         this.playersManager = playersManager;
         this.moveManager = moveManager;
@@ -31,7 +31,7 @@ public class NewGameSetter {
     }
 
     private void resetPlayers() {
-        for (Player player: playersManager.getPlayers()) {
+        for (Player player: playersManager) {
             if (player.getStatus() != PlayerStatus.Lost) {
                 dealer.giveCardsToPlayer(player);
                 player.setStatus(PlayerStatus.NotMoved);

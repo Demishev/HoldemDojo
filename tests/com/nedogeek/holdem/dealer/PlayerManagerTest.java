@@ -19,7 +19,7 @@ public class PlayerManagerTest {
     final Player firstPlayer = new Player("First player");
     final Player secondPlayer = new Player("Second player");
 
-    private PlayersManager playersManager;
+    private PlayersList playersManager;
     private Dealer dealerMock;
 
     @Before
@@ -62,14 +62,14 @@ public class PlayerManagerTest {
         secondPlayer.setStatus(PlayerStatus.Rise);
         playersManager.setLastMovedPlayer(0);
 
-        when(dealerMock.riseNeeded(secondPlayer)).thenReturn(true);      //TODO fixIt
+        when(dealerMock.riseNeeded(secondPlayer)).thenReturn(true);
 
         assertEquals(secondPlayer, playersManager.getMover());
     }
 
     @Test
     public void should0PlayersWhenNewPlayersManager() throws Exception {
-        assertEquals(0, new PlayersManager(dealerMock).getPlayers().size());
+        assertEquals(0, new PlayersList(dealerMock).size());
     }
 
     @Test
@@ -77,7 +77,7 @@ public class PlayerManagerTest {
         resetPlayerManager();
         playersManager.addPlayer(firstPlayer);
 
-        assertEquals(1, playersManager.getPlayers().size());
+        assertEquals(1, playersManager.size());
     }
 
     @Test
@@ -86,11 +86,11 @@ public class PlayerManagerTest {
         playersManager.addPlayer(firstPlayer);
         playersManager.addPlayer(secondPlayer);
 
-        assertEquals(2, playersManager.getPlayers().size());
+        assertEquals(2, playersManager.size());
     }
 
     private void resetPlayerManager() {
-        playersManager = new PlayersManager(dealerMock);
+        playersManager = new PlayersList(dealerMock);
 
         playersManager.setLastMovedPlayer(-1);
     }
@@ -101,7 +101,7 @@ public class PlayerManagerTest {
         playersManager.addPlayer(firstPlayer);
         playersManager.addPlayer(firstPlayer);
 
-        assertEquals(1, playersManager.getPlayers().size());
+        assertEquals(1, playersManager.size());
     }
 
     @Test
@@ -110,7 +110,7 @@ public class PlayerManagerTest {
         playersManager.addPlayer(firstPlayer);
         playersManager.removePlayer(firstPlayer);
 
-        assertEquals(0, playersManager.getPlayers().size());
+        assertEquals(0, playersManager.size());
     }
 
     @Test
@@ -119,7 +119,7 @@ public class PlayerManagerTest {
         playersManager.addPlayer(firstPlayer);
         playersManager.removePlayer(secondPlayer);
 
-        assertEquals(1, playersManager.getPlayers().size());
+        assertEquals(1, playersManager.size());
     }
 
     @Test
@@ -145,7 +145,7 @@ public class PlayerManagerTest {
 
     @Test
     public void should2PlayersListWhenPlayersManagerGetPlayers() throws Exception {
-        assertEquals(2, playersManager.getPlayers().size());
+        assertEquals(2, playersManager.size());
 
     }
 }

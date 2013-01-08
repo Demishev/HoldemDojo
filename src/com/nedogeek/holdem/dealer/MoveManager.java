@@ -12,9 +12,9 @@ import com.nedogeek.holdem.gamingStuff.PlayerAction;
  */
 public class MoveManager {
     private final Dealer dealer;
-    private final PlayersManager playersManager;
+    private final PlayersList playersManager;
 
-    MoveManager(Dealer dealer, PlayersManager playersManager) {
+    MoveManager(Dealer dealer, PlayersList playersManager) {
         this.dealer = dealer;
         this.playersManager = playersManager;
     }
