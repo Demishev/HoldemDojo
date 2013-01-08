@@ -7,9 +7,7 @@ import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * User: Konstantin Demishev
@@ -17,24 +15,27 @@ import static org.mockito.Mockito.when;
  * Time: 1:55
  */
 public class PlayersListTest {
-    final Player firstPlayer = new Player("First player");
-    final Player secondPlayer = new Player("Second player");
-
     private PlayersList playersList;
     private Dealer dealerMock;
 
+    private Player firstPlayer = mock(Player.class);
+    private Player secondPlayer = mock(Player.class);
+
     @Before
     public void setUp() throws Exception {
-        resetPlayers();
         dealerMock = mock(Dealer.class);
+        resetPlayers();
 
         resetPlayerManager();
         setDefaultTwoPlayersGame();
     }
 
     private void resetPlayers() {
-        firstPlayer.setStatus(PlayerStatus.NotMoved);
-        secondPlayer.setStatus(PlayerStatus.NotMoved);
+        firstPlayer = mock(Player.class);
+        secondPlayer = mock(Player.class);
+
+        when(firstPlayer.getStatus()).thenReturn(PlayerStatus.NotMoved);
+        when(secondPlayer.getStatus()).thenReturn(PlayerStatus.NotMoved);
     }
 
     private void setDefaultTwoPlayersGame() {
@@ -44,7 +45,7 @@ public class PlayersListTest {
 
     @Test
     public void shouldFalseWhenDefaultDeskSecondPlayerFold() throws Exception {
-        secondPlayer.setStatus(PlayerStatus.Fold);
+        when(secondPlayer.getStatus()).thenReturn(PlayerStatus.Fold);
 
         assertFalse(playersList.hasAvailableMovers());
     }
@@ -52,7 +53,7 @@ public class PlayersListTest {
     @Test
     public void shouldFalseWhenDefaultDeskSecondPlayerLost() throws Exception {
         playersList.playerMoved(secondPlayer);
-        secondPlayer.setStatus(PlayerStatus.Fold);
+        when(secondPlayer.getStatus()).thenReturn(PlayerStatus.Fold);
 
         assertFalse(playersList.hasAvailableMovers());
     }

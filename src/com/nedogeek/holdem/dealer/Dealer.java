@@ -108,4 +108,8 @@ public class Dealer implements Runnable {
     public void setGameEnded() {
 
     }
+
+    public void sendToPot(int i) {
+
+    }
 }

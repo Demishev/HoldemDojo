@@ -2,6 +2,7 @@ package com.nedogeek.holdem.gamingStuff;
 
 import com.nedogeek.holdem.PlayerStatus;
 import com.nedogeek.holdem.combinations.PlayerCardCombination;
+import com.nedogeek.holdem.dealer.Dealer;
 import com.nedogeek.holdem.dealer.PlayersList;
 
 /**
@@ -11,15 +12,17 @@ import com.nedogeek.holdem.dealer.PlayersList;
  */
 public class Player {
     private final String name;
+    private final Dealer dealer;
 
     private PlayerStatus status;
-    private PlayerStatus playerStatus;
     private int bet;
     private int balance;
     private PlayersList playersList;
 
-    public Player(String name) {
+    public Player(String name, Dealer dealer) {
         this.name = name;
+        this.dealer = dealer;
+
         status = PlayerStatus.NotMoved;
     }
 
@@ -64,6 +67,21 @@ public class Player {
     }
 
     public void makeBet(int bet) {
+        int chips = getChipsFromBalance(bet);
+        dealer.sendToPot(chips);
+        this.bet = chips;
+
         playersList.playerMoved(this);
+    }
+
+    private int getChipsFromBalance(int bet) {
+        if (bet < balance) {
+            balance = balance - bet;
+            return bet;
+        } else {
+            int chips = balance;
+            balance = 0;
+            return chips;
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.nedogeek.holdem.gamingStuff;
 
 import com.nedogeek.holdem.PlayerStatus;
+import com.nedogeek.holdem.dealer.Dealer;
 import com.nedogeek.holdem.dealer.PlayersList;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,14 +19,19 @@ public class PlayerTest {
     private static final String NAME = "Player name";
 
     private PlayersList playersListMock;
+    private Dealer dealerMock;
 
     private Player player;
 
     @Before
     public void setUp() throws Exception {
         playersListMock = mock(PlayersList.class);
+        dealerMock = mock(Dealer.class);
 
-        player = new Player(NAME);
+        player = new Player(NAME, dealerMock);
+
+        player.registerList(playersListMock);
+        player.setBalance(1000);
     }
 
     @Test
@@ -35,8 +41,6 @@ public class PlayerTest {
 
     @Test
     public void shouldMakeMoveToPlayersListWhenPlayerMakesBet() throws Exception {
-        player.registerList(playersListMock);
-
         player.makeBet(500);
 
         verify(playersListMock).playerMoved(player);
@@ -52,5 +56,54 @@ public class PlayerTest {
         player.setStatus(PlayerStatus.Fold);
 
         assertEquals(PlayerStatus.Fold, player.getStatus());
+    }
+
+    @Test
+    public void should100SendToPotWhenNewPlayerSetBalance1000AndBet100() throws Exception {
+        player.makeBet(100);
+
+        verify(dealerMock).sendToPot(100);
+    }
+
+    @Test
+    public void should200SendToPotWhenNewPlayerSetBalance1000AndBet200() throws Exception {
+        player.makeBet(200);
+
+        verify(dealerMock).sendToPot(200);
+    }
+
+    @Test
+    public void should1000SendToPotWhenNewPlayerSetBalance1000AndBet2000() throws Exception {
+        player.makeBet(2000);
+
+        verify(dealerMock).sendToPot(1000);
+    }
+
+    @Test
+    public void shouldBalance0WhenNewPlayerSetBalance1000AndBet2000() throws Exception {
+        player.makeBet(2000);
+
+        assertEquals(0, player.getBalance());
+    }
+
+    @Test
+    public void shouldBalance800WhenNewPlayerSetBalance1000AndBet200() throws Exception {
+        player.makeBet(200);
+
+        assertEquals(800, player.getBalance());
+    }
+
+    @Test
+    public void shouldBet200WhenNewPlayerSetBalance1000AndBet200() throws Exception {
+        player.makeBet(200);
+
+        assertEquals(200, player.getBet());
+    }
+
+    @Test
+    public void shouldBet1000WhenNewPlayerSetBalance1000AndBet2000() throws Exception {
+        player.makeBet(2000);
+
+        assertEquals(1000, player.getBet());
     }
 }
