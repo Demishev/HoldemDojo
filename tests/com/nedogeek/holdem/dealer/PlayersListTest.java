@@ -16,14 +16,13 @@ import static org.mockito.Mockito.*;
  */
 public class PlayersListTest {
     private PlayersList playersList;
-    private Dealer dealerMock;
 
     private Player firstPlayer = mock(Player.class);
     private Player secondPlayer = mock(Player.class);
 
     @Before
     public void setUp() throws Exception {
-        dealerMock = mock(Dealer.class);
+
         resetPlayers();
 
         resetPlayerManager();
@@ -63,15 +62,13 @@ public class PlayersListTest {
         firstPlayer.setStatus(PlayerStatus.Rise);
         secondPlayer.setStatus(PlayerStatus.Rise);
         playersList.playerMoved(firstPlayer);
-
-        when(dealerMock.riseNeeded(secondPlayer)).thenReturn(true);
-
+//TODO add test into PlayerTest for isNeededRise case.
         assertEquals(secondPlayer, playersList.getMover());
     }
 
     @Test
     public void should0PlayersWhenNewPlayersManager() throws Exception {
-        assertEquals(0, new PlayersList(dealerMock).size());
+        assertEquals(0, new PlayersList().size());
     }
 
     @Test
@@ -92,7 +89,7 @@ public class PlayersListTest {
     }
 
     private void resetPlayerManager() {
-        playersList = new PlayersList(dealerMock);
+        playersList = new PlayersList();
     }
 
     @Test

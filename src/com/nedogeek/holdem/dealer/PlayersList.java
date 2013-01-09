@@ -11,14 +11,12 @@ import java.util.ArrayList;
  * Time: 23:48
  */
 public class PlayersList extends ArrayList<Player> {
-    private final Dealer dealer;
 
     private int dealerNumber;
     private int lastMovedPlayer;
 
-    PlayersList(Dealer dealer) {
-        this.dealer = dealer;
-        dealerNumber = 0;
+    PlayersList() {
+       dealerNumber = 0;
     }
 
     @Override
@@ -70,18 +68,13 @@ public class PlayersList extends ArrayList<Player> {
         while (nextPlayerNumber != lastMovedPlayer) {
             final Player currentPlayer = get(nextPlayerNumber);
             if (currentPlayer.getStatus() == PlayerStatus.NotMoved ||
-                    isActiveNotRisePlayer(currentPlayer)) {
+                    currentPlayer.isActiveNotRisePlayer()) {
                 return nextPlayerNumber;
             }
             nextPlayerNumber = nextPlayer(nextPlayerNumber);
         }
         return -1;
-    }
-
-    private boolean isActiveNotRisePlayer(Player player) {
-        return (player.getStatus() != PlayerStatus.Fold &&
-                dealer.riseNeeded(player));
-    }
+    }    
 
     public void changeDealer() {
         dealerNumber = nextPlayer(dealerNumber);

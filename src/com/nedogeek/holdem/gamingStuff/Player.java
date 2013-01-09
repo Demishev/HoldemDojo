@@ -84,4 +84,9 @@ public class Player {
             return chips;
         }
     }
+
+	public boolean isActiveNotRisePlayer() {
+		//TODO Implement checking is player needed rise.
+		return (getStatus() != PlayerStatus.Fold);
+	}
 }
