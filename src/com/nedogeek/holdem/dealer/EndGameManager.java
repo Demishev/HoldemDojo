@@ -2,6 +2,7 @@ package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.PlayerStatus;
 import com.nedogeek.holdem.gamingStuff.Player;
+import com.nedogeek.holdem.gamingStuff.PlayersList;
 
 /**
  * User: Konstantin Demishev

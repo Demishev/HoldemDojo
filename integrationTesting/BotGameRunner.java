@@ -1,4 +1,8 @@
+import bot.CallBot;
+import bot.FoldBot;
+import bot.RandomBot;
 import com.nedogeek.holdem.dealer.Dealer;
+import com.nedogeek.holdem.gamingStuff.PlayersList;
 
 /**
  * User: Konstantin Demishev
@@ -8,7 +12,13 @@ import com.nedogeek.holdem.dealer.Dealer;
 public class BotGameRunner {
 
     public static void main(String[] args) {
-        Dealer dealer = new Dealer();
+        PlayersList players = new PlayersList();
+
+        Dealer dealer = new Dealer(players);
+
+        players.add(new FoldBot(dealer));
+        players.add(new CallBot(dealer));
+        players.add(new RandomBot(dealer));
 
         dealer.run();
     }

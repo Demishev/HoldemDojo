@@ -3,6 +3,7 @@ package com.nedogeek.holdem.dealer;
 import com.nedogeek.holdem.GameRound;
 import com.nedogeek.holdem.GameStatus;
 import com.nedogeek.holdem.gamingStuff.Player;
+import com.nedogeek.holdem.gamingStuff.PlayersList;
 
 /**
  * User: Konstantin Demishev
@@ -20,8 +21,9 @@ public class Dealer implements Runnable {
     private GameRound gameRound;
 
 
-    public Dealer() {
-        playersList = new PlayersList();
+    public Dealer(PlayersList playersList) {
+        this.playersList = playersList;
+
         moveManager = new MoveManager(this, playersList);
 
         newGameSetter = new NewGameSetter(this, playersList, moveManager);

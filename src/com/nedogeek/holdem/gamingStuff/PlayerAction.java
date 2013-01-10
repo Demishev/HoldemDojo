@@ -10,12 +10,25 @@ public class PlayerAction {
         Fold, Check, Call, Rise, AllIn
     }
 
+    private final ActionType actionType;
+    private final int riseAmount;
+
+    public PlayerAction(ActionType actionType) {
+        this.actionType = actionType;
+        riseAmount = 0;
+    }
+
+    public PlayerAction(ActionType actionType, int riseAmount) {
+        this.actionType = actionType;
+        this.riseAmount = riseAmount;
+    }
+
     public ActionType getActionType() {
-        return null;
+        return actionType;
     }
 
     public int getRiseAmount() {
-        return 0;
+        return riseAmount;
     }
 
 }

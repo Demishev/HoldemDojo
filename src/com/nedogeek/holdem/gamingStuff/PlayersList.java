@@ -1,7 +1,6 @@
-package com.nedogeek.holdem.dealer;
+package com.nedogeek.holdem.gamingStuff;
 
 import com.nedogeek.holdem.PlayerStatus;
-import com.nedogeek.holdem.gamingStuff.Player;
 
 import java.util.ArrayList;
 
@@ -15,7 +14,7 @@ public class PlayersList extends ArrayList<Player> {
     private int dealerNumber;
     private int lastMovedPlayer;
 
-    PlayersList() {
+    public PlayersList() {
        dealerNumber = 0;
     }
 
@@ -40,7 +39,7 @@ public class PlayersList extends ArrayList<Player> {
         }
     }
 
-    boolean hasAvailableMovers() {
+    public boolean hasAvailableMovers() {
         return moreThanOnePlayerDoNotFoldsOrLost() && getMoverNumber() != -1;
     }
 
@@ -55,7 +54,7 @@ public class PlayersList extends ArrayList<Player> {
         return availableMoverStatusQuantity > 1;
     }
 
-    Player getMover() {
+    public Player getMover() {
         return get(getMoverNumber());
     }
 

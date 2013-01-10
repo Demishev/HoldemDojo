@@ -1,7 +1,8 @@
-package com.nedogeek.holdem.dealer;
+package com.nedogeek.holdem.gamingStuff;
 
 import com.nedogeek.holdem.PlayerStatus;
 import com.nedogeek.holdem.gamingStuff.Player;
+import com.nedogeek.holdem.gamingStuff.PlayersList;
 import org.junit.Before;
 import org.junit.Test;
 
