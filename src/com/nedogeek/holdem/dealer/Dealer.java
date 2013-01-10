@@ -12,7 +12,7 @@ import com.nedogeek.holdem.gamingStuff.Player;
 public class Dealer implements Runnable {
     private final MoveManager moveManager;
     private final NewGameSetter newGameSetter;
-    private final PlayersList playersManager;
+    private final PlayersList playersList;
     private final GameCycleManager gameCycleManager;
     private final EndGameManager endGameManager;
 
@@ -20,12 +20,21 @@ public class Dealer implements Runnable {
     private GameRound gameRound;
 
 
+    public Dealer() {
+        playersList = new PlayersList();
+        moveManager = new MoveManager(this, playersList);
+
+        newGameSetter = new NewGameSetter(this, playersList, moveManager);
+        endGameManager = new EndGameManager(this, playersList);
+        gameCycleManager = new GameCycleManager(this, playersList);
+    }
+
     Dealer(MoveManager moveManagerMock, NewGameSetter newGameSetterMock,
            PlayersList playersManagerMock, GameCycleManager gameCycleManagerMock,
            EndGameManager endGameManagerMock, GameStatus gameStatus, GameRound gameRound) {
         moveManager = moveManagerMock;
         newGameSetter = newGameSetterMock;
-        playersManager = playersManagerMock;
+        playersList = playersManagerMock;
         gameCycleManager = gameCycleManagerMock;
         endGameManager = endGameManagerMock;
 
@@ -60,8 +69,8 @@ public class Dealer implements Runnable {
                 endGameManager.endGame();
                 break;
             default:
-                if (playersManager.hasAvailableMovers()) {
-                    moveManager.makeMove(playersManager.getMover());
+                if (playersList.hasAvailableMovers()) {
+                    moveManager.makeMove(playersList.getMover());
                 } else {
                     setNextGameRound();
                 }
@@ -73,39 +82,39 @@ public class Dealer implements Runnable {
 
     }
 
-    public boolean riseNeeded(Player player) {
+    boolean riseNeeded(Player player) {
         return false;
     }
 
-    public void addToPot(int betValue) {
+    void addToPot(int betValue) {
 
     }
 
-    public int getCallValue() {
+    int getCallValue() {
         return 0;
     }
 
-    public void setCallValue(int playerBet) {
+    void setCallValue(int playerBet) {
 
     }
 
-    public void resetCards() {
+    void resetCards() {
 
     }
 
-    public void setNextGameRound() {
+    void setNextGameRound() {
 
     }
 
-    public void giveCardsToPlayer(Player player) {
+    void giveCardsToPlayer(Player player) {
 
     }
 
-    public void setPlayerWin(Player winner) {
+    void setPlayerWin(Player winner) {
 
     }
 
-    public void setGameEnded() {
+    void setGameEnded() {
 
     }
 
