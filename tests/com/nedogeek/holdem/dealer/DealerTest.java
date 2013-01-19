@@ -4,6 +4,7 @@ import com.nedogeek.holdem.GameRound;
 import com.nedogeek.holdem.GameStatus;
 import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -111,5 +112,15 @@ public class DealerTest {
         dealer.tick();
 
         verify(gameCycleManagerMock).prepareNewGameCycle();
+    }
+
+    @Test
+    public void shouldNoNullPointerExceptionWhenNewDealerTick() throws Exception {
+        dealer = new Dealer(null);
+        try {
+            dealer.tick();
+        } catch (NullPointerException e) {
+            Assert.fail("Check is new Dealer has initial status.");
+        }
     }
 }

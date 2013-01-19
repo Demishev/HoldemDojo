@@ -1,36 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="388e9789-c4c7-491f-aae9-9962e0a04901" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/integrationTesting/bot/CallBot.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/integrationTesting/bot/FoldBot.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/integrationTesting/bot/RandomBot.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integrationTesting/BotGameRunner.java" afterPath="$PROJECT_DIR$/integrationTesting/BotGameRunner.java" />
+    <list default="true" id="388e9789-c4c7-491f-aae9-9962e0a04901" name="Default" comment="Coding integration part started.">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java" afterPath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/EndGameManager.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/EndGameManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/EndGameManagerTest.java" afterPath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/EndGameManagerTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/GameCycleManager.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/GameCycleManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/GameCycleManagerTest.java" afterPath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/GameCycleManagerTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/MoveManager.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/MoveManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/MoveManagerTest.java" afterPath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/MoveManagerTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/NewGameSetter.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/NewGameSetter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/NewGameSetterTest.java" afterPath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/NewGameSetterTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Player.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Player.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/PlayerAction.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/PlayerAction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/com/nedogeek/holdem/gamingStuff/PlayerTest.java" afterPath="$PROJECT_DIR$/tests/com/nedogeek/holdem/gamingStuff/PlayerTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="D:\java_projects\HoldemDojo\src\com\nedogeek\holdem\dealer\PlayersList.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/PlayersList.java" />
-      <change type="MOVED" beforePath="D:\java_projects\HoldemDojo\tests\com\nedogeek\holdem\dealer\PlayersListTest.java" afterPath="$PROJECT_DIR$/tests/com/nedogeek/holdem/gamingStuff/PlayersListTest.java" />
     </list>
     <ignored path="holdem.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357838391599" ignored="false" />
+    <file path="/Dummy.txt" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1358598994785" ignored="false" />
     <file path="/EndGameManager.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357605168468" ignored="false" />
     <file path="/EndGameManagerTest.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357605400689" ignored="false" />
     <file path="/Desk.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357564448570" ignored="false" />
     <file path="/DeskTest.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1354860227446" ignored="false" />
-    <file path="/fragment.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357838773456" ignored="false" />
+    <file path="/fragment.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357933885612" ignored="false" />
     <file path="/GameCycleManager.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357597203676" ignored="false" />
     <file path="/DealerIntegrationTest.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357150623462" ignored="false" />
     <file path="/PlayerStatus.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1354857454043" ignored="false" />
@@ -40,16 +23,16 @@
     <file path="/NewGameSetter.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357603540544" ignored="false" />
     <file path="/MoveManagerTest.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357605370379" ignored="false" />
     <file path="/Card.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357151181968" ignored="false" />
-    <file path="/Dealer.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357838521275" ignored="false" />
+    <file path="/Dealer.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357933744317" ignored="false" />
     <file path="/MoveManager.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357603218119" ignored="false" />
     <file path="/Player.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357610015989" ignored="false" />
     <file path="/GameCycleManagerTest.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357605348156" ignored="false" />
-    <file path="/DealerTest.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357604406629" ignored="false" />
+    <file path="/DealerTest.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357933454514" ignored="false" />
     <file path="/Bank.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357564585593" ignored="false" />
     <file path="/PlayersListTest.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357609294332" ignored="false" />
     <file path="/PlayersList.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357838747477" ignored="false" />
     <file path="/PlayerTest.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357609961768" ignored="false" />
-    <file path="/BotGameRunner.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357839850453" ignored="false" />
+    <file path="/BotGameRunner.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357932441467" ignored="false" />
     <file path="/FoldBot.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357839232562" ignored="false" />
     <file path="/PlayerAction.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357839828786" ignored="false" />
     <file path="/CallBot.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357839406455" ignored="false" />
@@ -73,7 +56,6 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -108,6 +90,7 @@
         <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
       </breakpoint>
     </breakpoint_any>
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -117,83 +100,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Player.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Player.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="69" column="8" selection-start="1427" selection-end="1427" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BotGameRunner.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/integrationTesting/BotGameRunner.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="43" selection-start="554" selection-end="554" vertical-scroll-proportion="0.81914896">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RandomBot.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/integrationTesting/bot/RandomBot.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="52" selection-start="779" selection-end="779" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="CallBot.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/integrationTesting/bot/CallBot.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="62" selection-start="455" selection-end="455" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FoldBot.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/integrationTesting/bot/FoldBot.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="19" selection-start="284" selection-end="284" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlayerAction.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/PlayerAction.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="37" selection-start="511" selection-end="511" vertical-scroll-proportion="0.0">
+            <state line="19" column="23" selection-start="416" selection-end="416" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MoveManager.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/MoveManager.java">
+      <file leaf-file-name="BotGameRunner.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/integrationTesting/BotGameRunner.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="51" column="14" selection-start="1435" selection-end="1435" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlayerTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/gamingStuff/PlayerTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="105" column="23" selection-start="2770" selection-end="2770" vertical-scroll-proportion="0.0">
+            <state line="22" column="0" selection-start="527" selection-end="527" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -202,16 +121,25 @@
       <file leaf-file-name="Dealer.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="0" selection-start="776" selection-end="776" vertical-scroll-proportion="0.0">
+            <state line="24" column="31" selection-start="717" selection-end="717" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PlayersList.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/PlayersList.java">
+      <file leaf-file-name="DealerTest.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="88" column="1" selection-start="2344" selection-end="2344" vertical-scroll-proportion="0.0">
+            <state line="122" column="64" selection-start="3983" selection-end="4022" vertical-scroll-proportion="0.5584416">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PlayerAction.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/PlayerAction.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="15" column="11" selection-start="302" selection-end="302" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -241,7 +169,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/EndGameManagerTest.java" />
         <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/NewGameSetterTest.java" />
         <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/PlayerManagerTest.java" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/MoveManager.java" />
@@ -249,7 +176,6 @@
         <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/PlayersListTest.java" />
         <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/gamingStuff/PlayerTest.java" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Player.java" />
-        <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/PlayersList.java" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/PlayersList.java" />
         <option value="$PROJECT_DIR$/integrationTesting/bot/FoldBot.java" />
@@ -257,6 +183,8 @@
         <option value="$PROJECT_DIR$/integrationTesting/bot/RandomBot.java" />
         <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/PlayerAction.java" />
         <option value="$PROJECT_DIR$/integrationTesting/BotGameRunner.java" />
+        <option value="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java" />
+        <option value="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java" />
       </list>
     </option>
   </component>
@@ -625,33 +553,6 @@
     </key>
   </component>
   <component name="RunManager" selected="JUnit.All in holdem">
-    <configuration default="false" name="PlayerCardCombinationTest.shouldPairWhenOnKWithAQJWhenAKKQJ" type="JUnit" factoryName="JUnit" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="holdem" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.nedogeek.holdem.combinations" />
-      <option name="MAIN_CLASS_NAME" value="com.nedogeek.holdem.combinations.PlayerCardCombinationTest" />
-      <option name="METHOD_NAME" value="shouldPairWhenOnKWithAQJWhenAKKQJ" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="true" />
-      </RunnerSettings>
-      <ConfigurationWrapper RunnerId="Debug" />
-      <method />
-    </configuration>
     <configuration default="false" name="EndGameManagerTest.shouldFirstPlayerWinWhenNoPlayerFoldsAndSecondHasWinningCombination" type="JUnit" factoryName="JUnit" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="holdem" />
@@ -874,6 +775,23 @@
       <patterns />
       <method />
     </configuration>
+    <configuration default="false" name="BotGameRunner" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" value="BotGameRunner" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="holdem" />
+      <envs />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
     <configuration default="false" name="All in holdem" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="holdem" />
@@ -898,8 +816,8 @@
       <method />
     </configuration>
     <list size="6">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.All in holdem" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.PlayerCardCombinationTest.shouldPairWhenOnKWithAQJWhenAKKQJ" />
+      <item index="0" class="java.lang.String" itemvalue="Application.BotGameRunner" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.All in holdem" />
       <item index="2" class="java.lang.String" itemvalue="JUnit.EndGameManagerTest.shouldFirstPlayerWinWhenNoPlayerFoldsAndSecondHasWinningCombination" />
       <item index="3" class="java.lang.String" itemvalue="JUnit.MoveManagerTest" />
       <item index="4" class="java.lang.String" itemvalue="JUnit.DealerIntegrationTest" />
@@ -1399,8 +1317,8 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.23609923" sideWeight="0.19444445" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988048" sideWeight="0.6923077" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.6923077" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23549488" sideWeight="0.73056996" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26943004" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23549488" sideWeight="0.73229706" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26770294" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298791" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1493,18 +1411,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/MoveManagerTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="93" column="53" selection-start="2629" selection-end="2629" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Card.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="41" selection-start="847" selection-end="847" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/gamingStuff/PlayersListTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="165" column="5" selection-start="4845" selection-end="4845" vertical-scroll-proportion="0.65656567">
@@ -1535,28 +1441,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/MoveManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="14" selection-start="1435" selection-end="1435" vertical-scroll-proportion="0.0">
+        <state line="51" column="14" selection-start="1435" selection-end="1435" vertical-scroll-proportion="0.030630631">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/gamingStuff/PlayerTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="105" column="23" selection-start="2770" selection-end="2770" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="0" selection-start="776" selection-end="776" vertical-scroll-proportion="0.0">
+        <state line="105" column="23" selection-start="2770" selection-end="2770" vertical-scroll-proportion="0.72432435">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/PlayersList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="1" selection-start="2344" selection-end="2344" vertical-scroll-proportion="0.0">
+        <state line="88" column="1" selection-start="2344" selection-end="2344" vertical-scroll-proportion="0.81621623">
           <folding />
         </state>
       </provider>
@@ -1564,52 +1463,61 @@
     <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/Player.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="69" column="8" selection-start="1427" selection-end="1427" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/PlayerAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="37" selection-start="511" selection-end="511" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/integrationTesting/bot/FoldBot.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="19" selection-start="284" selection-end="284" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/integrationTesting/bot/CallBot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="62" selection-start="455" selection-end="455" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="12" column="19" selection-start="284" selection-end="284" vertical-scroll-proportion="0.36756757">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/integrationTesting/bot/RandomBot.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="52" selection-start="779" selection-end="779" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="29" column="52" selection-start="779" selection-end="779" vertical-scroll-proportion="0.71348315">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/gamingStuff/PlayerAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="11" selection-start="302" selection-end="302" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/integrationTesting/bot/CallBot.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="23" selection-start="416" selection-end="416" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/integrationTesting/BotGameRunner.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="43" selection-start="554" selection-end="554" vertical-scroll-proportion="0.81914896">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="22" column="0" selection-start="527" selection-end="527" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.7.0_03/src.zip!/java/lang/Thread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="672" column="29" selection-start="25242" selection-end="25242" vertical-scroll-proportion="0.3316583" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="31" selection-start="717" selection-end="717" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/DealerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="122" column="64" selection-start="3983" selection-end="4022" vertical-scroll-proportion="0.5584416">
+          <folding />
         </state>
       </provider>
     </entry>

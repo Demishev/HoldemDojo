@@ -17,8 +17,9 @@ public class Dealer implements Runnable {
     private final GameCycleManager gameCycleManager;
     private final EndGameManager endGameManager;
 
-    private GameStatus gameStatus;
+    private GameStatus gameStatus = GameStatus.NOT_READY;
     private GameRound gameRound;
+    private boolean isStopped;
 
 
     public Dealer(PlayersList playersList) {
@@ -45,7 +46,9 @@ public class Dealer implements Runnable {
     }
 
     public void run() {
-        //TODO not codded yet
+        while (!isStopped) {
+            tick();
+        }
     }
 
     void tick() {
@@ -122,5 +125,9 @@ public class Dealer implements Runnable {
 
     public void sendToPot(int i) {
 
+    }
+
+    public void stop() {
+        isStopped = true;
     }
 }
