@@ -1,5 +1,7 @@
 package com.nedogeek.holdem.dealer;
 
+import java.util.Iterator;
+
 import com.nedogeek.holdem.GameRound;
 import com.nedogeek.holdem.GameStatus;
 import com.nedogeek.holdem.gamingStuff.Player;
@@ -8,6 +10,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 /**
@@ -43,9 +46,14 @@ public class DealerTest {
 
     private void resetPlayerManager() {
         playersManagerMock = mock(PlayersList.class);
+ 
         mover = mock(Player.class);
 
         when(playersManagerMock.getMover()).thenReturn(mover);
+        
+        Iterator<Player> playerMockIterator = mock(Iterator.class);
+        
+        when(playersManagerMock.iterator()).thenReturn(playerMockIterator);
     }
 
     private void setGameStatus(GameStatus gameStatus) {
@@ -57,7 +65,7 @@ public class DealerTest {
         dealer = new Dealer(moveManagerMock, newGameSetterMock, playersManagerMock,
                 gameCycleManagerMock, endGameManagerMock, gameStatus, gameRound);
     }
-
+    
     @Test
     public void shouldGameCycleManagerEndCycleWhenGameStatusCYCLE_ENDED() throws Exception {
         setGameStatus(GameStatus.CYCLE_ENDED);
@@ -116,7 +124,7 @@ public class DealerTest {
 
     @Test
     public void shouldNoNullPointerExceptionWhenNewDealerTick() throws Exception {
-        dealer = new Dealer(null);
+        dealer = new Dealer(playersManagerMock);
         try {
             dealer.tick();
         } catch (NullPointerException e) {

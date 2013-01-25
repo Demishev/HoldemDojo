@@ -21,13 +21,14 @@ public class EndGameManager {
     }
 
     public void endGame() {
-        dealer.setPlayerWin(findWinner());
-        giveMoneyToWinner();
+        Player winner = findWinner();
+		dealer.setPlayerWin(winner);
+        giveMoneyToWinner(winner);
         dealer.setGameEnded();
     }
 
-    private void giveMoneyToWinner() {
-		Player winner = findWinner();
+    private void giveMoneyToWinner(Player winner) {
+
 		int prize = 0;
 		for (Player player : playersList) {
 			prize += player.getBet();

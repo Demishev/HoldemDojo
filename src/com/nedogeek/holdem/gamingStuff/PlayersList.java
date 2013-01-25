@@ -40,7 +40,7 @@ public class PlayersList extends ArrayList<Player> {
     }
 
     public boolean hasAvailableMovers() {
-        return moreThanOnePlayerDoNotFoldsOrLost() && getMoverNumber() != -1;
+        return moreThanOnePlayerDoNotFoldsOrLost();
     }
 
     public boolean moreThanOnePlayerDoNotFoldsOrLost() {
