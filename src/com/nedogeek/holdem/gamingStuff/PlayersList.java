@@ -43,7 +43,7 @@ public class PlayersList extends ArrayList<Player> {
         return moreThanOnePlayerDoNotFoldsOrLost() && getMoverNumber() != -1;
     }
 
-    private boolean moreThanOnePlayerDoNotFoldsOrLost() {
+    public boolean moreThanOnePlayerDoNotFoldsOrLost() {
         int availableMoverStatusQuantity = 0;
         for (Player player : this) {
             final PlayerStatus playerStatus = player.getStatus();
@@ -77,6 +77,7 @@ public class PlayersList extends ArrayList<Player> {
 
     public void changeDealer() {
         dealerNumber = nextPlayer(dealerNumber);
+        System.out.println("Dealer number is: " + dealerNumber);
     }
 
     public Player smallBlindPlayer() {

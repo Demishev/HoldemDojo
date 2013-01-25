@@ -88,4 +88,14 @@ public class Player {
 		//TODO Implement checking is player needed rise.
 		return (getStatus() != PlayerStatus.Fold);
 	}
+
+	@Override
+	public String toString() {
+		return "Player [name=" + name + ", status=" + status + ", bet=" + bet
+				+ ", balance=" + balance + "]";
+	}
+
+	
+	
+	
 }

@@ -1,5 +1,6 @@
 package com.nedogeek.holdem.dealer;
 
+import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.PlayerStatus;
 import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
@@ -21,10 +22,25 @@ public class EndGameManager {
 
     public void endGame() {
         dealer.setPlayerWin(findWinner());
+        giveMoneyToWinner();
         dealer.setGameEnded();
     }
 
-    private Player findWinner() {
+    private void giveMoneyToWinner() {
+		Player winner = findWinner();
+		int prize = 0;
+		for (Player player : playersList) {
+			prize += player.getBet();
+			player.setBet(0);
+			if (player.getBalance() == 0) {
+				player.setBalance(GameSettings.COINS_AT_START);
+			}
+		}
+		winner.setBalance(winner.getBalance() + prize);
+		System.out.println("Winner: " + winner + " prize " + prize);
+	}
+
+	private Player findWinner() {
         Player winner = null;
         for (Player player: playersList) {
             if (isActivePlayer(player)) {

@@ -24,7 +24,6 @@ public class NewGameSetter {
     void setNewGame() {
         dealer.resetCards();
         playersManager.changeDealer();
-
         resetPlayers();
         makeInitialBets();
 
@@ -42,7 +41,8 @@ public class NewGameSetter {
 
     private void makeInitialBets() {
         moveManager.makeInitialBet(playersManager.smallBlindPlayer(), GameSettings.SMALL_BLIND_AT_START);
-
+        System.out.println("Small blind player is: " + playersManager.smallBlindPlayer());
         moveManager.makeInitialBet(playersManager.bigBlindPlayer(), 2 * GameSettings.SMALL_BLIND_AT_START);
+        System.out.println("Big blind player is: " + playersManager.bigBlindPlayer());
     }
 }
