@@ -26,7 +26,7 @@ public class Dealer implements Runnable {
 
     public Dealer(PlayersList playersList) {
         this.playersList = playersList;
-
+        EventManager.getInstance().collectPlayers(playersList);
         moveManager = new MoveManager(this, playersList);
 
         newGameSetter = new NewGameSetter(this, playersList, moveManager);
