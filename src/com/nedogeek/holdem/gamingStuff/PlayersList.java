@@ -1,8 +1,12 @@
 package com.nedogeek.holdem.gamingStuff;
 
 import com.nedogeek.holdem.PlayerStatus;
+import net.sf.json.JSONArray;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * User: Konstantin Demishev
@@ -86,5 +90,18 @@ public class PlayersList extends ArrayList<Player> {
 
     public Player bigBlindPlayer() {
         return get(nextPlayer(nextPlayer(dealerNumber)));
+    }
+
+    public String toJSON() {
+        List<String> playersJSON = new ArrayList<String>();
+        for (Player player : this) {
+            playersJSON.add(player.toJSON());
+        }
+
+        return JSONArray.fromCollection(playersJSON).toString();
+    }
+
+    public int getDealerNumber() {
+        return dealerNumber;
     }
 }

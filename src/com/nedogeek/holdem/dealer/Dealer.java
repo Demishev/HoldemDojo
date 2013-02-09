@@ -147,4 +147,12 @@ public class Dealer implements Runnable {
 	public void setGameReady() {
 		gameStatus = GameStatus.READY;		
 	}
+
+    public GameStatus getGameStatus() {
+        return gameStatus;
+    }
+
+    public GameRound getGameRound() {
+        return gameRound;
+    }
 }

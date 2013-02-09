@@ -24,6 +24,14 @@
             <artifactId>mockito-all</artifactId>
             <version>1.8.4</version>
         </dependency>
+
+        <dependency>
+            <groupId>net.sf.json-lib</groupId>
+            <artifactId>json-lib</artifactId>
+            <version>1.0</version>
+            <classifier>jdk15</classifier>
+        </dependency>
+
     </dependencies>
 
 

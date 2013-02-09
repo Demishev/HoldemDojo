@@ -95,6 +95,11 @@ public class Player {
 				+ ", balance=" + balance + "]";
 	}
 
+    public String toJSON() {
+        return "[\"name\":\"" + name + "\", \"status\":\"" + status + "\",\"bet\":" + bet
+                + ", \"balance\":" + balance + "]";
+    }
+
 	
 	
 	
