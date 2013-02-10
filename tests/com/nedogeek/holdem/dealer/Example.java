@@ -1,5 +1,6 @@
 package com.nedogeek.holdem.dealer;
 
+import static org.junit.Assert.assertEquals;
 import bot.CallBot;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
 import org.junit.Assert;
@@ -21,9 +22,7 @@ public class Example {
 		dealer.setGameReady();
 		for(int i = 0; i<300;i++){
 			dealer.tick();
-		}
-
-        Assert.assertEquals("CallBot,CallBot",EventManager.getInstance().getPlayersNames());
+		}        
 	}
 
     @Test
@@ -40,7 +39,7 @@ public class Example {
             dealer.tick();
         }
 
-        Assert.assertEquals("Call bot,Call bot",EventManager.getInstance().getPlayersNames());
-
+        assertEquals("Call bot,Call bot",EventManager.getInstance().getPlayersNames());
+        assertEquals("[\"[\\\"name\\\":\\\"Call bot\\\", \\\"status\\\":\\\"Call\\\",\\\"bet\\\":20, \\\"balance\\\":980]\",\"[\\\"name\\\":\\\"Call bot\\\", \\\"status\\\":\\\"Call\\\",\\\"bet\\\":20, \\\"balance\\\":980]\"]",playerList.toJSON());
     }
 }
