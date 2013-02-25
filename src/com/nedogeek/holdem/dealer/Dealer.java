@@ -22,7 +22,7 @@ public class Dealer implements Runnable {
     private boolean isStopped;
 
     private int tickNumber = 0;
-	private int callValue;
+    private int callValue;
 
     public Dealer(PlayersList playersList) {
         this.playersList = playersList;
@@ -67,8 +67,8 @@ public class Dealer implements Runnable {
                 break;
         }
         tickNumber++;
-        for(Player player: playersList){
-        	System.out.println(tickNumber +":" +" Game status: " + gameStatus +" Game round: " + gameRound + " " + player);
+        for (Player player : playersList) {
+            System.out.println(tickNumber + ":" + " Game status: " + gameStatus + " Game round: " + gameRound + " " + player);
         }
     }
 
@@ -84,17 +84,17 @@ public class Dealer implements Runnable {
                 if (playersList.hasAvailableMovers()) {
                     moveManager.makeMove(playersList.getMover());
                 } else {
-                    if (playersList.moreThanOnePlayerDoNotFoldsOrLost())
-                    	setNextGameRound();
+                    if (playersList.moreThanOneActiveNotRisePlayer())
+                        setNextGameRound();
                     else
-                    	gameRound = GameRound.FINAL;
+                        gameRound = GameRound.FINAL;
                 }
                 break;
         }
     }
 
     void setGameStarted() {
-    	gameStatus= GameStatus.STARTED;
+        gameStatus = GameStatus.STARTED;
     }
 
     boolean riseNeeded(Player player) {
@@ -105,12 +105,12 @@ public class Dealer implements Runnable {
 
     }
 
-    int getCallValue() {
+    public int getCallValue() {
         return callValue;
     }
 
     void setCallValue(int callValue) {
-		this.callValue = callValue;
+        this.callValue = callValue;
 
     }
 
@@ -119,8 +119,8 @@ public class Dealer implements Runnable {
     }
 
     void setNextGameRound() {
-    	
-    	gameRound = GameRound.values()[gameRound.ordinal() + 1];
+
+        gameRound = GameRound.values()[gameRound.ordinal() + 1];
     }
 
     void giveCardsToPlayer(Player player) {
@@ -128,11 +128,11 @@ public class Dealer implements Runnable {
     }
 
     void setPlayerWin(Player winner) {
-    	
+
     }
 
     void setGameEnded() {
-    	gameRound = GameRound.INITIAL;
+        gameRound = GameRound.INITIAL;
     }
 
     public void sendToPot(int i) {
@@ -144,9 +144,9 @@ public class Dealer implements Runnable {
     }
 
     @Deprecated
-	public void setGameReady() {
-		gameStatus = GameStatus.READY;		
-	}
+    public void setGameReady() {
+        gameStatus = GameStatus.READY;
+    }
 
     public GameStatus getGameStatus() {
         return gameStatus;

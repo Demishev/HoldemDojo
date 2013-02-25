@@ -4,9 +4,7 @@ import com.nedogeek.holdem.PlayerStatus;
 import net.sf.json.JSONArray;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * User: Konstantin Demishev
@@ -19,7 +17,7 @@ public class PlayersList extends ArrayList<Player> {
     private int lastMovedPlayer;
 
     public PlayersList() {
-       dealerNumber = 0;
+        dealerNumber = 0;
     }
 
     @Override
@@ -44,14 +42,13 @@ public class PlayersList extends ArrayList<Player> {
     }
 
     public boolean hasAvailableMovers() {
-        return moreThanOnePlayerDoNotFoldsOrLost();
+        return moreThanOneActiveNotRisePlayer();
     }
 
-    public boolean moreThanOnePlayerDoNotFoldsOrLost() {
+    public boolean moreThanOneActiveNotRisePlayer() {
         int availableMoverStatusQuantity = 0;
         for (Player player : this) {
-            final PlayerStatus playerStatus = player.getStatus();
-            if (playerStatus != PlayerStatus.Fold && playerStatus != PlayerStatus.Lost) {
+            if (player.isActiveNotRisePlayer()) {
                 availableMoverStatusQuantity++;
             }
         }
@@ -77,7 +74,7 @@ public class PlayersList extends ArrayList<Player> {
             nextPlayerNumber = nextPlayer(nextPlayerNumber);
         }
         return -1;
-    }    
+    }
 
     public void changeDealer() {
         dealerNumber = nextPlayer(dealerNumber);

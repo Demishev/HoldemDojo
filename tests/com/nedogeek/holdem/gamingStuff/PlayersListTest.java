@@ -1,8 +1,6 @@
 package com.nedogeek.holdem.gamingStuff;
 
 import com.nedogeek.holdem.PlayerStatus;
-import com.nedogeek.holdem.gamingStuff.Player;
-import com.nedogeek.holdem.gamingStuff.PlayersList;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -161,5 +159,13 @@ public class PlayersListTest {
         playersList.add(thirdPlayer);
 
         assertEquals(thirdPlayer, playersList.bigBlindPlayer());
+    }
+
+    @Test
+    public void shouldNotHasAvailableMoversWhenBothPlayersAreNotActiveNotRisingPlayers() throws Exception {
+        when(firstPlayer.isActiveNotRisePlayer()).thenReturn(false);
+        when(secondPlayer.isActiveNotRisePlayer()).thenReturn(false);
+
+        assertFalse(playersList.hasAvailableMovers());
     }
 }
