@@ -68,7 +68,7 @@ public class Dealer implements Runnable {
         }
         tickNumber++;
         for(Player player: playersList){
-        	System.out.println(tickNumber +":" +" Game satus: " + gameStatus +" Game raund: " + gameRound + " " + player);
+        	System.out.println(tickNumber +":" +" Game status: " + gameStatus +" Game round: " + gameRound + " " + player);
         }
     }
 

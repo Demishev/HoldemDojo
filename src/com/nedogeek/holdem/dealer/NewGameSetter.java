@@ -1,6 +1,5 @@
 package com.nedogeek.holdem.dealer;
 
-import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.PlayerStatus;
 import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
@@ -40,9 +39,9 @@ public class NewGameSetter {
     }
 
     private void makeInitialBets() {
-        moveManager.makeInitialBet(playersManager.smallBlindPlayer(), GameSettings.SMALL_BLIND_AT_START);
+        moveManager.makeSmallBlind(playersManager.smallBlindPlayer());
         System.out.println("Small blind player is: " + playersManager.smallBlindPlayer());
-        moveManager.makeInitialBet(playersManager.bigBlindPlayer(), 2 * GameSettings.SMALL_BLIND_AT_START);
+        moveManager.makeBigBlind(playersManager.bigBlindPlayer());
         System.out.println("Big blind player is: " + playersManager.bigBlindPlayer());
     }
 }

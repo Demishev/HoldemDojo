@@ -44,11 +44,11 @@ public class MoveManager {
         }
     }
 
-    void makeInitialBet(Player player, int initialBet) {
-    	if (player.getBalance() < initialBet) {
-    		makeAllIn(player);
-    	} else {
-    		makeBet(player, initialBet);
+    private void makeInitialBet(Player player, int initialBet) {
+    	if (player.getBalance() > initialBet) {
+            makeBet(player, initialBet);
+        } else {
+            makeAllIn(player);
     	}
     }
 
@@ -110,5 +110,17 @@ public class MoveManager {
 
     private int minimumRiseValue() {
         return dealer.getCallValue() + 2 * GameSettings.SMALL_BLIND_AT_START;
+    }
+
+    public void makeSmallBlind(Player player) {
+        player.setStatus(PlayerStatus.SmallBLind);
+
+        makeInitialBet(player, GameSettings.SMALL_BLIND_AT_START);
+    }
+
+    public void makeBigBlind(Player player) {
+        player.setStatus(PlayerStatus.BigBlind);
+
+        makeInitialBet(player, 2 * GameSettings.SMALL_BLIND_AT_START);
     }
 }

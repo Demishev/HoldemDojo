@@ -1,6 +1,5 @@
 package com.nedogeek.holdem.dealer;
 
-import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.PlayerStatus;
 import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
@@ -168,14 +167,14 @@ public class NewGameSetterTest {
     public void shouldSmallBlindAddedToPotWhenGameStarted() throws Exception {
         newGameSetter.setNewGame();
 
-        verify(moveManagerMock).makeInitialBet(secondPlayerMock, GameSettings.SMALL_BLIND_AT_START);
+        verify(moveManagerMock).makeSmallBlind(secondPlayerMock);
     }
 
     @Test
     public void shouldBigBlindAddedToPotWhenGameStarted() throws Exception {
         newGameSetter.setNewGame();
 
-        verify(moveManagerMock).makeInitialBet(firstPlayerMock, GameSettings.SMALL_BLIND_AT_START * 2);
+        verify(moveManagerMock).makeBigBlind(firstPlayerMock);
     }
 
     @Test
@@ -183,7 +182,7 @@ public class NewGameSetterTest {
         setDealerIs(1);
         newGameSetter.setNewGame();
 
-        verify(moveManagerMock).makeInitialBet(firstPlayerMock, GameSettings.SMALL_BLIND_AT_START);
+        verify(moveManagerMock).makeSmallBlind(firstPlayerMock);
     }
 
     @Test
@@ -191,7 +190,7 @@ public class NewGameSetterTest {
         setDealerIs(1);
         newGameSetter.setNewGame();
 
-        verify(moveManagerMock).makeInitialBet(secondPlayerMock, GameSettings.SMALL_BLIND_AT_START * 2);
+        verify(moveManagerMock).makeBigBlind(secondPlayerMock);
     }
 
     @Test

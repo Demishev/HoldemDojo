@@ -244,21 +244,21 @@ public class MoveManagerTest {
 
     @Test
     public void shouldSetCallValue2SmallBlindsWhenInitialBlindFirstPlayer2SmallBlinds() throws Exception {
-        moveManager.makeInitialBet(firstPlayerMock, 2 * SMALL_BLIND);
+        moveManager.makeBigBlind(firstPlayerMock);
 
         verify(dealerMock).setCallValue(2 * SMALL_BLIND);
     }
 
     @Test
     public void shouldSetCallValue2SmallBlindsWhenInitialBlindSecondPlayer2SmallBlinds() throws Exception {
-        moveManager.makeInitialBet(secondPlayerMock, 2 * SMALL_BLIND);
+        moveManager.makeBigBlind(secondPlayerMock);
 
         verify(dealerMock).setCallValue(2 * SMALL_BLIND);
     }
 
     @Test
     public void shouldSetCallValueSmallBlindsWhenInitialBlindFirstPlayerSmallBlinds() throws Exception {
-        moveManager.makeInitialBet(firstPlayerMock,SMALL_BLIND);
+        moveManager.makeSmallBlind(firstPlayerMock);
 
         verify(dealerMock).setCallValue(SMALL_BLIND);
     }
@@ -380,5 +380,56 @@ public class MoveManagerTest {
         moveManager.makeMove(firstPlayerMock);
 
         verify(dealerMock, never()).setCallValue(1000);
+    }
+
+
+    @Test
+    public void shouldFirstPlayerStatusSmallBlindWhenDefaultGameFirstPlayerMakesSmallBlind() throws Exception {
+        moveManager.makeSmallBlind(firstPlayerMock);
+
+        verify(firstPlayerMock).setStatus(PlayerStatus.SmallBLind);
+    }
+
+    @Test
+    public void shouldPlayerStatusAllInWhenPlayerBalance10AndMakesSmallBlind() throws Exception {
+        when(firstPlayerMock.getBalance()).thenReturn(10);
+
+        moveManager.makeSmallBlind(firstPlayerMock);
+
+        verify(firstPlayerMock).setStatus(PlayerStatus.AllIn);
+    }
+
+    @Test
+    public void shouldNoPlayerStatusAllInWhenPlayerBalance11AndMakesSmallBlind() throws Exception {
+        when(firstPlayerMock.getBalance()).thenReturn(11);
+
+        moveManager.makeSmallBlind(firstPlayerMock);
+
+        verify(firstPlayerMock, never()).setStatus(PlayerStatus.AllIn);
+    }
+
+    @Test
+    public void shouldPlayerStatusAllInWhenPlayerBalance20AndMakesBigBlind() throws Exception {
+        when(firstPlayerMock.getBalance()).thenReturn(20);
+
+        moveManager.makeBigBlind(firstPlayerMock);
+
+        verify(firstPlayerMock).setStatus(PlayerStatus.AllIn);
+    }
+
+    @Test
+    public void shouldFirstPlayerStatusBigBlindWhenDefaultGameFirstPlayerMakesBigBlind() throws Exception {
+        moveManager.makeBigBlind(firstPlayerMock);
+
+        verify(firstPlayerMock).setStatus(PlayerStatus.BigBlind);
+    }
+
+    @Test
+    public void shouldPlayerStatusAllInWhenPlayerBalance21AndMakesBigBlind() throws Exception {
+        when(firstPlayerMock.getBalance()).thenReturn(21);
+
+        moveManager.makeBigBlind(firstPlayerMock);
+
+        verify(firstPlayerMock, never()).setStatus(PlayerStatus.AllIn);
     }
 }
