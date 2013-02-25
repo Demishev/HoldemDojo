@@ -42,10 +42,6 @@ public class PlayersList extends ArrayList<Player> {
     }
 
     public boolean hasAvailableMovers() {
-        return moreThanOneActiveNotRisePlayer();
-    }
-
-    public boolean moreThanOneActiveNotRisePlayer() {
         int availableMoverStatusQuantity = 0;
         for (Player player : this) {
             if (player.isActiveNotRisePlayer()) {
@@ -100,5 +96,16 @@ public class PlayersList extends ArrayList<Player> {
 
     public int getDealerNumber() {
         return dealerNumber;
+    }
+
+    public boolean moreThanOnePlayerNotFold() {
+        int notFolded = 0;
+        for (Player player : this) {
+            if (player.getStatus() != PlayerStatus.Fold) {
+                notFolded++;
+            }
+        }
+
+        return notFolded > 1;
     }
 }

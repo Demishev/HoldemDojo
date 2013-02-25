@@ -19,7 +19,7 @@ public class BotGameRunner {
         Dealer dealer = new Dealer(players);
 
         players.add(new FoldBot(dealer));
-        players.add(new CallBot(dealer));
+        players.add(new FoldBot(dealer));
         players.add(new CallBot(dealer));
 
         dealer.setGameReady();

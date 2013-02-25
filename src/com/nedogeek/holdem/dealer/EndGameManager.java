@@ -54,6 +54,7 @@ public class EndGameManager {
                 }
             }
         }
+        System.out.println(winCandidate.getCardCombination());
         return winCandidate;
     }
 

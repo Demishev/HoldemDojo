@@ -11,5 +11,9 @@ public enum GameRound {
     THREE_CARDS,
     FOUR_CARDS,
     FIVE_CARDS,
-    FINAL
+    FINAL;
+
+    public static GameRound next(GameRound gameRound) {
+        return GameRound.values()[gameRound.ordinal() + 1];
+    }
 }

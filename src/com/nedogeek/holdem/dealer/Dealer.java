@@ -3,8 +3,12 @@ package com.nedogeek.holdem.dealer;
 import com.nedogeek.holdem.GameRound;
 import com.nedogeek.holdem.GameStatus;
 import com.nedogeek.holdem.gamingStuff.Card;
+import com.nedogeek.holdem.gamingStuff.CardDeck;
 import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * User: Konstantin Demishev
@@ -24,7 +28,10 @@ public class Dealer implements Runnable {
 
     private int tickNumber = 0;
     private int callValue;
-    private Card[] deskCards;
+
+    private CardDeck cardDeck;
+
+    private List<Card> deskCards;
 
     public Dealer(PlayersList playersList) {
         this.playersList = playersList;
@@ -86,7 +93,7 @@ public class Dealer implements Runnable {
                 if (playersList.hasAvailableMovers()) {
                     moveManager.makeMove(playersList.getMover());
                 } else {
-                    if (playersList.moreThanOneActiveNotRisePlayer())
+                    if (playersList.moreThanOnePlayerNotFold())
                         setNextGameRound();
                     else
                         gameRound = GameRound.FINAL;
@@ -117,12 +124,28 @@ public class Dealer implements Runnable {
     }
 
     void resetCards() {
+        cardDeck = new CardDeck();
+        deskCards = new ArrayList<Card>();
 
+        for (Player player : playersList) {
+            player.setCards(new Card[]{cardDeck.getCard(), cardDeck.getCard()});
+        }
     }
 
     void setNextGameRound() {
 
-        gameRound = GameRound.values()[gameRound.ordinal() + 1];
+        gameRound = GameRound.next(gameRound);
+
+        switch (gameRound) {
+            case THREE_CARDS:
+                deskCards.add(cardDeck.getCard());
+                deskCards.add(cardDeck.getCard());
+                deskCards.add(cardDeck.getCard());
+                break;
+            case FOUR_CARDS:
+            case FIVE_CARDS:
+                deskCards.add(cardDeck.getCard());
+        }
     }
 
     void giveCardsToPlayer(Player player) {
@@ -159,6 +182,12 @@ public class Dealer implements Runnable {
     }
 
     public Card[] getDeskCards() {
-        return deskCards;
+        Card[] cards = new Card[deskCards.size()];
+
+        for (int i = 0; i < deskCards.size(); i++) {
+            cards[i] = deskCards.get(i);
+        }
+
+        return cards;
     }
 }
