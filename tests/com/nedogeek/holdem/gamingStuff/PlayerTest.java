@@ -5,9 +5,8 @@ import com.nedogeek.holdem.dealer.Dealer;
 import org.junit.Before;
 import org.junit.Test;
 
-import static junit.framework.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static junit.framework.Assert.*;
+import static org.mockito.Mockito.*;
 
 /**
  * User: Konstantin Demishev
@@ -104,5 +103,34 @@ public class PlayerTest {
         player.makeBet(2000);
 
         assertEquals(1000, player.getBet());
+    }
+
+    @Test
+    public void shouldActiveNotRisePlayerWhenPlayerStatusSmallBlind() throws Exception {
+        player.setStatus(PlayerStatus.SmallBLind);
+
+        assertTrue(player.isActiveNotRisePlayer());
+    }
+
+    @Test
+    public void shouldActiveRisePlayerWhenPlayerStatusBigBlindPlayerBet20CallValue20() throws Exception {
+        player.setStatus(PlayerStatus.BigBlind);
+        player.setBet(20);
+        setCallValue(20);
+
+        assertTrue(player.isActiveNotRisePlayer());
+    }
+
+    @Test
+    public void shouldActiveNotRisePlayerWhenPlayerStatusCallPlayerBet20CallValue20() throws Exception {
+        player.setStatus(PlayerStatus.Call);
+        player.setBet(20);
+        setCallValue(20);
+
+        assertFalse(player.isActiveNotRisePlayer());
+    }
+
+    private void setCallValue(int callValue) {
+        when(dealerMock.getCallValue()).thenReturn(callValue);
     }
 }

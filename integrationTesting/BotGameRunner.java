@@ -1,6 +1,5 @@
 import bot.CallBot;
 import bot.FoldBot;
-import bot.RandomBot;
 import com.nedogeek.holdem.dealer.Dealer;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
 
@@ -21,7 +20,7 @@ public class BotGameRunner {
 
         players.add(new FoldBot(dealer));
         players.add(new CallBot(dealer));
-        players.add(new RandomBot(dealer));
+        players.add(new CallBot(dealer));
 
         dealer.setGameReady();
 

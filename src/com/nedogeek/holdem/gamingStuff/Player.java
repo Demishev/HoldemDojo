@@ -84,23 +84,22 @@ public class Player {
         }
     }
 
-	public boolean isActiveNotRisePlayer() {
-		//TODO Implement checking is player needed rise.
-		return (getStatus() != PlayerStatus.Fold);
-	}
+    public boolean isActiveNotRisePlayer() {
+        return status != PlayerStatus.Fold &&
+                (status == PlayerStatus.BigBlind || status == PlayerStatus.SmallBLind
+                        || bet < dealer.getCallValue());
+    }
 
-	@Override
-	public String toString() {
-		return "Player [name=" + name + ", status=" + status + ", bet=" + bet
-				+ ", balance=" + balance + "]";
-	}
+    @Override
+    public String toString() {
+        return "Player [name=" + name + ", status=" + status + ", bet=" + bet
+                + ", balance=" + balance + "]";
+    }
 
     public String toJSON() {
         return "[\"name\":\"" + name + "\", \"status\":\"" + status + "\",\"bet\":" + bet
                 + ", \"balance\":" + balance + "]";
     }
 
-	
-	
-	
+
 }
