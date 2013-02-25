@@ -1,21 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="388e9789-c4c7-491f-aae9-9962e0a04901" name="Default" comment="Events codded.">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/integrationTesting/BotGameRunner.java" afterPath="$PROJECT_DIR$/integrationTesting/BotGameRunner.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/Dealer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/MoveManager.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/MoveManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/MoveManagerTest.java" afterPath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/MoveManagerTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/NewGameSetter.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/dealer/NewGameSetter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/NewGameSetterTest.java" afterPath="$PROJECT_DIR$/tests/com/nedogeek/holdem/dealer/NewGameSetterTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/nedogeek/holdem/PlayerStatus.java" afterPath="$PROJECT_DIR$/src/com/nedogeek/holdem/PlayerStatus.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/holdem.iml" afterPath="$PROJECT_DIR$/holdem.iml" />
+    <list default="true" id="388e9789-c4c7-491f-aae9-9962e0a04901" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="holdem.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1361783667364" ignored="false" />
+    <file path="/Dummy.txt" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1361801255648" ignored="false" />
     <file path="/EndGameManager.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357605168468" ignored="false" />
     <file path="/EndGameManagerTest.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357605400689" ignored="false" />
     <file path="/Desk.java" changelist="388e9789-c4c7-491f-aae9-9962e0a04901" time="1357564448570" ignored="false" />
@@ -1304,7 +1295,11 @@
       <created>1360452241877</created>
       <updated>1360452241878</updated>
     </task>
-    <option name="localTasksCounter" value="107" />
+    <task id="LOCAL-00107" summary="makeInitialBets in MoveManager replaced with makeSmallBlind and makeBigBlind&#10;New PlayerStatuses(SmallBlind and BigBlind) introduced.">
+      <created>1361801272379</created>
+      <updated>1361801272379</updated>
+    </task>
+    <option name="localTasksCounter" value="108" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -1392,7 +1387,7 @@
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Events codded." />
+    <option name="LAST_COMMIT_MESSAGE" value="makeInitialBets in MoveManager replaced with makeSmallBlind and makeBigBlind&#10;New PlayerStatuses(SmallBlind and BigBlind) introduced." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1405,7 +1400,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="If AllIn and Balance is smaller than callValue - do not change call value!" />
     <MESSAGE value="NewGameSetter refactoring started." />
     <MESSAGE value="NewGameSetter refactored." />
     <MESSAGE value="EndGameManager not used bank anymore" />
@@ -1430,6 +1424,7 @@
     <MESSAGE value="Coding integration part started." />
     <MESSAGE value="Check is new Dealer has initial status." />
     <MESSAGE value="Events codded." />
+    <MESSAGE value="makeInitialBets in MoveManager replaced with makeSmallBlind and makeBigBlind&#10;New PlayerStatuses(SmallBlind and BigBlind) introduced." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
