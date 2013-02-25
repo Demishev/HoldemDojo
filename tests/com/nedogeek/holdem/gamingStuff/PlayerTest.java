@@ -15,6 +15,11 @@ import static org.mockito.Mockito.*;
  */
 public class PlayerTest {
     private static final String NAME = "Player name";
+    private static final Card CLUBS_ACE = new Card(CardSuit.CLUBS, CardValue.ACE);
+    private static final Card CLUBS_KING = new Card(CardSuit.CLUBS, CardValue.KING);
+    private static final Card CLUBS_QUEEN = new Card(CardSuit.CLUBS, CardValue.QUEEN);
+    private static final Card CLUBS_JACK = new Card(CardSuit.CLUBS, CardValue.JACK);
+    private static final Card CLUBS_TEN = new Card(CardSuit.CLUBS, CardValue.TEN);
 
     private PlayersList playersListMock;
     private Dealer dealerMock;
@@ -25,6 +30,7 @@ public class PlayerTest {
     public void setUp() throws Exception {
         playersListMock = mock(PlayersList.class);
         dealerMock = mock(Dealer.class);
+        when(dealerMock.getDeskCards()).thenReturn(new Card[]{});
 
         player = new Player(NAME, dealerMock);
 
@@ -132,5 +138,20 @@ public class PlayerTest {
 
     private void setCallValue(int callValue) {
         when(dealerMock.getCallValue()).thenReturn(callValue);
+    }
+
+    @Test
+    public void shouldProperToStringWhenNoCardsOnDeskAndClubsAceClubsKingInPlayer() throws Exception {
+        player.setCards(new Card[]{CLUBS_ACE, CLUBS_KING});
+
+        assertEquals("High card Ace with King: [A♣, K♣]", player.getCardCombination().toString());
+    }
+
+    @Test
+    public void shouldProperToStringWhenClubQueenClubJackClubTenOnDeskAndClubsAceClubsKingInPlayer() throws Exception {
+        player.setCards(new Card[]{CLUBS_ACE, CLUBS_KING});
+        when(dealerMock.getDeskCards()).thenReturn(new Card[]{CLUBS_QUEEN, CLUBS_JACK, CLUBS_TEN});
+
+        assertEquals("Royal flash: [A♣, K♣, Q♣, J♣, 10♣]", player.getCardCombination().toString());
     }
 }

@@ -2,6 +2,7 @@ package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.GameRound;
 import com.nedogeek.holdem.GameStatus;
+import com.nedogeek.holdem.gamingStuff.Card;
 import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
 
@@ -23,6 +24,7 @@ public class Dealer implements Runnable {
 
     private int tickNumber = 0;
     private int callValue;
+    private Card[] deskCards;
 
     public Dealer(PlayersList playersList) {
         this.playersList = playersList;
@@ -154,5 +156,9 @@ public class Dealer implements Runnable {
 
     public GameRound getGameRound() {
         return gameRound;
+    }
+
+    public Card[] getDeskCards() {
+        return deskCards;
     }
 }

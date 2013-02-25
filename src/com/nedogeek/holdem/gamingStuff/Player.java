@@ -17,6 +17,7 @@ public class Player {
     private int bet;
     private int balance;
     private PlayersList playersList;
+    private Card[] cards;
 
     public Player(String name, Dealer dealer) {
         this.name = name;
@@ -38,7 +39,13 @@ public class Player {
     }
 
     public PlayerCardCombination getCardCombination() {
-        return null;
+        Card[] deskCards = dealer.getDeskCards();
+
+        Card[] allCards = new Card[cards.length + deskCards.length];
+        System.arraycopy(cards, 0, allCards, 0, cards.length);
+        System.arraycopy(deskCards, 0, allCards, cards.length, deskCards.length);
+
+        return new PlayerCardCombination(allCards);
     }
 
     public int getBet() {
@@ -102,4 +109,7 @@ public class Player {
     }
 
 
+    public void setCards(Card[] cards) {
+        this.cards = cards;
+    }
 }
