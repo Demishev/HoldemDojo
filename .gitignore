@@ -1,3 +1,6 @@
 /.idea
 /target
 holdem.iml
+/.settings
+/.classpath
+/.project
