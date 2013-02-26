@@ -42,13 +42,15 @@ public class PlayersList extends ArrayList<Player> {
     }
 
     public boolean hasAvailableMovers() {
-        int availableMoverStatusQuantity = 0;
+        if (!moreThanOnePlayerNotFold()) {
+            return false;
+        }
         for (Player player : this) {
             if (player.isActiveNotRisePlayer()) {
-                availableMoverStatusQuantity++;
+                return true;
             }
         }
-        return availableMoverStatusQuantity > 1;
+        return false;
     }
 
     public Player getMover() {
@@ -107,5 +109,14 @@ public class PlayersList extends ArrayList<Player> {
         }
 
         return notFolded > 1;
+    }
+
+    public void setPlayersNotMoved() {
+        for (Player player : this) {
+            PlayerStatus playerStatus = player.getStatus();
+            if (playerStatus != PlayerStatus.Fold && playerStatus != PlayerStatus.AllIn)
+                player.setStatus(PlayerStatus.NotMoved);
+        }
+        lastMovedPlayer = -1;
     }
 }

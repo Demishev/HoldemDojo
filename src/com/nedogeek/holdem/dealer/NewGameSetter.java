@@ -12,17 +12,17 @@ import com.nedogeek.holdem.gamingStuff.PlayersList;
 public class NewGameSetter {
     private final Dealer dealer;
     private final MoveManager moveManager;
-    private final PlayersList playersManager;
+    private final PlayersList playersList;
 
-    public NewGameSetter(Dealer dealer, PlayersList playersManager, MoveManager moveManager) {
+    public NewGameSetter(Dealer dealer, PlayersList playersList, MoveManager moveManager) {
         this.dealer = dealer;
-        this.playersManager = playersManager;
+        this.playersList = playersList;
         this.moveManager = moveManager;
     }
 
     void setNewGame() {
         dealer.resetCards();
-        playersManager.changeDealer();
+        playersList.changeDealer();
         resetPlayers();
         makeInitialBets();
 
@@ -30,18 +30,16 @@ public class NewGameSetter {
     }
 
     private void resetPlayers() {
-        for (Player player: playersManager) {
-            if (player.getStatus() != PlayerStatus.Lost) {
-                dealer.giveCardsToPlayer(player);
-                player.setStatus(PlayerStatus.NotMoved);
-            }
+        for (Player player : playersList) {
+            dealer.giveCardsToPlayer(player);
+            player.setStatus(PlayerStatus.NotMoved);
         }
     }
 
     private void makeInitialBets() {
-        moveManager.makeSmallBlind(playersManager.smallBlindPlayer());
-        System.out.println("Small blind player is: " + playersManager.smallBlindPlayer());
-        moveManager.makeBigBlind(playersManager.bigBlindPlayer());
-        System.out.println("Big blind player is: " + playersManager.bigBlindPlayer());
+        moveManager.makeSmallBlind(playersList.smallBlindPlayer());
+        System.out.println("Small blind player is: " + playersList.smallBlindPlayer());
+        moveManager.makeBigBlind(playersList.bigBlindPlayer());
+        System.out.println("Big blind player is: " + playersList.bigBlindPlayer());
     }
 }

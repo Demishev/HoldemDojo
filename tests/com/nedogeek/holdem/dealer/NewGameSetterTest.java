@@ -103,18 +103,6 @@ public class NewGameSetterTest {
     }
 
     @Test
-    public void shouldNotLostPlayerSetNotMoves() throws Exception {
-        players.add(thirdPlayerMock);
-        resetIterator();
-
-        setPlayerStatus(firstPlayerMock, PlayerStatus.Lost);
-
-        newGameSetter.setNewGame();
-
-        verify(firstPlayerMock, never()).setStatus(PlayerStatus.NotMoved);
-    }
-
-    @Test
     public void shouldBeGivenCardsToFirstPlayerWhenDefaultNewGame() throws Exception {
         newGameSetter.setNewGame();
 
@@ -143,17 +131,6 @@ public class NewGameSetterTest {
         newGameSetter.setNewGame();
 
         verify(dealerMock, never()).giveCardsToPlayer(thirdPlayerMock);
-    }
-
-    @Test
-    public void shouldNotBeGivenCardsToThirdPlayerWhen3PlayersAnd3IsLostNewGame() throws Exception {
-        setPlayerStatus(secondPlayerMock, PlayerStatus.Lost);
-        players.add(thirdPlayerMock);
-        resetIterator();
-
-        newGameSetter.setNewGame();
-
-        verify(dealerMock, never()).giveCardsToPlayer(secondPlayerMock);
     }
 
     @Test

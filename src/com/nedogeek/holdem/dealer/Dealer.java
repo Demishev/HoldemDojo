@@ -126,10 +126,6 @@ public class Dealer implements Runnable {
     void resetCards() {
         cardDeck = new CardDeck();
         deskCards = new ArrayList<Card>();
-
-        for (Player player : playersList) {
-            player.setCards(new Card[]{cardDeck.getCard(), cardDeck.getCard()});
-        }
     }
 
     void setNextGameRound() {
@@ -146,10 +142,17 @@ public class Dealer implements Runnable {
             case FIVE_CARDS:
                 deskCards.add(cardDeck.getCard());
         }
+
+        System.out.println(gameRound + ": " + deskCards);
+
+        if (gameRound != GameRound.BLIND) {
+            playersList.setPlayersNotMoved();
+        }
+
     }
 
     void giveCardsToPlayer(Player player) {
-
+        player.setCards(new Card[]{cardDeck.getCard(), cardDeck.getCard()});
     }
 
     void setPlayerWin(Player winner) {

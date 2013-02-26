@@ -22,7 +22,7 @@ public class MoveManager {
 
     void makeMove(Player mover) {
         PlayerAction playerMove = mover.getMove();
-       playersManager.playerMoved(mover);
+        playersManager.playerMoved(mover);
         switch (playerMove.getActionType()) {
             case Fold:
                 makeFold(mover);
@@ -38,18 +38,18 @@ public class MoveManager {
             case AllIn:
                 makeAllIn(mover);
                 break;
-             default: 
-            	 makeFold(mover);
-            	 
+            default:
+                makeFold(mover);
+
         }
     }
 
     private void makeInitialBet(Player player, int initialBet) {
-    	if (player.getBalance() > initialBet) {
+        if (player.getBalance() > initialBet) {
             makeBet(player, initialBet);
         } else {
             makeAllIn(player);
-    	}
+        }
     }
 
     private void makeBet(Player player, int betValue) {
@@ -85,13 +85,14 @@ public class MoveManager {
     }
 
     private void makeAllIn(Player player) {
+        System.out.println(player + " making AllIn.");
         player.setStatus(PlayerStatus.AllIn);
         makeBet(player, player.getBalance());
     }
 
     private void makeRise(Player player) {
-       System.out.println(player + " making rise");
-    	int riseValue = player.getMove().getRiseAmount();
+        System.out.println(player + " making rise");
+        int riseValue = player.getMove().getRiseAmount();
         if (isAllInMove(player, riseValue)) {
             makeAllIn(player);
         } else {
