@@ -92,9 +92,16 @@ public class Player {
     }
 
     public boolean isActiveNotRisePlayer() {
-        return status != PlayerStatus.Fold &&
-                (status == PlayerStatus.BigBlind || status == PlayerStatus.SmallBLind
-                        || bet < dealer.getCallValue());
+        return isActiveStatus() || (!isPassiveStatus() && bet < dealer.getCallValue());
+    }
+
+    private boolean isActiveStatus() {
+        return status == PlayerStatus.NotMoved ||
+                status == PlayerStatus.SmallBLind || status == PlayerStatus.BigBlind;
+    }
+
+    private boolean isPassiveStatus() {
+        return status == PlayerStatus.Fold || status == PlayerStatus.AllIn;
     }
 
     @Override

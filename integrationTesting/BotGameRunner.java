@@ -1,5 +1,5 @@
 import bot.CallBot;
-import bot.FoldBot;
+import bot.RiseBot;
 import com.nedogeek.holdem.dealer.Dealer;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
 
@@ -19,12 +19,12 @@ public class BotGameRunner {
         Dealer dealer = new Dealer(players);
 
         players.add(new CallBot(dealer));
-        players.add(new FoldBot(dealer));
+        players.add(new RiseBot(dealer));
         players.add(new CallBot(dealer));
 
         dealer.setGameReady();
 
-        doTicks(100, dealer);
+        doTicks(10000, dealer);
     }
 
     private static void doTicks(int ticksCount, Dealer dealer) {

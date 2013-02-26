@@ -57,15 +57,6 @@ public class PlayersListTest {
     }
 
     @Test
-    public void shouldMoveWhen() throws Exception {
-        firstPlayer.setStatus(PlayerStatus.Rise);
-        secondPlayer.setStatus(PlayerStatus.Rise);
-        playersList.playerMoved(firstPlayer);
-//TODO add test into PlayerTest for isNeededRise case.
-        assertEquals(secondPlayer, playersList.getMover());
-    }
-
-    @Test
     public void should0PlayersWhenNewPlayersManager() throws Exception {
         assertEquals(0, new PlayersList().size());
     }
@@ -112,21 +103,6 @@ public class PlayersListTest {
         playersList.add(playerMock);
 
         verify(playerMock).registerList(playersList);
-    }
-
-    @Test
-    public void shouldMoverSecondPlayer0WhenMovedFirstPlayer() throws Exception {
-        playersList.playerMoved(firstPlayer);
-
-        assertEquals(secondPlayer, playersList.getMover());
-    }
-
-
-    @Test
-    public void shouldMoverFirstPlayer0WhenMovedSecondPlayer() throws Exception {
-        playersList.playerMoved(secondPlayer);
-
-        assertEquals(firstPlayer, playersList.getMover());
     }
 
     @Test
