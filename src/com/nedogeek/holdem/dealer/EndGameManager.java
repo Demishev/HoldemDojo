@@ -2,6 +2,7 @@ package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.PlayerStatus;
+import com.nedogeek.holdem.combinations.PlayerCardCombination;
 import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
 
@@ -44,21 +45,28 @@ public class EndGameManager {
     private Player findWinner() {
         Player winCandidate = null;
         for (Player player : playersList) {
-            if (isActivePlayer(player)) {
-                if (winCandidate == null) {
-                    winCandidate = player;
-                } else {
-                    if (winCandidate.getCardCombination().compareTo(player.getCardCombination()) < 0) {
-                        winCandidate = player;
-                    }
-                }
-            }
+            winCandidate = bestFromPlayers(winCandidate, player);
         }
-        System.out.println(winCandidate.getCardCombination());
+        System.out.println(winCandidate.getCardCombination().toString());
         return winCandidate;
     }
 
+    private Player bestFromPlayers(Player firstPlayer, Player secondPlayer) {
+        if (!isActivePlayer(firstPlayer)) {
+            return secondPlayer;
+        }
+        if (!isActivePlayer(secondPlayer)) {
+            return firstPlayer;
+        }
+
+        PlayerCardCombination firstPlayerCardCombination = firstPlayer.getCardCombination();
+        PlayerCardCombination secondPlayerCardCombination = secondPlayer.getCardCombination();
+
+        return (firstPlayerCardCombination.compareTo(secondPlayerCardCombination) > 0) ?
+                firstPlayer : secondPlayer;
+    }
+
     private boolean isActivePlayer(Player player) {
-        return player.getStatus() != PlayerStatus.Fold && player.getStatus() != PlayerStatus.Lost;
+        return player != null && player.getStatus() != PlayerStatus.Fold;
     }
 }

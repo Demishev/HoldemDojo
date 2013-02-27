@@ -118,4 +118,15 @@ public class PlayersList extends ArrayList<Player> {
         }
         lastMovedPlayer = -1;
     }
+
+    public boolean moreThanOnePlayerNotFolds() {
+        int notFoldedPlayersQuantity = 0;
+        for (Player player : this) {
+            if (player.getStatus() != PlayerStatus.Fold) {
+                notFoldedPlayersQuantity++;
+            }
+        }
+
+        return notFoldedPlayersQuantity > 1;
+    }
 }

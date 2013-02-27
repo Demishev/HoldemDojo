@@ -53,7 +53,7 @@ public class EndGameManagerTest {
         players.add(firstPlayerMock);
         players.add(secondPlayerMock);
 
-        for (Player player: players) {
+        for (Player player : players) {
             setPlayerStatus(player, PlayerStatus.NotMoved);
         }
 
@@ -90,6 +90,7 @@ public class EndGameManagerTest {
         playersManagerMock = mock(PlayersList.class);
 
         when(playersManagerMock.iterator()).thenReturn(players.iterator());
+        when(playersManagerMock.get(0)).thenReturn(firstPlayerMock);
     }
 
     private void setCombinationsRelations(PlayerCardCombination biggerCombination, PlayerCardCombination smallerCombination) {
@@ -104,11 +105,6 @@ public class EndGameManagerTest {
     private void setPlayerFold(Player player) {
         setPlayerStatus(player, PlayerStatus.Fold);
     }
-
-    private void setPlayerLost(Player player) {
-        setPlayerStatus(player, PlayerStatus.Lost);
-    }
-
 
     @Test
     public void shouldEndGameManagerNotNullWhenCreated() throws Exception {
@@ -125,15 +121,6 @@ public class EndGameManagerTest {
     @Test
     public void shouldSecondPlayerWinWhenFirstPlayerFolds() throws Exception {
         setPlayerFold(firstPlayerMock);
-
-        endGameManager.endGame();
-
-        verify(dealerMock).setPlayerWin(secondPlayerMock);
-    }
-
-    @Test
-    public void shouldSecondPlayerWinWhenFirstPlayerLost() throws Exception {
-        setPlayerLost(firstPlayerMock);
 
         endGameManager.endGame();
 
@@ -158,7 +145,7 @@ public class EndGameManagerTest {
 
     @Test
     public void shouldFirstPlayerWinWhenNoPlayerFoldsAndSecondHasWinningCombination() throws Exception {
-        setCombinationsRelations(secondPlayerCardCombinationMock,firstPlayerCardCombinationMock);
+        setCombinationsRelations(secondPlayerCardCombinationMock, firstPlayerCardCombinationMock);
 
         endGameManager.endGame();
 

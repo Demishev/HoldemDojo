@@ -93,7 +93,7 @@ public class Dealer implements Runnable {
                 if (playersList.hasAvailableMovers()) {
                     moveManager.makeMove(playersList.getMover());
                 } else {
-                    if (playersList.moreThanOnePlayerWithActiveStatus())
+                    if (playersList.moreThanOnePlayerNotFolds())
                         setNextGameRound();
                     else
                         gameRound = GameRound.FINAL;
