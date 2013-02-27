@@ -144,4 +144,19 @@ public class PlayersListTest {
 
         assertFalse(playersList.hasAvailableMovers());
     }
+
+    @Test
+    public void shouldChangeDealerWhenSetNewGame() throws Exception {
+        playersList.setNewGame();
+
+        assertEquals(1, playersList.getDealerNumber());
+    }
+
+    @Test
+    public void shouldAllPlayersGetNotMovedStatusesWhenNewGame() throws Exception {
+        playersList.setNewGame();
+
+        verify(firstPlayer).setStatus(PlayerStatus.NotMoved);
+        verify(secondPlayer).setStatus(PlayerStatus.NotMoved);
+    }
 }

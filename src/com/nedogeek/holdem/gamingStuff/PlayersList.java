@@ -72,7 +72,7 @@ public class PlayersList extends ArrayList<Player> {
         return -1;
     }
 
-    public void changeDealer() {
+    void changeDealer() {
         dealerNumber = nextPlayer(dealerNumber);
         System.out.println("Dealer number is: " + dealerNumber);
     }
@@ -128,5 +128,13 @@ public class PlayersList extends ArrayList<Player> {
         }
 
         return notFoldedPlayersQuantity > 1;
+    }
+
+    public void setNewGame() {
+        changeDealer();
+
+        for (Player player : this) {
+            player.setStatus(PlayerStatus.NotMoved);
+        }
     }
 }

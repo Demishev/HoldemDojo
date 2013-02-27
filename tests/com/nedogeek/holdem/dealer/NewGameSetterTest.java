@@ -89,20 +89,6 @@ public class NewGameSetterTest {
     }
 
     @Test
-    public void shouldSetFirstPlayerStatusNotMovedWhenDefaultNewGameSet() throws Exception {
-        newGameSetter.setNewGame();
-
-        verify(firstPlayerMock).setStatus(PlayerStatus.NotMoved);
-    }
-
-    @Test
-    public void shouldSetSecondPlayerStatusNotMovedWhenDefaultNewGameSet() throws Exception {
-        newGameSetter.setNewGame();
-
-        verify(secondPlayerMock).setStatus(PlayerStatus.NotMoved);
-    }
-
-    @Test
     public void shouldBeGivenCardsToFirstPlayerWhenDefaultNewGame() throws Exception {
         newGameSetter.setNewGame();
 
@@ -131,13 +117,6 @@ public class NewGameSetterTest {
         newGameSetter.setNewGame();
 
         verify(dealerMock, never()).giveCardsToPlayer(thirdPlayerMock);
-    }
-
-    @Test
-    public void shouldChangeDealerInPlayersManagerMockWhenNewGameSetterSetNewGame() throws Exception {
-        newGameSetter.setNewGame();
-
-        verify(playersManagerMock).changeDealer();
     }
 
     @Test
@@ -185,11 +164,9 @@ public class NewGameSetterTest {
     }
 
     @Test
-    public void shouldSetGameRound1WhenTick() throws Exception {
+    public void shouldPlayersListSetNewGameWhenNewGameSetterSetNewGame() throws Exception {
         newGameSetter.setNewGame();
 
-        verify(dealerMock).setNextGameRound();
+        verify(playersManagerMock).setNewGame();
     }
-
-
 }

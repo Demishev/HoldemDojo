@@ -1,6 +1,5 @@
 package com.nedogeek.holdem.dealer;
 
-import com.nedogeek.holdem.PlayerStatus;
 import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
 
@@ -21,18 +20,19 @@ public class NewGameSetter {
     }
 
     void setNewGame() {
-        dealer.resetCards();
-        playersList.changeDealer();
-        resetPlayers();
+        resetCards();
         makeInitialBets();
+
+        playersList.setNewGame();
 
         dealer.setNextGameRound();
     }
 
-    private void resetPlayers() {
+    private void resetCards() {
+        dealer.resetCards();
+
         for (Player player : playersList) {
             dealer.giveCardsToPlayer(player);
-            player.setStatus(PlayerStatus.NotMoved);
         }
     }
 
