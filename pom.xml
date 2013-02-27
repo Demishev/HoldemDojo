@@ -7,35 +7,44 @@
     <groupId>com.nedogeek</groupId>
     <artifactId>holdem</artifactId>
     <version>1.0</version>
-    
+
     <packaging>war</packaging>
-    
+
     <build>
-    	<sourceDirectory>${basedir}/src</sourceDirectory>
-    	<plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>2.1.1</version>
-        <configuration>
-          <warSourceDirectory>WebContent</warSourceDirectory>
-        </configuration>
-      </plugin>
-      
-      <plugin>
-		<groupId>org.codehaus.mojo</groupId>
-		<artifactId>tomcat-maven-plugin</artifactId>
-		<configuration>
-			<url>http://127.0.0.1:8080/manager/text</url>
-			<server>TomcatServer</server>
-			<path>/holdem</path>
-			<warFile>${basedir}/target/holdem-1.0.war</warFile>
-		</configuration>
-	  </plugin>
-      
-    </plugins>
+        <sourceDirectory>${basedir}/src</sourceDirectory>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.1.1</version>
+                <configuration>
+                    <warSourceDirectory>WebContent</warSourceDirectory>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>tomcat-maven-plugin</artifactId>
+                <configuration>
+                    <url>http://127.0.0.1:8080/manager/text</url>
+                    <server>TomcatServer</server>
+                    <path>/holdem</path>
+                    <warFile>${basedir}/target/holdem-1.0.war</warFile>
+                </configuration>
+            </plugin>
+
+        </plugins>
     </build>
-    
+
     <dependencies>
         <dependency>
             <groupId>javax</groupId>

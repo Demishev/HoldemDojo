@@ -446,4 +446,39 @@ public class MoveManagerTest {
 
         verify(playersListMock).playerMoved(firstPlayerMock);
     }
+
+    @Test
+    public void shouldCheckWhenCallValueIs0() throws Exception {
+        setPlayerAction(PlayerAction.ActionType.Check);
+
+        setCallValue(0);
+
+        moveManager.makeMove(firstPlayerMock);
+
+        verify(firstPlayerMock).setStatus(PlayerStatus.Check);
+    }
+
+    @Test
+    public void shouldFoldWhenCallValueIs100AndBetIs0() throws Exception {
+        setPlayerAction(PlayerAction.ActionType.Check);
+
+        setCallValue(100);
+
+        moveManager.makeMove(firstPlayerMock);
+
+        verify(firstPlayerMock).setStatus(PlayerStatus.Fold);
+    }
+
+    @Test
+    public void shouldCheckWhenCallValueIs100AndBetIs200() throws Exception {
+        setPlayerAction(PlayerAction.ActionType.Check);
+
+        when(firstPlayerMock.getBet()).thenReturn(200);
+
+        setCallValue(100);
+
+        moveManager.makeMove(firstPlayerMock);
+
+        verify(firstPlayerMock).setStatus(PlayerStatus.Check);
+    }
 }

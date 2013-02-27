@@ -28,6 +28,7 @@ public class MoveManager {
                 makeFold(mover);
                 break;
             case Check:
+                makeCheck(mover);
                 break;
             case Call:
                 makeCall(mover);
@@ -40,6 +41,14 @@ public class MoveManager {
                 break;
             default:
                 makeFold(mover);
+        }
+    }
+
+    private void makeCheck(Player player) {
+        if (dealer.getCallValue() <= player.getBet()) {
+            player.setStatus(PlayerStatus.Check);
+        } else {
+            player.setStatus(PlayerStatus.Fold);
         }
     }
 
