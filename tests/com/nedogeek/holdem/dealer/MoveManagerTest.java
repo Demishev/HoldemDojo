@@ -359,7 +359,7 @@ public class MoveManagerTest {
 
         moveManager.makeMove(firstPlayerMock);
 
-        verify(firstPlayerMock, never()).setStatus(PlayerStatus.Call);
+        verify(firstPlayerMock).setStatus(PlayerStatus.AllIn);
     }
 
     @Test

@@ -5,7 +5,7 @@ package com.nedogeek.holdem.gamingStuff;
  * Date: 05.10.12
  * Time: 22:13
  */
-public class Card implements Comparable<Card>{
+public class Card implements Comparable<Card> {
     private final CardSuit cardSuit;
     private final CardValue cardValue;
 
@@ -31,7 +31,7 @@ public class Card implements Comparable<Card>{
         return "" + cardValue + cardSuit;
     }
 
-    @Override //TODO Simplify this method
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
