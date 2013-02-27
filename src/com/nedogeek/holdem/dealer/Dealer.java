@@ -93,7 +93,7 @@ public class Dealer implements Runnable {
                 if (playersList.hasAvailableMovers()) {
                     moveManager.makeMove(playersList.getMover());
                 } else {
-                    if (playersList.moreThanOnePlayerNotFold())
+                    if (playersList.moreThanOnePlayerWithActiveStatus())
                         setNextGameRound();
                     else
                         gameRound = GameRound.FINAL;
@@ -107,7 +107,7 @@ public class Dealer implements Runnable {
     }
 
     void addToPot(int betValue) {
-
+        //TODO WTF
     }
 
     public int getCallValue() {

@@ -42,7 +42,7 @@ public class PlayersList extends ArrayList<Player> {
     }
 
     public boolean hasAvailableMovers() {
-        if (!moreThanOnePlayerNotFold()) {
+        if (!moreThanOnePlayerWithActiveStatus()) {
             return false;
         }
         for (Player player : this) {
@@ -58,17 +58,7 @@ public class PlayersList extends ArrayList<Player> {
     }
 
     private int getMoverNumber() {
-
-        if (lastMovedPlayer == -1 && get(nextPlayer(dealerNumber)).isActiveNotRisePlayer()) {
-            return nextPlayer(dealerNumber);
-        }
-
-        int startedPlayer;
-        if (lastMovedPlayer == -1) {
-            startedPlayer = nextPlayer(dealerNumber);
-        } else {
-            startedPlayer = lastMovedPlayer;
-        }
+        int startedPlayer = (lastMovedPlayer == -1) ? dealerNumber : lastMovedPlayer;
 
         int currentPlayerNumber = nextPlayer(startedPlayer);
 
@@ -108,10 +98,10 @@ public class PlayersList extends ArrayList<Player> {
         return dealerNumber;
     }
 
-    public boolean moreThanOnePlayerNotFold() {
+    public boolean moreThanOnePlayerWithActiveStatus() {
         int activePlayer = 0;
         for (Player player : this) {
-            if (player.getStatus() != PlayerStatus.Fold ||
+            if (player.getStatus() != PlayerStatus.Fold &&
                     player.getStatus() != PlayerStatus.AllIn) {
                 activePlayer++;
             }
