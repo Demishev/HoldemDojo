@@ -162,10 +162,6 @@ public class Dealer implements Runnable {
         gameRound = GameRound.INITIAL;
     }
 
-    public void sendToPot(int i) {
-
-    }
-
     public void stop() {
         isStopped = true;
     }

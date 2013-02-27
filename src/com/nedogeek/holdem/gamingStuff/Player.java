@@ -74,7 +74,6 @@ public class Player {
 
     public void makeBet(int bet) {
         int chips = getChipsFromBalance(bet);
-        dealer.sendToPot(chips);
         this.bet = chips;
 
         playersList.playerMoved(this);

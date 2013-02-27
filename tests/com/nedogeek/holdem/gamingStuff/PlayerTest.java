@@ -63,27 +63,6 @@ public class PlayerTest {
     }
 
     @Test
-    public void should100SendToPotWhenNewPlayerSetBalance1000AndBet100() throws Exception {
-        player.makeBet(100);
-
-        verify(dealerMock).sendToPot(100);
-    }
-
-    @Test
-    public void should200SendToPotWhenNewPlayerSetBalance1000AndBet200() throws Exception {
-        player.makeBet(200);
-
-        verify(dealerMock).sendToPot(200);
-    }
-
-    @Test
-    public void should1000SendToPotWhenNewPlayerSetBalance1000AndBet2000() throws Exception {
-        player.makeBet(2000);
-
-        verify(dealerMock).sendToPot(1000);
-    }
-
-    @Test
     public void shouldBalance0WhenNewPlayerSetBalance1000AndBet2000() throws Exception {
         player.makeBet(2000);
 
