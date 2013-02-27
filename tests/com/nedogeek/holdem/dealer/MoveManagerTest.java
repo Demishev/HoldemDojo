@@ -19,7 +19,7 @@ import static org.mockito.Mockito.*;
  * Time: 13:26
  */
 public class MoveManagerTest {
-    private final int SMALL_BLIND = GameSettings.SMALL_BLIND_AT_START;
+    private final int SMALL_BLIND = GameSettings.SMALL_BLIND;
 
     private PlayerAction playerActionMock;
     List<Player> players;
@@ -47,7 +47,7 @@ public class MoveManagerTest {
     }
 
     private void giveStartMoneyToPlayers() {
-        for (Player player: players) {
+        for (Player player : players) {
             when(player.getBalance()).thenReturn(GameSettings.COINS_AT_START);
         }
     }
@@ -71,7 +71,7 @@ public class MoveManagerTest {
         players.add(secondPlayerMock);
         when(playersManagerMock.iterator()).thenReturn(players.iterator());
 
-        for (Player player: players) {
+        for (Player player : players) {
             when(player.getMove()).thenReturn(playerActionMock);
         }
 
@@ -431,5 +431,15 @@ public class MoveManagerTest {
         moveManager.makeBigBlind(firstPlayerMock);
 
         verify(firstPlayerMock, never()).setStatus(PlayerStatus.AllIn);
+    }
+
+    @Test
+    public void shouldNameWhen() throws Exception {
+        setPlayerAction(PlayerAction.ActionType.Rise);
+        setCallValue(2000);
+
+        moveManager.makeMove(firstPlayerMock);
+
+        verify(firstPlayerMock).setStatus(PlayerStatus.AllIn);
     }
 }

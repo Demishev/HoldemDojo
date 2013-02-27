@@ -7,5 +7,5 @@ package com.nedogeek.holdem;
  */
 public interface GameSettings {
     int COINS_AT_START = 1000;
-    int SMALL_BLIND_AT_START = 10;
+    int SMALL_BLIND = 10;
 }

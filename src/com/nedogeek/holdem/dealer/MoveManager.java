@@ -92,17 +92,18 @@ public class MoveManager {
 
     private void makeRise(Player player) {
         System.out.println(player + " making rise");
-        int riseValue = player.getMove().getRiseAmount();
+        int riseValue = calculateRiseValue(player);
         if (isAllInMove(player, riseValue)) {
             makeAllIn(player);
         } else {
             player.setStatus(PlayerStatus.Rise);
-            if (riseValue >= minimumRiseValue()) {
-                makeBet(player, riseValue);
-            } else {
-                makeBet(player, minimumRiseValue());
-            }
+            makeBet(player, riseValue);
         }
+    }
+
+    private int calculateRiseValue(Player player) {
+        int playerWantRise = player.getMove().getRiseAmount();
+        return (playerWantRise < minimumRiseValue()) ? minimumRiseValue() : playerWantRise;
     }
 
     private boolean isAllInMove(Player player, int bet) {
@@ -110,18 +111,18 @@ public class MoveManager {
     }
 
     private int minimumRiseValue() {
-        return dealer.getCallValue() + 2 * GameSettings.SMALL_BLIND_AT_START;
+        return dealer.getCallValue() + 2 * GameSettings.SMALL_BLIND;
     }
 
     public void makeSmallBlind(Player player) {
         player.setStatus(PlayerStatus.SmallBLind);
 
-        makeInitialBet(player, GameSettings.SMALL_BLIND_AT_START);
+        makeInitialBet(player, GameSettings.SMALL_BLIND);
     }
 
     public void makeBigBlind(Player player) {
         player.setStatus(PlayerStatus.BigBlind);
 
-        makeInitialBet(player, 2 * GameSettings.SMALL_BLIND_AT_START);
+        makeInitialBet(player, 2 * GameSettings.SMALL_BLIND);
     }
 }
