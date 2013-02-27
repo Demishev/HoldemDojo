@@ -1,4 +1,4 @@
-package bot;
+package com.nedogeek.holdem.bot;
 
 import com.nedogeek.holdem.dealer.Dealer;
 import com.nedogeek.holdem.gamingStuff.Player;
@@ -11,7 +11,7 @@ import com.nedogeek.holdem.gamingStuff.PlayerAction;
  */
 public class FoldBot extends Player {
     public FoldBot(Dealer dealer) {
-        super("Folding bot", dealer);
+        super("Folding com.nedogeek.holdem.bot", dealer);
     }
 
     @Override

@@ -1,4 +1,4 @@
-import bot.RiseBot;
+import com.nedogeek.holdem.bot.RiseBot;
 import com.nedogeek.holdem.dealer.Dealer;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
 

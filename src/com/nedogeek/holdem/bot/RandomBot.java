@@ -1,4 +1,4 @@
-package bot;
+package com.nedogeek.holdem.bot;
 
 import com.nedogeek.holdem.dealer.Dealer;
 import com.nedogeek.holdem.gamingStuff.Player;
@@ -15,7 +15,7 @@ public class RandomBot extends Player {
     private Random random;
 
     public RandomBot(Dealer dealer) {
-        super("Random bot", dealer);
+        super("Random com.nedogeek.holdem.bot", dealer);
 
         random = new Random();
     }
