@@ -86,7 +86,7 @@ public class PlayersList extends ArrayList<Player> {
     }
 
     public String toJSON() {
-        List<String> playersJSON = new ArrayList<String>();
+        List<String> playersJSON = new ArrayList<>();
         for (Player player : this) {
             playersJSON.add(player.toJSON());
         }

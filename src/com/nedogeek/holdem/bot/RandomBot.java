@@ -22,7 +22,10 @@ public class RandomBot extends Player {
 
     @Override
     public PlayerAction getMove() {
-        int riseAmount = random.nextInt(getBalance());
+        int riseAmount = 0;
+        if (getBalance() != 0) {
+            riseAmount = random.nextInt(getBalance());
+        }
 
         int actionTypeNumber = random.nextInt(PlayerAction.ActionType.values().length);
         PlayerAction.ActionType actionType = PlayerAction.ActionType.values()[actionTypeNumber];
