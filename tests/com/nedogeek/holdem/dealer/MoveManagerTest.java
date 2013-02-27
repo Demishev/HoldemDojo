@@ -27,7 +27,7 @@ public class MoveManagerTest {
     private Player secondPlayerMock;
 
     private Dealer dealerMock;
-    private PlayersList playersManagerMock;
+    private PlayersList playersListMock;
 
     private MoveManager moveManager;
 
@@ -38,7 +38,7 @@ public class MoveManagerTest {
         resetBank();
         resetPlayersManager();
 
-        moveManager = new MoveManager(dealerMock, playersManagerMock);
+        moveManager = new MoveManager(dealerMock, playersListMock);
     }
 
 
@@ -57,7 +57,7 @@ public class MoveManagerTest {
     }
 
     private void resetPlayersManager() {
-        playersManagerMock = mock(PlayersList.class);
+        playersListMock = mock(PlayersList.class);
 
         setPlayers();
     }
@@ -69,7 +69,7 @@ public class MoveManagerTest {
         players = new ArrayList<Player>();
         players.add(firstPlayerMock);
         players.add(secondPlayerMock);
-        when(playersManagerMock.iterator()).thenReturn(players.iterator());
+        when(playersListMock.iterator()).thenReturn(players.iterator());
 
         for (Player player : players) {
             when(player.getMove()).thenReturn(playerActionMock);
@@ -363,16 +363,6 @@ public class MoveManagerTest {
     }
 
     @Test
-    public void shouldAddToPot1000WhenBalanceIs1000AndCallValueIs2000() throws Exception {
-        setCallValue(2000);
-        setPlayerAction(PlayerAction.ActionType.Call);
-
-        moveManager.makeMove(firstPlayerMock);
-
-        verify(dealerMock).addToPot(GameSettings.COINS_AT_START);
-    }
-
-    @Test
     public void shouldNotCallValue1000WhenCallValueWas2000() throws Exception {
         setCallValue(2000);
         setPlayerAction(PlayerAction.ActionType.Call);
@@ -434,12 +424,26 @@ public class MoveManagerTest {
     }
 
     @Test
-    public void shouldNameWhen() throws Exception {
+    public void shouldAllInWhenPlayerRiseWithBalance1000AndCallValue2000() throws Exception {
         setPlayerAction(PlayerAction.ActionType.Rise);
         setCallValue(2000);
 
         moveManager.makeMove(firstPlayerMock);
 
         verify(firstPlayerMock).setStatus(PlayerStatus.AllIn);
+    }
+
+    @Test
+    public void shouldFirstPlayerMoveRegisteredWhenFirstPlayerMakesSmallBlind() throws Exception {
+        moveManager.makeSmallBlind(firstPlayerMock);
+
+        verify(playersListMock).playerMoved(firstPlayerMock);
+    }
+
+    @Test
+    public void shouldFirstPlayerMoveRegisteredWhenFirstPlayerMakesBigBlind() throws Exception {
+        moveManager.makeBigBlind(firstPlayerMock);
+
+        verify(playersListMock).playerMoved(firstPlayerMock);
     }
 }

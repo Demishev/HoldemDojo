@@ -13,16 +13,16 @@ import com.nedogeek.holdem.gamingStuff.PlayersList;
  */
 public class MoveManager {
     private final Dealer dealer;
-    private final PlayersList playersManager;
+    private final PlayersList playersList;
 
-    MoveManager(Dealer dealer, PlayersList playersManager) {
+    MoveManager(Dealer dealer, PlayersList playersList) {
         this.dealer = dealer;
-        this.playersManager = playersManager;
+        this.playersList = playersList;
     }
 
     void makeMove(Player mover) {
         PlayerAction playerMove = mover.getMove();
-        playersManager.playerMoved(mover);
+        playersList.playerMoved(mover);
         switch (playerMove.getActionType()) {
             case Fold:
                 makeFold(mover);
@@ -59,7 +59,6 @@ public class MoveManager {
         final int playerBet = chips + player.getBet();
 
         player.setBet(playerBet);
-        dealer.addToPot(chips);
         player.setBalance(playerAmount - chips);
         checkCallValue(playerBet);
     }
@@ -109,11 +108,13 @@ public class MoveManager {
         player.setStatus(PlayerStatus.SmallBLind);
 
         trySendToPot(player, GameSettings.SMALL_BLIND);
+        playersList.playerMoved(player);
     }
 
     public void makeBigBlind(Player player) {
         player.setStatus(PlayerStatus.BigBlind);
 
         trySendToPot(player, 2 * GameSettings.SMALL_BLIND);
+        playersList.playerMoved(player);
     }
 }
