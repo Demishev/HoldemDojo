@@ -12,6 +12,7 @@ import java.util.List;
  * Time: 23:48
  */
 public class PlayersList extends ArrayList<Player> {
+    private static final int PLAYER_NOT_FOUND = -1;
 
     private int dealerNumber;
     private int lastMovedPlayer;
@@ -58,22 +59,21 @@ public class PlayersList extends ArrayList<Player> {
     }
 
     private int getMoverNumber() {
-        int startedPlayer = (lastMovedPlayer == -1) ? dealerNumber : lastMovedPlayer;
+        int currentPlayerNumber = nextPlayer(lastMovedPlayer);
 
-        int currentPlayerNumber = nextPlayer(startedPlayer);
-
-        while (currentPlayerNumber != startedPlayer) {
+        while (currentPlayerNumber != lastMovedPlayer) {
             final Player currentPlayer = get(currentPlayerNumber);
             if (currentPlayer.isActiveNotRisePlayer()) {
                 return currentPlayerNumber;
             }
             currentPlayerNumber = nextPlayer(currentPlayerNumber);
         }
-        return -1;
+        return PLAYER_NOT_FOUND;
     }
 
     void changeDealer() {
         dealerNumber = nextPlayer(dealerNumber);
+        lastMovedPlayer = dealerNumber;
         System.out.println("Dealer number is: " + dealerNumber);
     }
 

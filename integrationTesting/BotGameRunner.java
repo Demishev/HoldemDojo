@@ -31,11 +31,7 @@ public class BotGameRunner {
                 Method tick = dealer.getClass().getDeclaredMethod("tick");
                 tick.setAccessible(true);
                 tick.invoke(dealer);
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
+            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();
             }
         }
