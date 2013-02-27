@@ -42,7 +42,7 @@ public class PlayersList extends ArrayList<Player> {
     }
 
     public boolean hasAvailableMovers() {
-        if (!moreThanOnePlayerWithActiveStatus()) {
+        if (!moreThanOnePlayerNotFolds()) {
             return false;
         }
         for (Player player : this) {

@@ -4,8 +4,7 @@ import com.nedogeek.holdem.PlayerStatus;
 import org.junit.Before;
 import org.junit.Test;
 
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.*;
 import static org.mockito.Mockito.*;
 
 /**
@@ -158,5 +157,23 @@ public class PlayersListTest {
 
         verify(firstPlayer).setStatus(PlayerStatus.NotMoved);
         verify(secondPlayer).setStatus(PlayerStatus.NotMoved);
+    }
+
+    @Test
+    public void shouldHasAvailableMoversWhenFirstPlayerIsAllInAndSecondIsActive() throws Exception {
+        when(firstPlayer.getStatus()).thenReturn(PlayerStatus.AllIn);
+
+        when(secondPlayer.isActiveNotRisePlayer()).thenReturn(true);
+
+        assertTrue(playersList.hasAvailableMovers());
+    }
+
+    @Test
+    public void shouldNotHasAvailableMoversWhenFirstPlayerIsFoldAndSecondIsActive() throws Exception {
+        when(firstPlayer.getStatus()).thenReturn(PlayerStatus.Fold);
+
+        when(secondPlayer.isActiveNotRisePlayer()).thenReturn(true);
+
+        assertFalse(playersList.hasAvailableMovers());
     }
 }
