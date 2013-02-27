@@ -106,10 +106,6 @@ public class Dealer implements Runnable {
         gameStatus = GameStatus.STARTED;
     }
 
-    void addToPot(int betValue) {
-        //TODO WTF
-    }
-
     public int getCallValue() {
         return callValue;
     }
