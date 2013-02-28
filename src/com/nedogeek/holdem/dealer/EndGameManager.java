@@ -51,8 +51,12 @@ public class EndGameManager {
 
         int prize = 0;
         for (Player player : playersList) {
-            prize += getChipsFromPlayer(player, winner.getBet());
+            if (player != winner) {
+                prize += getChipsFromPlayer(player, winner.getBet());
+            }
         }
+        prize += winner.getBet();
+        winner.setBet(0);
         winner.setBalance(winner.getBalance() + prize);
         System.out.println("Winner: " + winner + " prize " + prize);
     }
