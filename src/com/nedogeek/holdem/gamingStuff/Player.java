@@ -17,7 +17,6 @@ public class Player {
     private PlayerStatus status;
     private int bet;
     private int balance = GameSettings.COINS_AT_START;
-    private PlayersList playersList;
     private Card[] cards;
 
     public Player(String name, Dealer dealer) {
@@ -65,30 +64,8 @@ public class Player {
         this.balance = balance;
     }
 
-    public void registerList(PlayersList playersList) {
-        this.playersList = playersList;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void makeBet(int bet) {
-        int chips = getChipsFromBalance(bet);
-        this.bet = chips;
-
-        playersList.playerMoved(this);
-    }
-
-    private int getChipsFromBalance(int bet) {
-        if (bet < balance) {
-            balance = balance - bet;
-            return bet;
-        } else {
-            int chips = balance;
-            balance = 0;
-            return chips;
-        }
     }
 
     public boolean isActiveNotRisePlayer() {

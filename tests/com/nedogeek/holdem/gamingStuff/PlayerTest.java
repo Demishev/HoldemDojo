@@ -7,7 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static junit.framework.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * User: Konstantin Demishev
@@ -22,33 +23,23 @@ public class PlayerTest {
     private static final Card CLUBS_JACK = new Card(CardSuit.CLUBS, CardValue.JACK);
     private static final Card CLUBS_TEN = new Card(CardSuit.CLUBS, CardValue.TEN);
 
-    private PlayersList playersListMock;
     private Dealer dealerMock;
 
     private Player player;
 
     @Before
     public void setUp() throws Exception {
-        playersListMock = mock(PlayersList.class);
         dealerMock = mock(Dealer.class);
         when(dealerMock.getDeskCards()).thenReturn(new Card[]{});
 
         player = new Player(NAME, dealerMock);
 
-        player.registerList(playersListMock);
         player.setBalance(1000);
     }
 
     @Test
     public void shouldNameSavedWhenPlayerCreates() throws Exception {
         assertEquals(NAME, player.getName());
-    }
-
-    @Test
-    public void shouldMakeMoveToPlayersListWhenPlayerMakesBet() throws Exception {
-        player.makeBet(500);
-
-        verify(playersListMock).playerMoved(player);
     }
 
     @Test
@@ -61,34 +52,6 @@ public class PlayerTest {
         player.setStatus(PlayerStatus.Fold);
 
         assertEquals(PlayerStatus.Fold, player.getStatus());
-    }
-
-    @Test
-    public void shouldBalance0WhenNewPlayerSetBalance1000AndBet2000() throws Exception {
-        player.makeBet(2000);
-
-        assertEquals(0, player.getBalance());
-    }
-
-    @Test
-    public void shouldBalance800WhenNewPlayerSetBalance1000AndBet200() throws Exception {
-        player.makeBet(200);
-
-        assertEquals(800, player.getBalance());
-    }
-
-    @Test
-    public void shouldBet200WhenNewPlayerSetBalance1000AndBet200() throws Exception {
-        player.makeBet(200);
-
-        assertEquals(200, player.getBet());
-    }
-
-    @Test
-    public void shouldBet1000WhenNewPlayerSetBalance1000AndBet2000() throws Exception {
-        player.makeBet(2000);
-
-        assertEquals(1000, player.getBet());
     }
 
     @Test

@@ -96,15 +96,6 @@ public class PlayersListTest {
     }
 
     @Test
-    public void shouldPlayersListRegisteredInPlayerWhenPlayerAddedToList() throws Exception {
-        final Player playerMock = mock(Player.class);
-
-        playersList.add(playerMock);
-
-        verify(playerMock).registerList(playersList);
-    }
-
-    @Test
     public void shouldSecondPlayerWhenSmallBlindPlayer() throws Exception {
         assertEquals(secondPlayer, playersList.smallBlindPlayer());
     }

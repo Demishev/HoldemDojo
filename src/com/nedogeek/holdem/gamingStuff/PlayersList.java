@@ -24,7 +24,6 @@ public class PlayersList extends ArrayList<Player> {
     @Override
     public boolean add(Player player) {
         if (!contains(player)) {
-            player.registerList(this);
             return super.add(player);
         }
         return false;
