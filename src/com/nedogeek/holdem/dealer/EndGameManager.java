@@ -1,8 +1,6 @@
 package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.GameSettings;
-import com.nedogeek.holdem.PlayerStatus;
-import com.nedogeek.holdem.combinations.PlayerCardCombination;
 import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
 
@@ -67,33 +65,5 @@ public class EndGameManager {
         player.setBet(playerBet -= chipsFromPlayer);
 
         return chipsFromPlayer;
-    }
-
-    private Player findWinner() {
-        Player winCandidate = null;
-        for (Player player : playersList) {
-            winCandidate = bestFromPlayers(winCandidate, player);
-        }
-        System.out.println(winCandidate.getCardCombination().toString());
-        return winCandidate;
-    }
-
-    private Player bestFromPlayers(Player firstPlayer, Player secondPlayer) {
-        if (!isActivePlayer(firstPlayer)) {
-            return secondPlayer;
-        }
-        if (!isActivePlayer(secondPlayer)) {
-            return firstPlayer;
-        }
-
-        PlayerCardCombination firstPlayerCardCombination = firstPlayer.getCardCombination();
-        PlayerCardCombination secondPlayerCardCombination = secondPlayer.getCardCombination();
-
-        return (firstPlayerCardCombination.compareTo(secondPlayerCardCombination) > 0) ?
-                firstPlayer : secondPlayer;
-    }
-
-    private boolean isActivePlayer(Player player) {
-        return player != null && player.getStatus() != PlayerStatus.Fold;
     }
 }

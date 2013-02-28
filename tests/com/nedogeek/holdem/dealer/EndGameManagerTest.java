@@ -1,7 +1,6 @@
 package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.PlayerStatus;
-import com.nedogeek.holdem.combinations.PlayerCardCombination;
 import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
 import org.junit.Before;
@@ -26,10 +25,6 @@ public class EndGameManagerTest {
     private Player firstPlayerMock;
     private Player secondPlayerMock;
     private Player thirdPlayerMock;
-
-    private PlayerCardCombination firstPlayerCardCombinationMock;
-    private PlayerCardCombination secondPlayerCardCombinationMock;
-    private PlayerCardCombination thirdPlayerCardCombinationMock;
 
     private EndGameManager endGameManager;
 
@@ -59,7 +54,6 @@ public class EndGameManagerTest {
             setPlayerStatus(player, PlayerStatus.NotMoved);
         }
 
-        setCardCombinationMocks();
     }
 
     private void setPlayersRelations() {
@@ -69,30 +63,6 @@ public class EndGameManagerTest {
         when(thirdPlayerMock.compareTo(firstPlayerMock)).thenReturn(-1);
         when(secondPlayerMock.compareTo(thirdPlayerMock)).thenReturn(1);
         when(thirdPlayerMock.compareTo(secondPlayerMock)).thenReturn(-1);
-    }
-
-    private void setCardCombinationMocks() {
-        firstPlayerCardCombinationMock = mock(PlayerCardCombination.class);
-        secondPlayerCardCombinationMock = mock(PlayerCardCombination.class);
-        thirdPlayerCardCombinationMock = mock(PlayerCardCombination.class);
-
-//        List<PlayerCardCombination> cardCombinations = new ArrayList<>();
-//                                                             TODO meybe remove it?
-//        cardCombinations.add(firstPlayerCardCombinationMock);
-//        cardCombinations.add(secondPlayerCardCombinationMock);
-//        cardCombinations.add(thirdPlayerCardCombinationMock);
-
-        setCombinationToPlayer(firstPlayerCardCombinationMock, firstPlayerMock);
-        setCombinationToPlayer(secondPlayerCardCombinationMock, secondPlayerMock);
-        setCombinationToPlayer(thirdPlayerCardCombinationMock, thirdPlayerMock);
-
-        setCombinationsRelations(firstPlayerCardCombinationMock, secondPlayerCardCombinationMock);
-        setCombinationsRelations(firstPlayerCardCombinationMock, thirdPlayerCardCombinationMock);
-        setCombinationsRelations(secondPlayerCardCombinationMock, thirdPlayerCardCombinationMock);
-    }
-
-    private void setCombinationToPlayer(PlayerCardCombination combinationMock, Player playerMock) {
-        when(playerMock.getCardCombination()).thenReturn(combinationMock);
     }
 
     private void resetDeskMock() {
@@ -107,17 +77,8 @@ public class EndGameManagerTest {
         when(playersListMock.get(0)).thenReturn(firstPlayerMock);
     }
 
-    private void setCombinationsRelations(PlayerCardCombination biggerCombination, PlayerCardCombination smallerCombination) {
-        when(biggerCombination.compareTo(smallerCombination)).thenReturn(1);
-        when(smallerCombination.compareTo(biggerCombination)).thenReturn(-1);
-    }
-
     private void setPlayerStatus(Player player, PlayerStatus playerStatus) {
         when(player.getStatus()).thenReturn(playerStatus);
-    }
-
-    private void setPlayerFold(Player player) {
-        setPlayerStatus(player, PlayerStatus.Fold);
     }
 
     @Test
@@ -130,40 +91,6 @@ public class EndGameManagerTest {
         endGameManager.endGame();
 
         verify(dealerMock).setInitialGameRound();
-    }
-
-    @Test
-    public void shouldSecondPlayerWinWhenFirstPlayerFolds() throws Exception {
-        setPlayerFold(firstPlayerMock);
-
-        endGameManager.endGame();
-
-        verify(dealerMock).setPlayerWin(secondPlayerMock);
-    }
-
-    @Test
-    public void shouldFirstPlayerWinWhenSecondPlayerFolds() throws Exception {
-        setPlayerFold(secondPlayerMock);
-
-        endGameManager.endGame();
-
-        verify(dealerMock).setPlayerWin(firstPlayerMock);
-    }
-
-    @Test
-    public void shouldSecondPlayerWinWhenNoPlayerFoldsAndFirstHasWinningCombination() throws Exception {
-        endGameManager.endGame();
-
-        verify(dealerMock).setPlayerWin(firstPlayerMock);
-    }
-
-    @Test
-    public void shouldFirstPlayerWinWhenNoPlayerFoldsAndSecondHasWinningCombination() throws Exception {
-        setCombinationsRelations(secondPlayerCardCombinationMock, firstPlayerCardCombinationMock);
-
-        endGameManager.endGame();
-
-        verify(dealerMock).setPlayerWin(secondPlayerMock);
     }
 
     @Test
@@ -189,17 +116,4 @@ public class EndGameManagerTest {
     private void setPlayerBet(Player player, int bet) {
         when(player.getBet()).thenReturn(bet);
     }
-
-    /*
-    * Задача такая:
-    *   есть несколько человек и нужно верно раздать им их выигрыши.
-    *   Например, если их 2, то нужно отдать первому то, что он заслужил, а уже второму остаток.
-    *
-    *   Можно попробовать сделать так:
-    *       1. Создаем список из кандидатов на победу.
-    *       2. Сортируем его по убыванию.
-    *       3. Раздаем кандидатам такую сумму:
-    *
-    *
-     */
 }
