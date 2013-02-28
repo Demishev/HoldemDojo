@@ -20,14 +20,13 @@ import static org.mockito.Mockito.*;
  */
 public class EndGameManagerTest {
     private Dealer dealerMock;
-    private PlayersList playersManagerMock;
+    private PlayersList playersListMock;
 
     private List<Player> players;
     private Player firstPlayerMock;
     private Player secondPlayerMock;
     private Player thirdPlayerMock;
 
-    private List<PlayerCardCombination> cardCombinations;
     private PlayerCardCombination firstPlayerCardCombinationMock;
     private PlayerCardCombination secondPlayerCardCombinationMock;
     private PlayerCardCombination thirdPlayerCardCombinationMock;
@@ -39,9 +38,9 @@ public class EndGameManagerTest {
     public void setUp() throws Exception {
         resetDeskMock();
         resetPlayersMocks();
-        resetPlayerManagerMock();
+        resetPlayerListMock();
 
-        endGameManager = new EndGameManager(dealerMock, playersManagerMock);
+        endGameManager = new EndGameManager(dealerMock, playersListMock);
     }
 
     private void resetPlayersMocks() {
@@ -49,9 +48,12 @@ public class EndGameManagerTest {
         secondPlayerMock = mock(Player.class);
         thirdPlayerMock = mock(Player.class);
 
-        players = new ArrayList<Player>();
+        players = new ArrayList<>();
         players.add(firstPlayerMock);
         players.add(secondPlayerMock);
+        players.add(thirdPlayerMock);
+
+        setPlayersRelations();
 
         for (Player player : players) {
             setPlayerStatus(player, PlayerStatus.NotMoved);
@@ -60,22 +62,33 @@ public class EndGameManagerTest {
         setCardCombinationMocks();
     }
 
+    private void setPlayersRelations() {
+        when(firstPlayerMock.compareTo(secondPlayerMock)).thenReturn(1);
+        when(secondPlayerMock.compareTo(firstPlayerMock)).thenReturn(-1);
+        when(firstPlayerMock.compareTo(thirdPlayerMock)).thenReturn(1);
+        when(thirdPlayerMock.compareTo(firstPlayerMock)).thenReturn(-1);
+        when(secondPlayerMock.compareTo(thirdPlayerMock)).thenReturn(1);
+        when(thirdPlayerMock.compareTo(secondPlayerMock)).thenReturn(-1);
+    }
+
     private void setCardCombinationMocks() {
         firstPlayerCardCombinationMock = mock(PlayerCardCombination.class);
         secondPlayerCardCombinationMock = mock(PlayerCardCombination.class);
         thirdPlayerCardCombinationMock = mock(PlayerCardCombination.class);
 
-        cardCombinations = new ArrayList<PlayerCardCombination>();
-
-        cardCombinations.add(firstPlayerCardCombinationMock);
-        cardCombinations.add(secondPlayerCardCombinationMock);
-        cardCombinations.add(thirdPlayerCardCombinationMock);
+//        List<PlayerCardCombination> cardCombinations = new ArrayList<>();
+//                                                             TODO meybe remove it?
+//        cardCombinations.add(firstPlayerCardCombinationMock);
+//        cardCombinations.add(secondPlayerCardCombinationMock);
+//        cardCombinations.add(thirdPlayerCardCombinationMock);
 
         setCombinationToPlayer(firstPlayerCardCombinationMock, firstPlayerMock);
         setCombinationToPlayer(secondPlayerCardCombinationMock, secondPlayerMock);
         setCombinationToPlayer(thirdPlayerCardCombinationMock, thirdPlayerMock);
 
         setCombinationsRelations(firstPlayerCardCombinationMock, secondPlayerCardCombinationMock);
+        setCombinationsRelations(firstPlayerCardCombinationMock, thirdPlayerCardCombinationMock);
+        setCombinationsRelations(secondPlayerCardCombinationMock, thirdPlayerCardCombinationMock);
     }
 
     private void setCombinationToPlayer(PlayerCardCombination combinationMock, Player playerMock) {
@@ -86,11 +99,12 @@ public class EndGameManagerTest {
         dealerMock = mock(Dealer.class);
     }
 
-    private void resetPlayerManagerMock() {
-        playersManagerMock = mock(PlayersList.class);
+    private void resetPlayerListMock() {
+        playersListMock = mock(PlayersList.class);
 
-        when(playersManagerMock.iterator()).thenReturn(players.iterator());
-        when(playersManagerMock.get(0)).thenReturn(firstPlayerMock);
+        when(playersListMock.iterator()).thenReturn(players.iterator()).thenReturn(players.iterator());
+        when(playersListMock.toArray()).thenReturn(players.toArray());
+        when(playersListMock.get(0)).thenReturn(firstPlayerMock);
     }
 
     private void setCombinationsRelations(PlayerCardCombination biggerCombination, PlayerCardCombination smallerCombination) {
@@ -151,4 +165,41 @@ public class EndGameManagerTest {
 
         verify(dealerMock).setPlayerWin(secondPlayerMock);
     }
+
+    @Test
+    public void shouldFirstPlayerSetBalance500WhenHisBet250AndSecondBet500() throws Exception {
+        setPlayerBet(firstPlayerMock, 250);
+        setPlayerBet(secondPlayerMock, 500);
+
+        endGameManager.endGame();
+
+        verify(firstPlayerMock).setBalance(500);
+    }
+
+    @Test
+    public void shouldSecondPlayerSetBalance250WhenHisBet250AndSecondBet750() throws Exception {
+        setPlayerBet(firstPlayerMock, 250);
+        setPlayerBet(secondPlayerMock, 500);
+
+        endGameManager.endGame();
+
+        verify(secondPlayerMock).setBalance(750);
+    }
+
+    private void setPlayerBet(Player player, int bet) {
+        when(player.getBet()).thenReturn(bet);
+    }
+
+    /*
+    * Задача такая:
+    *   есть несколько человек и нужно верно раздать им их выигрыши.
+    *   Например, если их 2, то нужно отдать первому то, что он заслужил, а уже второму остаток.
+    *
+    *   Можно попробовать сделать так:
+    *       1. Создаем список из кандидатов на победу.
+    *       2. Сортируем его по убыванию.
+    *       3. Раздаем кандидатам такую сумму:
+    *
+    *
+     */
 }

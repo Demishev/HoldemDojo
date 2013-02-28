@@ -10,7 +10,7 @@ import com.nedogeek.holdem.dealer.Dealer;
  * Date: 05.10.12
  * Time: 12:07
  */
-public class Player {
+public class Player implements Comparable<Player> {
     private final String name;
     private final Dealer dealer;
 
@@ -95,5 +95,22 @@ public class Player {
 
     public void setCards(Card[] cards) {
         this.cards = cards;
+    }
+
+    @Override
+    public int compareTo(Player o) {
+        if (this.getStatus() == PlayerStatus.Fold && o.getStatus() == PlayerStatus.Fold) {
+            return 0;
+        }
+
+        if (o.getStatus() == PlayerStatus.Fold) {
+            return 1;
+        }
+
+        if (this.getStatus() == PlayerStatus.Fold) {
+            return -1;
+        }
+
+        return this.getCardCombination().compareTo(o.getCardCombination());
     }
 }

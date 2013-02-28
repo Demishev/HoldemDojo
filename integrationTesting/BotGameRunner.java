@@ -27,7 +27,7 @@ public class BotGameRunner {
 
         dealer.setGameReady();
 
-        doTicks(100, dealer);
+        doTicks(10000, dealer);
     }
 
     private static void doTicks(int ticksCount, Dealer dealer) {

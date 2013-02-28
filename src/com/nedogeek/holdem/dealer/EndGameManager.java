@@ -6,6 +6,8 @@ import com.nedogeek.holdem.combinations.PlayerCardCombination;
 import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
 
+import java.util.Arrays;
+
 /**
  * User: Konstantin Demishev
  * Date: 22.11.12
@@ -22,24 +24,49 @@ public class EndGameManager {
     }
 
     public void endGame() {
-        Player winner = findWinner();
-        dealer.setPlayerWin(winner);
-        giveMoneyToWinner(winner);
+        rewardWinners();
         dealer.setInitialGameRound();
+    }
+
+    private void rewardWinners() {
+        Object[] winCandidates = playersList.toArray();
+        Arrays.sort(winCandidates);
+
+        for (int i = winCandidates.length - 1; i != -1; i--) {
+            Player winPlayer = (Player) winCandidates[i];
+            giveMoneyToWinner(winPlayer);
+            dealer.setPlayerWin(winPlayer);
+        }
+        checkZeroBalance();
+    }
+
+    private void checkZeroBalance() {
+        for (Player player : playersList) {
+            if (player.getBalance() == 0) {
+                player.setBalance(GameSettings.COINS_AT_START);
+                System.out.println("Giving chips to " + player);
+            }
+        }
     }
 
     private void giveMoneyToWinner(Player winner) {
 
         int prize = 0;
         for (Player player : playersList) {
-            prize += player.getBet();
-            player.setBet(0);
-            if (player.getBalance() == 0) {
-                player.setBalance(GameSettings.COINS_AT_START);
-            }
+            prize += getChipsFromPlayer(player, winner.getBet());
         }
         winner.setBalance(winner.getBalance() + prize);
         System.out.println("Winner: " + winner + " prize " + prize);
+    }
+
+    private int getChipsFromPlayer(Player player, int chipsCount) {
+        int playerBet = player.getBet();
+        int chipsFromPlayer = (playerBet < chipsCount) ?
+                playerBet : chipsCount;
+
+        player.setBet(playerBet -= chipsFromPlayer);
+
+        return chipsFromPlayer;
     }
 
     private Player findWinner() {
