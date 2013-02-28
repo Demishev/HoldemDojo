@@ -1,7 +1,5 @@
 package com.nedogeek.holdem.dealer;
 
-import java.util.Iterator;
-
 import com.nedogeek.holdem.GameRound;
 import com.nedogeek.holdem.GameStatus;
 import com.nedogeek.holdem.gamingStuff.Player;
@@ -10,7 +8,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import java.util.Iterator;
+
 import static org.mockito.Mockito.*;
 
 /**
@@ -27,7 +26,6 @@ public class DealerTest {
     private MoveManager moveManagerMock;
     private NewGameSetter newGameSetterMock;
     private PlayersList playersManagerMock;
-    private GameCycleManager gameCycleManagerMock;
     private EndGameManager endGameManagerMock;
 
     private Player mover;
@@ -37,42 +35,25 @@ public class DealerTest {
         moveManagerMock = mock(MoveManager.class);
         newGameSetterMock = mock(NewGameSetter.class);
         resetPlayerManager();
-        gameCycleManagerMock = mock(GameCycleManager.class);
         endGameManagerMock = mock(EndGameManager.class);
 
         dealer = new Dealer(moveManagerMock, newGameSetterMock, playersManagerMock,
-                gameCycleManagerMock, endGameManagerMock, DEFAULT_GAME_STATUS, DEFAULT_GAME_ROUND);
+                endGameManagerMock, DEFAULT_GAME_STATUS, DEFAULT_GAME_ROUND);
     }
 
     private void resetPlayerManager() {
         playersManagerMock = mock(PlayersList.class);
- 
+
         mover = mock(Player.class);
 
         when(playersManagerMock.getMover()).thenReturn(mover);
-        
         Iterator<Player> playerMockIterator = mock(Iterator.class);
-        
         when(playersManagerMock.iterator()).thenReturn(playerMockIterator);
-    }
-
-    private void setGameStatus(GameStatus gameStatus) {
-        dealer = new Dealer(moveManagerMock, newGameSetterMock, playersManagerMock,
-                gameCycleManagerMock, endGameManagerMock, gameStatus, DEFAULT_GAME_ROUND);
     }
 
     private void setGameData(GameStatus gameStatus, GameRound gameRound) {
         dealer = new Dealer(moveManagerMock, newGameSetterMock, playersManagerMock,
-                gameCycleManagerMock, endGameManagerMock, gameStatus, gameRound);
-    }
-    
-    @Test
-    public void shouldGameCycleManagerEndCycleWhenGameStatusCYCLE_ENDED() throws Exception {
-        setGameStatus(GameStatus.CYCLE_ENDED);
-
-        dealer.tick();
-
-        verify(gameCycleManagerMock).endGameCycle();
+                endGameManagerMock, gameStatus, gameRound);
     }
 
     @Test
@@ -114,15 +95,6 @@ public class DealerTest {
     }
 
     @Test
-    public void shouldGameCycleManagerPrepareNewGameCycleWhenGameStatusReady() throws Exception {
-        setGameStatus(GameStatus.READY);
-
-        dealer.tick();
-
-        verify(gameCycleManagerMock).prepareNewGameCycle();
-    }
-
-    @Test
     public void shouldNoNullPointerExceptionWhenNewDealerTick() throws Exception {
         dealer = new Dealer(playersManagerMock);
         try {
@@ -130,5 +102,14 @@ public class DealerTest {
         } catch (NullPointerException e) {
             Assert.fail("Check is new Dealer has initial status.");
         }
+    }
+
+    @Test
+    public void shouldNewGameSetterSetNewGameWhenDealerTick() throws Exception {
+        setGameData(GameStatus.READY, GameRound.INITIAL);
+
+        dealer.tick();
+
+        verify(newGameSetterMock).setNewGame();
     }
 }

@@ -1,5 +1,6 @@
 package com.nedogeek.holdem.gamingStuff;
 
+import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.PlayerStatus;
 import com.nedogeek.holdem.combinations.PlayerCardCombination;
 import com.nedogeek.holdem.dealer.Dealer;
@@ -15,7 +16,7 @@ public class Player {
 
     private PlayerStatus status;
     private int bet;
-    private int balance;
+    private int balance = GameSettings.COINS_AT_START;
     private PlayersList playersList;
     private Card[] cards;
 

@@ -19,7 +19,6 @@ public class Dealer implements Runnable {
     private final MoveManager moveManager;
     private final NewGameSetter newGameSetter;
     private final PlayersList playersList;
-    private final GameCycleManager gameCycleManager;
     private final EndGameManager endGameManager;
 
     private GameStatus gameStatus = GameStatus.NOT_READY;
@@ -40,17 +39,15 @@ public class Dealer implements Runnable {
 
         newGameSetter = new NewGameSetter(this, playersList, moveManager);
         endGameManager = new EndGameManager(this, playersList);
-        gameCycleManager = new GameCycleManager(this, playersList);
         gameRound = GameRound.INITIAL;
     }
 
     Dealer(MoveManager moveManagerMock, NewGameSetter newGameSetterMock,
-           PlayersList playersManagerMock, GameCycleManager gameCycleManagerMock,
-           EndGameManager endGameManagerMock, GameStatus gameStatus, GameRound gameRound) {
+           PlayersList playersManagerMock, EndGameManager endGameManagerMock,
+           GameStatus gameStatus, GameRound gameRound) {
         moveManager = moveManagerMock;
         newGameSetter = newGameSetterMock;
         playersList = playersManagerMock;
-        gameCycleManager = gameCycleManagerMock;
         endGameManager = endGameManagerMock;
 
         this.gameStatus = gameStatus;
@@ -66,13 +63,10 @@ public class Dealer implements Runnable {
     void tick() {
         switch (gameStatus) {
             case READY:
-                gameCycleManager.prepareNewGameCycle();
+                setGameStarted();
                 break;
             case STARTED:
                 makeGameAction();
-                break;
-            case CYCLE_ENDED:
-                gameCycleManager.endGameCycle();
                 break;
         }
         tickNumber++;
@@ -110,6 +104,7 @@ public class Dealer implements Runnable {
 
     void setGameStarted() {
         gameStatus = GameStatus.STARTED;
+        newGameSetter.setNewGame();
     }
 
     public int getCallValue() {
@@ -123,7 +118,7 @@ public class Dealer implements Runnable {
 
     void resetCards() {
         cardDeck = new CardDeck();
-        deskCards = new ArrayList<Card>();
+        deskCards = new ArrayList<>();
     }
 
     void setNextGameRound() {
@@ -158,7 +153,7 @@ public class Dealer implements Runnable {
 
     }
 
-    void setGameEnded() {
+    void setInitialGameRound() {
         gameRound = GameRound.INITIAL;
     }
 

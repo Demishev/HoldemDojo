@@ -1,5 +1,6 @@
 package com.nedogeek.holdem.gamingStuff;
 
+import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.PlayerStatus;
 import com.nedogeek.holdem.dealer.Dealer;
 import org.junit.Before;
@@ -132,5 +133,10 @@ public class PlayerTest {
         when(dealerMock.getDeskCards()).thenReturn(new Card[]{CLUBS_QUEEN, CLUBS_JACK, CLUBS_TEN});
 
         assertEquals("Royal flash: [A♣, K♣, Q♣, J♣, 10♣]", player.getCardCombination().toString());
+    }
+
+    @Test
+    public void shouldBalanceCOINS_AT_STARTWhenNewPlayer() throws Exception {
+        assertEquals(GameSettings.COINS_AT_START, new Player(null, null).getBalance());
     }
 }

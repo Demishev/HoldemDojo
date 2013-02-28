@@ -25,7 +25,7 @@ public class EndGameManager {
         Player winner = findWinner();
         dealer.setPlayerWin(winner);
         giveMoneyToWinner(winner);
-        dealer.setGameEnded();
+        dealer.setInitialGameRound();
     }
 
     private void giveMoneyToWinner(Player winner) {

@@ -1,3 +1,6 @@
+import com.nedogeek.holdem.bot.CallBot;
+import com.nedogeek.holdem.bot.FoldBot;
+import com.nedogeek.holdem.bot.RandomBot;
 import com.nedogeek.holdem.bot.RiseBot;
 import com.nedogeek.holdem.dealer.Dealer;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
@@ -18,11 +21,13 @@ public class BotGameRunner {
         Dealer dealer = new Dealer(players);
 
         players.add(new RiseBot(dealer));
-        players.add(new RiseBot(dealer));
+        players.add(new RandomBot(dealer));
+        players.add(new CallBot(dealer));
+        players.add(new FoldBot(dealer));
 
         dealer.setGameReady();
 
-        doTicks(1000, dealer);
+        doTicks(100, dealer);
     }
 
     private static void doTicks(int ticksCount, Dealer dealer) {
@@ -33,6 +38,7 @@ public class BotGameRunner {
                 tick.invoke(dealer);
             } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();
+                return;
             }
         }
     }

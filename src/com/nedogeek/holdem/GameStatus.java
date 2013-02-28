@@ -9,5 +9,4 @@ public enum GameStatus {
     NOT_READY,
     READY,
     STARTED,
-    CYCLE_ENDED
 }

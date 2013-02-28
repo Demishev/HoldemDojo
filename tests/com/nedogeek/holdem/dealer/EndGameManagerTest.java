@@ -115,7 +115,7 @@ public class EndGameManagerTest {
     public void shouldDeskSetNewGameRoundWhenEGMEndGame() throws Exception {
         endGameManager.endGame();
 
-        verify(dealerMock).setGameEnded();
+        verify(dealerMock).setInitialGameRound();
     }
 
     @Test

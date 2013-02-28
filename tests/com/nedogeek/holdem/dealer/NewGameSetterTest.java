@@ -59,7 +59,7 @@ public class NewGameSetterTest {
         secondPlayerMock = mock(Player.class);
         thirdPlayerMock = mock(Player.class);
 
-        players = new ArrayList<Player>();
+        players = new ArrayList<>();
         players.add(firstPlayerMock);
         players.add(secondPlayerMock);
         players.add(thirdPlayerMock);
