@@ -1,0 +1,43 @@
+<html>
+<head>
+
+<script type="text/javascript">
+var connect = function () {
+		addToDebug('Connecting!');
+        var connectionAddress = 'ws://localhost:8081';
+        socket = new WebSocket(connectionAddress);
+
+
+        socket.onopen = function () {
+			addToDebug('Connection open.');			
+        };
+
+        socket.onclose = function () {
+        	addToDebug('Connection closed');
+        };
+
+        socket.onmessage = function (message) {
+            addToDebug(message.data);
+        }
+        
+
+};
+
+var addToDebug = function (text) {
+    var debugTextArea = document.getElementById('debug');
+    debugTextArea.innerHTML += text + "\n";
+    debugTextArea.scrollTop = debugTextArea.scrollHeight;
+};
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Holdem Game</title>
+</head>
+<body>
+<script>
+	connect();
+</script>
+<textarea id="debug" disabled class="true" cols="100" rows="100"></textarea>
+<button onclick="connect();"></button>
+</body>
+</html>
