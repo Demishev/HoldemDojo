@@ -1,4 +1,5 @@
 package com.nedogeek.holdem;
+
 import com.nedogeek.holdem.bot.CallBot;
 import com.nedogeek.holdem.bot.FoldBot;
 import com.nedogeek.holdem.bot.RandomBot;
@@ -29,24 +30,25 @@ public class BotGameRunner {
         players.add(new FoldBot(dealer));
 
         dealer.setGameReady();
-      
+
         doTicks(1000, dealer);
     }
 
     private static void doTicks(int ticksCount, Dealer dealer) {
         for (int i = 0; i < ticksCount; i++) {
-        	try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e1) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e1) {
 
-				e1.printStackTrace();
-			}
-        	
+                e1.printStackTrace();
+            }
+
             try {
                 Method tick = dealer.getClass().getDeclaredMethod("tick");
                 tick.setAccessible(true);
                 tick.invoke(dealer);
-                EventManager.getInstance().addEvent(new Event("Tick!!!!\n"){});
+                EventManager.getInstance().addEvent(new Event("Tick!") {
+                });
             } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
                 e.printStackTrace();
                 return;

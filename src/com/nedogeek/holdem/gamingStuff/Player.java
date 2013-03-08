@@ -4,6 +4,10 @@ import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.PlayerStatus;
 import com.nedogeek.holdem.combinations.PlayerCardCombination;
 import com.nedogeek.holdem.dealer.Dealer;
+import net.sf.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * User: Konstantin Demishev
@@ -88,8 +92,13 @@ public class Player implements Comparable<Player> {
     }
 
     public String toJSON() {
-        return "[\"name\":\"" + name + "\", \"status\":\"" + status + "\",\"bet\":" + bet
-                + ", \"balance\":" + balance + "]";
+        Map playerData = new HashMap();
+        playerData.put("name", name);
+        playerData.put("status", status);
+        playerData.put("bet", bet);
+        playerData.put("balance", balance);
+
+        return JSONObject.fromMap(playerData).toString();
     }
 
 

@@ -11,7 +11,7 @@ import com.nedogeek.holdem.gamingStuff.PlayerAction;
  */
 public class RiseBot extends Player {
     public RiseBot(Dealer dealer) {
-        super("Rise com.nedogeek.holdem.bot", dealer);
+        super("Rise bot", dealer);
     }
 
     @Override

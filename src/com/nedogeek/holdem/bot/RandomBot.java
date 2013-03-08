@@ -15,7 +15,7 @@ public class RandomBot extends Player {
     private Random random;
 
     public RandomBot(Dealer dealer) {
-        super("Random com.nedogeek.holdem.bot", dealer);
+        super("Random bot", dealer);
 
         random = new Random();
     }

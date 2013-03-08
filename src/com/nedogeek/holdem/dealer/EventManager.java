@@ -1,10 +1,9 @@
 package com.nedogeek.holdem.dealer;
 
-import org.eclipse.jetty.websocket.WebSocket.Connection;
-
 import com.nedogeek.holdem.gameEvents.Event;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
 import net.sf.json.JSONObject;
+import org.eclipse.jetty.websocket.WebSocket.Connection;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,19 +29,20 @@ public class EventManager {
     }
 
     public void addEvent(Event event) {
-    	events.add(event.toString());
-    	if(events.size() > 10 )
-    		events.remove(0);
-     
-        if (viewer != null)
-        try {
-			viewer.sendMessage(event + "\n"+ gameToJSON());
-			
-		} catch (IOException e) {
+        events.add(event.toString());
+        System.out.println(gameToJSON());
+        if (events.size() > 10)
+            events.remove(0);
 
-			e.printStackTrace();
-		}
-    }  
+        if (viewer != null)
+            try {
+                viewer.sendMessage(gameToJSON());
+
+            } catch (IOException e) {
+
+                e.printStackTrace();
+            }
+    }
 
     public void setPlayersList(PlayersList playersList) {
         this.playersList = playersList;
@@ -50,6 +50,8 @@ public class EventManager {
 
     public String gameToJSON() {
         Map gameData = new HashMap();
+        gameData.put("gameStatus", dealer.getGameStatus());
+        gameData.put("deskCards", dealer.getDeskCards());
         gameData.put("players", playersList.toJSON());
         gameData.put("dealerNumber", playersList.getDealerNumber());
         gameData.put("gameStatus", dealer.getGameStatus());
@@ -59,11 +61,11 @@ public class EventManager {
         return JSONObject.fromMap(gameData).toString();
     }
 
-	public void setViewer(Connection connection) {
-		viewer = connection;		
-	}
+    public void setViewer(Connection connection) {
+        viewer = connection;
+    }
 
-	public void setDealer(Dealer dealer) {
-		this.dealer = dealer;		
-	}
+    public void setDealer(Dealer dealer) {
+        this.dealer = dealer;
+    }
 }

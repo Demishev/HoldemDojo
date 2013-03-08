@@ -12,7 +12,7 @@ import com.nedogeek.holdem.gamingStuff.PlayerAction;
 public class CallBot extends Player {
 
     public CallBot(Dealer dealer) {
-        super("Call com.nedogeek.holdem.bot", dealer);
+        super("Call bot", dealer);
     }
 
     @Override

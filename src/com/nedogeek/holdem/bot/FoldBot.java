@@ -11,7 +11,7 @@ import com.nedogeek.holdem.gamingStuff.PlayerAction;
  */
 public class FoldBot extends Player {
     public FoldBot(Dealer dealer) {
-        super("Folding com.nedogeek.holdem.bot", dealer);
+        super("Folding bot", dealer);
     }
 
     @Override
