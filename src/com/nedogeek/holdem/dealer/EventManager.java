@@ -1,10 +1,12 @@
 package com.nedogeek.holdem.dealer;
 
+import org.eclipse.jetty.websocket.WebSocket.Connection;
+
 import com.nedogeek.holdem.gameEvents.Event;
-import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
 import net.sf.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +20,7 @@ import java.util.Map;
 public class EventManager {
     private static final EventManager eventManager = new EventManager();
 
+    private Connection viewer;
     private PlayersList playersList;
     private Dealer dealer;
     private List<String> events = new ArrayList<String>();
@@ -27,22 +30,21 @@ public class EventManager {
     }
 
     public void addEvent(Event event) {
-        events.add(event.toString());
-    }
+    	events.add(event.toString());
+    	if(events.size() > 10 )
+    		events.remove(0);
+     
+        if (viewer != null)
+        try {
+			viewer.sendMessage(event + "\n"+ gameToJSON());
+			
+		} catch (IOException e) {
 
-    public String getPlayersNames() {
-        String names = null;
-        for (Player player : playersList) {
-            if (names == null) {
-                names = player.getName();
-            } else {
-                names += "," + player.getName();
-            }
-        }
-        return names;
-    }
+			e.printStackTrace();
+		}
+    }  
 
-    public void collectPlayers(PlayersList playersList) {
+    public void setPlayersList(PlayersList playersList) {
         this.playersList = playersList;
     }
 
@@ -56,4 +58,12 @@ public class EventManager {
 
         return JSONObject.fromMap(gameData).toString();
     }
+
+	public void setViewer(Connection connection) {
+		viewer = connection;		
+	}
+
+	public void setDealer(Dealer dealer) {
+		this.dealer = dealer;		
+	}
 }

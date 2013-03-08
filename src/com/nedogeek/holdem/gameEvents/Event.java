@@ -9,7 +9,7 @@ package com.nedogeek.holdem.gameEvents;
 public abstract class Event {
     private final String event;
 
-    Event(String event) {
+    public Event(String event) {
         this.event = event;
     }
 
