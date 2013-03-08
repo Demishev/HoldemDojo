@@ -2,12 +2,12 @@
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 
     <script>
-        WS_ADDRESS = 'ws://localhost:8081';
-        SAMPLE_MESSAGE =
-        '{"gameRound":"FOUR_CARDS","dealerNumber":1,"events":["Tick!","Tick!","Tick!","Tick!","Tick!","Tick!","Tick!","Tick!","Tick!","Tick!","Tick!"],"players":[{"balance":940,"status":"Rise","name":"Rise
-        bot","bet":60},{"balance":990,"status":"Fold","name":"Random
-        bot","bet":10},{"balance":940,"status":"Call","name":"Call
-        bot","bet":60},{"balance":1000,"status":"Fold","name":"Folding
+        var WS_ADDRESS = 'ws://localhost:8081';
+        var SAMPLE_MESSAGE =
+        '{"gameRound":"FOUR_CARDS","dealerNumber":1,"events":["Tick!","Tick!","Tick!","Tick!","Tick!","Tick!","Tick!","Tick!","Tick!","Tick!","Tick!"],"players":[{"balance":940,"status":"Rise","name":"Rise\
+        bot","bet":60},{"balance":990,"status":"Fold","name":"Random \
+        bot","bet":10},{"balance":940,"status":"Call","name":"Call\
+        bot","bet":60},{"balance":1000,"status":"Fold","name":"Folding\
         bot","bet":0}],"gameStatus":"STARTED","deskCards":[{"cardValue":"5","cardValueName":"5","cardSuit":"♠"},{"cardValue":"Q","cardValueName":"Queen","cardSuit":"♣"},{"cardValue":"10","cardValueName":"10","cardSuit":"♠"},{"cardValue":"3","cardValueName":"3","cardSuit":"♦"}]}';
 
         var gameStatus = 'Disconnected';
@@ -25,9 +25,11 @@
 
 
         var connect = function () {
-        socket = new WebSocket(connectionAddress);
+
+        socket = new WebSocket(WS_ADDRESS);
 
         socket.onopen = function () {
+
         };
 
         socket.onclose = function () {
@@ -95,26 +97,22 @@
 
         var refreshPlayers = function() {
         playersTableInnerHTML = document.getElementById("playersTable");
-        playersTableInnerHTML.innerHTML = '
-        <tr>
-            <th>Name</th>
-            <th>balance</th>
-            <th>bet</th>
-            <th>status</th>
-        </tr>
-        ';
+        playersTableInnerHTML.innerHTML = '<tr><th>Name</th><th>balance</th> \
+            <th>bet</th> \
+            <th>status</th> \
+        </tr>';
 
         for (var i = 0; i < players.length; i++) {
         player = players[i];
-        playersTableInnerHTML.innerHTML += '
-        <tr>
-            <td>' + player.name + '</td>
-            <td>' + player.balance + '</td>
-            <td>' + player.bet + '</td>
-            <td>' + player.status + '</td>
+        playersTableInnerHTML.innerHTML += '\
+        <tr>\
+            <td>' + player.name + '</td>\
+            <td>' + player.balance + '</td>\
+            <td>' + player.bet + '</td>\
+            <td>' + player.status + '</td>\
             ';
-            playersTableInnerHTML.innerHTML += '
-        </tr>
+            playersTableInnerHTML.innerHTML += '\
+        </tr>\
         ';
         }
         };
