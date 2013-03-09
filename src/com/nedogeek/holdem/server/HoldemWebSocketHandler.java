@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 public class HoldemWebSocketHandler extends WebSocketHandler {
     @Override
     public WebSocket doWebSocketConnect(HttpServletRequest request, String protocol) {
+        System.out.println("In handler");
         return new HoldemWebSocket();
     }
 }

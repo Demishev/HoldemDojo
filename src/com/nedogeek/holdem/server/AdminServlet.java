@@ -34,6 +34,7 @@ public class AdminServlet extends HttpServlet {
         players.add(new RandomBot(dealer));
         players.add(new CallBot(dealer));
         players.add(new FoldBot(dealer));
+        System.out.println("Admin servlet initialized.");
     }
 
     @Override

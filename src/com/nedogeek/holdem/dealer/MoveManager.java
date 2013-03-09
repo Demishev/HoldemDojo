@@ -14,6 +14,11 @@ import com.nedogeek.holdem.gamingStuff.PlayersList;
 public class MoveManager {
     private final Dealer dealer;
     private final PlayersList playersList;
+    private long delayValue = 1000;   //TODO add to GameSettings
+
+    public void setDelayValue(long delayValue) {
+        this.delayValue = delayValue;
+    }
 
     MoveManager(Dealer dealer, PlayersList playersList) {
         this.dealer = dealer;
@@ -22,7 +27,7 @@ public class MoveManager {
 
     void makeMove(Player mover) {
         delay();
-    	PlayerAction playerMove = mover.getMove();
+        PlayerAction playerMove = mover.getMove();
         playersList.playerMoved(mover);
         switch (playerMove.getActionType()) {
             case Fold:
@@ -46,16 +51,16 @@ public class MoveManager {
     }
 
     private void delay() {
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			
-			e.printStackTrace();
-		}
-		
-	}
+        try {
+            Thread.sleep(delayValue);
+        } catch (InterruptedException e) {
 
-	private void makeCheck(Player player) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void makeCheck(Player player) {
         if (dealer.getCallValue() <= player.getBet()) {
             player.setStatus(PlayerStatus.Check);
         } else {

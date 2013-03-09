@@ -39,6 +39,7 @@ public class MoveManagerTest {
         resetPlayersManager();
 
         moveManager = new MoveManager(dealerMock, playersListMock);
+        moveManager.setDelayValue(0);
     }
 
 
@@ -66,7 +67,7 @@ public class MoveManagerTest {
         firstPlayerMock = mock(Player.class);
         secondPlayerMock = mock(Player.class);
 
-        players = new ArrayList<Player>();
+        players = new ArrayList<>();
         players.add(firstPlayerMock);
         players.add(secondPlayerMock);
         when(playersListMock.iterator()).thenReturn(players.iterator());

@@ -43,11 +43,13 @@ public class EventManager {
     }
 
     public void addViewer(Connection viewer) {
+        System.out.println("Viewer adding");
         viewers.add(viewer);
     }
 
     public void setDealer(Dealer dealer) {
         this.dealer = dealer;
+        System.out.println("Dealer seted.");
     }
 
     public void setPlayersList(PlayersList playersList) {
@@ -55,6 +57,7 @@ public class EventManager {
     }
 
     public void addEvent(Event event) {
+        System.out.println("Event added. " + viewers.size() + " listeners.");
         processEvents(event);
 
         events.add(event.toString());
@@ -62,7 +65,7 @@ public class EventManager {
         if (events.size() > MAX_EVENTS_COUNT)
             events.remove(0);
 
-        notifyViewer();
+        notifyViewers();
     }
 
     private void processEvents(Event event) {
@@ -75,10 +78,11 @@ public class EventManager {
         }
     }
 
-    private void notifyViewer() {
+    private void notifyViewers() {
         for (Connection viewer : viewers) {
             try {
                 viewer.sendMessage(gameToJSON());
+                System.out.println("Notifying");
             } catch (IOException e) {
                 viewer.close();
             }

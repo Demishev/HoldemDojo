@@ -21,12 +21,12 @@ public class WebSocketListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         try {
             this.server = new Server(8081);
-            HoldemWebSocketHandler pingPongWebSocketHandler = new HoldemWebSocketHandler();
-            pingPongWebSocketHandler.setHandler(new DefaultHandler());
-
-            server.setHandler(pingPongWebSocketHandler);
+            HoldemWebSocketHandler holdemWebSocketHandler = new HoldemWebSocketHandler();
+            holdemWebSocketHandler.setHandler(new DefaultHandler());
+            server.setHandler(holdemWebSocketHandler);
 
             server.start();
+            System.out.println("Handler set");
         } catch (Exception e) {
             e.printStackTrace();
         }
