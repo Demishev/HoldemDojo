@@ -20,22 +20,26 @@ import java.util.Map;
 public class EventManager {
     private static final EventManager eventManager = new EventManager();
 
-    private Connection viewer;
     private PlayersList playersList;
-    private List<String> events = new ArrayList<>();
-
     private Dealer dealer;
+
+    private final List<String> events = new ArrayList<>();
+    private final List<Connection> viewers = new ArrayList<>();
 
     public static EventManager getInstance() {
         return eventManager;
+    }
+
+    public static EventManager getTestInstance() {
+        return new EventManager();
     }
 
     private EventManager() {
 
     }
 
-    public void addViewer(Connection connection) {
-        viewer = connection;
+    public void addViewer(Connection viewer) {
+        viewers.add(viewer);
     }
 
     public void setDealer(Dealer dealer) {
@@ -55,12 +59,29 @@ public class EventManager {
     }
 
     private void notifyViewer() {
-        if (viewer != null)
+        for (Connection viewer : viewers) {
             try {
                 viewer.sendMessage(gameToJSON());
             } catch (IOException e) {
                 viewer.close();
             }
+        }
+        removeClosedConnections();
+    }
+
+    private void removeClosedConnections() {
+        for (Connection viewer : viewers) {
+            if (!viewer.isOpen()) {
+                viewers.remove(viewer);
+                removeClosedConnections();
+                return;
+            }
+        }
+    }
+
+    public void closeConnection(Connection viewer) {
+        viewer.close();
+        viewers.remove(viewer);
     }
 
     public String gameToJSON() {

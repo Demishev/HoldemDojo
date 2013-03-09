@@ -4,6 +4,7 @@ package com.nedogeek.holdem.dealer;
 import com.nedogeek.holdem.gameEvents.Event;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
 import org.eclipse.jetty.websocket.WebSocket;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -11,8 +12,7 @@ import org.mockito.Mockito;
 import java.io.IOException;
 
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 /**
  * User: Konstantin Demishev
@@ -20,26 +20,32 @@ import static org.mockito.Mockito.verify;
  * Time: 14:29
  */
 public class EventManagerTest {
-    private EventManager eventManager = EventManager.getInstance();
+    private EventManager eventManager;
 
-    private WebSocket.Connection firstViewerMock;
-    private Dealer dealerMock;
-    private PlayersList playersListMock;
+    private volatile WebSocket.Connection firstViewerMock;
+    private WebSocket.Connection secondViewerMock;
     private Event eventMock;
 
 
     @Before
     public void setUp() throws Exception {
         firstViewerMock = mock(WebSocket.Connection.class);
-        dealerMock = mock(Dealer.class);
-        playersListMock = mock(PlayersList.class);
+        secondViewerMock = mock(WebSocket.Connection.class);
+        Dealer dealerMock = mock(Dealer.class);
+        PlayersList playersListMock = mock(PlayersList.class);
         eventMock = mock(Event.class);
 
+        eventManager = EventManager.getTestInstance();
         eventManager.setDealer(dealerMock);
         eventManager.setPlayersList(playersListMock);
         eventManager.addViewer(firstViewerMock);
     }
 
+    @After
+    public void tearDown() throws Exception {
+        eventManager.closeConnection(firstViewerMock);
+        eventManager.closeConnection(secondViewerMock);
+    }
 
     @Test
     public void shouldFirstViewerMockSendMessageWhenAddGameEvent() throws Exception {
@@ -49,11 +55,40 @@ public class EventManagerTest {
     }
 
     @Test
-    public void shouldConnectionCloseWhenViewerThrowsIOException() throws Exception {
-        Mockito.doThrow(new IOException()).when(firstViewerMock).sendMessage(anyString());
+    public void shouldConnectionCloseWhenThirdViewerThrowsIOException() throws Exception {
+        WebSocket.Connection throwingConnection = mock(WebSocket.Connection.class);
+        Mockito.doThrow(new IOException()).when(throwingConnection).sendMessage(anyString());
+        eventManager.addViewer(throwingConnection);
 
         eventManager.addEvent(eventMock);
 
-        verify(firstViewerMock).close();
+        verify(throwingConnection).close();
+    }
+
+    @Test
+    public void shouldSecondViewerMockSendMessageWhenItAddsToEventManager() throws Exception {
+        eventManager.addViewer(secondViewerMock);
+
+        eventManager.addEvent(eventMock);
+
+        verify(secondViewerMock).sendMessage(anyString());
+    }
+
+    @Test
+    public void shouldFirstViewerMockSendMessageWhenSecondViewerAddsToEventManager() throws Exception {
+        eventManager.addViewer(secondViewerMock);
+
+        eventManager.addEvent(eventMock);
+
+        verify(firstViewerMock).sendMessage(anyString());
+    }
+
+    @Test
+    public void shouldNotNotifyFirstViewerWhenConnectionClosed() throws Exception {
+        eventManager.closeConnection(firstViewerMock);
+
+        eventManager.addEvent(eventMock);
+
+        verify(firstViewerMock, never()).sendMessage(anyString());
     }
 }
