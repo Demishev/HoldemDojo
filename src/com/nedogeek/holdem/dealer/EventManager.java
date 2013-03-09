@@ -6,6 +6,7 @@ import net.sf.json.JSONObject;
 import org.eclipse.jetty.websocket.WebSocket.Connection;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,7 +23,7 @@ public class EventManager {
     private Connection viewer;
     private PlayersList playersList;
     private Dealer dealer;
-    private List<String> events = new ArrayList<String>();
+    private List<String> events = new ArrayList<>();
 
     public static EventManager getInstance() {
         return eventManager;
@@ -49,7 +50,7 @@ public class EventManager {
     }
 
     public String gameToJSON() {
-        Map gameData = new HashMap();
+        Map<String, Serializable> gameData = new HashMap<>();
         gameData.put("gameStatus", dealer.getGameStatus());
         gameData.put("deskCards", dealer.getDeskCards());
         gameData.put("players", playersList.toJSON());
