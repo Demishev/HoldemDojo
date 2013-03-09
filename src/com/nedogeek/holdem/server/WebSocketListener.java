@@ -3,8 +3,6 @@ package com.nedogeek.holdem.server;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.DefaultHandler;
 
-import com.nedogeek.holdem.BotGameRunner;
-
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
@@ -32,17 +30,8 @@ public class WebSocketListener implements ServletContextListener {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
-        Thread runner = new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				  BotGameRunner.main(null);
-				
-			}
-		});
-        runner.start();
-      
+
+
     }
 
     @Override
