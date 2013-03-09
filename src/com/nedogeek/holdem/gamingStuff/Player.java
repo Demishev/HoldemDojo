@@ -6,6 +6,7 @@ import com.nedogeek.holdem.combinations.PlayerCardCombination;
 import com.nedogeek.holdem.dealer.Dealer;
 import net.sf.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -92,7 +93,7 @@ public class Player implements Comparable<Player> {
     }
 
     public String toJSON() {
-        Map playerData = new HashMap();
+        Map<String, Serializable> playerData = new HashMap<>();
         playerData.put("name", name);
         playerData.put("status", status);
         playerData.put("bet", bet);

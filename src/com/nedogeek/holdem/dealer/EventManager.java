@@ -52,7 +52,8 @@ public class EventManager {
 
     public void addEvent(Event event) {
         events.add(event.toString());
-        if (events.size() > 10)
+        final int MAX_EVENTS_COUNT = 10;
+        if (events.size() > MAX_EVENTS_COUNT)
             events.remove(0);
 
         notifyViewer();

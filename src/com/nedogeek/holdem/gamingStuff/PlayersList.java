@@ -23,10 +23,7 @@ public class PlayersList extends ArrayList<Player> {
 
     @Override
     public boolean add(Player player) {
-        if (!contains(player)) {
-            return super.add(player);
-        }
-        return false;
+        return !contains(player) && super.add(player);
     }
 
     public void playerMoved(Player player) {
@@ -34,11 +31,8 @@ public class PlayersList extends ArrayList<Player> {
     }
 
     private int nextPlayer(int playerNumber) {
-        if (playerNumber == size() - 1) {
-            return 0;
-        } else {
-            return playerNumber + 1;
-        }
+        return (playerNumber == size() - 1) ?
+                0 : playerNumber + 1;
     }
 
     public boolean hasAvailableMovers() {
