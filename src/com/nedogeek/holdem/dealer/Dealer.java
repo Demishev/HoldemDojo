@@ -2,6 +2,7 @@ package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.GameRound;
 import com.nedogeek.holdem.GameStatus;
+import com.nedogeek.holdem.gameEvents.ChangeGameRoundEvent;
 import com.nedogeek.holdem.gamingStuff.Card;
 import com.nedogeek.holdem.gamingStuff.CardDeck;
 import com.nedogeek.holdem.gamingStuff.Player;
@@ -22,9 +23,8 @@ public class Dealer implements Runnable {
     private final EndGameManager endGameManager;
     private final EventManager eventManager;
 
-    private GameStatus gameStatus = GameStatus.NOT_READY;
+    private GameStatus gameStatus = GameStatus.NOT_ENOUGH_PLAYERS;
     private GameRound gameRound;
-    private boolean isStopped;
 
     private int tickNumber = 0;
     private int callValue;
@@ -63,9 +63,23 @@ public class Dealer implements Runnable {
     }
 
     public void run() {
-        while (!isStopped) {
+        gameStatus = calculateGameStatus();
+        while (!(gameStatus == GameStatus.STOPPED || gameStatus == GameStatus.PAUSED)) {
             tick();
         }
+    }
+
+    private GameStatus calculateGameStatus() {
+        if (playersList.size() < 2) {
+            return GameStatus.NOT_ENOUGH_PLAYERS;
+        }
+
+        if (gameStatus == GameStatus.STOPPED) {
+            gameRound = GameRound.INITIAL;
+        }
+
+        return (gameStatus == GameStatus.PAUSED) ?
+                GameStatus.STARTED : GameStatus.READY;
     }
 
     void tick() {
@@ -121,7 +135,6 @@ public class Dealer implements Runnable {
 
     void setCallValue(int callValue) {
         this.callValue = callValue;
-
     }
 
     void resetCards() {
@@ -145,7 +158,7 @@ public class Dealer implements Runnable {
                 deskCards.add(cardDeck.getCard());
         }
 
-        System.out.println(gameRound + ": " + deskCards);
+        eventManager.addEvent(new ChangeGameRoundEvent(gameRound));
 
         if (gameRound != GameRound.BLIND) {
             playersList.setPlayersNotMoved();
@@ -157,17 +170,16 @@ public class Dealer implements Runnable {
         player.setCards(new Card[]{cardDeck.getCard(), cardDeck.getCard()});
     }
 
-    @Deprecated
-    void setPlayerWin(Player winner) {
-
-    }
-
     void setInitialGameRound() {
         gameRound = GameRound.INITIAL;
     }
 
     public void stop() {
-        isStopped = true;
+        gameStatus = GameStatus.STOPPED;
+    }
+
+    public void pause() {
+        gameStatus = GameStatus.PAUSED;
     }
 
     @Deprecated

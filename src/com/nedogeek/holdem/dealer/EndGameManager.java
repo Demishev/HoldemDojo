@@ -1,6 +1,7 @@
 package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.GameSettings;
+import com.nedogeek.holdem.gameEvents.PlayerWinEvent;
 import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
 
@@ -14,11 +15,19 @@ import java.util.Arrays;
 public class EndGameManager {
     private final Dealer dealer;
     private final PlayersList playersList;
+    private final EventManager eventManager;
 
 
     public EndGameManager(Dealer dealer, PlayersList playersList) {
         this.dealer = dealer;
         this.playersList = playersList;
+        eventManager = EventManager.getInstance();
+    }
+
+    public EndGameManager(Dealer dealer, PlayersList playersList, EventManager eventManager) {
+        this.dealer = dealer;
+        this.playersList = playersList;
+        this.eventManager = eventManager;
     }
 
     public void endGame() {
@@ -41,13 +50,11 @@ public class EndGameManager {
         for (Player player : playersList) {
             if (player.getBalance() == 0) {
                 player.setBalance(GameSettings.COINS_AT_START);
-                System.out.println("Giving chips to " + player);
             }
         }
     }
 
     private void giveMoneyToWinner(Player winner) {
-
         int prize = 0;
         for (Player player : playersList) {
             if (player != winner) {
@@ -58,7 +65,7 @@ public class EndGameManager {
         winner.setBet(0);
         winner.setBalance(winner.getBalance() + prize);
         if (prize != 0) {
-            dealer.setPlayerWin(winner);
+            eventManager.addEvent(new PlayerWinEvent(winner, prize));
         }
     }
 

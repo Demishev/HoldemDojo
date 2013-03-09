@@ -1,6 +1,7 @@
 package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.PlayerStatus;
+import com.nedogeek.holdem.gameEvents.Event;
 import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
 import org.junit.Before;
@@ -20,6 +21,7 @@ import static org.mockito.Mockito.*;
 public class EndGameManagerTest {
     private Dealer dealerMock;
     private PlayersList playersListMock;
+    private EventManager eventManagerMock;
 
     private List<Player> players;
     private Player firstPlayerMock;
@@ -35,7 +37,9 @@ public class EndGameManagerTest {
         resetPlayersMocks();
         resetPlayerListMock();
 
-        endGameManager = new EndGameManager(dealerMock, playersListMock);
+        eventManagerMock = mock(EventManager.class);
+
+        endGameManager = new EndGameManager(dealerMock, playersListMock, eventManagerMock);
     }
 
     private void resetPlayersMocks() {
@@ -125,6 +129,6 @@ public class EndGameManagerTest {
 
         endGameManager.endGame();
 
-        verify(dealerMock, never()).setPlayerWin(firstPlayerMock);
+        verify(eventManagerMock, never()).addEvent((Event) any());
     }
 }

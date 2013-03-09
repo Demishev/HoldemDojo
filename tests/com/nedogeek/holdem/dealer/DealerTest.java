@@ -18,7 +18,7 @@ import static org.mockito.Mockito.*;
  * Time: 0:52
  */
 public class DealerTest {
-    private final GameStatus DEFAULT_GAME_STATUS = GameStatus.NOT_READY;
+    private final GameStatus DEFAULT_GAME_STATUS = GameStatus.NOT_ENOUGH_PLAYERS;
     private final GameRound DEFAULT_GAME_ROUND = GameRound.INITIAL;
 
     private Dealer dealer;
@@ -114,5 +114,15 @@ public class DealerTest {
         dealer.tick();
 
         verify(newGameSetterMock).setNewGame();
+    }
+
+    @Test
+    public void shouldNoMoveManagerMakesMoveWhenGameStatusPAUSEDHasAvailableMovesAndGameRoundTHREE_CARDS() throws Exception {
+        setGameData(GameStatus.PAUSED, GameRound.THREE_CARDS);
+        when(playersManagerMock.hasAvailableMovers()).thenReturn(true);
+
+        dealer.tick();
+
+        verify(moveManagerMock, never()).makeMove(mover);
     }
 }

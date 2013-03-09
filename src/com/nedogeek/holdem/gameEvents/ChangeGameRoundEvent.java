@@ -8,7 +8,7 @@ import com.nedogeek.holdem.GameRound;
  * Time: 1:09
  */
 public class ChangeGameRoundEvent extends Event {
-    ChangeGameRoundEvent(GameRound gameRound) {
+    public ChangeGameRoundEvent(GameRound gameRound) {
         super(gameRound + " game round started.");
     }
 }
