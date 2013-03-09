@@ -21,7 +21,8 @@ public class MoveManager {
     }
 
     void makeMove(Player mover) {
-        PlayerAction playerMove = mover.getMove();
+        delay();
+    	PlayerAction playerMove = mover.getMove();
         playersList.playerMoved(mover);
         switch (playerMove.getActionType()) {
             case Fold:
@@ -44,7 +45,17 @@ public class MoveManager {
         }
     }
 
-    private void makeCheck(Player player) {
+    private void delay() {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			
+			e.printStackTrace();
+		}
+		
+	}
+
+	private void makeCheck(Player player) {
         if (dealer.getCallValue() <= player.getBet()) {
             player.setStatus(PlayerStatus.Check);
         } else {

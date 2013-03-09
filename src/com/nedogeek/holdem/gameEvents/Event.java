@@ -1,5 +1,8 @@
 package com.nedogeek.holdem.gameEvents;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * User: Demishev
  * Date: 10.02.13
@@ -9,7 +12,7 @@ public abstract class Event {
     private final String event;
 
     public Event(String event) {
-        this.event = event;
+        this.event = new SimpleDateFormat("hh:mm").format(new Date()) + ": " +   event;
     }
 
     @Override
