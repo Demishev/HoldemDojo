@@ -12,7 +12,7 @@ public abstract class Event {
     private final String event;
 
     public Event(String event) {
-        this.event = new SimpleDateFormat("hh:mm").format(new Date()) + ": " +   event;
+        this.event = new SimpleDateFormat("hh:mm:ss").format(new Date()) + ": " + event;
     }
 
     @Override

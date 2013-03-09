@@ -9,6 +9,7 @@ import com.nedogeek.holdem.gamingStuff.Player;
  */
 public class PlayerWinEvent extends Event {
     public PlayerWinEvent(Player winner, int prize) {
-        super(winner.getName() + " win " + prize + " chips.");
+        super(winner.getName() + " win " + prize +
+                " chips with " + winner.getCardCombination() + '.');
     }
 }

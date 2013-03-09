@@ -27,7 +27,6 @@ public class Dealer implements Runnable {
     private GameStatus gameStatus = GameStatus.NOT_ENOUGH_PLAYERS;
     private GameRound gameRound;
 
-    private int tickNumber = 0;
     private int callValue;
 
     private CardDeck cardDeck;
@@ -91,10 +90,6 @@ public class Dealer implements Runnable {
             case STARTED:
                 makeGameAction();
                 break;
-        }
-        tickNumber++;
-        for (Player player : playersList) {
-            System.out.println(tickNumber + ":" + " Game status: " + gameStatus + " Game round: " + gameRound + " " + player);
         }
     }
 
