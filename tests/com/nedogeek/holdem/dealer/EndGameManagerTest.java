@@ -116,4 +116,15 @@ public class EndGameManagerTest {
     private void setPlayerBet(Player player, int bet) {
         when(player.getBet()).thenReturn(bet);
     }
+
+    @Test
+    public void shouldNotFirstPlayerWinWhenFirstPlayerBet0SecondPlayerBet0AndThirdPlayerBet0() throws Exception {
+        setPlayerBet(firstPlayerMock, 0);
+        setPlayerBet(secondPlayerMock, 0);
+        setPlayerBet(thirdPlayerMock, 0);
+
+        endGameManager.endGame();
+
+        verify(dealerMock, never()).setPlayerWin(firstPlayerMock);
+    }
 }

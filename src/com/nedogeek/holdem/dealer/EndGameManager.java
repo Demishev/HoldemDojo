@@ -33,7 +33,6 @@ public class EndGameManager {
         for (int i = winCandidates.length - 1; i != -1; i--) {
             Player winPlayer = (Player) winCandidates[i];
             giveMoneyToWinner(winPlayer);
-            dealer.setPlayerWin(winPlayer);
         }
         checkZeroBalance();
     }
@@ -58,7 +57,9 @@ public class EndGameManager {
         prize += winner.getBet();
         winner.setBet(0);
         winner.setBalance(winner.getBalance() + prize);
-        System.out.println("Winner: " + winner + " prize " + prize);
+        if (prize != 0) {
+            dealer.setPlayerWin(winner);
+        }
     }
 
     private int getChipsFromPlayer(Player player, int chipsCount) {
