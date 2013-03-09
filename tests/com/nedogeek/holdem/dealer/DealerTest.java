@@ -27,6 +27,7 @@ public class DealerTest {
     private NewGameSetter newGameSetterMock;
     private PlayersList playersManagerMock;
     private EndGameManager endGameManagerMock;
+    private EventManager eventManagerMock;
 
     private Player mover;
 
@@ -36,24 +37,26 @@ public class DealerTest {
         newGameSetterMock = mock(NewGameSetter.class);
         resetPlayerManager();
         endGameManagerMock = mock(EndGameManager.class);
+        eventManagerMock = mock(EventManager.class);
 
         dealer = new Dealer(moveManagerMock, newGameSetterMock, playersManagerMock,
-                endGameManagerMock, DEFAULT_GAME_STATUS, DEFAULT_GAME_ROUND);
+                endGameManagerMock, DEFAULT_GAME_STATUS, DEFAULT_GAME_ROUND, eventManagerMock);
     }
 
+    @SuppressWarnings("unchecked")
     private void resetPlayerManager() {
         playersManagerMock = mock(PlayersList.class);
 
         mover = mock(Player.class);
 
         when(playersManagerMock.getMover()).thenReturn(mover);
-        Iterator<Player> playerMockIterator = mock(Iterator.class);
+        Iterator playerMockIterator = mock(Iterator.class);
         when(playersManagerMock.iterator()).thenReturn(playerMockIterator);
     }
 
     private void setGameData(GameStatus gameStatus, GameRound gameRound) {
         dealer = new Dealer(moveManagerMock, newGameSetterMock, playersManagerMock,
-                endGameManagerMock, gameStatus, gameRound);
+                endGameManagerMock, gameStatus, gameRound, eventManagerMock);
     }
 
     @Test

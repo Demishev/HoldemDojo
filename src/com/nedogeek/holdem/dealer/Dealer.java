@@ -20,6 +20,7 @@ public class Dealer implements Runnable {
     private final NewGameSetter newGameSetter;
     private final PlayersList playersList;
     private final EndGameManager endGameManager;
+    private final EventManager eventManager;
 
     private GameStatus gameStatus = GameStatus.NOT_READY;
     private GameRound gameRound;
@@ -34,8 +35,11 @@ public class Dealer implements Runnable {
 
     public Dealer(PlayersList playersList) {
         this.playersList = playersList;
-        EventManager.getInstance().setPlayersList(playersList);
-        EventManager.getInstance().setDealer(this);
+        eventManager = EventManager.getInstance();
+
+        eventManager.setPlayersList(playersList);
+        eventManager.setDealer(this);
+
         moveManager = new MoveManager(this, playersList);
 
         newGameSetter = new NewGameSetter(this, playersList, moveManager);
@@ -43,16 +47,19 @@ public class Dealer implements Runnable {
         gameRound = GameRound.INITIAL;
     }
 
-    Dealer(MoveManager moveManagerMock, NewGameSetter newGameSetterMock,
-           PlayersList playersManagerMock, EndGameManager endGameManagerMock,
-           GameStatus gameStatus, GameRound gameRound) {
-        moveManager = moveManagerMock;
-        newGameSetter = newGameSetterMock;
-        playersList = playersManagerMock;
-        endGameManager = endGameManagerMock;
-
+    /**
+     * Test constructor
+     */
+    Dealer(MoveManager moveManager, NewGameSetter newGameSetter,
+           PlayersList playersList, EndGameManager endGameManager,
+           GameStatus gameStatus, GameRound gameRound, EventManager eventManager) {
+        this.moveManager = moveManager;
+        this.newGameSetter = newGameSetter;
+        this.playersList = playersList;
+        this.endGameManager = endGameManager;
         this.gameStatus = gameStatus;
         this.gameRound = gameRound;
+        this.eventManager = eventManager;
     }
 
     public void run() {
@@ -150,6 +157,7 @@ public class Dealer implements Runnable {
         player.setCards(new Card[]{cardDeck.getCard(), cardDeck.getCard()});
     }
 
+    @Deprecated
     void setPlayerWin(Player winner) {
 
     }
