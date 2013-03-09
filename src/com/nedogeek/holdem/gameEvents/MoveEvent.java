@@ -4,7 +4,6 @@ import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayerAction;
 
 /**
- * Created with IntelliJ IDEA.
  * User: Demishev
  * Date: 10.02.13
  * Time: 0:55
