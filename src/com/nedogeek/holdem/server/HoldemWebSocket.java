@@ -1,9 +1,8 @@
 package com.nedogeek.holdem.server;
 
 
-import org.eclipse.jetty.websocket.WebSocket;
-
 import com.nedogeek.holdem.dealer.EventManager;
+import org.eclipse.jetty.websocket.WebSocket;
 
 import java.io.IOException;
 
@@ -18,26 +17,26 @@ public class HoldemWebSocket implements WebSocket.OnTextMessage {
 
     @Override
     public void onMessage(String command) {
-      
-       
+
+
     }
 
     @Override
     public void onOpen(Connection connection) {
         this.connection = connection;
         try {
-			connection.sendMessage("Hello from server");
-		} catch (IOException e) {
+            connection.sendMessage("Hello from server");
+        } catch (IOException e) {
 
-			e.printStackTrace();
-		}
-        EventManager.getInstance().setViewer(connection);
+            e.printStackTrace();
+        }
+        EventManager.getInstance().addViewer(connection);
     }
 
     @Override
     public void onClose(int i, String s) {
 
     }
-    
+
 
 }

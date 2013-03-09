@@ -22,31 +22,45 @@ public class EventManager {
 
     private Connection viewer;
     private PlayersList playersList;
-    private Dealer dealer;
     private List<String> events = new ArrayList<>();
+
+    private Dealer dealer;
 
     public static EventManager getInstance() {
         return eventManager;
     }
 
-    public void addEvent(Event event) {
-        events.add(event.toString());
-        System.out.println(gameToJSON());
-        if (events.size() > 10)
-            events.remove(0);
+    private EventManager() {
 
-        if (viewer != null)
-            try {
-                viewer.sendMessage(gameToJSON());
+    }
 
-            } catch (IOException e) {
+    public void addViewer(Connection connection) {
+        viewer = connection;
+    }
 
-                e.printStackTrace();
-            }
+    public void setDealer(Dealer dealer) {
+        this.dealer = dealer;
     }
 
     public void setPlayersList(PlayersList playersList) {
         this.playersList = playersList;
+    }
+
+    public void addEvent(Event event) {
+        events.add(event.toString());
+        if (events.size() > 10)
+            events.remove(0);
+
+        notifyViewer();
+    }
+
+    private void notifyViewer() {
+        if (viewer != null)
+            try {
+                viewer.sendMessage(gameToJSON());
+            } catch (IOException e) {
+                viewer.close();
+            }
     }
 
     public String gameToJSON() {
@@ -60,13 +74,5 @@ public class EventManager {
         gameData.put("events", events.toArray());
 
         return JSONObject.fromMap(gameData).toString();
-    }
-
-    public void setViewer(Connection connection) {
-        viewer = connection;
-    }
-
-    public void setDealer(Dealer dealer) {
-        this.dealer = dealer;
     }
 }
