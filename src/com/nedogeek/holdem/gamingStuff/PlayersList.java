@@ -1,6 +1,9 @@
 package com.nedogeek.holdem.gamingStuff;
 
 import com.nedogeek.holdem.PlayerStatus;
+import com.nedogeek.holdem.dealer.EventManager;
+import com.nedogeek.holdem.gameEvents.AddPlayerEvent;
+import com.nedogeek.holdem.gameEvents.RemovePlayerEvent;
 import net.sf.json.JSONArray;
 
 import java.util.ArrayList;
@@ -23,7 +26,14 @@ public class PlayersList extends ArrayList<Player> {
 
     @Override
     public boolean add(Player player) {
+        EventManager.getInstance().addEvent(new AddPlayerEvent(player));
         return !contains(player) && super.add(player);
+    }
+
+    @Override
+    public boolean remove(Object player) {
+        EventManager.getInstance().addEvent(new RemovePlayerEvent((Player) player));
+        return super.remove(player);
     }
 
     public void playerMoved(Player player) {

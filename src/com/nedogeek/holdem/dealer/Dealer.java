@@ -3,6 +3,7 @@ package com.nedogeek.holdem.dealer;
 import com.nedogeek.holdem.GameRound;
 import com.nedogeek.holdem.GameStatus;
 import com.nedogeek.holdem.gameEvents.ChangeGameRoundEvent;
+import com.nedogeek.holdem.gameEvents.PlayerMovesEvent;
 import com.nedogeek.holdem.gamingStuff.Card;
 import com.nedogeek.holdem.gamingStuff.CardDeck;
 import com.nedogeek.holdem.gamingStuff.Player;
@@ -69,7 +70,7 @@ public class Dealer implements Runnable {
         }
     }
 
-    private GameStatus calculateGameStatus() {
+    GameStatus calculateGameStatus() {
         if (playersList.size() < 2) {
             return GameStatus.NOT_ENOUGH_PLAYERS;
         }
@@ -107,7 +108,9 @@ public class Dealer implements Runnable {
                 break;
             default:
                 if (playersList.hasAvailableMovers()) {
-                    moveManager.makeMove(playersList.getMover());
+                    final Player mover = playersList.getMover();
+                    eventManager.addEvent(new PlayerMovesEvent(mover, playersList));
+                    moveManager.makeMove(mover);
                 } else {
                     if (playersList.moreThanOnePlayerWithActiveStatus())
                         setNextGameRound();
@@ -180,11 +183,6 @@ public class Dealer implements Runnable {
 
     public void pause() {
         gameStatus = GameStatus.PAUSED;
-    }
-
-    @Deprecated
-    public void setGameReady() {
-        gameStatus = GameStatus.READY;
     }
 
     public GameStatus getGameStatus() {
