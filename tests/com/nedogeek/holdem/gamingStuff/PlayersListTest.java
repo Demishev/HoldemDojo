@@ -1,6 +1,8 @@
 package com.nedogeek.holdem.gamingStuff;
 
 import com.nedogeek.holdem.PlayerStatus;
+import com.nedogeek.holdem.dealer.EventManager;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,6 +19,7 @@ public class PlayersListTest {
 
     private Player firstPlayer = mock(Player.class);
     private Player secondPlayer = mock(Player.class);
+    private EventManager eventManagerMock = mock(EventManager.class);
 
     @Before
     public void setUp() throws Exception {
@@ -30,6 +33,9 @@ public class PlayersListTest {
     private void resetPlayers() {
         firstPlayer = mock(Player.class);
         secondPlayer = mock(Player.class);
+        
+        when(firstPlayer.getName()).thenReturn("First player");
+        when(secondPlayer.getName()).thenReturn("Second player");
 
         when(firstPlayer.getStatus()).thenReturn(PlayerStatus.NotMoved);
         when(secondPlayer.getStatus()).thenReturn(PlayerStatus.NotMoved);
@@ -78,7 +84,7 @@ public class PlayersListTest {
     }
 
     private void resetPlayerManager() {
-        playersList = new PlayersList();
+        playersList = new PlayersList(eventManagerMock);
     }
 
     @Test

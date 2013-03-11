@@ -25,21 +25,21 @@
 
 
         var connect = function () {
-        alert('Connecting');
+       
 
         socket = new WebSocket(WS_ADDRESS);
 
         socket.onopen = function () {
-        alert('Connected');
+       
         };
 
         socket.onclose = function () {
-        alert('Closed');
+
         document.getElementById("gameStatus").innerHTML = 'Disconnected';
         };
 
         socket.onmessage = function (message) {
-        alert('Message');
+
         updateGameData(message.data)
         }
         };
@@ -100,35 +100,21 @@
 
         var refreshPlayers = function() {
         playersTableInnerHTML = document.getElementById("playersTable");
-        playersTableInnerHTML.innerHTML = '
-        <tr>
-            <th>Name</th>
-            <th>balance</th>
-            \
-            <th>bet</th>
-            \
-            <th>status</th>
-            \
-        </tr>
-        ';
+        playersTableInnerHTML.innerHTML = '<tr> \
+            <th>Name</th> \
+            <th>balance</th> \
+            <th>bet</th>    \
+            <th>status</th> \
+        </tr>';
 
         for (var i = 0; i < players.length; i++) {
         player = players[i];
-        playersTableInnerHTML.innerHTML += '\
-        <tr>\
-            <td>' + player.name + '</td>
-            \
-            <td>' + player.balance + '</td>
-            \
-            <td>' + player.bet + '</td>
-            \
-            <td>' + player.status + '</td>
-            \
-            ';
-            playersTableInnerHTML.innerHTML += '\
-        </tr>
-        \
-        ';
+        playersTableInnerHTML.innerHTML += '  <tr>\
+            <td>' + player.name + '</td>  \
+            <td>' + player.balance + '</td> \
+            <td>' + player.bet + '</td> \
+            <td>' + player.status + '</td>';
+            playersTableInnerHTML.innerHTML += ' </tr> ';
         }
         };
 

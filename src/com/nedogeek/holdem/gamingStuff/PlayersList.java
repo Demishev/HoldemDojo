@@ -19,20 +19,29 @@ public class PlayersList extends ArrayList<Player> {
 
     private int dealerNumber;
     private int lastMovedPlayer;
+    private final EventManager eventManager;
 
     public PlayersList() {
         dealerNumber = 0;
+        eventManager = EventManager.getInstance();
     }
-
+    
+    /**
+     * Test purposes ONLY!
+     */
+    PlayersList(EventManager eventManager) {
+    	dealerNumber = 0;
+    	this.eventManager = eventManager;
+    }
     @Override
     public boolean add(Player player) {
-        EventManager.getInstance().addEvent(new AddPlayerEvent(player));
+        eventManager.addEvent(new AddPlayerEvent(player));
         return !contains(player) && super.add(player);
     }
 
     @Override
     public boolean remove(Object player) {
-        EventManager.getInstance().addEvent(new RemovePlayerEvent((Player) player));
+        eventManager.addEvent(new RemovePlayerEvent((Player) player));
         return super.remove(player);
     }
 
@@ -140,4 +149,30 @@ public class PlayersList extends ArrayList<Player> {
             player.setStatus(PlayerStatus.NotMoved);
         }
     }
+
+	@Override
+	public boolean contains(Object o) {
+		if (!(o instanceof Player)) {
+			return false;
+		}
+		
+		for (Player player: this) {
+			if (player.getName().equals(((Player) o).getName())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/*public Player findPlayer(String login) {
+		for (Player player: this) {
+			if (player.getName().equals(login)) {
+				return player;
+			}
+		}
+		add(new Player(login, nu))
+		
+	}*/
+    
+    
 }

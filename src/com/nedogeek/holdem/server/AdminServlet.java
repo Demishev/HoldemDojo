@@ -19,7 +19,7 @@ import java.io.IOException;
  * Date: 09.03.13
  * Time: 20:08
  */
-@WebServlet("/admin")
+@WebServlet(urlPatterns="/admin", loadOnStartup=1)
 public class AdminServlet extends HttpServlet {
     Dealer dealer;
 
@@ -34,7 +34,6 @@ public class AdminServlet extends HttpServlet {
         players.add(new RandomBot(dealer));
         players.add(new CallBot(dealer));
         players.add(new FoldBot(dealer));
-        System.out.println("Admin servlet initialized.");
     }
 
     @Override

@@ -13,7 +13,16 @@ import javax.servlet.http.HttpServletRequest;
 public class HoldemWebSocketHandler extends WebSocketHandler {
     @Override
     public WebSocket doWebSocketConnect(HttpServletRequest request, String protocol) {
-        System.out.println("In handler");
-        return new HoldemWebSocket();
+    	String login = request.getParameter("user");
+    	String password = request.getParameter("password");
+    	if(login == null && password == null){
+    		return new HoldemWebSocket();
+    	}else{
+    		if(RegisterServlet.USER_LIST.containsKey(login) && RegisterServlet.USER_LIST.containsKey(password)){
+    			return new HoldemWebSocket(login);
+    		}
+    	}
+    	
+    	return null;
     }
 }

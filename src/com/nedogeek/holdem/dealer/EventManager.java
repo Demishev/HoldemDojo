@@ -4,6 +4,7 @@ import com.nedogeek.holdem.gameEvents.AddPlayerEvent;
 import com.nedogeek.holdem.gameEvents.Event;
 import com.nedogeek.holdem.gameEvents.PlayerMovesEvent;
 import com.nedogeek.holdem.gameEvents.RemovePlayerEvent;
+import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
 import net.sf.json.JSONObject;
 import org.eclipse.jetty.websocket.WebSocket.Connection;
@@ -30,6 +31,8 @@ public class EventManager {
     private final List<String> events = new ArrayList<>();
     private final List<Connection> viewers = new ArrayList<>();
 
+	private HashMap<String, Connection> namedConnections = new HashMap<String,Connection>();
+
     public static EventManager getInstance() {
         return eventManager;
     }
@@ -43,13 +46,11 @@ public class EventManager {
     }
 
     public void addViewer(Connection viewer) {
-        System.out.println("Viewer adding");
         viewers.add(viewer);
     }
 
     public void setDealer(Dealer dealer) {
         this.dealer = dealer;
-        System.out.println("Dealer seted.");
     }
 
     public void setPlayersList(PlayersList playersList) {
@@ -57,7 +58,6 @@ public class EventManager {
     }
 
     public void addEvent(Event event) {
-        System.out.println("Event added. " + viewers.size() + " listeners.");
         processEvents(event);
 
         events.add(event.toString());
@@ -65,7 +65,7 @@ public class EventManager {
         if (events.size() > MAX_EVENTS_COUNT)
             events.remove(0);
 
-        notifyViewers();
+        notifyViewer();
     }
 
     private void processEvents(Event event) {
@@ -78,11 +78,10 @@ public class EventManager {
         }
     }
 
-    private void notifyViewers() {
+    private void notifyViewer() {
         for (Connection viewer : viewers) {
             try {
                 viewer.sendMessage(gameToJSON());
-                System.out.println("Notifying");
             } catch (IOException e) {
                 viewer.close();
             }
@@ -118,4 +117,13 @@ public class EventManager {
 
         return JSONObject.fromMap(gameData).toString();
     }
+
+	public Player addViewer(Connection connection, String login) {
+		
+		namedConnections.put(login, connection);
+		Player player = new Player(login, dealer);
+		if(playersList.contains(player))
+			return player;
+		return null;
+	}
 }
