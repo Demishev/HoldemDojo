@@ -8,16 +8,22 @@ import com.nedogeek.holdem.gamingStuff.PlayersList;
  * Date: 09.03.13
  * Time: 18:28
  */
-public class PlayerMovesEvent extends Event {
+public class PlayerMovesNotificationEvent extends Event {
     private final int moverNumber;
+    private final Player player;
 
-    public PlayerMovesEvent(Player mover, PlayersList players) {
+    public PlayerMovesNotificationEvent(Player mover, PlayersList players) {
         super(mover.getName() + " moves.");
 
         moverNumber = players.indexOf(mover);
+        player = mover;
     }
 
     public int getMoverNumber() {
         return moverNumber;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 }

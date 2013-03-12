@@ -3,7 +3,7 @@ package com.nedogeek.holdem.dealer;
 import com.nedogeek.holdem.GameRound;
 import com.nedogeek.holdem.GameStatus;
 import com.nedogeek.holdem.gameEvents.ChangeGameRoundEvent;
-import com.nedogeek.holdem.gameEvents.PlayerMovesEvent;
+import com.nedogeek.holdem.gameEvents.PlayerMovesNotificationEvent;
 import com.nedogeek.holdem.gamingStuff.Card;
 import com.nedogeek.holdem.gamingStuff.CardDeck;
 import com.nedogeek.holdem.gamingStuff.Player;
@@ -104,7 +104,7 @@ public class Dealer implements Runnable {
             default:
                 if (playersList.hasAvailableMovers()) {
                     final Player mover = playersList.getMover();
-                    eventManager.addEvent(new PlayerMovesEvent(mover, playersList));
+                    eventManager.addEvent(new PlayerMovesNotificationEvent(mover, playersList));
                     moveManager.makeMove(mover);
                 } else {
                     if (playersList.moreThanOnePlayerWithActiveStatus())

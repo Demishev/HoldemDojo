@@ -3,11 +3,12 @@ package com.nedogeek.holdem.dealer;
 import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.gameEvents.AddPlayerEvent;
 import com.nedogeek.holdem.gameEvents.Event;
-import com.nedogeek.holdem.gameEvents.PlayerMovesEvent;
+import com.nedogeek.holdem.gameEvents.PlayerMovesNotificationEvent;
 import com.nedogeek.holdem.gameEvents.RemovePlayerEvent;
 import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
 import net.sf.json.JSONObject;
+import org.eclipse.jetty.websocket.WebSocket;
 import org.eclipse.jetty.websocket.WebSocket.Connection;
 
 import java.io.IOException;
@@ -77,11 +78,34 @@ public class EventManager {
             events.remove(0);
 
         notifyConnections();
+
+        notifyMover(event);
+    }
+
+    private void notifyMover(Event event) {
+        if (event instanceof PlayerMovesNotificationEvent) {
+            final String YOUR_MOVE_MESSAGE = "Your move!";
+            String playerName = ((PlayerMovesNotificationEvent) event).getPlayer().getName();
+            sendMessageToPlayer(YOUR_MOVE_MESSAGE, playerName);
+        }
+    }
+
+    private void sendMessageToPlayer(String message, String playerName) {
+        if (connections.containsKey(playerName)) {
+            List<Connection> playerConnections = connections.get(playerName);
+            for (Connection connection: playerConnections) {
+                try {
+                    connection.sendMessage(message);
+                } catch (IOException e) {
+                    connection.close();
+                }
+            }
+        }
     }
 
     private void processEvents(Event event) {
-        if (event instanceof PlayerMovesEvent) {
-            moverNumber = ((PlayerMovesEvent) event).getMoverNumber();
+        if (event instanceof PlayerMovesNotificationEvent) {
+            moverNumber = ((PlayerMovesNotificationEvent) event).getMoverNumber();
         }
 
         if (event instanceof AddPlayerEvent || event instanceof RemovePlayerEvent) {

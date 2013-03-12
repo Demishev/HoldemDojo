@@ -3,7 +3,6 @@ package com.nedogeek.holdem.dealer;
 import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.PlayerStatus;
 import com.nedogeek.holdem.gameEvents.MoveEvent;
-import com.nedogeek.holdem.gameEvents.PlayerMovesEvent;
 import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayerAction;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
