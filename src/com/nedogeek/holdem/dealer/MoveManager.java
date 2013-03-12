@@ -91,27 +91,19 @@ public class MoveManager {
     }
 
     private void makeFold(Player player) {
-        System.out.println(player + " making fold.");
-
         player.setStatus(PlayerStatus.Fold);
     }
 
     private void makeCall(Player player) {
-        System.out.println(player + " making call.");
-
         player.setStatus(PlayerStatus.Call);
         trySendToPot(player, dealer.getCallValue() - player.getBet());
     }
 
     private void makeAllIn(Player player) {
-        System.out.println(player + " making AllIn.");
-
         trySendToPot(player, player.getBalance());
     }
 
     private void makeRise(Player player) {
-        System.out.println(player + " making rise");
-
         int riseValue = calculateRiseValue(player);
         player.setStatus(PlayerStatus.Rise);
         trySendToPot(player, riseValue);

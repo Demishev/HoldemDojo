@@ -96,7 +96,6 @@ public class PlayersList extends ArrayList<Player> {
     private void changeDealer() {
         dealerNumber = nextPlayer(dealerNumber);
         lastMovedPlayer = dealerNumber;
-        System.out.println("Dealer number is: " + dealerNumber);
     }
 
     public Player smallBlindPlayer() {

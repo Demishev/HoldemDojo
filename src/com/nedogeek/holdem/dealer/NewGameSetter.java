@@ -38,8 +38,6 @@ public class NewGameSetter {
 
     private void makeInitialBets() {
         moveManager.makeSmallBlind(playersList.smallBlindPlayer());
-        System.out.println("Small blind player is: " + playersList.smallBlindPlayer());
         moveManager.makeBigBlind(playersList.bigBlindPlayer());
-        System.out.println("Big blind player is: " + playersList.bigBlindPlayer());
     }
 }
