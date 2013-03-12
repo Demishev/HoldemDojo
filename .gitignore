@@ -4,3 +4,4 @@ holdem.iml
 /.settings
 /.classpath
 /.project
+*.ser
