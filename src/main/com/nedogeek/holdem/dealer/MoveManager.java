@@ -2,6 +2,8 @@ package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.PlayerStatus;
+import com.nedogeek.holdem.gameEvents.MoveEvent;
+import com.nedogeek.holdem.gameEvents.PlayerMovesEvent;
 import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayerAction;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
@@ -14,16 +16,19 @@ import com.nedogeek.holdem.gamingStuff.PlayersList;
 public class MoveManager {
     private final Dealer dealer;
     private final PlayersList playersList;
+    private final EventManager eventManager;
 
     MoveManager(Dealer dealer, PlayersList playersList) {
         this.dealer = dealer;
         this.playersList = playersList;
+        eventManager = EventManager.getInstance();
     }
 
     void makeMove(Player mover) {
         delay();
         PlayerAction playerMove = mover.getMove();
         playersList.playerMoved(mover);
+        eventManager.addEvent(new MoveEvent(mover));
         switch (playerMove.getActionType()) {
             case Fold:
                 makeFold(mover);
@@ -92,6 +97,7 @@ public class MoveManager {
 
     private void makeFold(Player player) {
         player.setStatus(PlayerStatus.Fold);
+
     }
 
     private void makeCall(Player player) {

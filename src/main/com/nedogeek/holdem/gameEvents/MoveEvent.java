@@ -9,8 +9,8 @@ import com.nedogeek.holdem.gamingStuff.PlayerAction;
  * Time: 0:55
  */
 public class MoveEvent extends Event {
-    public MoveEvent(Player player, PlayerAction.ActionType moveType, int bet) {
-        super(generateMessage(player, moveType, bet));
+    public MoveEvent(Player player) {
+        super(generateMessage(player, player.getMove().getActionType(), player.getMove().getRiseAmount()));
     }
 
     private static String generateMessage(Player player, PlayerAction.ActionType moveType, int bet) {
