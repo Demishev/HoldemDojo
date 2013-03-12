@@ -37,6 +37,12 @@ public class AdminServlet extends HttpServlet {
     }
 
     @Override
+    public void destroy() {
+        super.destroy();
+        dealer.stop();
+    }
+
+    @Override
     protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
         switch (httpServletRequest.getParameter("Command")) {
             case "Start":
