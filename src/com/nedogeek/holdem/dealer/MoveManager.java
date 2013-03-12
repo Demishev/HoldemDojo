@@ -14,11 +14,6 @@ import com.nedogeek.holdem.gamingStuff.PlayersList;
 public class MoveManager {
     private final Dealer dealer;
     private final PlayersList playersList;
-    private long delayValue = 1000;   //TODO add to GameSettings
-
-    public void setDelayValue(long delayValue) {
-        this.delayValue = delayValue;
-    }
 
     MoveManager(Dealer dealer, PlayersList playersList) {
         this.dealer = dealer;
@@ -52,7 +47,7 @@ public class MoveManager {
 
     private void delay() {
         try {
-            Thread.sleep(delayValue);
+            Thread.sleep(GameSettings.GAME_DELAY_VALUE);
         } catch (InterruptedException e) {
 
             e.printStackTrace();
