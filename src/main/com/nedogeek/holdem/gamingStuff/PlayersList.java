@@ -1,6 +1,7 @@
 package com.nedogeek.holdem.gamingStuff;
 
 import com.nedogeek.holdem.PlayerStatus;
+import com.nedogeek.holdem.dealer.Dealer;
 import com.nedogeek.holdem.dealer.EventManager;
 import com.nedogeek.holdem.gameEvents.AddPlayerEvent;
 import com.nedogeek.holdem.gameEvents.PlayerConnectedEvent;import com.nedogeek.holdem.gameEvents.RemovePlayerEvent;
@@ -183,4 +184,20 @@ public class PlayersList extends ArrayList<Player> {
 		}
 		return false;
 	}
+
+    public Player getPlayerByName(String login, Dealer dealer) {
+        for (Player player : waitingPlayers) {
+            if (player.getName().equals(login)) {
+                return player;
+            }
+        }
+        for (Player player : this) {
+            if (player.getName().equals(login)) {
+                return player;
+            }
+        }
+        Player player = new Player(login, dealer);
+        add(player);
+        return player;
+    }
 }

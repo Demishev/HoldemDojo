@@ -88,8 +88,6 @@ public class HoldemWebSocket implements WebSocket.OnTextMessage {
 
     @Override
     public void onClose(int i, String s) {
-
+        EventManager.getInstance().closeConnection(connection);
     }
-
-
 }

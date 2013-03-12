@@ -8,7 +8,6 @@ import com.nedogeek.holdem.gameEvents.RemovePlayerEvent;
 import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
 import net.sf.json.JSONObject;
-import org.eclipse.jetty.websocket.WebSocket;
 import org.eclipse.jetty.websocket.WebSocket.Connection;
 
 import java.io.IOException;
@@ -150,10 +149,7 @@ public class EventManager {
     public Player addPlayer(Connection connection, String login) {
         addConnection(login, connection);
 
-        Player player = new Player(login, dealer);
-        if (playersList.contains(player))
-            return player;   //TODO Ересь!
-        return null;
+        return playersList.getPlayerByName(login, dealer);
     }
 
     public void setDealer(Dealer dealer) {
