@@ -3,7 +3,7 @@ package com.nedogeek.holdem.gamingStuff;
 import com.nedogeek.holdem.PlayerStatus;
 import com.nedogeek.holdem.dealer.EventManager;
 import com.nedogeek.holdem.gameEvents.AddPlayerEvent;
-import com.nedogeek.holdem.gameEvents.RemovePlayerEvent;
+import com.nedogeek.holdem.gameEvents.PlayerConnectedEvent;import com.nedogeek.holdem.gameEvents.RemovePlayerEvent;
 import net.sf.json.JSONArray;
 
 import java.util.ArrayList;
@@ -21,6 +21,8 @@ public class PlayersList extends ArrayList<Player> {
     private int lastMovedPlayer;
     private final EventManager eventManager;
 
+    private List<Player> waitingPlayers = new ArrayList<>();
+
     public PlayersList() {
         dealerNumber = 0;
         eventManager = EventManager.getInstance();
@@ -35,8 +37,16 @@ public class PlayersList extends ArrayList<Player> {
     }
     @Override
     public boolean add(Player player) {
-        eventManager.addEvent(new AddPlayerEvent(player));
-        return !contains(player) && super.add(player);
+        eventManager.addEvent(new PlayerConnectedEvent(player));
+        return !contains(player) && !waitingPlayers.contains(player) && waitingPlayers.add(player);
+    }
+
+    private void addWaitingPlayers() {
+        for (Player player: waitingPlayers) {
+            super.add(player);
+            eventManager.addEvent(new AddPlayerEvent(player));
+        }
+        waitingPlayers.clear();
     }
 
     @Override
@@ -83,7 +93,7 @@ public class PlayersList extends ArrayList<Player> {
         return PLAYER_NOT_FOUND;
     }
 
-    void changeDealer() {
+    private void changeDealer() {
         dealerNumber = nextPlayer(dealerNumber);
         lastMovedPlayer = dealerNumber;
         System.out.println("Dealer number is: " + dealerNumber);
@@ -144,6 +154,7 @@ public class PlayersList extends ArrayList<Player> {
 
     public void setNewGame() {
         changeDealer();
+        addWaitingPlayers();
 
         for (Player player : this) {
             player.setStatus(PlayerStatus.NotMoved);
@@ -163,16 +174,4 @@ public class PlayersList extends ArrayList<Player> {
 		}
 		return false;
 	}
-
-	/*public Player findPlayer(String login) {
-		for (Player player: this) {
-			if (player.getName().equals(login)) {
-				return player;
-			}
-		}
-		add(new Player(login, nu))
-		
-	}*/
-    
-    
 }

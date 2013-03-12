@@ -26,7 +26,7 @@ public class PlayersListTest {
 
         resetPlayers();
 
-        resetPlayerManager();
+        resetPlayerList();
         setDefaultTwoPlayersGame();
     }
 
@@ -44,6 +44,7 @@ public class PlayersListTest {
     private void setDefaultTwoPlayersGame() {
         playersList.add(firstPlayer);
         playersList.add(secondPlayer);
+        playersList.setNewGame();
     }
 
     @Test
@@ -68,30 +69,33 @@ public class PlayersListTest {
 
     @Test
     public void should1PlayerWhenNewPlayerAddedToNewPlayersManager() throws Exception {
-        resetPlayerManager();
+        resetPlayerList();
         playersList.add(firstPlayer);
+        playersList.setNewGame();
 
         assertEquals(1, playersList.size());
     }
 
     @Test
     public void should2PlayersWhen2NewPlayerAddedToNewPlayersManager() throws Exception {
-        resetPlayerManager();
+        resetPlayerList();
         playersList.add(firstPlayer);
         playersList.add(secondPlayer);
+        playersList.setNewGame();
 
         assertEquals(2, playersList.size());
     }
 
-    private void resetPlayerManager() {
+    private void resetPlayerList() {
         playersList = new PlayersList(eventManagerMock);
     }
 
     @Test
     public void should1PlayerWhenSameNewPlayerAddedToNewPlayersManagerTwice() throws Exception {
-        resetPlayerManager();
+        resetPlayerList();
         playersList.add(firstPlayer);
         playersList.add(firstPlayer);
+        playersList.setNewGame();
 
         assertEquals(1, playersList.size());
     }
@@ -102,26 +106,12 @@ public class PlayersListTest {
     }
 
     @Test
-    public void shouldSecondPlayerWhenSmallBlindPlayer() throws Exception {
-        assertEquals(secondPlayer, playersList.smallBlindPlayer());
-    }
-
-    @Test
-    public void shouldFirstPlayerWhenBigBlindPlayer() throws Exception {
-        assertEquals(firstPlayer, playersList.bigBlindPlayer());
-    }
-
-    @Test
-    public void shouldFirstPlayerWhenSmallBlindPlayerAfterSwitchingDealer() throws Exception {
-        playersList.changeDealer();
-
+    public void shouldFirstPlayerWhenSmallBlindPlayer() throws Exception {
         assertEquals(firstPlayer, playersList.smallBlindPlayer());
     }
 
     @Test
-    public void shouldSecondPlayerWhenBigBlindPlayerAfterSwitchingDealer() throws Exception {
-        playersList.changeDealer();
-
+    public void shouldSecondPlayerWhenBigBlindPlayer() throws Exception {
         assertEquals(secondPlayer, playersList.bigBlindPlayer());
     }
 
@@ -129,6 +119,7 @@ public class PlayersListTest {
     public void shouldThirdPlayerWhenAddThirdPlayerAndGetBigBlindPlayer() throws Exception {
         Player thirdPlayer = mock(Player.class);
         playersList.add(thirdPlayer);
+        playersList.setNewGame();
 
         assertEquals(thirdPlayer, playersList.bigBlindPlayer());
     }
@@ -145,13 +136,11 @@ public class PlayersListTest {
     public void shouldChangeDealerWhenSetNewGame() throws Exception {
         playersList.setNewGame();
 
-        assertEquals(1, playersList.getDealerNumber());
+        assertEquals(0, playersList.getDealerNumber());
     }
 
     @Test
-    public void shouldAllPlayersGetNotMovedStatusesWhenNewGame() throws Exception {
-        playersList.setNewGame();
-
+    public void shouldAllPlayersSetNotMovedStatusesWhenPlayersAdded() throws Exception {
         verify(firstPlayer).setStatus(PlayerStatus.NotMoved);
         verify(secondPlayer).setStatus(PlayerStatus.NotMoved);
     }
@@ -172,5 +161,36 @@ public class PlayersListTest {
         when(secondPlayer.isActiveNotRisePlayer()).thenReturn(true);
 
         assertFalse(playersList.hasAvailableMovers());
+    }
+
+    @Test
+    public void should2PlayersWhenFirstAddedManagedAndAddedAgainSecondTime() throws Exception {
+        resetPlayerList();
+
+        playersList.add(firstPlayer);
+        playersList.setNewGame();
+        playersList.add(firstPlayer);
+        playersList.setNewGame();
+
+        assertEquals(1, playersList.size());
+    }
+
+    @Test
+    public void shouldPlayerAddedWhenAddPlayerAndSetNewGame() throws Exception {
+        resetPlayerList();
+
+        playersList.add(firstPlayer);
+        playersList.setNewGame();
+
+        assertEquals(1, playersList.size());
+    }
+
+    @Test
+    public void should0PlayersWhenAddPlayerWithoutSetNewGame() throws Exception {
+        resetPlayerList();
+
+        playersList.add(firstPlayer);
+
+        assertEquals(0, playersList.size());
     }
 }

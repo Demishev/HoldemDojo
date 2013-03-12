@@ -8,4 +8,5 @@ package com.nedogeek.holdem;
 public interface GameSettings {
     int COINS_AT_START = 1000;
     int SMALL_BLIND = 10;
+    int MAX_EVENTS_COUNT = 100;
 }

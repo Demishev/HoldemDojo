@@ -1,5 +1,6 @@
 package com.nedogeek.holdem.dealer;
 
+import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.gameEvents.AddPlayerEvent;
 import com.nedogeek.holdem.gameEvents.Event;
 import com.nedogeek.holdem.gameEvents.PlayerMovesEvent;
@@ -31,7 +32,7 @@ public class EventManager {
     private final List<String> events = new ArrayList<>();
     private final List<Connection> viewers = new ArrayList<>();
 
-	private HashMap<String, Connection> namedConnections = new HashMap<String,Connection>();
+	private HashMap<String, Connection> namedConnections = new HashMap<>();
 
     public static EventManager getInstance() {
         return eventManager;
@@ -61,8 +62,7 @@ public class EventManager {
         processEvents(event);
 
         events.add(event.toString());
-        final int MAX_EVENTS_COUNT = 10;
-        if (events.size() > MAX_EVENTS_COUNT)
+        if (events.size() > GameSettings.MAX_EVENTS_COUNT)
             events.remove(0);
 
         notifyViewer();

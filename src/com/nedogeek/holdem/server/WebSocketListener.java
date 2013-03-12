@@ -26,12 +26,9 @@ public class WebSocketListener implements ServletContextListener {
             server.setHandler(holdemWebSocketHandler);
 
             server.start();
-            System.out.println("Handler set");
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
     }
 
     @Override
