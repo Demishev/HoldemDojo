@@ -35,10 +35,16 @@ public class PlayersList extends ArrayList<Player> {
     	dealerNumber = 0;
     	this.eventManager = eventManager;
     }
+
     @Override
     public boolean add(Player player) {
-        eventManager.addEvent(new PlayerConnectedEvent(player));
-        return !contains(player) && !waitingPlayers.contains(player) && waitingPlayers.add(player);
+        if (!contains(player) && !waitingPlayers.contains(player) && ((size() < 2))) {
+            eventManager.addEvent(new AddPlayerEvent(player));
+            return super.add(player);
+        } else {
+            eventManager.addEvent(new PlayerConnectedEvent(player));
+            return waitingPlayers.add(player);
+        }
     }
 
     private void addWaitingPlayers() {

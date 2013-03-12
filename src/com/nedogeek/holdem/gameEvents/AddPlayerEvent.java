@@ -9,6 +9,6 @@ import com.nedogeek.holdem.gamingStuff.Player;
  */
 public class AddPlayerEvent extends Event {
     public AddPlayerEvent(Player player) {
-        super(player.getName() + " connected.");
+        super(player.getName() + " set to desk.");
     }
 }

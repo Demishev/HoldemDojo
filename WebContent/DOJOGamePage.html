@@ -90,8 +90,11 @@
             document.getElementById("mover").innerHTML = 'Mover is: ' + movingPlayer;
             document.getElementById("pot").innerHTML = 'Pot: ' + pot;
             document.getElementById("deskCards").innerHTML = 'Desk cards: ' + deskCards;
+
             document.getElementById("console").innerHTML = history;
 
+
+            document.getElementById("console").scrollTop = document.getElementById("console").scrollHeight;
             refreshPlayers();
 
         };

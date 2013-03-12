@@ -186,11 +186,28 @@ public class PlayersListTest {
     }
 
     @Test
-    public void should0PlayersWhenAddPlayerWithoutSetNewGame() throws Exception {
+    public void should2PlayersWhenAddThirdPlayerWithoutSetNewGame() throws Exception {
+        playersList.add(mock(Player.class));
+
+        assertEquals(2, playersList.size());
+    }
+
+    @Test
+    public void shouldFirstPlayerAddedImmediatelyWhenPlayersListSize0() throws Exception {
         resetPlayerList();
 
         playersList.add(firstPlayer);
 
-        assertEquals(0, playersList.size());
+        assertEquals(1, playersList.size());
+    }
+
+    @Test
+    public void shouldSecondPlayerAddedImmediatelyWhenPlayersListSize1() throws Exception {
+        resetPlayerList();
+
+        playersList.add(firstPlayer);
+        playersList.add(secondPlayer);
+
+        assertEquals(2, playersList.size());
     }
 }

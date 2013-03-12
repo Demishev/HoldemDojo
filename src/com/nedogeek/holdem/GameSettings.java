@@ -10,4 +10,5 @@ public class GameSettings {
     public static int SMALL_BLIND = 10;
     public static int MAX_EVENTS_COUNT = 100;
     public static long GAME_DELAY_VALUE = 1000;
+    public static long END_GAME_DELAY_VALUE = 3000;
 }

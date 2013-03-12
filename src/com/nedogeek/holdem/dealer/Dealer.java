@@ -31,7 +31,7 @@ public class Dealer implements Runnable {
 
     private CardDeck cardDeck;
 
-    private List<Card> deskCards;
+    private List<Card> deskCards = new ArrayList<>();
 
     public Dealer(PlayersList playersList) {
         this.playersList = playersList;

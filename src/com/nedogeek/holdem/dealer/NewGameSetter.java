@@ -20,10 +20,11 @@ public class NewGameSetter {
     }
 
     void setNewGame() {
+        playersList.setNewGame();
+
         resetCards();
         makeInitialBets();
 
-        playersList.setNewGame();
 
         dealer.setNextGameRound();
     }

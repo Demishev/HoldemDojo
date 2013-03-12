@@ -1,5 +1,6 @@
 package com.nedogeek.holdem.dealer;
 
+import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.PlayerStatus;
 import com.nedogeek.holdem.gameEvents.Event;
 import com.nedogeek.holdem.gamingStuff.Player;
@@ -36,6 +37,8 @@ public class EndGameManagerTest {
         resetDeskMock();
         resetPlayersMocks();
         resetPlayerListMock();
+
+        GameSettings.END_GAME_DELAY_VALUE = 0;
 
         eventManagerMock = mock(EventManager.class);
 

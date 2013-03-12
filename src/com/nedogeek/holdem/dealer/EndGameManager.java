@@ -32,7 +32,18 @@ public class EndGameManager {
 
     public void endGame() {
         rewardWinners();
+
+        endGameSleep();
+
         dealer.setInitialGameRound();
+    }
+
+    private void endGameSleep() {
+        try {
+            Thread.sleep(GameSettings.END_GAME_DELAY_VALUE);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private void rewardWinners() {
