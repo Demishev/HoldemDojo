@@ -82,7 +82,7 @@ public class HoldemWebSocket implements WebSocket.OnTextMessage {
        if(login == null){
         EventManager.getInstance().addViewer(connection);
        }else{
-    	  player = EventManager.getInstance().addViewer(connection,login); 
+    	  player = EventManager.getInstance().addPlayer(connection, login);
        }
     }
 

@@ -41,8 +41,8 @@ public class EndGameManager {
     private void endGameSleep() {
         try {
             Thread.sleep(GameSettings.END_GAME_DELAY_VALUE);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        } catch (InterruptedException ignored) {
+
         }
     }
 

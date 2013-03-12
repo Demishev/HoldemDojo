@@ -30,9 +30,8 @@ public class EventManager {
     private int moverNumber = -1;
 
     private final List<String> events = new ArrayList<>();
-    private final List<Connection> viewers = new ArrayList<>();
 
-	private HashMap<String, Connection> namedConnections = new HashMap<>();
+    private Map<String, List<Connection>> connections = new HashMap<>();
 
     public static EventManager getInstance() {
         return eventManager;
@@ -47,15 +46,27 @@ public class EventManager {
     }
 
     public void addViewer(Connection viewer) {
-        viewers.add(viewer);
+        addConnection("public", viewer);
     }
 
-    public void setDealer(Dealer dealer) {
-        this.dealer = dealer;
+    private void addConnection(String owner, Connection connection) {
+        if (!connections.containsKey(owner)) {
+            connections.put(owner, new ArrayList<Connection>());
+        }
+        connections.get(owner).add(connection);
     }
 
-    public void setPlayersList(PlayersList playersList) {
-        this.playersList = playersList;
+    private void notifyConnections() {
+        for (List<Connection> connectionList : connections.values()) {
+            for (Connection connection : connectionList) {
+                try {
+                    connection.sendMessage(gameToJSON());
+                } catch (IOException e) {
+                    connection.close();
+                }
+            }
+            removeClosedConnections(connectionList);
+        }
     }
 
     public void addEvent(Event event) {
@@ -65,7 +76,7 @@ public class EventManager {
         if (events.size() > GameSettings.MAX_EVENTS_COUNT)
             events.remove(0);
 
-        notifyViewer();
+        notifyConnections();
     }
 
     private void processEvents(Event event) {
@@ -78,30 +89,24 @@ public class EventManager {
         }
     }
 
-    private void notifyViewer() {
-        for (Connection viewer : viewers) {
-            try {
-                viewer.sendMessage(gameToJSON());
-            } catch (IOException e) {
-                viewer.close();
-            }
-        }
-        removeClosedConnections();
-    }
-
-    private void removeClosedConnections() {
-        for (Connection viewer : viewers) {
-            if (!viewer.isOpen()) {
-                viewers.remove(viewer);
-                removeClosedConnections();
+    private void removeClosedConnections(List<Connection> connections) {
+        for (Connection connection : connections) {
+            if (!connection.isOpen()) {
+                connections.remove(connection);
+                removeClosedConnections(connections);
                 return;
             }
         }
     }
 
-    public void closeConnection(Connection viewer) {
-        viewer.close();
-        viewers.remove(viewer);
+    public void closeConnection(Connection connection) {
+        connection.close();
+
+        for (List<Connection> connectionList : connections.values()) {
+            if (connectionList.contains(connection)) {
+                connectionList.remove(connection);
+            }
+        }
     }
 
     public String gameToJSON() {
@@ -118,12 +123,20 @@ public class EventManager {
         return JSONObject.fromMap(gameData).toString();
     }
 
-	public Player addViewer(Connection connection, String login) {
-		
-		namedConnections.put(login, connection);
-		Player player = new Player(login, dealer);
-		if(playersList.contains(player))
-			return player;
-		return null;
-	}
+    public Player addPlayer(Connection connection, String login) {
+        addConnection(login, connection);
+
+        Player player = new Player(login, dealer);
+        if (playersList.contains(player))
+            return player;   //TODO Ересь!
+        return null;
+    }
+
+    public void setDealer(Dealer dealer) {
+        this.dealer = dealer;
+    }
+
+    public void setPlayersList(PlayersList playersList) {
+        this.playersList = playersList;
+    }
 }
