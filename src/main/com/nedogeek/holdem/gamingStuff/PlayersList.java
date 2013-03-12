@@ -38,7 +38,11 @@ public class PlayersList extends ArrayList<Player> {
 
     @Override
     public boolean add(Player player) {
-        if (!contains(player) && !waitingPlayers.contains(player) && ((size() < 2))) {
+        if (contains(player) || waitingPlayers.contains(player)) {
+            return false;
+        }
+
+        if ((size() < 2)) {
             eventManager.addEvent(new AddPlayerEvent(player));
             return super.add(player);
         } else {

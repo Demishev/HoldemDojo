@@ -10,8 +10,7 @@ import java.util.Random;
  * Time: 14:08
  */
 public class CardDeck {
-    private final List<Card> cards = new ArrayList<Card>();
-    ;
+    private final List<Card> cards = new ArrayList<>();
     private final Random random;
 
     CardDeck(int randomSeed) {

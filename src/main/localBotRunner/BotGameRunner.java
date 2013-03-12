@@ -1,4 +1,4 @@
-package com.nedogeek.holdem;
+package localBotRunner;
 
 import com.nedogeek.holdem.bot.CallBot;
 import com.nedogeek.holdem.bot.FoldBot;

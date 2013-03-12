@@ -1,5 +1,6 @@
 package com.nedogeek.holdem.dealer;
 
+import com.nedogeek.holdem.gameEvents.NewGameStartedEvent;
 import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
 
@@ -27,6 +28,7 @@ public class NewGameSetter {
 
 
         dealer.setNextGameRound();
+        EventManager.getInstance().addEvent(new NewGameStartedEvent());
     }
 
     private void resetCards() {
