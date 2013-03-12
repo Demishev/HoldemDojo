@@ -22,7 +22,9 @@ import java.util.Map;
  * Date: 08.02.13
  * Time: 22:10
  */
-public class EventManager {
+public class EventManager implements Serializable {
+    private Map<String, String> userData = new HashMap<>();
+
     private static final EventManager eventManager = new EventManager();
 
     private PlayersList playersList;
@@ -158,5 +160,9 @@ public class EventManager {
 
     public void setPlayersList(PlayersList playersList) {
         this.playersList = playersList;
+    }
+
+    public Map<String, String> getUserData() {
+        return userData;
     }
 }

@@ -1,8 +1,10 @@
 package com.nedogeek.holdem.server;
 
+import com.nedogeek.holdem.dealer.EventManager;
+
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class RegisterServlet extends HttpServlet {
 
-	public static final HashMap<String, String> USER_LIST = new HashMap<>();
+	private Map<String, String> userData = EventManager.getInstance().getUserData();
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
@@ -20,10 +22,10 @@ public class RegisterServlet extends HttpServlet {
         final String login = request.getParameter("login");
         final String password = request.getParameter("password");
         if (login != null && password != null) {
-            if (USER_LIST.containsKey(login)) {
+            if (userData.containsKey(login)) {
                 out.write("User already present.");
             } else {
-                USER_LIST.put(login, password);
+                userData.put(login, password);
                 out.write("Registered.");
             }
         } else {

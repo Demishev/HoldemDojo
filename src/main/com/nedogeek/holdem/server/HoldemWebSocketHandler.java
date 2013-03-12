@@ -1,9 +1,11 @@
 package com.nedogeek.holdem.server;
 
+import com.nedogeek.holdem.dealer.EventManager;
 import org.eclipse.jetty.websocket.WebSocket;
 import org.eclipse.jetty.websocket.WebSocketHandler;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 /**
  * User: Konstantin Demishev
@@ -11,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
  * Time: 14:25
  */
 public class HoldemWebSocketHandler extends WebSocketHandler {
+    private Map<String,String> userList = EventManager.getInstance().getUserData();
+
     @Override
     public WebSocket doWebSocketConnect(HttpServletRequest request, String protocol) {
     	String login = request.getParameter("user");
@@ -18,8 +22,8 @@ public class HoldemWebSocketHandler extends WebSocketHandler {
     	if(login == null && password == null){
     		return new HoldemWebSocket();
     	}else{
-    		if(RegisterServlet.USER_LIST.containsKey(login) &&
-                    RegisterServlet.USER_LIST.get(login).equals(password)){
+    		if(userList.containsKey(login) &&
+                    userList.get(login).equals(password)){
     			return new HoldemWebSocket(login);
     		}
     	}
