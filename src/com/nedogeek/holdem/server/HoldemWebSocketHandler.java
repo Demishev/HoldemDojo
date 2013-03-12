@@ -18,7 +18,8 @@ public class HoldemWebSocketHandler extends WebSocketHandler {
     	if(login == null && password == null){
     		return new HoldemWebSocket();
     	}else{
-    		if(RegisterServlet.USER_LIST.containsKey(login) && RegisterServlet.USER_LIST.containsKey(password)){
+    		if(RegisterServlet.USER_LIST.containsKey(login) &&
+                    RegisterServlet.USER_LIST.get(login).equals(password)){
     			return new HoldemWebSocket(login);
     		}
     	}
