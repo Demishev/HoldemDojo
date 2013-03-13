@@ -2,7 +2,7 @@
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 
     <script>
-        var WS_ADDRESS = 'ws://localhost:8080/ws';
+        var WS_ADDRESS = 'ws://77.47.200.184:8080/ws';
         var SAMPLE_MESSAGE =
                 '{"gameRound":"FOUR_CARDS","dealerNumber":1,"moverNumber":1,"events":[],"players":[{"balance":940,"status":"Rise","name":"Rise\
                 bot","bet":60},{"balance":990,"status":"Fold","name":"Random \
@@ -126,10 +126,10 @@
 </head>
 
 <body>
-<h1> HoldEm DOJO Game Page.</h1>
+<h1 style="text-align: center"> HoldEm DOJO Game Page.</h1>
 
-<div>
-    <div style='float:left'>
+<div style="text-align: center; float:left; text-align: left">
+    <div style='right: 15%'>
         <p id='gameStatus'></p>
 
         <p id='gameRound'></p>
@@ -143,11 +143,13 @@
         <p id='pot'></p>
     </div>
 
-    <table id="playersTable" border=1 style='position:relative;float:left'>
+    <table id="playersTable" style="border:1px; float :right;  text-align: left;">
     </table>
 </div>
-<div style='clear:left;padding-left:150px'>
-    <label for="console"></label><textarea id='console' disabled cols="80" rows="15">
+
+
+<div style='padding-left:50px; float: right'>
+    <label for="console"></label><textarea id='console' disabled cols="100" rows="35">
 </textarea>
 
     <br>
