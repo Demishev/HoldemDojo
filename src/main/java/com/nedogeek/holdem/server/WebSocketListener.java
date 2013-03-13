@@ -19,6 +19,7 @@ public class WebSocketListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
+/*
         try {
             this.server = new Server(8081);
             HoldemWebSocketHandler holdemWebSocketHandler = new HoldemWebSocketHandler();
@@ -29,10 +30,12 @@ public class WebSocketListener implements ServletContextListener {
         } catch (Exception e) {
             e.printStackTrace();
         }
+*/
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
+/*
         if (server != null) {
             try {
                 server.stop();
@@ -40,5 +43,6 @@ public class WebSocketListener implements ServletContextListener {
                 e.printStackTrace();
             }
         }
+*/
     }
 }
