@@ -3,6 +3,7 @@ package com.nedogeek.holdem.server;
 import com.nedogeek.holdem.dealer.EventManager;
 import org.eclipse.jetty.websocket.WebSocket;
 import org.eclipse.jetty.websocket.WebSocketHandler;
+import org.eclipse.jetty.websocket.WebSocketServlet;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -12,7 +13,7 @@ import java.util.Map;
  * Date: 13.08.12
  * Time: 14:25
  */
-public class HoldemWebSocketHandler extends WebSocketHandler {
+public class HoldemWebSocketServlet extends WebSocketServlet {
     private Map<String,String> userList = EventManager.getInstance().getUserData();
 
     @Override
