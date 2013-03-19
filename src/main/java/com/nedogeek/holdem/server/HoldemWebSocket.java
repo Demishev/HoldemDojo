@@ -17,73 +17,75 @@ import org.eclipse.jetty.websocket.WebSocket;
 public class HoldemWebSocket implements WebSocket.OnTextMessage {
 
     private Connection connection;
-	private String login;
-	private Player player;
+    private String login;
+    private Player player;
 
-	 public HoldemWebSocket() {
-			
-	}
-	
+    public HoldemWebSocket() {
+
+    }
+
     public HoldemWebSocket(String login) {
-		this.login = login;
-		
-	}
+        this.login = login;
 
-	@Override
+    }
+
+    @Override
     public void onMessage(String command) {
-		PlayerAction playerAction = defineAction(command);
-		
-		player.setMove(playerAction);
+        if (player != null) {
+            PlayerAction playerAction = defineAction(command);
+
+            player.setMove(playerAction);
+        }
     }
 
     private PlayerAction defineAction(String command) {
-    	if (command == null) {
-    		return new PlayerAction(ActionType.Fold);
-    	}
-    	
-    	ActionType actionType;
-    	int actionValue;
-    	String actionTypePart;
-    	String actionValuePart; 
-    	if (command.contains(",")) {
-    		actionTypePart = command.substring(0,command.indexOf(','));
-    		actionValuePart = command.substring(command.indexOf(',') + 1);
-    	} else {
-    		actionTypePart = command;
-    		actionValuePart = "0";
-    	}
-    	
-    	try {
-    	actionValue = Integer.parseInt(actionValuePart);
-    	} catch (NumberFormatException e){
-    		actionValue = 0;
-    	}
-  		actionType = ActionType.Fold;
-  		
-    	if ("Check".equals(actionTypePart)) {
-    		actionType = ActionType.Check;
-    	}
-    	if ("Call".equals(actionTypePart)) {
-    		actionType = ActionType.Call;
-    	}
-    	if ("Rise".equals(actionTypePart)) {
-    		actionType = ActionType.Rise;
-    	}
-    	if ("AllIn".equals(actionTypePart)) {
-    		actionType = ActionType.AllIn;
-    	}
-    		
-		return new PlayerAction(actionType, actionValue);
-	}
+        if (command == null) {
+            return new PlayerAction(ActionType.Fold);
+        }
 
-	@Override
+        ActionType actionType;
+        int actionValue;
+        String actionTypePart;
+        String actionValuePart;
+        if (command.contains(",")) {
+            actionTypePart = command.substring(0, command.indexOf(','));
+            actionValuePart = command.substring(command.indexOf(',') + 1);
+        } else {
+            actionTypePart = command;
+            actionValuePart = "0";
+        }
+
+        try {
+            actionValue = Integer.parseInt(actionValuePart);
+        } catch (NumberFormatException e) {
+            actionValue = 0;
+        }
+        actionType = ActionType.Fold;
+
+        if ("Check".equals(actionTypePart)) {
+            actionType = ActionType.Check;
+        }
+        if ("Call".equals(actionTypePart)) {
+            actionType = ActionType.Call;
+        }
+        if ("Rise".equals(actionTypePart)) {
+            actionType = ActionType.Rise;
+        }
+        if ("AllIn".equals(actionTypePart)) {
+            actionType = ActionType.AllIn;
+        }
+
+        return new PlayerAction(actionType, actionValue);
+    }
+
+    @Override
     public void onOpen(Connection connection) {
         this.connection = connection;
-       if(login == null){
-        EventManager.getInstance().addViewer(connection);
-       }else{
-    	  player = EventManager.getInstance().addPlayer(connection, login);
-       }
+        if (login == null) {
+            EventManager.getInstance().addViewer(connection);
+        } else {
+            player = EventManager.getInstance().addPlayer(connection, login);
+        }
     }
 
     @Override

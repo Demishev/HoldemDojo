@@ -15,6 +15,8 @@
 
         <p id='deskCards'></p>
 
+        <p id='playersCards'></p>
+
         <p id='dealer'></p>
 
         <p id='mover'></p>
@@ -29,6 +31,16 @@
         <input value="login">
         <input value="password" type="password">
         <button value="sendLogin" onclick="connect(WS_ADDRESS + '?user=User&password=Password' )">Re-Login</button>
+    </div>
+
+    <div>
+        <input type="radio" value="Fold" name="action" checked>Fold<br>
+        <input type="radio" value="Check" name="action">Check<br>
+        <input type="radio" value="Call" name="action">Call<br>
+        <input type="radio" value="Rise" name="action">Rise<input name="riseValue"><br>
+        <input type="radio" value="AllIn" name="action">All In<br>
+        <button onclick="makeMove()">Make move</button>
+
     </div>
 </div>
 

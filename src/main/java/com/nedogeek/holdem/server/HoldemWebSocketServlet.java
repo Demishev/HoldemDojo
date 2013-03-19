@@ -28,7 +28,7 @@ public class HoldemWebSocketServlet extends WebSocketServlet {
     			return new HoldemWebSocket(login);
     		}
     	}
-    	
+
     	return null;
     }
 }

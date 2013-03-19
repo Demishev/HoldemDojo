@@ -2,13 +2,11 @@
  * Date: 16.03.13
  * Time: 12:24
  */
+document.write("<script src='jquery.min.js' type='text/javascript'></script>");
+
 var WS_ADDRESS = 'ws://localhost:8080/ws';
 var SAMPLE_MESSAGE =
-    '{"gameRound":"FOUR_CARDS","dealerNumber":1,"moverNumber":1,"events":[],"players":[{"balance":940,"status":"Rise","name":"Rise\
-    bot","bet":60},{"balance":990,"status":"Fold","name":"Random \
-    bot","bet":10},{"balance":940,"status":"Call","name":"Call\
-    bot","bet":60},{"balance":1000,"status":"Fold","name":"Folding\
-    bot","bet":0}],"gameStatus":"STARTED","deskCards":[{"cardValue":"5","cardValueName":"5","cardSuit":"♠"},{"cardValue":"Q","cardValueName":"Queen","cardSuit":"♣"},{"cardValue":"10","cardValueName":"10","cardSuit":"♠"},{"cardValue":"3","cardValueName":"3","cardSuit":"♦"}]}';
+    '{"gameRound":"","dealerNumber":-1,"moverNumber":-1,"events":[],"players":[],"gameStatus":"","deskCards":[]}';
 
 var gameStatus = 'Disconnected';
 var gameRound = 'Undefined';
@@ -23,9 +21,11 @@ var history = '';
 
 var players = [];
 
+var socket
+
 var connect = function (adderess) {
 
-    var socket = new WebSocket(adderess);
+    socket = new WebSocket(adderess);
 
     socket.onopen = function () {
 
@@ -43,28 +43,30 @@ var connect = function (adderess) {
 };
 
 var updateGameData = function (stringData) {
-    var gameData = JSON.parse(stringData);
-
-    gameStatus = gameData.gameStatus;
-    gameRound = gameData.gameRound;
-    dealerPlayer = gameData.players[gameData.dealerNumber].name;
-    movingPlayer = gameData.players[gameData.moverNumber].name;
-
-
-    var cardsArray = gameData.deskCards;
-    deskCards = '';
-    for (var i = 0; i < cardsArray.length; i++) {
-        deskCards += cardsArray[i].cardSuit + cardsArray[i].cardValue;
-        if (i + 1 < cardsArray.length) {
-            deskCards += ',';
+    function updateJSON() {
+        var gameData = JSON.parse(stringData);
+        gameStatus = gameData.gameStatus;
+        gameRound = gameData.gameRound;
+        if (gameData.dealerNumber != -1) dealerPlayer = gameData.players[gameData.dealerNumber].name;
+        if (gameData.moverNumber != -1) movingPlayer = gameData.players[gameData.moverNumber].name;
+        var cardsArray = gameData.deskCards;
+        deskCards = '';
+        for (var i = 0; i < cardsArray.length; i++) {
+            deskCards += cardsArray[i].cardSuit + cardsArray[i].cardValue;
+            if (i + 1 < cardsArray.length) {
+                deskCards += ',';
+            }
         }
+        players = gameData.players;
+        parseHistory(gameData.events);
+        calculatePot();
     }
 
-    players = gameData.players;
-
-    parseHistory(gameData.events);
-    calculatePot();
-
+    if (stringData.indexOf("Your cards") != -1) {
+        $('#playersCards').text(stringData);
+    } else {
+        updateJSON();
+    }
     refreshPage();
 };
 
@@ -117,4 +119,11 @@ var refreshPlayers = function () {
             <td>' + player.status + '</td>';
         playersTableInnerHTML.innerHTML += ' </tr> ';
     }
+};
+
+var makeMove = function () {
+
+    socket.send($('input:checked').val())
+
+
 };

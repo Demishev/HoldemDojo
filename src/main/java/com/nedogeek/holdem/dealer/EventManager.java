@@ -1,10 +1,7 @@
 package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.GameSettings;
-import com.nedogeek.holdem.gameEvents.AddPlayerEvent;
-import com.nedogeek.holdem.gameEvents.Event;
-import com.nedogeek.holdem.gameEvents.PlayerMovesNotificationEvent;
-import com.nedogeek.holdem.gameEvents.RemovePlayerEvent;
+import com.nedogeek.holdem.gameEvents.*;
 import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
 import net.sf.json.JSONObject;
@@ -23,7 +20,11 @@ import java.util.Map;
  * Time: 22:10
  */
 public class EventManager implements Serializable {
-    private Map<String, String> userData = new HashMap<>();
+    private Map<String, String> userData = new HashMap<>();  //TODO Maybe move field?
+
+    {
+        userData.put("User", "Password");   //TODO remove it later.
+    }
 
     private static final EventManager eventManager = new EventManager();
 
@@ -74,11 +75,14 @@ public class EventManager implements Serializable {
     public void addEvent(Event event) {
         processEvents(event);
 
-        events.add(event.toString());
-        if (events.size() > GameSettings.MAX_EVENTS_COUNT)
-            events.remove(0);
-
-        notifyConnections();
+       if (event instanceof PrivateEvent) {
+            sendMessageToPlayer(event.toString(), ((PrivateEvent) event).getOwner());
+        } else {
+            events.add(event.toString());
+            if (events.size() > GameSettings.MAX_EVENTS_COUNT)
+                events.remove(0);
+            notifyConnections();
+        }
 
         notifyMover(event);
     }

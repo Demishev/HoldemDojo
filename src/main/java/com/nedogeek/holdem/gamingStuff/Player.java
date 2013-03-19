@@ -16,6 +16,8 @@ import java.util.Map;
  * Time: 12:07
  */
 public class Player implements Comparable<Player> {
+    private static final PlayerAction DEFAULT_ACTION = new PlayerAction(PlayerAction.ActionType.Fold, 0);
+
     private final String name;
     private final Dealer dealer;
 
@@ -24,7 +26,7 @@ public class Player implements Comparable<Player> {
     private int balance = GameSettings.COINS_AT_START;
     private Card[] cards;
     
-    private PlayerAction playerAction;
+    private PlayerAction playerAction = DEFAULT_ACTION;
 
     public Player(String name, Dealer dealer) {
         this.name = name;
@@ -47,6 +49,7 @@ public class Player implements Comparable<Player> {
 
     public void setStatus(PlayerStatus status) {
         this.status = status;
+        playerAction = DEFAULT_ACTION;
     }
 
     public PlayerCardCombination getCardCombination() {
