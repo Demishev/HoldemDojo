@@ -7,6 +7,12 @@ body {
     text-align: right;
 }
 
+.sessionButton {
+    background-color: white;
+    width: 4em;
+    border-radius: 0.5em;
+}
+
 
 .table {
     position: relative;
@@ -57,62 +63,62 @@ body {
     height: 7em;
 }
 
-.player1 {
+.player0 {
     top: 0;
     left: 0;
+}
+
+.player1 {
+    top: -2em;
+    left: 8em;
 }
 
 .player2 {
     top: -2em;
-    left: 8em;
+    left: 16em;
 }
 
 .player3 {
     top: -2em;
-    left: 16em;
-}
-
-.player4 {
-    top: -2em;
     left: 24em;
 }
 
-.player5 {
+.player4 {
     top: 0;
     left: 32em;
 }
 
-.player6 {
+.player5 {
     top: 7em;
     left: 38em;
 }
 
-.player7 {
+.player6 {
     top: 15em;
     left: 32em;
 }
 
-.player8 {
+.player7 {
     top: 17em;
     left: 24em;
 }
 
-.player9 {
+.player8 {
     top: 17em;
     left: 16em;
 }
 
-.player10 {
+.player9 {
     top: 17em;
     left: 8em;
 }
 
-.player11 {
+.player10 {
     top: 15em;
     left: 0;
 }
 
-.player12 {
+.player11 {
     top: 7em;
     left: -4em;
 }
@@ -142,30 +148,29 @@ body {
     top: 0;
     left: 0.2em;
 
-    background-color: #19de54;
     border-radius: 0.5em;
     list-style-type: none;
     height: 3.7em;
     width: 3em;
     text-align: center;
 
-    background-image: url("cardDeck/CK.png");
+    background-image: url("cardDeck/♣K.png");
     background-size: 100%;
 }
 
-.secondCard {
+.card1 {
     left: 3.4em;
 }
 
-.thirdCard {
+.card2 {
     left: 6.6em;
 }
 
-.fourthCard {
+.card3 {
     left: 9.8em;
 }
 
-.fifthCard {
+.card4 {
     left: 13em;
 }
 
