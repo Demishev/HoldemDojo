@@ -1,6 +1,8 @@
 package com.nedogeek.holdem.gameEvents;
 
 import com.nedogeek.holdem.gamingStuff.Player;
+import net.sf.json.JSONArray;
+
 
 /**
  * User: Konstantin Demishev
@@ -11,7 +13,8 @@ public class CardsGivingEvent extends Event  implements  PrivateEvent{
     private final String owner;
 
     public CardsGivingEvent(Player player) {
-        super("Your cards: " + player.getCardCombination());
+        super("Your cards: " + player.getCardCombination(), EventType.CARDS_GIVED,
+                JSONArray.fromArray(player.getCards()).toString());
         owner = player.getName();
     }
 

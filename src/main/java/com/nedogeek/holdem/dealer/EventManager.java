@@ -5,6 +5,7 @@ import com.nedogeek.holdem.gameEvents.*;
 import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
 import net.sf.json.JSONObject;
+import net.sf.json.JSONSerializer;
 import org.eclipse.jetty.websocket.WebSocket.Connection;
 
 import java.io.IOException;
@@ -28,6 +29,7 @@ public class EventManager implements Serializable {
     private PlayersList playersList;
     private Dealer dealer;
     private int moverNumber = -1;
+    private Event lastPublicEvent;
 
     private final List<String> events = new ArrayList<>();
 
@@ -72,10 +74,11 @@ public class EventManager implements Serializable {
     public void addEvent(Event event) {
         processEvents(event);
 
-       if (event instanceof PrivateEvent) {
+        if (event instanceof PrivateEvent) {
             sendMessageToPlayer(event.toString(), ((PrivateEvent) event).getOwner());
         } else {
             events.add(event.toString());
+            lastPublicEvent = event;
             if (events.size() > GameSettings.MAX_EVENTS_COUNT)
                 events.remove(0);
             notifyConnections();
@@ -95,7 +98,7 @@ public class EventManager implements Serializable {
     private void sendMessageToPlayer(String message, String playerName) {
         if (connections.containsKey(playerName)) {
             List<Connection> playerConnections = connections.get(playerName);
-            for (Connection connection: playerConnections) {
+            for (Connection connection : playerConnections) {
                 try {
                     connection.sendMessage(message);
                 } catch (IOException e) {
@@ -149,14 +152,15 @@ public class EventManager implements Serializable {
         gameData.put("gameStatus", dealer.getGameStatus());
 
         gameData.put("events", events.toArray());
+        gameData.put("lastEvent", lastPublicEvent.toJSON());
 
         return JSONObject.fromMap(gameData).toString();
     }
 
     private int calculatePot() {
         int pot = 0;
-        for (Player player: playersList) {
-            pot+=player.getBet();
+        for (Player player : playersList) {
+            pot += player.getBet();
         }
         return pot;
     }

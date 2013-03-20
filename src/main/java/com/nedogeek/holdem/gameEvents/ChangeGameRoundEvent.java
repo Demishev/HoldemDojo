@@ -9,6 +9,6 @@ import com.nedogeek.holdem.GameRound;
  */
 public class ChangeGameRoundEvent extends Event {
     public ChangeGameRoundEvent(GameRound gameRound) {
-        super(gameRound + " game round started.");
+        super(gameRound + " game round started.", EventType.ROUND_CHANGED, gameRound.toString());
     }
 }

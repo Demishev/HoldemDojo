@@ -2,6 +2,7 @@ package com.nedogeek.holdem.gameEvents;
 
 import com.nedogeek.holdem.gamingStuff.Player;
 
+
 /**
  * User: Konstantin Demishev
  * Date: 09.03.13
@@ -9,6 +10,6 @@ import com.nedogeek.holdem.gamingStuff.Player;
  */
 public class AddPlayerEvent extends Event {
     public AddPlayerEvent(Player player) {
-        super(player.getName() + " set to desk.");
+        super(player.getName() + " set to desk.", EventType.PLAYER_ADDED, player.getName());
     }
 }

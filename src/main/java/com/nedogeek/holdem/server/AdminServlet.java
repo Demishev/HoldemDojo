@@ -19,9 +19,10 @@ import java.io.IOException;
  * Date: 09.03.13
  * Time: 20:08
  */
-@WebServlet(urlPatterns="/admin", loadOnStartup=1)
+@WebServlet(urlPatterns = "/admin", loadOnStartup = 1)
 public class AdminServlet extends HttpServlet {
     Dealer dealer;
+    Thread dealerThread;
 
 
     @Override
@@ -35,26 +36,24 @@ public class AdminServlet extends HttpServlet {
         players.add(new CallBot(dealer));
         players.add(new FoldBot(dealer));
 
-        new Thread(dealer).start();
+        dealerThread = new Thread(dealer);
+        dealerThread.start();
     }
 
     @Override
     public void destroy() {
-        super.destroy();
         dealer.stop();
+        super.destroy();
     }
 
     @Override
     protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
         switch (httpServletRequest.getParameter("Command")) {
-            case "Start":
-                new Thread(dealer).start();
-                break;
             case "Stop":
                 dealer.stop();
                 break;
-            case "Pause":
-                dealer.pause();
+            case "Start":
+                new Thread(dealer).start();
         }
     }
 }

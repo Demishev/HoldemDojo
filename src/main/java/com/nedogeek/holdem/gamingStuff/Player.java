@@ -132,6 +132,9 @@ public class Player implements Comparable<Player> {
 
         return this.getCardCombination().compareTo(o.getCardCombination());
     }
-    
-    
+
+
+    public Card[] getCards() {
+        return cards;
+    }
 }

@@ -2,6 +2,7 @@ package com.nedogeek.holdem.gameEvents;
 
 import com.nedogeek.holdem.gamingStuff.Player;
 
+
 /**
  * User: Konstantin Demishev
  * Date: 12.03.13
@@ -9,6 +10,6 @@ import com.nedogeek.holdem.gamingStuff.Player;
  */
 public class PlayerConnectedEvent extends Event {
     public PlayerConnectedEvent(Player player) {
-        super(player.getName() + " connected.");
+        super(player.getName() + " connected.", EventType.PLAYER_CONNECTED, player.getName());
     }
 }
