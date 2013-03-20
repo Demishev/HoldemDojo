@@ -9,10 +9,7 @@ import org.eclipse.jetty.websocket.WebSocket.Connection;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * User: Konstantin Demishev
@@ -34,7 +31,7 @@ public class EventManager implements Serializable {
 
     private final List<String> events = new ArrayList<>();
 
-    private Map<String, List<Connection>> connections = new HashMap<>();
+    private Map<String, List<Connection>> connections = new Hashtable<>();
 
     public static EventManager getInstance() {
         return eventManager;
@@ -141,15 +138,27 @@ public class EventManager implements Serializable {
     public String gameToJSON() {
         Map<String, Serializable> gameData = new HashMap<>();
         gameData.put("gameStatus", dealer.getGameStatus());
-        gameData.put("deskCards", dealer.getDeskCards());
-        gameData.put("players", playersList.toJSON());
-        gameData.put("dealerNumber", playersList.getDealerNumber());
-        gameData.put("gameStatus", dealer.getGameStatus());
         gameData.put("gameRound", dealer.getGameRound());
-        gameData.put("events", events.toArray());
+
+        gameData.put("players", playersList.toJSON());
+        gameData.put("deskCards", dealer.getDeskCards());
+        gameData.put("deskPot", calculatePot());
+
+        gameData.put("dealerNumber", playersList.getDealerNumber());
         gameData.put("moverNumber", moverNumber);
+        gameData.put("gameStatus", dealer.getGameStatus());
+
+        gameData.put("events", events.toArray());
 
         return JSONObject.fromMap(gameData).toString();
+    }
+
+    private int calculatePot() {
+        int pot = 0;
+        for (Player player: playersList) {
+            pot+=player.getBet();
+        }
+        return pot;
     }
 
     public Player addPlayer(Connection connection, String login) {

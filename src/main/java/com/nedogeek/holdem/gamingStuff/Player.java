@@ -105,7 +105,7 @@ public class Player implements Comparable<Player> {
         Map<String, Serializable> playerData = new HashMap<>();
         playerData.put("name", name);
         playerData.put("status", status);
-        playerData.put("bet", bet);
+        playerData.put("pot", bet);
         playerData.put("balance", balance);
 
         return JSONObject.fromMap(playerData).toString();

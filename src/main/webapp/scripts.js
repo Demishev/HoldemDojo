@@ -4,14 +4,14 @@
  */
 document.write("<script src='jquery.min.js' type='text/javascript'></script>");
 document.write("<script src='gameData.js' type='text/javascript'></script> ");
+document.write("<script src='gameSocket.js' type='text/javascript'></script> ");
 
 var sessionAction = function () {
-    alert("Session action");
+    connect();
 };
 
 var drawGameData = function () {
     drawEvents();
-    updateEvents();
 
     drawPlayers();
     drawMover();
@@ -22,14 +22,11 @@ var drawGameData = function () {
 
 drawEvents = function () {
     $console = $(document).find(".console");
+    $console.text("");
 
     $(gameData.events).each(function () {
         $console.append(this + "\n");
     });
-};
-
-updateEvents = function () {
-    $(document).find(".console").append(gameData.lastEvent);
 };
 
 drawPlayers = function () {

@@ -4,9 +4,11 @@
  * Time: 12:09
  */
 
+var login = undefined;
+var server = "ws://77.47.200.184:8080/ws";
+
 gameData = {
-login: undefined,
-server: "ws://localhost:8080/ws",
+
 
 players: [ {
     name: "First player",
@@ -39,8 +41,6 @@ moverNumber: 0,
 dealerNumber: 0,
 
 events: ["Some first event", "Some second event", "Some third event"],
-
-lastEvent: "Third player connected",
 
 cardCombination: "Some test card combination text."
 

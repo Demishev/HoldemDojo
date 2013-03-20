@@ -2,6 +2,7 @@ package com.nedogeek.holdem.dealer;
 
 
 import com.nedogeek.holdem.gameEvents.Event;
+import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
 import org.eclipse.jetty.websocket.WebSocket;
 import org.junit.After;
@@ -10,6 +11,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.*;
@@ -33,6 +35,7 @@ public class EventManagerTest {
         secondViewerMock = mock(WebSocket.Connection.class);
         Dealer dealerMock = mock(Dealer.class);
         PlayersList playersListMock = mock(PlayersList.class);
+        when(playersListMock.iterator()).thenReturn(new ArrayList<Player>().iterator());
         eventMock = mock(Event.class);
 
         eventManager = EventManager.getTestInstance();
