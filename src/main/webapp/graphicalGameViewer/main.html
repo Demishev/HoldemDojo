@@ -2,12 +2,207 @@
 <head>
     <link href="styles.css" type="text/css" rel="stylesheet">
     <script src="jquery.min.js"></script>
+    <script src="scripts.js"></script>
 </head>
 
 <body>
-<ul>
-    <li class="card">SomeCard</li>
-</ul>
+<div id="session">
+    <label for="login"></label><input id="login">
+    <label for="password"></label><input id="password" type="password">
+    <label for="server"></label><input id="server" value="ws://localhost:8080/ws">
+    <button onclick="sessionAction()">login</button>
+</div>
+
+<div class="table">
+    <ul>
+        <li class="player player1">
+            <div class="name">First player</div>
+            <div class="cards">
+                <div class="cards">
+                    <div class="card"></div>
+                    <div class="card secondCard"></div>
+                </div>
+            </div>
+            <div class="balance">Balance: $200</div>
+            <div class="pot">Pot: $500</div>
+
+            <div class="status">Folded</div>
+        </li>
+
+        <li class="player player2">
+            <div class="name">Second player</div>
+            <div class="cards">
+                <div class="cards">
+                    <div class="card"></div>
+                    <div class="card secondCard"></div>
+                </div>
+            </div>
+            <div class="balance">Balance: $200</div>
+            <div class="pot">Pot: $500</div>
+
+            <div class="status">Folded</div>
+        </li>
+
+        <li class="player player3">
+            <div class="name">Third player</div>
+            <div class="cards">
+                <div class="cards">
+                    <div class="card"></div>
+                    <div class="card secondCard"></div>
+                </div>
+            </div>
+            <div class="balance">Balance: $200</div>
+            <div class="pot">Pot: $500</div>
+
+            <div class="status">Folded</div>
+        </li>
+
+        <li class="player player4">
+            <div class="name">Fourth player</div>
+            <div class="cards">
+                <div class="cards">
+                    <div class="card"></div>
+                    <div class="card secondCard"></div>
+                </div>
+            </div>
+            <div class="balance">Balance: $200</div>
+            <div class="pot">Pot: $500</div>
+
+            <div class="status">Folded</div>
+        </li>
+
+        <li class="player player5">
+            <div class="name">Fifth player</div>
+            <div class="cards">
+                <div class="cards">
+                    <div class="card"></div>
+                    <div class="card secondCard"></div>
+                </div>
+            </div>
+            <div class="balance">Balance: $200</div>
+            <div class="pot">Pot: $500</div>
+
+            <div class="status">Folded</div>
+        </li>
+
+        <li class="player player6">
+            <div class="name">Sixth player</div>
+            <div class="cards">
+                <div class="cards">
+                    <div class="card"></div>
+                    <div class="card secondCard"></div>
+                </div>
+            </div>
+            <div class="balance">Balance: $200</div>
+            <div class="pot">Pot: $500</div>
+
+            <div class="status">Folded</div>
+        </li>
+
+        <li class="player player7">
+            <div class="name">Seventh player</div>
+            <div class="cards">
+                <div class="cards">
+                    <div class="card"></div>
+                    <div class="card secondCard"></div>
+                </div>
+            </div>
+            <div class="balance">Balance: $200</div>
+            <div class="pot">Pot: $500</div>
+
+            <div class="status">Rise 98350</div>
+        </li>
+
+        <li class="player player8 mover">
+            <div class="name">Eights player</div>
+            <div class="cards">
+                <div class="cards">
+                    <div class="card"></div>
+                    <div class="card secondCard"></div>
+                </div>
+            </div>
+            <div class="balance">Balance: $2000000</div>
+            <div class="pot">Pot: $500</div>
+
+            <div class="status">Folded</div>
+        </li>
+
+        <li class="player player9">
+            <div class="name">Ninth player</div>
+            <div class="cards">
+                <div class="cards">
+                    <div class="card"></div>
+                    <div class="card secondCard"></div>
+                </div>
+            </div>
+            <div class="balance">Balance: $50000</div>
+            <div class="pot">Pot: $500</div>
+
+            <div class="status">Folded</div>
+        </li>
+
+        <li class="player player10">
+            <div class="name">Tenth player</div>
+            <div class="cards">
+                <div class="cards">
+                    <div class="card"></div>
+                    <div class="card secondCard"></div>
+                </div>
+            </div>
+            <div class="balance">Balance: $50000</div>
+            <div class="pot">Pot: $500</div>
+
+            <div class="status">Folded</div>
+        </li>
+
+        <li class="player player11">
+            <div class="name">Eighteenth player</div>
+            <div class="cards">
+                <div class="cards">
+                    <div class="card"></div>
+                    <div class="card secondCard"></div>
+                </div>
+            </div>
+            <div class="balance">Balance: $50000</div>
+            <div class="pot">Pot: $500</div>
+
+            <div class="status">Folded</div>
+        </li>
+
+        <li class="player player12">
+            <div class="name">Twelfth player</div>
+            <div class="cards">
+                <div class="cards">
+                    <div class="card"></div>
+                    <div class="card secondCard"></div>
+                </div>
+            </div>
+            <div class="balance">Balance: $50000</div>
+            <div class="pot">Pot: $500</div>
+
+            <div class="status">Folded</div>
+        </li>
+    </ul>
+
+    <ul class="deskCards">
+        <li class="card"></li>
+        <li class="card secondCard"></li>
+        <li class="card thirdCard"></li>
+        <li class="card fourthCard"></li>
+        <li class="card fifthCard"></li>
+    </ul>
+
+    <div class="deskPot"> Pot: $5800</div>
+
+    <div class="playerCombination"> Royal flash on blah, blah, blah.</div>
+
+</div>
+
+<label>
+    <textarea class="console" readonly>
+
+    </textarea>
+</label>
 
 </body>
 </html>
