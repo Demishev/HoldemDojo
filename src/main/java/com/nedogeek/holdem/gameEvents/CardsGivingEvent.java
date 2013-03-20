@@ -13,7 +13,7 @@ public class CardsGivingEvent extends Event  implements  PrivateEvent{
     private final String owner;
 
     public CardsGivingEvent(Player player) {
-        super("Your cards: " + player.getCardCombination(), EventType.CARDS_GIVED,
+        super("Your cards: " + player.getCardCombination(), EventType.CARDS_GIVEN,
                 JSONArray.fromArray(player.getCards()).toString());
         owner = player.getName();
     }

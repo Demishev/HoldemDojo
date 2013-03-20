@@ -33,13 +33,13 @@ public class MoveEvent extends Event {
             case AllIn:
                 return player.getName() + " goes All in.";
             case Call:
-                return player.getName() + "makes call.";
+                return player.getName() + " makes call.";
             case Fold:
-                return player.getName() + "folds.";
+                return player.getName() + " folds.";
             case Check:
-                return player.getName() + "checks.";
+                return player.getName() + " checks.";
             case Rise:
-                return player.getName() + "makes bet " + bet;
+                return player.getName() + " makes bet " + bet;
             default:
                 return "NULL message.";
         }
