@@ -49,12 +49,12 @@ var updateGameData = function (stringData) {
         gameRound = gameData.gameRound;
         if (gameData.dealerNumber != -1) dealerPlayer = gameData.players[gameData.dealerNumber].name;
         if (gameData.moverNumber != -1) movingPlayer = gameData.players[gameData.moverNumber].name;
-        var cardsArray = gameData.deskCards;
-        deskCards = '';
+        var cardsArray = gameData.$deskCardsDiv;
+        $deskCardsDiv = '';
         for (var i = 0; i < cardsArray.length; i++) {
-            deskCards += cardsArray[i].cardSuit + cardsArray[i].cardValue;
+            $deskCardsDiv += cardsArray[i].cardSuit + cardsArray[i].cardValue;
             if (i + 1 < cardsArray.length) {
-                deskCards += ',';
+                $deskCardsDiv += ',';
             }
         }
         players = gameData.players;
@@ -91,12 +91,12 @@ var refreshPage = function () {
     document.getElementById("dealer").innerHTML = 'Dealer is: ' + dealerPlayer;
     document.getElementById("mover").innerHTML = 'Mover is: ' + movingPlayer;
     document.getElementById("pot").innerHTML = 'Pot: ' + pot;
-    document.getElementById("deskCards").innerHTML = 'Desk cards: ' + deskCards;
+    document.getElementById("deskCards").innerHTML = 'Desk cards: ' + $deskCardsDiv;
 
-    document.getElementById("console").innerHTML = history;
+    document.getElementById("$console").innerHTML = history;
 
 
-    document.getElementById("console").scrollTop = document.getElementById("console").scrollHeight;
+    document.getElementById("$console").scrollTop = document.getElementById("$console").scrollHeight;
     refreshPlayers();
 
 };

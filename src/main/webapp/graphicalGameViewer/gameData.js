@@ -24,6 +24,10 @@ players: [ {
     cards: [{cardValue: "2", cardSuit: "♦"}, {cardValue: "10", cardSuit: "♦"}],
 
     status: "Bet 15"
+}, {
+    name: "Third player",
+    balance: 23,
+    pot: 0
 }],
 
 
@@ -36,6 +40,8 @@ dealerNumber: 0,
 
 events: ["Some first event", "Some second event", "Some third event"],
 
-lastEvent: "Third player connected"
+lastEvent: "Third player connected",
+
+cardCombination: "Some test card combination text."
 
 };
