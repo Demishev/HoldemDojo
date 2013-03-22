@@ -61,7 +61,9 @@ public class EventManager implements Serializable {
         for (String connectionName : connections.keySet()) {
             String message = gameToJSON(connectionName);
             sendMessageToPlayer(message, connectionName);
+            removeClosedConnections(connectionName);
         }
+
     }
 
     public void addEvent(Event event) {
@@ -90,11 +92,11 @@ public class EventManager implements Serializable {
         }
     }
 
-    private void removeClosedConnections(List<Connection> connections) { //TODO removing closed connections needed
-        for (Connection connection : connections) {
+    private void removeClosedConnections(String connectionsName) {
+        for (Connection connection : connections.get(connectionsName)) {
             if (!connection.isOpen()) {
-                connections.remove(connection);
-                removeClosedConnections(connections);
+                connections.get(connectionsName).remove(connection);
+                removeClosedConnections(connectionsName);
                 return;
             }
         }

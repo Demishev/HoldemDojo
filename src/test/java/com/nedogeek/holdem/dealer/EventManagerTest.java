@@ -83,11 +83,7 @@ public class EventManagerTest {
 
     @Before
     public void setUp() throws Exception {
-        firstViewerConnectionMock = mock(WebSocket.Connection.class);
-        secondViewerConnectionMock = mock(WebSocket.Connection.class);
-
-        firstPlayerConnectionMock = mock(WebSocket.Connection.class);
-        secondPlayerConnectionMock = mock(WebSocket.Connection.class);
+        resetConnections();
 
         resetDealerMock();
 
@@ -101,6 +97,20 @@ public class EventManagerTest {
         eventManager.setDealer(dealerMock);
         eventManager.setPlayersList(playersListMock);
         eventManager.addViewer(firstViewerConnectionMock);
+    }
+
+    private void resetConnections() {
+        firstViewerConnectionMock = mock(WebSocket.Connection.class);
+        secondViewerConnectionMock = mock(WebSocket.Connection.class);
+
+        firstPlayerConnectionMock = mock(WebSocket.Connection.class);
+        secondPlayerConnectionMock = mock(WebSocket.Connection.class);
+
+        when(firstViewerConnectionMock.isOpen()).thenReturn(true);
+        when(secondViewerConnectionMock.isOpen()).thenReturn(true);
+
+        when(firstPlayerConnectionMock.isOpen()).thenReturn(true);
+        when(secondViewerConnectionMock.isOpen()).thenReturn(true);
     }
 
     private void resetDealerMock() {
@@ -352,5 +362,15 @@ public class EventManagerTest {
                 + "\"," + "\"gameStatus\":\"" + READY + "\",\"deskCards\":[],\"deskPot\":0}";
 
         verify(firstViewerConnectionMock).sendMessage(message);
+    }
+
+    @Test
+    public void shouldMessageSendToFirstViewerOnceBecauseOfClosedConnectionShouldBeRemovedWhenAddEvent() throws Exception {
+        when(firstViewerConnectionMock.isOpen()).thenReturn(false);
+
+        eventManager.addEvent(eventMock);
+        eventManager.addEvent(eventMock);
+
+        verify(firstViewerConnectionMock).sendMessage(anyString());
     }
 }
