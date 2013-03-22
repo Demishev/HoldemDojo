@@ -1,11 +1,12 @@
 package com.nedogeek.holdem.dealer;
 
-import com.nedogeek.holdem.GameSettings;
-import com.nedogeek.holdem.gameEvents.*;
+import com.nedogeek.holdem.gameEvents.AddPlayerEvent;
+import com.nedogeek.holdem.gameEvents.Event;
+import com.nedogeek.holdem.gameEvents.PlayerMovesNotificationEvent;
+import com.nedogeek.holdem.gameEvents.RemovePlayerEvent;
 import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
 import net.sf.json.JSONObject;
-import net.sf.json.JSONSerializer;
 import org.eclipse.jetty.websocket.WebSocket.Connection;
 
 import java.io.IOException;
@@ -30,8 +31,6 @@ public class EventManager implements Serializable {
     private Dealer dealer;
     private int moverNumber = -1;
     private Event lastPublicEvent;
-
-    private final List<String> events = new ArrayList<>();
 
     private Map<String, List<Connection>> connections = new Hashtable<>();
 
@@ -59,51 +58,40 @@ public class EventManager implements Serializable {
     }
 
     private void notifyConnections() {
-        for (List<Connection> connectionList : connections.values()) {
-            for (Connection connection : connectionList) {
-                try {
-                    connection.sendMessage(gameToJSON());
-                } catch (IOException e) {
-                    connection.close();
-                }
-            }
-            removeClosedConnections(connectionList);
+        for (String connectionName : connections.keySet()) {
+            String message = gameToJSON(connectionName);
+            sendMessageToPlayer(message, connectionName);
         }
+
+
+//        for (List<Connection> connectionList : connections.values()) {
+//            for (Connection connection : connectionList) {
+//                try {
+//                    connection.sendMessage(gameToJSON(connectionName));
+//                } catch (IOException e) {
+//                    connection.close();
+//                }
+//            }
+//            removeClosedConnections(connectionList);
+//        }
     }
 
     public void addEvent(Event event) {
         processEvents(event);
 
-        if (event instanceof PrivateEvent) {
-            sendMessageToPlayer(event.toString(), ((PrivateEvent) event).getOwner());
-        } else {
-            events.add(event.toString());
-            lastPublicEvent = event;
-            if (events.size() > GameSettings.MAX_EVENTS_COUNT)
-                events.remove(0);
-            notifyConnections();
-        }
+        lastPublicEvent = event;
 
-        notifyMover(event);
+        notifyConnections();
     }
 
-    private void notifyMover(Event event) {
-        if (event instanceof PlayerMovesNotificationEvent) {
-            final String YOUR_MOVE_MESSAGE = "Your move!";
-            String playerName = ((PlayerMovesNotificationEvent) event).getPlayer().getName();
-            sendMessageToPlayer(YOUR_MOVE_MESSAGE, playerName);
-        }
-    }
 
     private void sendMessageToPlayer(String message, String playerName) {
-        if (connections.containsKey(playerName)) {
-            List<Connection> playerConnections = connections.get(playerName);
-            for (Connection connection : playerConnections) {
-                try {
-                    connection.sendMessage(message);
-                } catch (IOException e) {
-                    connection.close();
-                }
+        List<Connection> playerConnections = connections.get(playerName);
+        for (Connection connection : playerConnections) {
+            try {
+                connection.sendMessage(message);
+            } catch (IOException e) {
+                connection.close();
             }
         }
     }
@@ -138,31 +126,43 @@ public class EventManager implements Serializable {
         }
     }
 
-    public String gameToJSON() {
+    public String gameToJSON(String connectionName) {
+
+
+        String playersJSON = (connectionName.equals("public")) ? playersList.generatePlayersJSON() :
+                playersList.generatePlayersJSON(connectionName);
+
+        String gameStatus = dealer.getGameStatus().toString();
+        String gameRound = dealer.getGameRound().toString();
+        int pot = playersList.getPot();
+        String deskCards = Arrays.toString(dealer.getDeskCards());
+        String event = lastPublicEvent.toString();
+
+        String dealerName = playersList.getDealerName();
+        String moverName = playersList.getMoverName();
+
+
         Map<String, Serializable> gameData = new HashMap<>();
-        gameData.put("gameStatus", dealer.getGameStatus());
-        gameData.put("gameRound", dealer.getGameRound());
+        gameData.put("gameStatus", gameStatus);
+        gameData.put("gameRound", gameRound);
 
-        gameData.put("players", playersList.toJSON());
-        gameData.put("deskCards", dealer.getDeskCards());
-        gameData.put("deskPot", calculatePot());
+        gameData.put("players", playersJSON);
+        gameData.put("mover", moverName);
+        gameData.put("dealer", dealerName);
 
-        gameData.put("dealerNumber", playersList.getDealerNumber());
-        gameData.put("moverNumber", moverNumber);
-        gameData.put("gameStatus", dealer.getGameStatus());
+        gameData.put("deskCards", deskCards);
+        gameData.put("deskPot", pot);
 
-        gameData.put("events", events.toArray());
-        gameData.put("lastEvent", lastPublicEvent.toJSON());
+        gameData.put("event", event);
+//
+//        gameData.put("dealerNumber", playersList.getDealerNumber());
+//        gameData.put("moverNumber", moverNumber);
+//        gameData.put("gameStatus", dealer.getGameStatus());
+//
+//        gameData.put("events", events.toArray());
+//        gameData.put("lastEvent", lastPublicEvent.toJSON());
 
         return JSONObject.fromMap(gameData).toString();
-    }
-
-    private int calculatePot() {
-        int pot = 0;
-        for (Player player : playersList) {
-            pot += player.getBet();
-        }
-        return pot;
     }
 
     public Player addPlayer(Connection connection, String login) {

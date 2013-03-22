@@ -4,8 +4,8 @@ import com.nedogeek.holdem.PlayerStatus;
 import com.nedogeek.holdem.dealer.Dealer;
 import com.nedogeek.holdem.dealer.EventManager;
 import com.nedogeek.holdem.gameEvents.AddPlayerEvent;
-import com.nedogeek.holdem.gameEvents.PlayerConnectedEvent;import com.nedogeek.holdem.gameEvents.RemovePlayerEvent;
-import net.sf.json.JSONArray;
+import com.nedogeek.holdem.gameEvents.PlayerConnectedEvent;
+import com.nedogeek.holdem.gameEvents.RemovePlayerEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,13 +28,13 @@ public class PlayersList extends ArrayList<Player> {
         dealerNumber = 0;
         eventManager = EventManager.getInstance();
     }
-    
+
     /**
      * Test purposes ONLY!
      */
     PlayersList(EventManager eventManager) {
-    	dealerNumber = 0;
-    	this.eventManager = eventManager;
+        dealerNumber = 0;
+        this.eventManager = eventManager;
     }
 
     @Override
@@ -53,7 +53,7 @@ public class PlayersList extends ArrayList<Player> {
     }
 
     private void addWaitingPlayers() {
-        for (Player player: waitingPlayers) {
+        for (Player player : waitingPlayers) {
             super.add(player);
             eventManager.addEvent(new AddPlayerEvent(player));
         }
@@ -117,13 +117,14 @@ public class PlayersList extends ArrayList<Player> {
         return get(nextPlayer(nextPlayer(dealerNumber)));
     }
 
-    public String toJSON() {
+    public String generatePlayersJSON(String... playerNames) { //TODO not tested
         List<String> playersJSON = new ArrayList<>();
+
         for (Player player : this) {
             playersJSON.add(player.toJSON());
         }
 
-        return JSONArray.fromCollection(playersJSON).toString();
+        return playersJSON.toString();
     }
 
     public int getDealerNumber() {
@@ -171,19 +172,19 @@ public class PlayersList extends ArrayList<Player> {
         }
     }
 
-	@Override
-	public boolean contains(Object o) {
-		if (!(o instanceof Player)) {
-			return false;
-		}
-		
-		for (Player player: this) {
-			if (player.getName().equals(((Player) o).getName())) {
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean contains(Object o) {
+        if (!(o instanceof Player)) {
+            return false;
+        }
+
+        for (Player player : this) {
+            if (player.getName().equals(((Player) o).getName())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public Player getPlayerByName(String login, Dealer dealer) {
         for (Player player : waitingPlayers) {
@@ -199,5 +200,17 @@ public class PlayersList extends ArrayList<Player> {
         Player player = new Player(login, dealer);
         add(player);
         return player;
+    }
+
+    public int getPot() {
+        return 0;  //TODO this is a stub
+    }
+
+    public String getDealerName() {
+        return null;  //TODO this is a stub
+    }
+
+    public String getMoverName() {
+        return null;  //TODO This is a stub
     }
 }
