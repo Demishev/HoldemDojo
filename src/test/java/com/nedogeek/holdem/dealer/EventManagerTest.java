@@ -4,17 +4,18 @@ package com.nedogeek.holdem.dealer;
 import com.nedogeek.holdem.GameRound;
 import com.nedogeek.holdem.GameStatus;
 import com.nedogeek.holdem.gameEvents.Event;
+import com.nedogeek.holdem.gameEvents.GameEndedEvent;
 import com.nedogeek.holdem.gamingStuff.Card;
 import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
 import org.eclipse.jetty.websocket.WebSocket;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.Matchers.anyString;
@@ -111,6 +112,9 @@ public class EventManagerTest {
         firstPlayerMock = mock(Player.class);
         secondPlayerMock = mock(Player.class);
 
+        when(firstPlayerMock.getName()).thenReturn(FIRST_PLAYER);
+        when(secondPlayerMock.getName()).thenReturn(SECOND_PLAYER);
+
         when(firstPlayerMock.toJSON()).thenReturn(FIRST_PLAYER + JSON);
         when(secondPlayerMock.toJSON()).thenReturn(SECOND_PLAYER + JSON);
     }
@@ -130,20 +134,12 @@ public class EventManagerTest {
 
         when(playersListMock.generatePlayersJSON(FIRST_PLAYER)).thenReturn(FIRST_PLAYER + JSON + CARDS);
         when(playersListMock.generatePlayersJSON(SECOND_PLAYER)).thenReturn(SECOND_PLAYER + JSON + CARDS);
+        when(playersListMock.generatePlayersJSON(FIRST_PLAYER, SECOND_PLAYER)).
+                thenReturn(FIRST_PLAYER + JSON + CARDS + "," + SECOND_PLAYER + JSON + CARDS);
 
         when(playersListMock.iterator()).thenReturn(playersHolder.iterator(), playersHolder.iterator(), playersHolder.iterator());
     }
 
-
-    private void setFirstPlayerWin() {
-
-    }
-
-    @After
-    public void tearDown() throws Exception {  //TODO RemoveIt???
-        eventManager.closeConnection(firstViewerConnectionMock);
-        eventManager.closeConnection(secondViewerConnectionMock);
-    }
 
     @Test
     public void shouldFirstViewerMockSendMessageWhenAddGameEvent() throws Exception {
@@ -299,11 +295,49 @@ public class EventManagerTest {
     }
 
     @Test
-    public void shouldSecondPlayerConnectionCanViewBothPlayersCardsWhenFirstPlayerWon() throws Exception {
-        eventManager.addPlayer(secondPlayerConnectionMock, SECOND_PLAYER);
+    public void shouldFirstViewerCanViewFirstPlayerCardsWhenFirstPlayerWon() throws Exception {
+        eventManager.addEvent(new GameEndedEvent(Arrays.asList(firstPlayerMock)));
 
-        setFirstPlayerWin();
+        String message = "{\"gameRound\":\"" + INITIAL + "\",\"dealer\":\"" + DEALER_NAME + "\"," +
+                "\"mover\":\"" + MOVER_NAME + "\",\"event\":\"" + "Game ended" + "\",\"players\":\"" +
+
+                FIRST_PLAYER + JSON + CARDS
+
+                + "\"," + "\"gameStatus\":\"" + READY + "\",\"deskCards\":[],\"deskPot\":0}";
+
+        verify(firstViewerConnectionMock).sendMessage(message);
     }
+
+    @Test
+    public void shouldFirstPlayerCanViewBothPlayersCardsWhenSecondPlayerWon() throws Exception {
+        eventManager.addPlayer(firstPlayerConnectionMock, FIRST_PLAYER);
+
+        eventManager.addEvent(new GameEndedEvent(Arrays.asList(secondPlayerMock)));
+
+        String message = "{\"gameRound\":\"" + INITIAL + "\",\"dealer\":\"" + DEALER_NAME + "\"," +
+                "\"mover\":\"" + MOVER_NAME + "\",\"event\":\"" + "Game ended" + "\",\"players\":\"" +
+
+                FIRST_PLAYER + JSON + CARDS + "," + SECOND_PLAYER + JSON + CARDS
+
+                + "\"," + "\"gameStatus\":\"" + READY + "\",\"deskCards\":[],\"deskPot\":0}";
+
+        verify(firstPlayerConnectionMock).sendMessage(message);
+    }
+
+    @Test
+    public void shouldFirstViewerCanViewBothPlayersCardsWhenBothPlayersWon() throws Exception {
+        eventManager.addEvent(new GameEndedEvent(Arrays.asList(firstPlayerMock, secondPlayerMock)));
+
+        String message = "{\"gameRound\":\"" + INITIAL + "\",\"dealer\":\"" + DEALER_NAME + "\"," +
+                "\"mover\":\"" + MOVER_NAME + "\",\"event\":\"" + "Game ended" + "\",\"players\":\"" +
+
+                FIRST_PLAYER + JSON + CARDS + "," + SECOND_PLAYER + JSON + CARDS
+
+                + "\"," + "\"gameStatus\":\"" + READY + "\",\"deskCards\":[],\"deskPot\":0}";
+
+        verify(firstViewerConnectionMock).sendMessage(message);
+    }
+
 
     /*
     * Задача такая: нужно отправлять каждому коннекшену именно то, что ему нужно:

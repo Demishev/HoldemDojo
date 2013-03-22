@@ -2,6 +2,7 @@ package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.gameEvents.AddPlayerEvent;
 import com.nedogeek.holdem.gameEvents.Event;
+import com.nedogeek.holdem.gameEvents.GameEndedEvent;
 import com.nedogeek.holdem.gameEvents.RemovePlayerEvent;
 import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
@@ -28,7 +29,7 @@ public class EventManager implements Serializable {
 
     private PlayersList playersList;
     private Dealer dealer;
-    private Event lastPublicEvent;
+    private Event event;
 
     private Map<String, List<Connection>> connections = new Hashtable<>();
 
@@ -77,7 +78,7 @@ public class EventManager implements Serializable {
     public void addEvent(Event event) {
         processEvents(event);
 
-        lastPublicEvent = event;
+        this.event = event;
 
         notifyConnections();
     }
@@ -123,14 +124,13 @@ public class EventManager implements Serializable {
     public String gameToJSON(String connectionName) {
 
 
-        String playersJSON = (connectionName.equals("public")) ? playersList.generatePlayersJSON() :
-                playersList.generatePlayersJSON(connectionName);
+        String playersJSON = generatePlayersJSON(connectionName);
 
         String gameStatus = dealer.getGameStatus().toString();
         String gameRound = dealer.getGameRound().toString();
         int pot = playersList.getPot();
         String deskCards = Arrays.toString(dealer.getDeskCards());
-        String event = lastPublicEvent.toString();
+        String event = this.event.toString();
 
         String dealerName = playersList.getDealerName();
         String moverName = playersList.getMoverName();
@@ -154,9 +154,34 @@ public class EventManager implements Serializable {
 //        gameData.put("gameStatus", dealer.getGameStatus());
 //
 //        gameData.put("events", events.toArray());
-//        gameData.put("lastEvent", lastPublicEvent.toJSON());
+//        gameData.put("lastEvent", event.toJSON());
 
         return JSONObject.fromMap(gameData).toString();
+    }
+
+    private String generatePlayersJSON(String connectionName) {
+        List<String> playersWithCards = new ArrayList<>();
+
+        if (!connectionName.equals("public")) {
+            playersWithCards.add(connectionName);
+        }
+
+        if (event instanceof GameEndedEvent) {
+            List<Player> winners = ((GameEndedEvent) event).getWinners();
+            for (Player winner : winners) {
+                String winnerName = winner.getName();
+                if (!connectionName.equals(winnerName)) {
+                    playersWithCards.add(winnerName);
+                }
+            }
+        }
+
+        String[] playerNamesArray = new String[playersWithCards.size()];
+        for (int i = 0; i < playersWithCards.size(); i++) {
+            playerNamesArray[i] = playersWithCards.get(i);
+        }
+
+        return playersList.generatePlayersJSON(playerNamesArray);
     }
 
     public Player addPlayer(Connection connection, String login) {

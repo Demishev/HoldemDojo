@@ -35,7 +35,7 @@ public class EndGameManager {
 
         endGameSleep();
 
-        eventManager.addEvent(new GameEndedEvent());
+        eventManager.addEvent(new GameEndedEvent(null));
 
         dealer.setInitialGameRound();
     }
