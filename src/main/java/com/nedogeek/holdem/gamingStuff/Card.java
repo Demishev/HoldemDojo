@@ -1,5 +1,10 @@
 package com.nedogeek.holdem.gamingStuff;
 
+import net.sf.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * User: Konstantin Demishev
  * Date: 05.10.12
@@ -69,6 +74,11 @@ public class Card implements Comparable<Card> {
     }
 
     public String toJSON() {
-        return null;  //TODO Stub!
+        Map<String, String> cardData = new HashMap<>();
+
+        cardData.put("cardSuit", cardSuit.toString());
+        cardData.put("cardValue", cardValue.toString());
+
+        return JSONObject.fromMap(cardData).toString();
     }
 }
