@@ -9,6 +9,6 @@ import com.nedogeek.holdem.gamingStuff.Player;
  */
 public class RemovePlayerEvent extends Event {
     public RemovePlayerEvent(Player player) {
-        super(player.getName() + " disconnected.", EventType.PLAYER_DISCONNECTED, player.getName());
+        super(player.getName() + " disconnected.");
     }
 }

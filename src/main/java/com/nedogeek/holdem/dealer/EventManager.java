@@ -2,7 +2,6 @@ package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.gameEvents.AddPlayerEvent;
 import com.nedogeek.holdem.gameEvents.Event;
-import com.nedogeek.holdem.gameEvents.PlayerMovesNotificationEvent;
 import com.nedogeek.holdem.gameEvents.RemovePlayerEvent;
 import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
@@ -29,7 +28,6 @@ public class EventManager implements Serializable {
 
     private PlayersList playersList;
     private Dealer dealer;
-    private int moverNumber = -1;
     private Event lastPublicEvent;
 
     private Map<String, List<Connection>> connections = new Hashtable<>();
@@ -97,10 +95,6 @@ public class EventManager implements Serializable {
     }
 
     private void processEvents(Event event) {
-        if (event instanceof PlayerMovesNotificationEvent) {
-            moverNumber = ((PlayerMovesNotificationEvent) event).getMoverNumber();
-        }
-
         if (event instanceof AddPlayerEvent || event instanceof RemovePlayerEvent) {
             dealer.calculateGameStatus();
         }

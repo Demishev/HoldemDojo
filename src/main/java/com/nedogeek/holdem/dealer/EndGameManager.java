@@ -1,7 +1,7 @@
 package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.GameSettings;
-import com.nedogeek.holdem.gameEvents.PlayerWinEvent;
+import com.nedogeek.holdem.gameEvents.GameEndedEvent;
 import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
 
@@ -34,6 +34,8 @@ public class EndGameManager {
         rewardWinners();
 
         endGameSleep();
+
+        eventManager.addEvent(new GameEndedEvent());
 
         dealer.setInitialGameRound();
     }
@@ -75,9 +77,6 @@ public class EndGameManager {
         prize += winner.getBet();
         winner.setBet(0);
         winner.setBalance(winner.getBalance() + prize);
-        if (prize != 0) {
-            eventManager.addEvent(new PlayerWinEvent(winner, prize));
-        }
     }
 
     private int getChipsFromPlayer(Player player, int chipsCount) {

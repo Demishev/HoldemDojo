@@ -9,6 +9,6 @@ public class NewGameStartedEvent extends Event {
 
 
     public NewGameStartedEvent() {
-        super("New game started", EventType.NEW_GAME_STARTED, "");
+        super("New game started");
     }
 }

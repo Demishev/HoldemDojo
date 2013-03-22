@@ -2,7 +2,6 @@ package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.PlayerStatus;
-import com.nedogeek.holdem.gameEvents.Event;
 import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
 import org.junit.Before;
@@ -122,16 +121,5 @@ public class EndGameManagerTest {
 
     private void setPlayerBet(Player player, int bet) {
         when(player.getBet()).thenReturn(bet);
-    }
-
-    @Test
-    public void shouldNotFirstPlayerWinWhenFirstPlayerBet0SecondPlayerBet0AndThirdPlayerBet0() throws Exception {
-        setPlayerBet(firstPlayerMock, 0);
-        setPlayerBet(secondPlayerMock, 0);
-        setPlayerBet(thirdPlayerMock, 0);
-
-        endGameManager.endGame();
-
-        verify(eventManagerMock, never()).addEvent((Event) any());
     }
 }

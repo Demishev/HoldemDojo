@@ -46,31 +46,35 @@ public class EventManagerTest {
             "\"mover\":\"" + MOVER_NAME + "\",\"event\":\"" + EVENT_MOCK + "\",\"players\":\"" + PLAYERS_JSON + "\"," +
             "\"gameStatus\":\"" + READY + "\",\"deskCards\":[],\"deskPot\":0}";
 
-    private EventManager eventManager;
-
-    private WebSocket.Connection firstViewerConnectionMock;
-    private WebSocket.Connection secondViewerConnectionMock;
-    private WebSocket.Connection firstPlayerConnectionMock;
-    private WebSocket.Connection secondPlayerConnectionMock;
-
-    private Event eventMock;
-
-    private Player firstPlayerMock;
-    private Player secondPlayerMock;
-    private PlayersList playersListMock;
-    private Dealer dealerMock;
     private final String SECOND_PLAYER_WITH_CARDS_MESSAGE = "{\"gameRound\":\"" + INITIAL + "\",\"dealer\":\"" + DEALER_NAME + "\"," +
             "\"mover\":\"" + MOVER_NAME + "\",\"event\":\"" + EVENT_MOCK + "\",\"players\":\"" +
 
             SECOND_PLAYER + JSON + CARDS
 
             + "\"," + "\"gameStatus\":\"" + READY + "\",\"deskCards\":[],\"deskPot\":0}";
+
     private final String FIRST_PLAYER_WITH_CARDS_MESSAGE = "{\"gameRound\":\"" + INITIAL + "\",\"dealer\":\"" + DEALER_NAME + "\"," +
             "\"mover\":\"" + MOVER_NAME + "\",\"event\":\"" + EVENT_MOCK + "\",\"players\":\"" +
 
             FIRST_PLAYER + JSON + CARDS
 
             + "\"," + "\"gameStatus\":\"" + READY + "\",\"deskCards\":[],\"deskPot\":0}";
+
+
+    private EventManager eventManager;
+
+    private WebSocket.Connection firstViewerConnectionMock;
+    private WebSocket.Connection secondViewerConnectionMock;
+    private WebSocket.Connection firstPlayerConnectionMock;
+
+    private WebSocket.Connection secondPlayerConnectionMock;
+
+    private Event eventMock;
+    private Player firstPlayerMock;
+    private Player secondPlayerMock;
+    private PlayersList playersListMock;
+
+    private Dealer dealerMock;
 
 
     @Before
@@ -131,8 +135,12 @@ public class EventManagerTest {
     }
 
 
+    private void setFirstPlayerWin() {
+
+    }
+
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() throws Exception {  //TODO RemoveIt???
         eventManager.closeConnection(firstViewerConnectionMock);
         eventManager.closeConnection(secondViewerConnectionMock);
     }
@@ -290,12 +298,12 @@ public class EventManagerTest {
         verify(secondPlayerConnectionMock, never()).sendMessage(FIRST_PLAYER_WITH_CARDS_MESSAGE);
     }
 
-//    @Test
-//    public void shouldSecondPlayerConnectionCanViewBothPlayersCardsWhenFirstPlayerWon() throws Exception {
-//        eventManager.addPlayer(secondPlayerConnectionMock, SECOND_PLAYER);
-//
-//        setFirstPlayerWin();
-//    }
+    @Test
+    public void shouldSecondPlayerConnectionCanViewBothPlayersCardsWhenFirstPlayerWon() throws Exception {
+        eventManager.addPlayer(secondPlayerConnectionMock, SECOND_PLAYER);
+
+        setFirstPlayerWin();
+    }
 
     /*
     * Задача такая: нужно отправлять каждому коннекшену именно то, что ему нужно:

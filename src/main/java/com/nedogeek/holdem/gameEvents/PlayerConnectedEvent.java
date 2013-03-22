@@ -10,6 +10,6 @@ import com.nedogeek.holdem.gamingStuff.Player;
  */
 public class PlayerConnectedEvent extends Event {
     public PlayerConnectedEvent(Player player) {
-        super(player.getName() + " connected.", EventType.PLAYER_CONNECTED, player.getName());
+        super(player.getName() + " connected.");
     }
 }
