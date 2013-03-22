@@ -6,6 +6,8 @@ import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * User: Konstantin Demishev
@@ -31,11 +33,11 @@ public class EndGameManager {
     }
 
     public void endGame() {
-        rewardWinners();
+        Map<Player, Integer> winners = rewardWinners();
 
         endGameSleep();
 
-        eventManager.addEvent(new GameEndedEvent(null));
+        eventManager.addEvent(new GameEndedEvent(winners));
 
         dealer.setInitialGameRound();
     }
@@ -48,15 +50,22 @@ public class EndGameManager {
         }
     }
 
-    private void rewardWinners() {
+    private Map<Player, Integer> rewardWinners() {
+        Map<Player, Integer> winners = new HashMap<>();
+
         Object[] winCandidates = playersList.toArray();
         Arrays.sort(winCandidates);
 
         for (int i = winCandidates.length - 1; i != -1; i--) {
             Player winPlayer = (Player) winCandidates[i];
-            giveMoneyToWinner(winPlayer);
+            int prize = giveMoneyToWinner(winPlayer);
+            if (prize > 0) {
+                winners.put(winPlayer, prize);
+            }
         }
-        checkZeroBalance();
+        checkZeroBalance();//TODO Need to create new SystemEvent
+
+        return winners;
     }
 
     private void checkZeroBalance() {
@@ -67,7 +76,7 @@ public class EndGameManager {
         }
     }
 
-    private void giveMoneyToWinner(Player winner) {
+    private int giveMoneyToWinner(Player winner) {
         int prize = 0;
         for (Player player : playersList) {
             if (player != winner) {
@@ -77,6 +86,7 @@ public class EndGameManager {
         prize += winner.getBet();
         winner.setBet(0);
         winner.setBalance(winner.getBalance() + prize);
+        return prize;
     }
 
     private int getChipsFromPlayer(Player player, int chipsCount) {

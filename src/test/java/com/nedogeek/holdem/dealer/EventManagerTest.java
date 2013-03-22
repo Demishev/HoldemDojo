@@ -74,6 +74,9 @@ public class EventManagerTest {
     private WebSocket.Connection secondPlayerConnectionMock;
 
     private Event eventMock;
+
+    private GameEndedEvent gameEndedEventMock;
+
     private Player firstPlayerMock;
     private Player secondPlayerMock;
     private PlayersList playersListMock;
@@ -92,6 +95,9 @@ public class EventManagerTest {
 
         eventMock = mock(Event.class);
         when(eventMock.toString()).thenReturn(EVENT_MOCK);
+
+        gameEndedEventMock = mock(GameEndedEvent.class);
+        when(gameEndedEventMock.toString()).thenReturn("Game ended");
 
         eventManager = EventManager.getTestInstance();
         eventManager.setDealer(dealerMock);
@@ -320,7 +326,9 @@ public class EventManagerTest {
 
     @Test
     public void shouldFirstViewerCanViewFirstPlayerCardsWhenFirstPlayerWon() throws Exception {
-        eventManager.addEvent(new GameEndedEvent(Arrays.asList(firstPlayerMock)));
+        when(gameEndedEventMock.getWinners()).thenReturn(Arrays.asList(firstPlayerMock));
+
+        eventManager.addEvent(gameEndedEventMock);
 
         String message = "{\"gameRound\":\"" + INITIAL + "\",\"dealer\":\"" + DEALER_NAME + "\"," +
                 "\"mover\":\"" + MOVER_NAME + "\",\"event\":\"" + "Game ended" + "\",\"players\":\"" +
@@ -334,9 +342,11 @@ public class EventManagerTest {
 
     @Test
     public void shouldFirstPlayerCanViewBothPlayersCardsWhenSecondPlayerWon() throws Exception {
+        when(gameEndedEventMock.getWinners()).thenReturn(Arrays.asList(secondPlayerMock));
+
         eventManager.addPlayer(firstPlayerConnectionMock, FIRST_PLAYER);
 
-        eventManager.addEvent(new GameEndedEvent(Arrays.asList(secondPlayerMock)));
+        eventManager.addEvent(gameEndedEventMock);
 
         String message = "{\"gameRound\":\"" + INITIAL + "\",\"dealer\":\"" + DEALER_NAME + "\"," +
                 "\"mover\":\"" + MOVER_NAME + "\",\"event\":\"" + "Game ended" + "\",\"players\":\"" +
@@ -352,7 +362,9 @@ public class EventManagerTest {
 
     @Test
     public void shouldFirstViewerCanViewBothPlayersCardsWhenBothPlayersWon() throws Exception {
-        eventManager.addEvent(new GameEndedEvent(Arrays.asList(firstPlayerMock, secondPlayerMock)));
+        when(gameEndedEventMock.getWinners()).thenReturn(Arrays.asList(firstPlayerMock, secondPlayerMock));
+
+        eventManager.addEvent(gameEndedEventMock);
 
         String message = "{\"gameRound\":\"" + INITIAL + "\",\"dealer\":\"" + DEALER_NAME + "\"," +
                 "\"mover\":\"" + MOVER_NAME + "\",\"event\":\"" + "Game ended" + "\",\"players\":\"" +
