@@ -15,8 +15,24 @@ public class GameEndedEvent extends Event {//TODO test toString()
     private final Map<Player, Integer> winners;
 
     public GameEndedEvent(Map<Player, Integer> winners) {
-        super("Game ended");
+        super(generateEventMessage(winners));
         this.winners = winners;
+
+    }
+
+    private static String generateEventMessage(Map<Player, Integer> winners) {
+        String message = "Game ended";
+
+        for (Player winner : winners.keySet()) {
+            message += '\n';
+            message += winner.getName();
+            message += " win $";
+            message += winners.get(winner);
+            message += " with ";
+            message += winner.getCardCombination().toString();
+        }
+
+        return message;
     }
 
     public List<Player> getWinners() {

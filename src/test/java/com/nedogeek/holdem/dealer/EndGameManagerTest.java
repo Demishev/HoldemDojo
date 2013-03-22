@@ -2,6 +2,7 @@ package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.PlayerStatus;
+import com.nedogeek.holdem.combinations.PlayerCardCombination;
 import com.nedogeek.holdem.gameEvents.Event;
 import com.nedogeek.holdem.gameEvents.GameEndedEvent;
 import com.nedogeek.holdem.gamingStuff.Player;
@@ -96,9 +97,13 @@ public class EndGameManagerTest {
 
         setPlayersRelations();
 
+        PlayerCardCombination playerCardCombinationMock = mock(PlayerCardCombination.class);
+        when(playerCardCombinationMock.toString()).thenReturn("");
+
         for (Player player : players) {
             setPlayerStatus(player, PlayerStatus.NotMoved);
             setBetSetGetListener(player);
+            when(player.getCardCombination()).thenReturn(playerCardCombinationMock);
         }
 
         when(firstPlayerMock.getName()).thenReturn("First player");
