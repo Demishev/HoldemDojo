@@ -213,4 +213,8 @@ public class PlayersList extends ArrayList<Player> {
     public String getMoverName() {
         return null;  //TODO This is a stub
     }
+
+    public String getPlayerCardCombination(String playerName) {
+        return null; //TODO This is a stub
+    }
 }

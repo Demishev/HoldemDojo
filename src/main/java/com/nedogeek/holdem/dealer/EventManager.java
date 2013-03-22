@@ -19,6 +19,7 @@ import java.util.*;
  * Time: 22:10
  */
 public class EventManager implements Serializable {
+    private final String PUBLIC = "public";
     private Map<String, String> userData = new HashMap<>();  //TODO Maybe move field?
 
     {
@@ -46,7 +47,7 @@ public class EventManager implements Serializable {
     }
 
     public void addViewer(Connection viewer) {
-        addConnection("public", viewer);
+        addConnection(PUBLIC, viewer);
     }
 
     private void addConnection(String owner, Connection connection) {
@@ -61,18 +62,6 @@ public class EventManager implements Serializable {
             String message = gameToJSON(connectionName);
             sendMessageToPlayer(message, connectionName);
         }
-
-
-//        for (List<Connection> connectionList : connections.values()) {
-//            for (Connection connection : connectionList) {
-//                try {
-//                    connection.sendMessage(gameToJSON(connectionName));
-//                } catch (IOException e) {
-//                    connection.close();
-//                }
-//            }
-//            removeClosedConnections(connectionList);
-//        }
     }
 
     public void addEvent(Event event) {
@@ -122,8 +111,6 @@ public class EventManager implements Serializable {
     }
 
     public String gameToJSON(String connectionName) {
-
-
         String playersJSON = generatePlayersJSON(connectionName);
 
         String gameStatus = dealer.getGameStatus().toString();
@@ -148,21 +135,17 @@ public class EventManager implements Serializable {
         gameData.put("deskPot", pot);
 
         gameData.put("event", event);
-//
-//        gameData.put("dealerNumber", playersList.getDealerNumber());
-//        gameData.put("moverNumber", moverNumber);
-//        gameData.put("gameStatus", dealer.getGameStatus());
-//
-//        gameData.put("events", events.toArray());
-//        gameData.put("lastEvent", event.toJSON());
 
+        if (!connectionName.equals(PUBLIC)) {
+            gameData.put("combination", playersList.getPlayerCardCombination(connectionName));
+        }
         return JSONObject.fromMap(gameData).toString();
     }
 
     private String generatePlayersJSON(String connectionName) {
         List<String> playersWithCards = new ArrayList<>();
 
-        if (!connectionName.equals("public")) {
+        if (!connectionName.equals(PUBLIC)) {
             playersWithCards.add(connectionName);
         }
 

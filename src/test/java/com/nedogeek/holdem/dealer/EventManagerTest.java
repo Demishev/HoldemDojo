@@ -43,23 +43,26 @@ public class EventManagerTest {
     private final String EVENT_MOCK = "EventMock";
     private final String READY = "READY";
 
+    private final String FIRST_PLAYER_CARD_COMBINATION = "First player cards combination";
+    private final String SECOND_PLAYER_CARD_COMBINATION = "Second player cards combination";
+
     private final String DEFAULT_MESSAGE = "{\"gameRound\":\"" + INITIAL + "\",\"dealer\":\"" + DEALER_NAME + "\"," +
             "\"mover\":\"" + MOVER_NAME + "\",\"event\":\"" + EVENT_MOCK + "\",\"players\":\"" + PLAYERS_JSON + "\"," +
             "\"gameStatus\":\"" + READY + "\",\"deskCards\":[],\"deskPot\":0}";
 
     private final String SECOND_PLAYER_WITH_CARDS_MESSAGE = "{\"gameRound\":\"" + INITIAL + "\",\"dealer\":\"" + DEALER_NAME + "\"," +
             "\"mover\":\"" + MOVER_NAME + "\",\"event\":\"" + EVENT_MOCK + "\",\"players\":\"" +
-
-            SECOND_PLAYER + JSON + CARDS
-
-            + "\"," + "\"gameStatus\":\"" + READY + "\",\"deskCards\":[],\"deskPot\":0}";
+            SECOND_PLAYER + JSON + CARDS +
+            "\"combination\":\"" + FIRST_PLAYER_CARD_COMBINATION
+            + "\"," + "\"," + "\"gameStatus\":\"" + READY + "\",\"deskCards\":[],\"deskPot\":0}";
 
     private final String FIRST_PLAYER_WITH_CARDS_MESSAGE = "{\"gameRound\":\"" + INITIAL + "\",\"dealer\":\"" + DEALER_NAME + "\"," +
             "\"mover\":\"" + MOVER_NAME + "\",\"event\":\"" + EVENT_MOCK + "\",\"players\":\"" +
-
             FIRST_PLAYER + JSON + CARDS
-
-            + "\"," + "\"gameStatus\":\"" + READY + "\",\"deskCards\":[],\"deskPot\":0}";
+            + "\"," +
+            "\"combination\":\"" + FIRST_PLAYER_CARD_COMBINATION
+            + "\"," +
+            "\"gameStatus\":\"" + READY + "\",\"deskCards\":[],\"deskPot\":0}";
 
 
     private EventManager eventManager;
@@ -89,7 +92,7 @@ public class EventManagerTest {
         resetDealerMock();
 
         resetPlayersMock();
-        resetPlayerLisMock();
+        resetPlayerListMock();
 
         eventMock = mock(Event.class);
         when(eventMock.toString()).thenReturn(EVENT_MOCK);
@@ -120,7 +123,7 @@ public class EventManagerTest {
     }
 
     @SuppressWarnings("unchecked")
-    private void resetPlayerLisMock() {
+    private void resetPlayerListMock() {
         playersListMock = mock(PlayersList.class);
 
         List<Player> playersHolder = new ArrayList<>();
@@ -136,6 +139,9 @@ public class EventManagerTest {
         when(playersListMock.generatePlayersJSON(SECOND_PLAYER)).thenReturn(SECOND_PLAYER + JSON + CARDS);
         when(playersListMock.generatePlayersJSON(FIRST_PLAYER, SECOND_PLAYER)).
                 thenReturn(FIRST_PLAYER + JSON + CARDS + "," + SECOND_PLAYER + JSON + CARDS);
+
+        when(playersListMock.getPlayerCardCombination(FIRST_PLAYER)).thenReturn(FIRST_PLAYER_CARD_COMBINATION);
+        when(playersListMock.getPlayerCardCombination(SECOND_PLAYER)).thenReturn(SECOND_PLAYER_CARD_COMBINATION);
 
         when(playersListMock.iterator()).thenReturn(playersHolder.iterator(), playersHolder.iterator(), playersHolder.iterator());
     }
@@ -262,11 +268,19 @@ public class EventManagerTest {
 
     @Test
     public void shouldInMessageSecondPlayerWithCardsSendToSecondPlayerConnection() throws Exception {
-        eventManager.addPlayer(firstPlayerConnectionMock, SECOND_PLAYER);
+        eventManager.addPlayer(secondPlayerConnectionMock, SECOND_PLAYER);
 
         eventManager.addEvent(eventMock);
 
-        verify(firstPlayerConnectionMock).sendMessage(SECOND_PLAYER_WITH_CARDS_MESSAGE);
+        String message = "{\"gameRound\":\"" + INITIAL + "\",\"dealer\":\"" + DEALER_NAME + "\"," +
+                "\"mover\":\"" + MOVER_NAME + "\",\"event\":\"" + EVENT_MOCK + "\",\"players\":\"" +
+                SECOND_PLAYER + JSON + CARDS
+                + "\"," +
+                "\"combination\":\"" + SECOND_PLAYER_CARD_COMBINATION
+                + "\"," +
+                "\"gameStatus\":\"" + READY + "\",\"deskCards\":[],\"deskPot\":0}";
+
+        verify(secondPlayerConnectionMock).sendMessage(message);
     }
 
     @Test
@@ -319,6 +333,8 @@ public class EventManagerTest {
 
                 FIRST_PLAYER + JSON + CARDS + "," + SECOND_PLAYER + JSON + CARDS
 
+                + "\"," +
+                "\"combination\":\"" + FIRST_PLAYER_CARD_COMBINATION
                 + "\"," + "\"gameStatus\":\"" + READY + "\",\"deskCards\":[],\"deskPot\":0}";
 
         verify(firstPlayerConnectionMock).sendMessage(message);
@@ -337,25 +353,4 @@ public class EventManagerTest {
 
         verify(firstViewerConnectionMock).sendMessage(message);
     }
-
-
-    /*
-    * Задача такая: нужно отправлять каждому коннекшену именно то, что ему нужно:
-    *   - Его карты.
-    *   - Может и другие карты, если позволяет игровой раунд.
-
-     Из чего будет состоять сообщение для игрока:
-     - Игровой раунд.
-     - Игровой статус.
-     - Игровой пот.
-     - Карты на столе.
-     - Игровая комбинация. (если игрок залогинен)
-     - Последнее игровое сообщение.
-     - Игроков с картами или же без карт:
-        С картами, если они победители и сейчас конец игры.
-        Без карт в других случаях.
-
-     - Еще можно отправить специальный маркерный параметр, который будет сообщать, что игроку нужно походить.
-
-    * */
 }
