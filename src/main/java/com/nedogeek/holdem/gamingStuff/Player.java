@@ -7,7 +7,9 @@ import com.nedogeek.holdem.dealer.Dealer;
 import net.sf.json.JSONObject;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -102,15 +104,33 @@ public class Player implements Comparable<Player> {
     }
 
     public String toJSON() {
+        Map<String, Serializable> playerData = generateGeneralPropertiesMap();
+
+        return JSONObject.fromMap(playerData).toString();
+    }
+
+    public String toJSONWithCards() {
+        Map<String, Serializable> playerData = generateGeneralPropertiesMap();
+
+        List<String> cardsJSON = new ArrayList<>();
+        for (Card card : cards) {
+            cardsJSON.add(card.toJSON());
+        }
+
+        playerData.put("cards", cardsJSON.toArray());
+
+        return JSONObject.fromMap(playerData).toString();
+    }
+
+
+    private Map<String, Serializable> generateGeneralPropertiesMap() {
         Map<String, Serializable> playerData = new HashMap<>();
         playerData.put("name", name);
         playerData.put("status", status);
         playerData.put("pot", bet);
         playerData.put("balance", balance);
-
-        return JSONObject.fromMap(playerData).toString();
+        return playerData;
     }
-
 
     public void setCards(Card[] cards) {
         this.cards = cards;
@@ -131,9 +151,5 @@ public class Player implements Comparable<Player> {
         }
 
         return this.getCardCombination().compareTo(o.getCardCombination());
-    }
-
-    public String toJSONWithCards() {
-        return null; //TODO Stub!
     }
 }

@@ -102,4 +102,23 @@ public class PlayerTest {
     public void shouldBalanceCOINS_AT_STARTWhenNewPlayer() throws Exception {
         assertEquals(GameSettings.COINS_AT_START, new Player(null, null).getBalance());
     }
+
+    @Test
+    public void shouldPlayerWithCardsSerializedToJSONProperly() throws Exception {
+        assertEquals("{\"balance\":1000,\"status\":\"NotMoved\",\"name\":\"Player name\",\"pot\":0}", player.toJSON());
+    }
+
+    @Test
+    public void shouldPlayerWithCardsSerializedToJSONWithCardsProperly() throws Exception {
+        Card firstCardMock = mock(Card.class);
+        Card secondCardMock = mock(Card.class);
+
+        when(firstCardMock.toJSON()).thenReturn("FirstCardJSON");
+        when(secondCardMock.toJSON()).thenReturn("SecondCardJSON");
+
+        player.setCards(new Card[]{firstCardMock, secondCardMock});
+
+        assertEquals("{\"balance\":1000,\"status\":\"NotMoved\",\"name\":\"Player name\",\"pot\":0" +
+                ",\"cards\":[\"FirstCardJSON\",\"SecondCardJSON\"]}", player.toJSONWithCards());
+    }
 }

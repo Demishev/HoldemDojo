@@ -67,4 +67,8 @@ public class Card implements Comparable<Card> {
     public boolean sameValue(Card otherCard) {
         return cardValue == otherCard.getCardValue();
     }
+
+    public String toJSON() {
+        return null;  //TODO Stub!
+    }
 }
