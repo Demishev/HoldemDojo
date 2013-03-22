@@ -121,10 +121,24 @@ public class PlayersList extends ArrayList<Player> {
         List<String> playersJSON = new ArrayList<>();
 
         for (Player player : this) {
-            playersJSON.add(player.toJSON());
+            if (playerInPlayerNames(player, playerNames)) {
+                playersJSON.add(player.toJSONWithCards());
+            } else {
+                playersJSON.add(player.toJSON());
+            }
         }
 
         return playersJSON.toString();
+    }
+
+    private boolean playerInPlayerNames(Player player, String[] playerNames) {
+        String playerName = player.getName();
+        for (String wantedName : playerNames) {
+            if (playerName.equals(wantedName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public int getDealerNumber() {

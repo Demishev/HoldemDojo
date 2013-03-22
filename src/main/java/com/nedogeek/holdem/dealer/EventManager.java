@@ -90,7 +90,7 @@ public class EventManager implements Serializable {
         }
     }
 
-    private void removeClosedConnections(List<Connection> connections) {
+    private void removeClosedConnections(List<Connection> connections) { //TODO removing closed connections needed
         for (Connection connection : connections) {
             if (!connection.isOpen()) {
                 connections.remove(connection);

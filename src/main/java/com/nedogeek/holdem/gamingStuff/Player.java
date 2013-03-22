@@ -25,7 +25,7 @@ public class Player implements Comparable<Player> {
     private int bet;
     private int balance = GameSettings.COINS_AT_START;
     private Card[] cards;
-    
+
     private PlayerAction playerAction = DEFAULT_ACTION;
 
     public Player(String name, Dealer dealer) {
@@ -42,9 +42,9 @@ public class Player implements Comparable<Player> {
     public PlayerAction getMove() {
         return playerAction;
     }
-    
+
     public void setMove(PlayerAction playerAction) {
-    	this.playerAction = playerAction;
+        this.playerAction = playerAction;
     }
 
     public void setStatus(PlayerStatus status) {
@@ -133,8 +133,7 @@ public class Player implements Comparable<Player> {
         return this.getCardCombination().compareTo(o.getCardCombination());
     }
 
-
-    public Card[] getCards() {
-        return cards;
+    public String toJSONWithCards() {
+        return null; //TODO Stub!
     }
 }

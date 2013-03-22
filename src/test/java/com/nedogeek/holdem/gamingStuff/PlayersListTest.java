@@ -21,6 +21,13 @@ public class PlayersListTest {
     private final String FIRST_PLAYER_CARD_COMBINATION_STRING = "First player card combination";
     private final String SECOND_PLAYER_CARD_COMBINATION_STRING = "Second player card combination";
 
+    private final String FIRST_PLAYER_JSON = "First player JSON";
+    private final String SECOND_PLAYER_JSON = "Second player JSON";
+
+    private final String FIRST_PLAYER_JSON_WITH_CARDS = "First player JSON with cards";
+    private final String SECOND_PLAYER_JSON_WITH_CARDS = "Second player JSON with cards";
+    private final String NOT_PRESENT_PLAYER = "Not presented player";
+
     private PlayersList playersList;
 
     private Player firstPlayer = mock(Player.class);
@@ -58,6 +65,12 @@ public class PlayersListTest {
 
         when(firstPlayerCardCombinationMock.toString()).thenReturn(FIRST_PLAYER_CARD_COMBINATION_STRING);
         when(secondPlayerCardCombinationMock.toString()).thenReturn(SECOND_PLAYER_CARD_COMBINATION_STRING);
+
+        when(firstPlayer.toJSON()).thenReturn(FIRST_PLAYER_JSON);
+        when(secondPlayer.toJSON()).thenReturn(SECOND_PLAYER_JSON);
+
+        when(firstPlayer.toJSONWithCards()).thenReturn(FIRST_PLAYER_JSON_WITH_CARDS);
+        when(secondPlayer.toJSONWithCards()).thenReturn(SECOND_PLAYER_JSON_WITH_CARDS);
     }
 
     private void setDefaultTwoPlayersGame() {
@@ -299,6 +312,30 @@ public class PlayersListTest {
 
     @Test
     public void shouldEmptyStringWhenGetCardCombinationOgNotPresentedPlayer() throws Exception {
-        assertEquals("", playersList.getPlayerCardCombination("Not presented player"));
+        assertEquals("", playersList.getPlayerCardCombination(NOT_PRESENT_PLAYER));
+    }
+
+    @Test
+    public void shouldTwoPlayersJSONWhenGeneratePlayersJSON() throws Exception {
+        assertEquals("[" + FIRST_PLAYER_JSON + ", " + SECOND_PLAYER_JSON + "]",
+                playersList.generatePlayersJSON());
+    }
+
+    @Test
+    public void shouldFirstPlayerJSONSecondPlayerJSONWithCardsWhenGeneratePlayersJSONSecondPlayer() throws Exception {
+        assertEquals("[" + FIRST_PLAYER_JSON + ", " + SECOND_PLAYER_JSON_WITH_CARDS + "]",
+                playersList.generatePlayersJSON(SECOND_PLAYER));
+    }
+
+    @Test
+    public void shouldTwoPlayersJSONWhenGeneratePlayersJSONWithNotPresentPlayer() throws Exception {
+        assertEquals("[" + FIRST_PLAYER_JSON + ", " + SECOND_PLAYER_JSON + "]",
+                playersList.generatePlayersJSON(NOT_PRESENT_PLAYER));
+    }
+
+    @Test
+    public void shouldBothPlayersJSONWithCardsWhenGeneratePlayersJSONFirstPlayerSecondPlayer() throws Exception {
+        assertEquals("[" + FIRST_PLAYER_JSON_WITH_CARDS + ", " + SECOND_PLAYER_JSON_WITH_CARDS + "]",
+                playersList.generatePlayersJSON(FIRST_PLAYER, SECOND_PLAYER));
     }
 }
