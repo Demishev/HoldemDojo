@@ -117,7 +117,7 @@ public class PlayersList extends ArrayList<Player> {
         return get(nextPlayer(nextPlayer(dealerNumber)));
     }
 
-    public String generatePlayersJSON(String... playerNames) { //TODO not tested
+    public String generatePlayersJSON(String... playerNames) {
         List<String> playersJSON = new ArrayList<>();
 
         for (Player player : this) {
