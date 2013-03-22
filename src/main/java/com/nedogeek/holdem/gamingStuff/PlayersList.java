@@ -203,18 +203,29 @@ public class PlayersList extends ArrayList<Player> {
     }
 
     public int getPot() {
-        return 0;  //TODO this is a stub
+        int pot = 0;
+        for (Player player : this) {
+            pot += player.getBet();
+        }
+        return pot;
     }
 
     public String getDealerName() {
-        return null;  //TODO this is a stub
+        return this.get(dealerNumber).getName();
     }
 
     public String getMoverName() {
-        return null;  //TODO This is a stub
+        int moverNumber = getMoverNumber();
+
+        return (moverNumber != -1) ? this.get(moverNumber).getName() : "";
     }
 
     public String getPlayerCardCombination(String playerName) {
-        return null; //TODO This is a stub
+        for (Player player : this) {
+            if (player.getName().equals(playerName)) {
+                return player.getCardCombination().toString();
+            }
+        }
+        return "";
     }
 }

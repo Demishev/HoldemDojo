@@ -1,8 +1,8 @@
 package com.nedogeek.holdem.gamingStuff;
 
 import com.nedogeek.holdem.PlayerStatus;
+import com.nedogeek.holdem.combinations.PlayerCardCombination;
 import com.nedogeek.holdem.dealer.EventManager;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,6 +15,12 @@ import static org.mockito.Mockito.*;
  * Time: 1:55
  */
 public class PlayersListTest {
+    private final String FIRST_PLAYER = "First player";
+    private final String SECOND_PLAYER = "Second player";
+
+    private final String FIRST_PLAYER_CARD_COMBINATION_STRING = "First player card combination";
+    private final String SECOND_PLAYER_CARD_COMBINATION_STRING = "Second player card combination";
+
     private PlayersList playersList;
 
     private Player firstPlayer = mock(Player.class);
@@ -33,18 +39,35 @@ public class PlayersListTest {
     private void resetPlayers() {
         firstPlayer = mock(Player.class);
         secondPlayer = mock(Player.class);
-        
-        when(firstPlayer.getName()).thenReturn("First player");
-        when(secondPlayer.getName()).thenReturn("Second player");
+
+        when(firstPlayer.getName()).thenReturn(FIRST_PLAYER);
+        when(secondPlayer.getName()).thenReturn(SECOND_PLAYER);
 
         when(firstPlayer.getStatus()).thenReturn(PlayerStatus.NotMoved);
         when(secondPlayer.getStatus()).thenReturn(PlayerStatus.NotMoved);
+
+        setPlayersCardCombinations();
+    }
+
+    private void setPlayersCardCombinations() {
+        PlayerCardCombination firstPlayerCardCombinationMock = mock(PlayerCardCombination.class);
+        PlayerCardCombination secondPlayerCardCombinationMock = mock(PlayerCardCombination.class);
+
+        when(firstPlayer.getCardCombination()).thenReturn(firstPlayerCardCombinationMock);
+        when(secondPlayer.getCardCombination()).thenReturn(secondPlayerCardCombinationMock);
+
+        when(firstPlayerCardCombinationMock.toString()).thenReturn(FIRST_PLAYER_CARD_COMBINATION_STRING);
+        when(secondPlayerCardCombinationMock.toString()).thenReturn(SECOND_PLAYER_CARD_COMBINATION_STRING);
     }
 
     private void setDefaultTwoPlayersGame() {
         playersList.add(firstPlayer);
         playersList.add(secondPlayer);
         playersList.setNewGame();
+    }
+
+    private void setPlayerBet(Player player, int bet) {
+        when(player.getBet()).thenReturn(bet);
     }
 
     @Test
@@ -209,5 +232,73 @@ public class PlayersListTest {
         playersList.add(secondPlayer);
 
         assertEquals(2, playersList.size());
+    }
+
+    @Test
+    public void shouldPot0WhenDefault2PlayersGame() throws Exception {
+        assertEquals(0, playersList.getPot());
+    }
+
+    @Test
+    public void shouldPot100WhenFirstPlayerBet100() throws Exception {
+        setPlayerBet(firstPlayer, 100);
+
+        assertEquals(100, playersList.getPot());
+    }
+
+    @Test
+    public void shouldPot200WhenFirstPlayerBet100AndSecondPlayerBet100() throws Exception {
+        setPlayerBet(firstPlayer, 100);
+        setPlayerBet(secondPlayer, 100);
+
+        assertEquals(200, playersList.getPot());
+    }
+
+    @Test
+    public void shouldSecondPlayerIsDealerWhenDefaultGame() throws Exception {
+
+        assertEquals(SECOND_PLAYER, playersList.getDealerName());
+    }
+
+    @Test
+    public void shouldFirstPlayerIsDealerWhenDefaultGameSetNewGame() throws Exception {
+        playersList.setNewGame();
+
+        assertEquals(FIRST_PLAYER, playersList.getDealerName());
+    }
+
+    @Test
+    public void shouldFirstPlayerIsMoverWhenFirstPlayerIsActive() throws Exception {
+        when(firstPlayer.isActiveNotRisePlayer()).thenReturn(true);
+
+        assertEquals(FIRST_PLAYER, playersList.getMoverName());
+    }
+
+    @Test
+    public void shouldSecondPlayerIsMoverWhenSecondPlayerIsActiveAndFirstPlayerMoved() throws Exception {
+        when(secondPlayer.isActiveNotRisePlayer()).thenReturn(true);
+        playersList.playerMoved(firstPlayer);
+
+        assertEquals(SECOND_PLAYER, playersList.getMoverName());
+    }
+
+    @Test
+    public void shouldEmptyStringWhenDefault() throws Exception {
+        assertEquals("", playersList.getMoverName());
+    }
+
+    @Test
+    public void shouldFirstPlayerCardCombinationWhenGetFirstPlayerCardCombination() throws Exception {
+        assertEquals(FIRST_PLAYER_CARD_COMBINATION_STRING, playersList.getPlayerCardCombination(FIRST_PLAYER));
+    }
+
+    @Test
+    public void shouldSecondPlayerCardCombinationWhenGetSecondPlayerCardCombination() throws Exception {
+        assertEquals(SECOND_PLAYER_CARD_COMBINATION_STRING, playersList.getPlayerCardCombination(SECOND_PLAYER));
+    }
+
+    @Test
+    public void shouldEmptyStringWhenGetCardCombinationOgNotPresentedPlayer() throws Exception {
+        assertEquals("", playersList.getPlayerCardCombination("Not presented player"));
     }
 }
