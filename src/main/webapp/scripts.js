@@ -113,8 +113,8 @@ drawDeskInfo = function () {
     $(document).find(".deskPot").text("Pot: $" + gameData.deskPot);
 
     $cardCombinationDiv = $(document).find(".cardCombination");
-    if (gameData.cardCombination != undefined) {
-        $cardCombinationDiv.text(gameData.cardCombination);
+    if (gameData.combination != undefined) {
+        $cardCombinationDiv.text(gameData.combination);
     } else {
         $cardCombinationDiv.text("");
     }
