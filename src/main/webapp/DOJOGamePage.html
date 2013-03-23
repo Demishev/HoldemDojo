@@ -7,13 +7,13 @@
     <link href="styles.css" type="text/css" rel="stylesheet">
     <script src="jquery.min.js"></script>
     <script src="scripts.js"></script>
+    <script src="gameData.js"></script>
 </head>
 
 <body>
 <div id="session">
-    <label for="login"></label><input id="login">
-    <label for="password"></label><input id="password" type="password">
-    <label for="server"></label><input id="server" value="ws://localhost:8080/ws">
+    <label for="login"></label><input id="login" value="User">
+    <label for="password"></label><input id="password" value="Password" type="password">
     <button class="sessionButton" onclick="sessionAction()">login</button>
 </div>
 
@@ -189,16 +189,16 @@
     </ul>
 
     <ul class="deskCards">
-        <li class="card card0"></li>
-        <li class="card card1"></li>
-        <li class="card card2"></li>
-        <li class="card card3"></li>
-        <li class="card card4"></li>
+        <li class="card card0" style="opacity:0;"></li>
+        <li class="card card1" style="opacity:0;"></li>
+        <li class="card card2" style="opacity:0;"></li>
+        <li class="card card3" style="opacity:0;"></li>
+        <li class="card card4" style="opacity:0;"></li>
     </ul>
 
-    <div class="deskPot"> Pot: $5800</div>
+    <div class="deskPot"></div>
 
-    <div class="cardCombination"> Royal flash on blah, blah, blah.</div>
+    <div class="cardCombination"></div>
 
 </div>
 
@@ -207,8 +207,8 @@
 </label>
 
 <script>
-    $(document).ready(function() {
-        connect();
+    $(document).ready(function () {
+        connect(server);
     });
 </script>
 

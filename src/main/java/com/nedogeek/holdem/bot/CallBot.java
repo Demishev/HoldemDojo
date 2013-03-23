@@ -15,6 +15,10 @@ public class CallBot extends Player {
         super("Call bot", dealer);
     }
 
+    public CallBot(String name, Dealer dealer) {
+        super(name, dealer);
+    }
+
     @Override
     public PlayerAction getMove() {
         return new PlayerAction(PlayerAction.ActionType.Call);

@@ -14,6 +14,10 @@ public class RiseBot extends Player {
         super("Rise bot", dealer);
     }
 
+    public RiseBot(String name, Dealer dealer) {
+        super(name, dealer);
+    }
+
     @Override
     public PlayerAction getMove() {
         return new PlayerAction(PlayerAction.ActionType.Rise);

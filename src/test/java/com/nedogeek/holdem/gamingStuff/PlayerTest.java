@@ -121,4 +121,9 @@ public class PlayerTest {
         assertEquals("{\"balance\":1000,\"status\":\"NotMoved\",\"name\":\"Player name\",\"pot\":0" +
                 ",\"cards\":[\"FirstCardJSON\",\"SecondCardJSON\"]}", player.toJSONWithCards());
     }
+
+    @Test
+    public void shouldNoNullPointerWhenNewPlayerGenerateJSONWithCards() throws Exception {
+        new Player("New player", dealerMock).toJSONWithCards();
+    }
 }

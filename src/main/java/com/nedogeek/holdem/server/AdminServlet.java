@@ -36,6 +36,11 @@ public class AdminServlet extends HttpServlet {
         players.add(new CallBot(dealer));
         players.add(new FoldBot(dealer));
 
+        players.add(new CallBot("Vasili Call", dealer));
+        players.add(new RandomBot("Fredia Rand", dealer));
+        players.add(new RandomBot("Nina Rand", dealer));
+        players.add(new RiseBot("Leha Rise!", dealer));
+
         dealerThread = new Thread(dealer);
         dealerThread.start();
     }

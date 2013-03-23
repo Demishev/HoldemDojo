@@ -4,9 +4,11 @@
  */
 document.write("<script src='jquery.min.js' type='text/javascript'></script>");
 document.write("<script src='gameData.js' type='text/javascript'></script> ");
+var socket;
 
-var connect = function () {
-    socket = new WebSocket(server);
+
+var connect = function (path) {
+    socket = new WebSocket(path);
 
     socket.onopen = function () {
 

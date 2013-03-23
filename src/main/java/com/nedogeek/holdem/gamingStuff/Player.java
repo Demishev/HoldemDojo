@@ -26,7 +26,7 @@ public class Player implements Comparable<Player> {
     private PlayerStatus status;
     private int bet;
     private int balance = GameSettings.COINS_AT_START;
-    private Card[] cards;
+    private Card[] cards = new Card[0];
 
     private PlayerAction playerAction = DEFAULT_ACTION;
 

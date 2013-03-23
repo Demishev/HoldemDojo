@@ -20,6 +20,12 @@ public class RandomBot extends Player {
         random = new Random();
     }
 
+    public RandomBot(String name, Dealer dealer) {
+        super(name, dealer);
+
+        random = new Random();
+    }
+
     @Override
     public PlayerAction getMove() {
         int riseAmount = 0;

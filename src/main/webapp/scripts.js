@@ -6,8 +6,19 @@ document.write("<script src='jquery.min.js' type='text/javascript'></script>");
 document.write("<script src='gameData.js' type='text/javascript'></script> ");
 document.write("<script src='gameSocket.js' type='text/javascript'></script> ");
 
+var path;
+
 var sessionAction = function () {
-    connect();
+    login = $(document).find('#login').val();
+    password = $(document).find('#password').val();
+
+    path = server + '?user=' + login + '&password=' + password;
+
+    if (socket != undefined) {
+        socket.close();
+    }
+
+    connect(path);
 };
 
 var drawGameData = function () {
@@ -27,6 +38,9 @@ var drawEvents = function () {
     for (i = 0; i < event.length; i++) {
         $console.append(event[i] + "\n");
     }
+
+    textarea = document.getElementsByClassName('console');
+    textarea.scrollTop = textarea.scrollHeight;
 };
 
 drawPlayers = function () {
