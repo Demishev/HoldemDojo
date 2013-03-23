@@ -1,6 +1,7 @@
 package com.nedogeek.holdem.gameEvents;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 /**
  * User: Demishev
@@ -17,5 +18,14 @@ public abstract class Event implements Serializable {
     @Override
     public String toString() {
         return event;
+    }
+
+    public String toJSON() {
+        String[] result = (event.split("\n"));
+        for (int i = 0; i < result.length; i++) {
+            result[i] = "\"" + result[i] + "\"";
+        }
+
+        return Arrays.toString(result);
     }
 }

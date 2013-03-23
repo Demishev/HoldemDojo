@@ -10,38 +10,51 @@ var server = "ws://77.47.200.184:8080/ws";
 gameData = {
 
 
-players: [ {
-    name: "First player",
-    balance: 100,
-    pot: 28,
+    players: [
+        {
+            name: "First player",
+            balance: 100,
+            pot: 28,
 
-    cards: [{cardValue: "K", cardSuit: "♠"}, {cardValue: "10", cardSuit: "♥"}],
+            cards: [
+                {cardValue: "K", cardSuit: "♠"},
+                {cardValue: "10", cardSuit: "♥"}
+            ],
 
-    status: "Folded"
-}, {
-    name: "Second player",
-    balance: 12004,
-    pot: 148,
+            status: "Folded"
+        },
+        {
+            name: "Second player",
+            balance: 12004,
+            pot: 148,
 
-    cards: [{cardValue: "2", cardSuit: "♦"}, {cardValue: "10", cardSuit: "♦"}],
+            cards: [
+                {cardValue: "2", cardSuit: "♦"},
+                {cardValue: "10", cardSuit: "♦"}
+            ],
 
-    status: "Bet 15"
-}, {
-    name: "Third player",
-    balance: 23,
-    pot: 0
-}],
+            status: "Bet 15"
+        },
+        {
+            name: "Third player",
+            balance: 23,
+            pot: 0
+        }
+    ],
 
 
-deskCards: [{cardValue: "2", cardSuit: "♦"}, {cardValue: "4", cardSuit: "♦"},
-    {cardValue: "5", cardSuit: "♦"}],
+    deskCards: [
+        {cardValue: "2", cardSuit: "♦"},
+        {cardValue: "4", cardSuit: "♦"},
+        {cardValue: "5", cardSuit: "♦"}
+    ],
 
-deskPot: 580,
-moverNumber: 0,
-dealerNumber: 0,
+    deskPot: 580,
+    mover: "First player",
+    dealer: "Second player",
 
-events: ["Some first event", "Some second event", "Some third event"],
+    event: ["Some event"],
 
-cardCombination: "Some test card combination text."
+    combination: "Some test card combination text."
 
 };

@@ -119,7 +119,7 @@ public class EventManager implements Serializable {
         String gameRound = dealer.getGameRound().toString();
         int pot = playersList.getPot();
         String deskCards = generateCardsJSON();
-        String event = this.event.toString();
+        String event = this.event.toJSON();
 
         String dealerName = playersList.getDealerName();
         String moverName = playersList.getMoverName();
@@ -128,7 +128,7 @@ public class EventManager implements Serializable {
         message += "\"gameRound\":\"" + gameRound + "\"";
         message += "," + "\"dealer\":\"" + dealerName + "\"";
         message += "," + "\"mover\":\"" + moverName + "\"";
-        message += "," + "\"event\":\"" + event + "\"";
+        message += "," + "\"event\":" + event;
         message += "," + "\"players\":" + playersJSON;
         if (!connectionName.equals(PUBLIC)) {
             message += "," + "\"combination\":\"" + playersList.getPlayerCardCombination(connectionName) + "\"";

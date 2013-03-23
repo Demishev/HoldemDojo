@@ -35,9 +35,8 @@ public class EndGameManager {
     public void endGame() {
         Map<Player, Integer> winners = rewardWinners();
 
-        endGameSleep();
-
         eventManager.addEvent(new GameEndedEvent(winners));
+        endGameSleep();
 
         dealer.setInitialGameRound();
     }
@@ -63,7 +62,7 @@ public class EndGameManager {
                 winners.put(winPlayer, prize);
             }
         }
-        checkZeroBalance();//TODO Need to create new SystemEvent
+        checkZeroBalance();//TODO Need to create new SystemEvent to remove players without chips and connections
 
         return winners;
     }

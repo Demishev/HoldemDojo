@@ -47,7 +47,7 @@ public class EventManagerTest {
     private final String SECOND_PLAYER_CARD_COMBINATION = "Second player cards combination";
 
     private final String DEFAULT_MESSAGE = "{\"gameRound\":\"" + INITIAL + "\",\"dealer\":\"" + DEALER_NAME + "\"," +
-            "\"mover\":\"" + MOVER_NAME + "\",\"event\":\"" + EVENT_MOCK + "\",\"players\":" + PLAYERS_JSON + "," +
+            "\"mover\":\"" + MOVER_NAME + "\",\"event\":" + EVENT_MOCK + ",\"players\":" + PLAYERS_JSON + "," +
             "\"gameStatus\":\"" + READY + "\",\"deskCards\":[],\"deskPot\":0}";
 
     private final String SECOND_PLAYER_WITH_CARDS_MESSAGE = "{\"gameRound\":\"" + INITIAL + "\",\"dealer\":\"" + DEALER_NAME + "\"," +
@@ -57,7 +57,7 @@ public class EventManagerTest {
             + "\"," + "\"," + "\"gameStatus\":\"" + READY + "\",\"deskCards\":[],\"deskPot\":0}";
 
     private final String FIRST_PLAYER_WITH_CARDS_MESSAGE = "{\"gameRound\":\"" + INITIAL + "\",\"dealer\":\"" + DEALER_NAME + "\"," +
-            "\"mover\":\"" + MOVER_NAME + "\",\"event\":\"" + EVENT_MOCK + "\",\"players\":" +
+            "\"mover\":\"" + MOVER_NAME + "\",\"event\":" + EVENT_MOCK + ",\"players\":" +
             FIRST_PLAYER + JSON + CARDS
             + ",\"combination\":\"" + FIRST_PLAYER_CARD_COMBINATION
             + "\"," +
@@ -101,10 +101,10 @@ public class EventManagerTest {
         resetCards();
 
         eventMock = mock(Event.class);
-        when(eventMock.toString()).thenReturn(EVENT_MOCK);
+        when(eventMock.toJSON()).thenReturn(EVENT_MOCK);
 
         gameEndedEventMock = mock(GameEndedEvent.class);
-        when(gameEndedEventMock.toString()).thenReturn("Game ended");
+        when(gameEndedEventMock.toJSON()).thenReturn("Game ended");
 
         eventManager = EventManager.getTestInstance();
         eventManager.setDealer(dealerMock);
@@ -304,7 +304,7 @@ public class EventManagerTest {
         eventManager.addEvent(eventMock);
 
         String message = "{\"gameRound\":\"" + INITIAL + "\",\"dealer\":\"" + DEALER_NAME + "\"," +
-                "\"mover\":\"" + MOVER_NAME + "\",\"event\":\"" + EVENT_MOCK + "\",\"players\":" +
+                "\"mover\":\"" + MOVER_NAME + "\",\"event\":" + EVENT_MOCK + ",\"players\":" +
                 SECOND_PLAYER + JSON + CARDS
                 + "," +
                 "\"combination\":\"" + SECOND_PLAYER_CARD_COMBINATION
@@ -346,7 +346,7 @@ public class EventManagerTest {
         eventManager.addEvent(gameEndedEventMock);
 
         String message = "{\"gameRound\":\"" + INITIAL + "\",\"dealer\":\"" + DEALER_NAME + "\"," +
-                "\"mover\":\"" + MOVER_NAME + "\",\"event\":\"" + "Game ended" + "\",\"players\":" +
+                "\"mover\":\"" + MOVER_NAME + "\",\"event\":" + "Game ended" + ",\"players\":" +
 
                 FIRST_PLAYER + JSON + CARDS
 
@@ -364,7 +364,7 @@ public class EventManagerTest {
         eventManager.addEvent(gameEndedEventMock);
 
         String message = "{\"gameRound\":\"" + INITIAL + "\",\"dealer\":\"" + DEALER_NAME + "\"," +
-                "\"mover\":\"" + MOVER_NAME + "\",\"event\":\"" + "Game ended" + "\",\"players\":" +
+                "\"mover\":\"" + MOVER_NAME + "\",\"event\":" + "Game ended" + ",\"players\":" +
 
                 FIRST_PLAYER + JSON + CARDS + "," + SECOND_PLAYER + JSON + CARDS
 
@@ -382,7 +382,7 @@ public class EventManagerTest {
         eventManager.addEvent(gameEndedEventMock);
 
         String message = "{\"gameRound\":\"" + INITIAL + "\",\"dealer\":\"" + DEALER_NAME + "\"," +
-                "\"mover\":\"" + MOVER_NAME + "\",\"event\":\"" + "Game ended" + "\",\"players\":" +
+                "\"mover\":\"" + MOVER_NAME + "\",\"event\":" + "Game ended" + ",\"players\":" +
 
                 FIRST_PLAYER + JSON + CARDS + "," + SECOND_PLAYER + JSON + CARDS
 
@@ -408,7 +408,7 @@ public class EventManagerTest {
         eventManager.addEvent(eventMock);
 
         String message = "{\"gameRound\":\"" + INITIAL + "\",\"dealer\":\"" + DEALER_NAME + "\"," +
-                "\"mover\":\"" + MOVER_NAME + "\",\"event\":\"" + EVENT_MOCK + "\",\"players\":" + PLAYERS_JSON + "," +
+                "\"mover\":\"" + MOVER_NAME + "\",\"event\":" + EVENT_MOCK + ",\"players\":" + PLAYERS_JSON + "," +
                 "\"gameStatus\":\"" + READY + "\",\"deskCards\":" +
                 "[" + FIRST_CARD_JSON + "," + SECOND_CARD_JSON + "]" +
                 ",\"deskPot\":0}";

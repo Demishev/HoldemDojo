@@ -20,13 +20,13 @@ var drawGameData = function () {
 };
 
 
-drawEvents = function () {
+var drawEvents = function () {
     $console = $(document).find(".console");
-    $console.text("");
 
-    $(gameData.events).each(function () {
-        $console.append(this + "\n");
-    });
+    event = gameData.event;
+    for (i = 0; i < event.length; i++) {
+        $console.append(event[i] + "\n");
+    }
 };
 
 drawPlayers = function () {
@@ -75,20 +75,20 @@ drawPlayers = function () {
 ;
 
 updateCard = function (card, cardDiv) {
-    fileName = "cardDeck/" + card.cardSuit + card.cardValue + ".png";
+    fileName = "cardDeck/" + card.cardValue + card.cardSuit + ".png";
     cardDiv.css("background-image", "url(" + fileName + ")");
 };
 
-drawDeskInfo = function() {
+drawDeskInfo = function () {
     $deskCardsDiv = $(document).find(".deskCards .card");
 
-    $deskCardsDiv.each(function(cardNumber) {
+    $deskCardsDiv.each(function (cardNumber) {
         $($deskCardsDiv[cardNumber]).css("opacity", 0);
     });
 
     $deskCards = $(gameData.deskCards);
 
-    $deskCards.each(function(cardNumber) {
+    $deskCards.each(function (cardNumber) {
         updateCard($deskCards[cardNumber], $($deskCardsDiv[cardNumber]));
 
 
@@ -108,5 +108,6 @@ drawDeskInfo = function() {
 };
 
 drawMover = function () {
-    $(document).find(".player" + gameData.moverNumber).addClass("mover");
+    if (gameData.mover != "")
+        $(document).find('.name:contains(' + gameData.mover + ')').parent().addClass("mover");
 };
