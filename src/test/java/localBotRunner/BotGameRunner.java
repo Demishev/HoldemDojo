@@ -1,5 +1,6 @@
 package localBotRunner;
 
+import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.bot.CallBot;
 import com.nedogeek.holdem.bot.FoldBot;
 import com.nedogeek.holdem.bot.RandomBot;
@@ -42,6 +43,8 @@ public class BotGameRunner {
         players.add(new CallBot(dealer));
         players.add(new FoldBot(dealer));
 
+        GameSettings.END_GAME_DELAY_VALUE = 100;
+        GameSettings.GAME_DELAY_VALUE = 100;
 
         WebSocket.Connection consoleConnection = prepareConsoleConnection();
 

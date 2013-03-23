@@ -163,7 +163,7 @@ public class PlayersList extends ArrayList<Player> {
             if (playerStatus != PlayerStatus.Fold && playerStatus != PlayerStatus.AllIn)
                 player.setStatus(PlayerStatus.NotMoved);
         }
-        lastMovedPlayer = -1;
+        lastMovedPlayer = dealerNumber;
     }
 
     public boolean moreThanOnePlayerNotFolds() {

@@ -338,4 +338,15 @@ public class PlayersListTest {
         assertEquals("[" + FIRST_PLAYER_JSON_WITH_CARDS + ", " + SECOND_PLAYER_JSON_WITH_CARDS + "]",
                 playersList.generatePlayersJSON(FIRST_PLAYER, SECOND_PLAYER));
     }
+
+    @Test
+    public void shouldMoverIsSecondPlayerChangeDealerWhenSetNewGameSetPlayersNotMovedGetMoverNumber() throws Exception {
+        playersList.setNewGame();
+        playersList.setPlayersNotMoved();
+
+        when(secondPlayer.isActiveNotRisePlayer()).thenReturn(true);
+        when(firstPlayer.isActiveNotRisePlayer()).thenReturn(true);
+
+        assertEquals(secondPlayer, playersList.getMover());
+    }
 }
