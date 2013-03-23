@@ -47,20 +47,19 @@ public class EventManagerTest {
     private final String SECOND_PLAYER_CARD_COMBINATION = "Second player cards combination";
 
     private final String DEFAULT_MESSAGE = "{\"gameRound\":\"" + INITIAL + "\",\"dealer\":\"" + DEALER_NAME + "\"," +
-            "\"mover\":\"" + MOVER_NAME + "\",\"event\":\"" + EVENT_MOCK + "\",\"players\":\"" + PLAYERS_JSON + "\"," +
+            "\"mover\":\"" + MOVER_NAME + "\",\"event\":\"" + EVENT_MOCK + "\",\"players\":" + PLAYERS_JSON + "," +
             "\"gameStatus\":\"" + READY + "\",\"deskCards\":[],\"deskPot\":0}";
 
     private final String SECOND_PLAYER_WITH_CARDS_MESSAGE = "{\"gameRound\":\"" + INITIAL + "\",\"dealer\":\"" + DEALER_NAME + "\"," +
-            "\"mover\":\"" + MOVER_NAME + "\",\"event\":\"" + EVENT_MOCK + "\",\"players\":\"" +
+            "\"mover\":\"" + MOVER_NAME + "\",\"event\":\"" + EVENT_MOCK + "\",\"players\":" +
             SECOND_PLAYER + JSON + CARDS +
-            "\"combination\":\"" + FIRST_PLAYER_CARD_COMBINATION
+            ",combination\":\"" + FIRST_PLAYER_CARD_COMBINATION
             + "\"," + "\"," + "\"gameStatus\":\"" + READY + "\",\"deskCards\":[],\"deskPot\":0}";
 
     private final String FIRST_PLAYER_WITH_CARDS_MESSAGE = "{\"gameRound\":\"" + INITIAL + "\",\"dealer\":\"" + DEALER_NAME + "\"," +
-            "\"mover\":\"" + MOVER_NAME + "\",\"event\":\"" + EVENT_MOCK + "\",\"players\":\"" +
+            "\"mover\":\"" + MOVER_NAME + "\",\"event\":\"" + EVENT_MOCK + "\",\"players\":" +
             FIRST_PLAYER + JSON + CARDS
-            + "\"," +
-            "\"combination\":\"" + FIRST_PLAYER_CARD_COMBINATION
+            + ",\"combination\":\"" + FIRST_PLAYER_CARD_COMBINATION
             + "\"," +
             "\"gameStatus\":\"" + READY + "\",\"deskCards\":[],\"deskPot\":0}";
 
@@ -305,9 +304,9 @@ public class EventManagerTest {
         eventManager.addEvent(eventMock);
 
         String message = "{\"gameRound\":\"" + INITIAL + "\",\"dealer\":\"" + DEALER_NAME + "\"," +
-                "\"mover\":\"" + MOVER_NAME + "\",\"event\":\"" + EVENT_MOCK + "\",\"players\":\"" +
+                "\"mover\":\"" + MOVER_NAME + "\",\"event\":\"" + EVENT_MOCK + "\",\"players\":" +
                 SECOND_PLAYER + JSON + CARDS
-                + "\"," +
+                + "," +
                 "\"combination\":\"" + SECOND_PLAYER_CARD_COMBINATION
                 + "\"," +
                 "\"gameStatus\":\"" + READY + "\",\"deskCards\":[],\"deskPot\":0}";
@@ -347,11 +346,11 @@ public class EventManagerTest {
         eventManager.addEvent(gameEndedEventMock);
 
         String message = "{\"gameRound\":\"" + INITIAL + "\",\"dealer\":\"" + DEALER_NAME + "\"," +
-                "\"mover\":\"" + MOVER_NAME + "\",\"event\":\"" + "Game ended" + "\",\"players\":\"" +
+                "\"mover\":\"" + MOVER_NAME + "\",\"event\":\"" + "Game ended" + "\",\"players\":" +
 
                 FIRST_PLAYER + JSON + CARDS
 
-                + "\"," + "\"gameStatus\":\"" + READY + "\",\"deskCards\":[],\"deskPot\":0}";
+                + "," + "\"gameStatus\":\"" + READY + "\",\"deskCards\":[],\"deskPot\":0}";
 
         verify(firstViewerConnectionMock).sendMessage(message);
     }
@@ -365,11 +364,11 @@ public class EventManagerTest {
         eventManager.addEvent(gameEndedEventMock);
 
         String message = "{\"gameRound\":\"" + INITIAL + "\",\"dealer\":\"" + DEALER_NAME + "\"," +
-                "\"mover\":\"" + MOVER_NAME + "\",\"event\":\"" + "Game ended" + "\",\"players\":\"" +
+                "\"mover\":\"" + MOVER_NAME + "\",\"event\":\"" + "Game ended" + "\",\"players\":" +
 
                 FIRST_PLAYER + JSON + CARDS + "," + SECOND_PLAYER + JSON + CARDS
 
-                + "\"," +
+                + "," +
                 "\"combination\":\"" + FIRST_PLAYER_CARD_COMBINATION
                 + "\"," + "\"gameStatus\":\"" + READY + "\",\"deskCards\":[],\"deskPot\":0}";
 
@@ -383,11 +382,11 @@ public class EventManagerTest {
         eventManager.addEvent(gameEndedEventMock);
 
         String message = "{\"gameRound\":\"" + INITIAL + "\",\"dealer\":\"" + DEALER_NAME + "\"," +
-                "\"mover\":\"" + MOVER_NAME + "\",\"event\":\"" + "Game ended" + "\",\"players\":\"" +
+                "\"mover\":\"" + MOVER_NAME + "\",\"event\":\"" + "Game ended" + "\",\"players\":" +
 
                 FIRST_PLAYER + JSON + CARDS + "," + SECOND_PLAYER + JSON + CARDS
 
-                + "\"," + "\"gameStatus\":\"" + READY + "\",\"deskCards\":[],\"deskPot\":0}";
+                + "," + "\"gameStatus\":\"" + READY + "\",\"deskCards\":[],\"deskPot\":0}";
 
         verify(firstViewerConnectionMock).sendMessage(message);
     }

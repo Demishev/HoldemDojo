@@ -6,7 +6,6 @@ import com.nedogeek.holdem.gameEvents.GameEndedEvent;
 import com.nedogeek.holdem.gameEvents.RemovePlayerEvent;
 import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
-import net.sf.json.JSONObject;
 import org.eclipse.jetty.websocket.WebSocket.Connection;
 
 import java.io.IOException;
@@ -124,24 +123,23 @@ public class EventManager implements Serializable {
         String dealerName = playersList.getDealerName();
         String moverName = playersList.getMoverName();
 
-
-        Map<String, Serializable> gameData = new HashMap<>();
-        gameData.put("gameStatus", gameStatus);
-        gameData.put("gameRound", gameRound);
-
-        gameData.put("players", playersJSON);
-        gameData.put("mover", moverName);
-        gameData.put("dealer", dealerName);
-
-        gameData.put("deskCards", deskCards);
-        gameData.put("deskPot", pot);
-
-        gameData.put("event", event);
-
+        String message = "{";
+        message += "\"gameRound\":\"" + gameRound + "\"";
+        message += "," + "\"dealer\":\"" + dealerName + "\"";
+        message += "," + "\"mover\":\"" + moverName + "\"";
+        message += "," + "\"event\":\"" + event + "\"";
+        message += "," + "\"players\":" + playersJSON;
         if (!connectionName.equals(PUBLIC)) {
-            gameData.put("combination", playersList.getPlayerCardCombination(connectionName));
+            message += "," + "\"combination\":\"" + playersList.getPlayerCardCombination(connectionName) + "\"";
         }
-        return JSONObject.fromMap(gameData).toString();
+        message += "," + "\"gameStatus\":\"" + gameStatus + "\"";
+
+        message += "," + "\"deskCards\":" + deskCards;
+        message += "," + "\"deskPot\":" + pot;
+
+
+        message += "}";
+        return message;
     }
 
     private String generatePlayersJSON(String connectionName) {
