@@ -6,7 +6,7 @@ import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
 
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -51,7 +51,7 @@ public class EndGameManager {
     }
 
     private Map<Player, Integer> rewardWinners() {
-        Map<Player, Integer> winners = new HashMap<>();
+        Map<Player, Integer> winners = new LinkedHashMap<>();
 
         Object[] winCandidates = playersList.toArray();
         Arrays.sort(winCandidates);

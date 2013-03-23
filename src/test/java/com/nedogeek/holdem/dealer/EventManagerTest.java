@@ -81,6 +81,12 @@ public class EventManagerTest {
     private Player secondPlayerMock;
     private PlayersList playersListMock;
 
+    private final String FIRST_CARD_JSON = "FirstCardJSON";
+    private final String SECOND_CARD_JSON = "SecondCardJSON";
+
+    private Card firstCardMock;
+    private Card secondCardMock;
+
     private Dealer dealerMock;
 
 
@@ -93,6 +99,8 @@ public class EventManagerTest {
         resetPlayersMock();
         resetPlayerListMock();
 
+        resetCards();
+
         eventMock = mock(Event.class);
         when(eventMock.toString()).thenReturn(EVENT_MOCK);
 
@@ -103,6 +111,14 @@ public class EventManagerTest {
         eventManager.setDealer(dealerMock);
         eventManager.setPlayersList(playersListMock);
         eventManager.addViewer(firstViewerConnectionMock);
+    }
+
+    private void resetCards() {
+        firstCardMock = mock(Card.class);
+        secondCardMock = mock(Card.class);
+
+        when(firstCardMock.toJSON()).thenReturn(FIRST_CARD_JSON);
+        when(secondCardMock.toJSON()).thenReturn(SECOND_CARD_JSON);
     }
 
     private void resetConnections() {

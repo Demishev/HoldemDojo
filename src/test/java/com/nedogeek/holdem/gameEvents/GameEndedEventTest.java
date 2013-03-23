@@ -5,7 +5,7 @@ import com.nedogeek.holdem.gamingStuff.Player;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
@@ -35,7 +35,7 @@ public class GameEndedEventTest {
 
     @Before
     public void setUp() throws Exception {
-        winners = new HashMap<>();
+        winners = new LinkedHashMap<>();
 
         resetPlayers();
     }
