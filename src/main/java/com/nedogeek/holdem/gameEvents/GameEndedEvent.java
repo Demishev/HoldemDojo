@@ -11,7 +11,7 @@ import java.util.Map;
  * Date: 22.03.13
  * Time: 12:01
  */
-public class GameEndedEvent extends Event {//TODO test toString()
+public class GameEndedEvent extends Event {
     private final Map<Player, Integer> winners;
 
     public GameEndedEvent(Map<Player, Integer> winners) {

@@ -400,4 +400,19 @@ public class EventManagerTest {
 
         verify(firstViewerConnectionMock).sendMessage(anyString());
     }
+
+    @Test
+    public void shouldDefaultMessageWithDeskCardsSendToFirstViewerMockEqualsDefaultMessage() throws Exception {
+        when(dealerMock.getDeskCards()).thenReturn(new Card[]{firstCardMock, secondCardMock});
+
+        eventManager.addEvent(eventMock);
+
+        String message = "{\"gameRound\":\"" + INITIAL + "\",\"dealer\":\"" + DEALER_NAME + "\"," +
+                "\"mover\":\"" + MOVER_NAME + "\",\"event\":\"" + EVENT_MOCK + "\",\"players\":" + PLAYERS_JSON + "," +
+                "\"gameStatus\":\"" + READY + "\",\"deskCards\":" +
+                "[" + FIRST_CARD_JSON + "," + SECOND_CARD_JSON + "]" +
+                ",\"deskPot\":0}";
+
+        verify(firstViewerConnectionMock).sendMessage(message);
+    }
 }

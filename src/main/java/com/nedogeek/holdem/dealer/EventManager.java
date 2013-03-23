@@ -4,6 +4,7 @@ import com.nedogeek.holdem.gameEvents.AddPlayerEvent;
 import com.nedogeek.holdem.gameEvents.Event;
 import com.nedogeek.holdem.gameEvents.GameEndedEvent;
 import com.nedogeek.holdem.gameEvents.RemovePlayerEvent;
+import com.nedogeek.holdem.gamingStuff.Card;
 import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
 import org.eclipse.jetty.websocket.WebSocket.Connection;
@@ -117,7 +118,7 @@ public class EventManager implements Serializable {
         String gameStatus = dealer.getGameStatus().toString();
         String gameRound = dealer.getGameRound().toString();
         int pot = playersList.getPot();
-        String deskCards = Arrays.toString(dealer.getDeskCards());
+        String deskCards = generateCardsJSON();
         String event = this.event.toString();
 
         String dealerName = playersList.getDealerName();
@@ -140,6 +141,20 @@ public class EventManager implements Serializable {
 
         message += "}";
         return message;
+    }
+
+    private String generateCardsJSON() {
+        String cardsJSON = "[";
+
+        if (dealer.getDeskCards().length > 0) {
+            for (Card card : dealer.getDeskCards()) {
+                cardsJSON += card.toJSON() + ",";
+            }
+            cardsJSON = cardsJSON.substring(0, cardsJSON.length() - 1);
+        }
+        cardsJSON += "]";
+
+        return cardsJSON;
     }
 
     private String generatePlayersJSON(String connectionName) {

@@ -17,6 +17,7 @@ var connect = function () {
     };
 
     socket.onmessage = function (message) {
+        datas = message.data;
         gameData = JSON.parse(message.data);
         drawGameData();
     }
