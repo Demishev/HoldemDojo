@@ -69,7 +69,6 @@ public class MoveManager {
 
     private void trySendToPot(Player player, int betValue) {
         final int playerAmount = player.getBalance();
-
         if (playerAmount <= betValue) {
             sendToPot(player, playerAmount);
             player.setStatus(PlayerStatus.AllIn);

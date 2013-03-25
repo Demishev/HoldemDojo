@@ -22,6 +22,7 @@ public class NewGameSetter {
 
     void setNewGame() {
         if (playersList.size() > 1) {
+            dealer.setCallValue(0);
             playersList.setNewGame();
 
             resetCards();
@@ -29,7 +30,6 @@ public class NewGameSetter {
 
 
             dealer.setNextGameRound();
-            dealer.setCallValue(0);
             EventManager.getInstance().addEvent(new NewGameStartedEvent());
         }
     }

@@ -2,9 +2,7 @@ package com.nedogeek.holdem.server;
 
 import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.bot.CallBot;
-import com.nedogeek.holdem.bot.FoldBot;
 import com.nedogeek.holdem.bot.RandomBot;
-import com.nedogeek.holdem.bot.RiseBot;
 import com.nedogeek.holdem.dealer.Dealer;
 import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
@@ -53,15 +51,8 @@ public class AdminServlet extends HttpServlet {
 
         dealer = new Dealer(players);
 
-        players.add(new RiseBot(dealer));
         players.add(new RandomBot(dealer));
         players.add(new CallBot(dealer));
-        players.add(new FoldBot("Folding bot", dealer));
-
-        players.add(new CallBot("Vasili Call", dealer));
-        players.add(new RandomBot("Fredia Rand", dealer));
-        players.add(new RandomBot("Nina Rand", dealer));
-        players.add(new RiseBot("Leha Rise!", dealer));
     }
 
     @Override

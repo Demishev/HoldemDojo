@@ -6,7 +6,7 @@ package com.nedogeek.holdem;
  * Time: 22:46
  */
 public class GameSettings {
-    private static int coinsAtStart = 1000;
+    private static int coinsAtStart = 100;
     private static int smallBlind = 10;
     private static long gameDelayValue = 1000;
     private static long endGameDelayValue = 3000;
