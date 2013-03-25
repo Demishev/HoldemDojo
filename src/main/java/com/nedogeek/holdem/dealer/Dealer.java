@@ -1,6 +1,7 @@
 package com.nedogeek.holdem.dealer;
 
 import com.nedogeek.holdem.GameRound;
+import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.GameStatus;
 import com.nedogeek.holdem.gameEvents.ChangeGameRoundEvent;
 import com.nedogeek.holdem.gameEvents.PlayerMovesNotificationEvent;
@@ -90,6 +91,11 @@ public class Dealer implements Runnable {
             case STARTED:
                 makeGameAction();
                 break;
+            default:
+                try {
+                    Thread.sleep(GameSettings.getGameDelayValue());
+                } catch (InterruptedException ignored) {
+                }
         }
     }
 

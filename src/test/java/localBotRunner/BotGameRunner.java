@@ -43,8 +43,8 @@ public class BotGameRunner {
         players.add(new CallBot(dealer));
         players.add(new FoldBot(dealer));
 
-        GameSettings.END_GAME_DELAY_VALUE = 100;
-        GameSettings.GAME_DELAY_VALUE = 100;
+        GameSettings.setEndGameDelayValue(100);
+        GameSettings.setGameDelayValue(100);
 
         WebSocket.Connection consoleConnection = prepareConsoleConnection();
 

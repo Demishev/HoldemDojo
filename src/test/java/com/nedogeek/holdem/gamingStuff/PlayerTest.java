@@ -100,7 +100,7 @@ public class PlayerTest {
 
     @Test
     public void shouldBalanceCOINS_AT_STARTWhenNewPlayer() throws Exception {
-        assertEquals(GameSettings.COINS_AT_START, new Player(null, null).getBalance());
+        assertEquals(GameSettings.getCoinsAtStart(), new Player(null, null).getBalance());
     }
 
     @Test

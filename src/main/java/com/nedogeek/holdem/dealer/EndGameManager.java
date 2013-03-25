@@ -43,7 +43,7 @@ public class EndGameManager {
 
     private void endGameSleep() {
         try {
-            Thread.sleep(GameSettings.END_GAME_DELAY_VALUE);
+            Thread.sleep(GameSettings.getEndGameDelayValue());
         } catch (InterruptedException ignored) {
 
         }
@@ -70,7 +70,7 @@ public class EndGameManager {
     private void checkZeroBalance() {
         for (Player player : playersList) {
             if (player.getBalance() == 0) {
-                player.setBalance(GameSettings.COINS_AT_START);
+                player.setBalance(GameSettings.getCoinsAtStart());
             }
         }
     }

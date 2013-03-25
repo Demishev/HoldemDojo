@@ -39,10 +39,16 @@ public class AdminServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
+        createDealer();
         startDealerThread();
     }
 
     private void startDealerThread() {
+        dealerThread = new Thread(dealer);
+        dealerThread.start();
+    }
+
+    private void createDealer() {
         players = new PlayersList();
 
         dealer = new Dealer(players);
@@ -56,9 +62,6 @@ public class AdminServlet extends HttpServlet {
         players.add(new RandomBot("Fredia Rand", dealer));
         players.add(new RandomBot("Nina Rand", dealer));
         players.add(new RiseBot("Leha Rise!", dealer));
-
-        dealerThread = new Thread(dealer);
-        dealerThread.start();
     }
 
     @Override
@@ -89,18 +92,18 @@ public class AdminServlet extends HttpServlet {
 
     private void addGameData(HttpServletRequest request) {
         String gameStatus = (dealer != null) ? dealer.getGameStatus().toString() : "Stopped";
-        request.setAttribute("gameStatus", gameStatus);
+        request.setAttribute("GameStatus", gameStatus);
 
         List<String> playerNames = (players != null) ? players.getPlayerNames() : new ArrayList<String>();
-        request.setAttribute("players", playerNames);
+        request.setAttribute("Players", playerNames);
 
-        request.setAttribute("bots", serverBots);
+        request.setAttribute("Bots", serverBots);
 
-        request.setAttribute("coinsAtStart", GameSettings.COINS_AT_START);
-        request.setAttribute("smallBlind", GameSettings.SMALL_BLIND);
+        request.setAttribute("CoinsAtStart", GameSettings.getCoinsAtStart());
+        request.setAttribute("SmallBlind", GameSettings.getSmallBlind());
 
-        request.setAttribute("gameDelay", GameSettings.GAME_DELAY_VALUE);
-        request.setAttribute("endGameDelay", GameSettings.END_GAME_DELAY_VALUE);
+        request.setAttribute("GameDelay", GameSettings.getGameDelayValue());
+        request.setAttribute("EndGameDelay", GameSettings.getEndGameDelayValue());
     }
 
     private void processCommands(HttpServletRequest request) {
@@ -129,7 +132,7 @@ public class AdminServlet extends HttpServlet {
             }
         }
         if ("Pause".equals(pauseServerCommand)) {
-            dealer.pause();//TODO test it
+            dealer.pause();
         }
 
         if (kickPlayerCommand != null && players != null) {
@@ -138,25 +141,25 @@ public class AdminServlet extends HttpServlet {
 
         if (coinsAtStartCommand != null) {
             try {
-                GameSettings.COINS_AT_START = Integer.parseInt(coinsAtStartCommand);
+                GameSettings.setCoinsAtStart(Integer.parseInt(coinsAtStartCommand));
             } catch (NumberFormatException ignored) {
             }
         }
         if (smallBlindCommand != null) {
             try {
-                GameSettings.SMALL_BLIND = Integer.parseInt(smallBlindCommand);
+                GameSettings.setSmallBlind(Integer.parseInt(smallBlindCommand));
             } catch (NumberFormatException ignored) {
             }
         }
         if (gameDelayCommand != null) {
             try {
-                GameSettings.GAME_DELAY_VALUE = Integer.parseInt(gameDelayCommand);
+                GameSettings.setGameDelayValue(Integer.parseInt(gameDelayCommand));
             } catch (NumberFormatException ignored) {
             }
         }
         if (endGameDelayCommand != null) {
             try {
-                GameSettings.END_GAME_DELAY_VALUE = Integer.parseInt(endGameDelayCommand);
+                GameSettings.setEndGameDelayValue(Integer.parseInt(endGameDelayCommand));
             } catch (NumberFormatException ignored) {
             }
         }

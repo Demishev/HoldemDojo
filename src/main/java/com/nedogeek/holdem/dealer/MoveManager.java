@@ -51,7 +51,7 @@ public class MoveManager {
 
     private void delay() {
         try {
-            Thread.sleep(GameSettings.GAME_DELAY_VALUE);
+            Thread.sleep(GameSettings.getEndGameDelayValue());
         } catch (InterruptedException e) {
 
             e.printStackTrace();
@@ -116,7 +116,7 @@ public class MoveManager {
 
     private int calculateRiseValue(Player player) {
         int playerWantRise = player.getMove().getRiseAmount();
-        int minimumRiseValue = dealer.getCallValue() + 2 * GameSettings.SMALL_BLIND;
+        int minimumRiseValue = dealer.getCallValue() + 2 * GameSettings.getSmallBlind();
 
         return (playerWantRise < minimumRiseValue) ? minimumRiseValue : playerWantRise;
     }
@@ -124,14 +124,14 @@ public class MoveManager {
     public void makeSmallBlind(Player player) {
         player.setStatus(PlayerStatus.SmallBLind);
 
-        trySendToPot(player, GameSettings.SMALL_BLIND);
+        trySendToPot(player, GameSettings.getSmallBlind());
         playersList.playerMoved(player);
     }
 
     public void makeBigBlind(Player player) {
         player.setStatus(PlayerStatus.BigBlind);
 
-        trySendToPot(player, 2 * GameSettings.SMALL_BLIND);
+        trySendToPot(player, 2 * GameSettings.getSmallBlind());
         playersList.playerMoved(player);
     }
 }

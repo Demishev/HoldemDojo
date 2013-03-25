@@ -19,7 +19,7 @@ import static org.mockito.Mockito.*;
  * Time: 13:26
  */
 public class MoveManagerTest {
-    private final int SMALL_BLIND = GameSettings.SMALL_BLIND;
+    private final int SMALL_BLIND = GameSettings.getSmallBlind();
 
     private PlayerAction playerActionMock;
     List<Player> players;
@@ -39,7 +39,7 @@ public class MoveManagerTest {
         resetPlayersManager();
 
         moveManager = new MoveManager(dealerMock, playersListMock);
-        GameSettings.GAME_DELAY_VALUE = 0;
+        GameSettings.setGameDelayValue(0);
     }
 
 
@@ -49,7 +49,7 @@ public class MoveManagerTest {
 
     private void giveStartMoneyToPlayers() {
         for (Player player : players) {
-            when(player.getBalance()).thenReturn(GameSettings.COINS_AT_START);
+            when(player.getBalance()).thenReturn(GameSettings.getCoinsAtStart());
         }
     }
 
@@ -164,7 +164,7 @@ public class MoveManagerTest {
 
     @Test
     public void shouldSetAllInMoveFirstPlayerWhenFirstRise2CoinsAtStart() throws Exception {
-        setPlayerAction(PlayerAction.ActionType.Rise, 2 * GameSettings.COINS_AT_START);
+        setPlayerAction(PlayerAction.ActionType.Rise, 2 * GameSettings.getCoinsAtStart());
 
         moveManager.makeMove(firstPlayerMock);
 
@@ -173,7 +173,7 @@ public class MoveManagerTest {
 
     @Test
     public void shouldSetAllInMoveSecondPlayerWhenSecondRise2CoinsAtStart() throws Exception {
-        setPlayerAction(PlayerAction.ActionType.Rise, 2 * GameSettings.COINS_AT_START);
+        setPlayerAction(PlayerAction.ActionType.Rise, 2 * GameSettings.getCoinsAtStart());
 
         moveManager.makeMove(secondPlayerMock);
 
@@ -320,7 +320,7 @@ public class MoveManagerTest {
 
         moveManager.makeMove(firstPlayerMock);
 
-        verify(firstPlayerMock).setBet(GameSettings.COINS_AT_START);
+        verify(firstPlayerMock).setBet(GameSettings.getCoinsAtStart());
     }
 
     @Test
@@ -329,7 +329,7 @@ public class MoveManagerTest {
 
         moveManager.makeMove(secondPlayerMock);
 
-        verify(secondPlayerMock).setBet(GameSettings.COINS_AT_START);
+        verify(secondPlayerMock).setBet(GameSettings.getCoinsAtStart());
     }
 
 

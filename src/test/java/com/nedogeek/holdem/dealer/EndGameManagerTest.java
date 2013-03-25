@@ -42,7 +42,7 @@ public class EndGameManagerTest {
         resetPlayersMocks();
         resetPlayerListMock();
 
-        GameSettings.END_GAME_DELAY_VALUE = 0;
+        GameSettings.setEndGameDelayValue(0);
 
         eventManagerMock = mock(EventManager.class);
 
