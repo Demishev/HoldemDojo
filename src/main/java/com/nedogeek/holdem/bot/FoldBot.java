@@ -10,8 +10,8 @@ import com.nedogeek.holdem.gamingStuff.PlayerAction;
  * Time: 19:28
  */
 public class FoldBot extends Player {
-    public FoldBot(Dealer dealer) {
-        super("Folding bot", dealer);
+    public FoldBot(String name, Dealer dealer) {
+        super(name, dealer);
     }
 
     @Override

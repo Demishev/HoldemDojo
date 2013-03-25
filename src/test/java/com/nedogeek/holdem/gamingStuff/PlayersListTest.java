@@ -382,9 +382,22 @@ public class PlayersListTest {
     }
 
     @Test
-    public void shouldFirstPlayerSetStatusKickedWhenKickFirstPlayer() throws Exception {
-        playersList.kickPlayer(FIRST_PLAYER);
+    public void shouldNoExceptionsWhenNewPlayerListGetBigBlindPlayer() throws Exception {
+        new PlayersList().bigBlindPlayer();
+    }
 
-        verify(firstPlayer).setStatus(PlayerStatus.Kicked);
+    @Test
+    public void shouldNoExceptionsWhenNewPlayerListGetSmallBlindPlayer() throws Exception {
+        new PlayersList().smallBlindPlayer();
+    }
+
+    @Test
+    public void shouldNoExceptionsWhenNewPlayerListGetMover() throws Exception {
+        new PlayersList().getMover();
+    }
+
+    @Test
+    public void shouldNoExceptionsWhenNewPlayerListGetDealerName() throws Exception {
+        new PlayersList().getDealerName();
     }
 }

@@ -41,7 +41,7 @@ public class BotGameRunner {
         players.add(new RiseBot(dealer));
         players.add(new RandomBot(dealer));
         players.add(new CallBot(dealer));
-        players.add(new FoldBot(dealer));
+        players.add(new FoldBot("Folding bot", dealer));
 
         GameSettings.setEndGameDelayValue(100);
         GameSettings.setGameDelayValue(100);

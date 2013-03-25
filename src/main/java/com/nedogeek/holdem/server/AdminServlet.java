@@ -56,7 +56,7 @@ public class AdminServlet extends HttpServlet {
         players.add(new RiseBot(dealer));
         players.add(new RandomBot(dealer));
         players.add(new CallBot(dealer));
-        players.add(new FoldBot(dealer));
+        players.add(new FoldBot("Folding bot", dealer));
 
         players.add(new CallBot("Vasili Call", dealer));
         players.add(new RandomBot("Fredia Rand", dealer));
@@ -163,7 +163,7 @@ public class AdminServlet extends HttpServlet {
             } catch (NumberFormatException ignored) {
             }
         }
-        if (addBotCommand != null && botName != null) {
+        if (addBotCommand != null && botName != null && !botName.equals("")) {
             addBot(addBotCommand, botName);
         }
 

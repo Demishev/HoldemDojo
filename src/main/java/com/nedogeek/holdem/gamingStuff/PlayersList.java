@@ -9,13 +9,14 @@ import com.nedogeek.holdem.gameEvents.RemovePlayerEvent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 /**
  * User: Konstantin Demishev
  * Date: 21.11.12
  * Time: 23:48
  */
-public class PlayersList extends ArrayList<Player> {
+public class PlayersList extends Vector<Player> {
     private static final int PLAYER_NOT_FOUND = -1;
 
     private int dealerNumber = 0;
@@ -70,7 +71,7 @@ public class PlayersList extends ArrayList<Player> {
     }
 
     private int nextPlayer(int playerNumber) {
-        return (playerNumber == size() - 1) ?
+        return (playerNumber >= size() - 1) ?
                 0 : playerNumber + 1;
     }
 
@@ -87,7 +88,7 @@ public class PlayersList extends ArrayList<Player> {
     }
 
     public Player getMover() {
-        return get(getMoverNumber());
+        return (size() != 0) ? get(getMoverNumber()) : null;
     }
 
     private int getMoverNumber() {
@@ -109,11 +110,11 @@ public class PlayersList extends ArrayList<Player> {
     }
 
     public Player smallBlindPlayer() {
-        return get(nextPlayer(dealerNumber));
+        return (size() != 0) ? get(nextPlayer(dealerNumber)) : null;
     }
 
     public Player bigBlindPlayer() {
-        return get(nextPlayer(nextPlayer(dealerNumber)));
+        return (size() != 0) ? get(nextPlayer(nextPlayer(dealerNumber))) : null;
     }
 
     public String generatePlayersJSON(String... playerNames) {
@@ -177,13 +178,14 @@ public class PlayersList extends ArrayList<Player> {
     }
 
     public void setNewGame() {
+        removeKickedPlayers();
+
         changeDealer();
         addWaitingPlayers();
 
         for (Player player : this) {
             player.setStatus(PlayerStatus.NotMoved);
         }
-        removeKickedPlayers();
     }
 
     private void removeKickedPlayers() {
@@ -241,7 +243,7 @@ public class PlayersList extends ArrayList<Player> {
     }
 
     public String getDealerName() {
-        return this.get(dealerNumber).getName();
+        return (size() != 0) ? this.get(dealerNumber).getName() : null;
     }
 
     public String getMoverName() {
@@ -263,7 +265,6 @@ public class PlayersList extends ArrayList<Player> {
         for (Player player : this) {
             if (player.getName().equals(kickedPlayer)) {
                 kickedPlayers.add(player);
-                player.setStatus(PlayerStatus.Kicked);
             }
         }
     }
