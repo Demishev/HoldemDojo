@@ -364,4 +364,27 @@ public class PlayersListTest {
     public void shouldSecondPlayerNameWhenGetPlayerNamesDefaultGameGetSecondPlayer() throws Exception {
         assertEquals(SECOND_PLAYER, playersList.getPlayerNames().get(1));
     }
+
+    @Test
+    public void shouldPlayerFirstPlayerKickedWhenKickFirstPlayerSetNewGame() throws Exception {
+        playersList.kickPlayer(FIRST_PLAYER);
+
+        playersList.setNewGame();
+
+        assertEquals(SECOND_PLAYER, playersList.getPlayerNames().get(0));
+    }
+
+    @Test
+    public void shouldFirstPlayerNotRemovedWhenKickFirstPlayer() throws Exception {
+        playersList.kickPlayer(FIRST_PLAYER);
+
+        assertEquals(FIRST_PLAYER, playersList.getPlayerNames().get(0));
+    }
+
+    @Test
+    public void shouldFirstPlayerSetStatusKickedWhenKickFirstPlayer() throws Exception {
+        playersList.kickPlayer(FIRST_PLAYER);
+
+        verify(firstPlayer).setStatus(PlayerStatus.Kicked);
+    }
 }

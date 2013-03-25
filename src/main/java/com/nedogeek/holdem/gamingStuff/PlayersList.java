@@ -23,6 +23,7 @@ public class PlayersList extends ArrayList<Player> {
     private final EventManager eventManager;
 
     private List<Player> waitingPlayers = new ArrayList<>();
+    private List<Player> kickedPlayers = new ArrayList<>();
 
     public PlayersList() {
         eventManager = EventManager.getInstance();
@@ -182,6 +183,23 @@ public class PlayersList extends ArrayList<Player> {
         for (Player player : this) {
             player.setStatus(PlayerStatus.NotMoved);
         }
+        removeKickedPlayers();
+    }
+
+    private void removeKickedPlayers() {
+        for (Player kickedPlayer : kickedPlayers) {
+            removePlayer(kickedPlayer);
+        }
+        kickedPlayers.clear();
+    }
+
+    private void removePlayer(Player kickedPlayer) {
+        for (Player player : this) {
+            if (kickedPlayer == player) {
+                this.remove(player);
+                return;
+            }
+        }
     }
 
     @Override
@@ -242,7 +260,12 @@ public class PlayersList extends ArrayList<Player> {
     }
 
     public void kickPlayer(String kickedPlayer) {
-        //TODO Stub!
+        for (Player player : this) {
+            if (player.getName().equals(kickedPlayer)) {
+                kickedPlayers.add(player);
+                player.setStatus(PlayerStatus.Kicked);
+            }
+        }
     }
 
     public List<String> getPlayerNames() {
