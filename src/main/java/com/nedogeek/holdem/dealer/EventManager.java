@@ -20,12 +20,6 @@ import java.util.*;
  */
 public class EventManager implements Serializable {
     private final String PUBLIC = "public";
-    private Map<String, String> userData = new HashMap<>();  //TODO Maybe move field?
-
-    {
-        userData.put("User", "Password");   //TODO remove it later.
-    }
-
     private static final EventManager eventManager = new EventManager();
 
     private PlayersList playersList;
@@ -194,9 +188,5 @@ public class EventManager implements Serializable {
 
     public void setPlayersList(PlayersList playersList) {
         this.playersList = playersList;
-    }
-
-    public Map<String, String> getUserData() {
-        return userData;
     }
 }
