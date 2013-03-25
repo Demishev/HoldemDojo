@@ -189,4 +189,11 @@ public class NewGameSetterTest {
 
         verify(playersManagerMock, never()).setNewGame();
     }
+
+    @Test
+    public void shouldDealerSetCallValue0WhenSetNewGame() throws Exception {
+        newGameSetter.setNewGame();
+
+        verify(dealerMock).setCallValue(0);
+    }
 }

@@ -147,10 +147,7 @@ public class Dealer implements Runnable {
     }
 
     void setNextGameRound() {
-
         gameRound = GameRound.next(gameRound);
-        callValue = 0;
-
         switch (gameRound) {
             case THREE_CARDS:
                 deskCards.add(cardDeck.getCard());

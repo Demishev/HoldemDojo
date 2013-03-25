@@ -29,6 +29,7 @@ public class NewGameSetter {
 
 
             dealer.setNextGameRound();
+            dealer.setCallValue(0);
             EventManager.getInstance().addEvent(new NewGameStartedEvent());
         }
     }
