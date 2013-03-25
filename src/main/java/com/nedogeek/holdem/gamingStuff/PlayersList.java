@@ -18,14 +18,13 @@ import java.util.List;
 public class PlayersList extends ArrayList<Player> {
     private static final int PLAYER_NOT_FOUND = -1;
 
-    private int dealerNumber;
+    private int dealerNumber = 0;
     private int lastMovedPlayer;
     private final EventManager eventManager;
 
     private List<Player> waitingPlayers = new ArrayList<>();
 
     public PlayersList() {
-        dealerNumber = 0;
         eventManager = EventManager.getInstance();
     }
 
@@ -33,7 +32,6 @@ public class PlayersList extends ArrayList<Player> {
      * Test purposes ONLY!
      */
     PlayersList(EventManager eventManager) {
-        dealerNumber = 0;
         this.eventManager = eventManager;
     }
 
@@ -247,7 +245,11 @@ public class PlayersList extends ArrayList<Player> {
         //TODO Stub!
     }
 
-    public static List<String> getPlayerNames() {
-        return null; //TODO Stub!
+    public List<String> getPlayerNames() {
+        List<String> names = new ArrayList<>();
+        for (Player player : this) {
+            names.add(player.getName());
+        }
+        return names;
     }
 }

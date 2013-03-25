@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -90,8 +91,8 @@ public class AdminServlet extends HttpServlet {
         String gameStatus = (dealer != null) ? dealer.getGameStatus().toString() : "Stopped";
         request.setAttribute("gameStatus", gameStatus);
 
-        List<String> players = PlayersList.getPlayerNames();
-        request.setAttribute("players", players);
+        List<String> playerNames = (players != null) ? players.getPlayerNames() : new ArrayList<String>();
+        request.setAttribute("players", playerNames);
 
         request.setAttribute("bots", serverBots);
 

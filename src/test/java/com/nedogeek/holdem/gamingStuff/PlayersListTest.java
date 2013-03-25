@@ -349,4 +349,19 @@ public class PlayersListTest {
 
         assertEquals(secondPlayer, playersList.getMover());
     }
+
+    @Test
+    public void should2PlayerNamesWhenGetPlayerNamesDefaultGame() throws Exception {
+        assertEquals(2, playersList.getPlayerNames().size());
+    }
+
+    @Test
+    public void shouldFirstPlayerNameWhenGetPlayerNamesDefaultGameGetFirstPlayer() throws Exception {
+        assertEquals(FIRST_PLAYER, playersList.getPlayerNames().get(0));
+    }
+
+    @Test
+    public void shouldSecondPlayerNameWhenGetPlayerNamesDefaultGameGetSecondPlayer() throws Exception {
+        assertEquals(SECOND_PLAYER, playersList.getPlayerNames().get(1));
+    }
 }
