@@ -52,7 +52,7 @@ public class EventManager implements Serializable {
 
     private void addConnection(String owner, Connection connection) {
         if (!connections.containsKey(owner)) {
-            connections.put(owner, new ArrayList<Connection>());
+            connections.put(owner, new Vector<Connection>());
         }
         connections.get(owner).add(connection);
     }
