@@ -242,4 +242,12 @@ public class PlayersList extends ArrayList<Player> {
         }
         return "";
     }
+
+    public void kickPlayer(String kickedPlayer) {
+        //TODO Stub!
+    }
+
+    public static List<String> getPlayerNames() {
+        return null; //TODO Stub!
+    }
 }
