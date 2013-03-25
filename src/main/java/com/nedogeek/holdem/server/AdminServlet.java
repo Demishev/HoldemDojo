@@ -174,8 +174,9 @@ public class AdminServlet extends HttpServlet {
 
     private void addBot(String addBotCommand, String botName) {
         try {
-            players.add((Player) Class.forName(addBotCommand).getConstructor(String.class).newInstance(botName));
-        } catch (InstantiationException | NoSuchMethodException | ClassNotFoundException | InvocationTargetException | IllegalAccessException ignored) {
+            players.add((Player) Class.forName("com.nedogeek.holdem.bot." + addBotCommand).getConstructor(String.class, Dealer.class).newInstance(botName, dealer));
+        } catch (InstantiationException | NoSuchMethodException | ClassNotFoundException | InvocationTargetException | IllegalAccessException e) {
+            e.printStackTrace();
         }
     }
 }
