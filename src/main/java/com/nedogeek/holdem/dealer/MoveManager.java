@@ -51,7 +51,7 @@ public class MoveManager {
 
     private void delay() {
         try {
-            Thread.sleep(GameSettings.getEndGameDelayValue());
+            Thread.sleep(GameSettings.getGameDelayValue());
         } catch (InterruptedException e) {
 
             e.printStackTrace();
