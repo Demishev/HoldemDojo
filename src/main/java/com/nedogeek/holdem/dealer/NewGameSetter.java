@@ -21,14 +21,16 @@ public class NewGameSetter {
     }
 
     void setNewGame() {
-        playersList.setNewGame();
+        if (playersList.size() > 1) {
+            playersList.setNewGame();
 
-        resetCards();
-        makeInitialBets();
+            resetCards();
+            makeInitialBets();
 
 
-        dealer.setNextGameRound();
-        EventManager.getInstance().addEvent(new NewGameStartedEvent());
+            dealer.setNextGameRound();
+            EventManager.getInstance().addEvent(new NewGameStartedEvent());
+        }
     }
 
     private void resetCards() {

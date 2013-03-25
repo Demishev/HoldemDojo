@@ -39,6 +39,7 @@ public class NewGameSetterTest {
 
     private void resetMoveManagerMock() {
         moveManagerMock = mock(MoveManager.class);
+
     }
 
     private void resetPlayerManagerMock() {
@@ -70,6 +71,7 @@ public class NewGameSetterTest {
 
         players.remove(thirdPlayerMock);
 
+        when(playersManagerMock.size()).thenReturn(2);
     }
 
     private void setDealerIs(int dealerNumber) {
@@ -168,5 +170,23 @@ public class NewGameSetterTest {
         newGameSetter.setNewGame();
 
         verify(playersManagerMock).setNewGame();
+    }
+
+    @Test
+    public void shouldNotSetNewGameWhenPlayersListSizeIs0() throws Exception {
+        when(playersManagerMock.size()).thenReturn(0);
+
+        newGameSetter.setNewGame();
+
+        verify(playersManagerMock, never()).setNewGame();
+    }
+
+    @Test
+    public void shouldNotSetNewGameWhenPlayersListSizeIs1() throws Exception {
+        when(playersManagerMock.size()).thenReturn(1);
+
+        newGameSetter.setNewGame();
+
+        verify(playersManagerMock, never()).setNewGame();
     }
 }
