@@ -10,7 +10,12 @@ public class PlayerAction {
         Fold, Check, Call, Rise, AllIn
     }
 
+    private static final ActionType DEFAULT_ACTION_TYPE = ActionType.Fold;
+
+    private static final PlayerAction DEFAULT_ACTION = new PlayerAction(DEFAULT_ACTION_TYPE, 0);
+
     private final ActionType actionType;
+
     private final int riseAmount;
 
     public PlayerAction(ActionType actionType) {
@@ -34,41 +39,36 @@ public class PlayerAction {
 
     public static PlayerAction defineAction(String command) {
         if (command == null) {
-            return new PlayerAction(ActionType.Fold);
+            return DEFAULT_ACTION;
         }
+        String[] parts = prepareCommandStrings(command);
 
-        ActionType actionType;
-        int actionValue;
-        String actionTypePart;
-        String actionValuePart;
-        if (command.contains(",")) {
-            actionTypePart = command.substring(0, command.indexOf(','));
-            actionValuePart = command.substring(command.indexOf(',') + 1);
-        } else {
-            actionTypePart = command;
-            actionValuePart = "0";
-        }
-
-        try {
-            actionValue = Integer.parseInt(actionValuePart);
-        } catch (NumberFormatException e) {
-            actionValue = 0;
-        }
-        actionType = ActionType.Fold;
-
-        if ("Check".equals(actionTypePart)) {
-            actionType = ActionType.Check;
-        }
-        if ("Call".equals(actionTypePart)) {
-            actionType = ActionType.Call;
-        }
-        if ("Rise".equals(actionTypePart)) {
-            actionType = ActionType.Rise;
-        }
-        if ("AllIn".equals(actionTypePart)) {
-            actionType = ActionType.AllIn;
-        }
+        ActionType actionType = defineActionType(parts[0]);
+        int actionValue = (parts.length > 1) ? defineActionValue(parts[1]) : 0;
 
         return new PlayerAction(actionType, actionValue);
+    }
+
+    private static String[] prepareCommandStrings(String command) {
+        command = command.replace(" ", "");
+        return command.split(",");
+    }
+
+    private static int defineActionValue(String valuePart) {
+        try {
+            return Integer.parseInt(valuePart);
+        } catch (NumberFormatException ignored) {
+
+        }
+        return 0;
+    }
+
+    private static ActionType defineActionType(String actionPart) {
+        for (PlayerAction.ActionType actionType : PlayerAction.ActionType.values()) {
+            if (actionType.toString().equals(actionPart)) {
+                return actionType;
+            }
+        }
+        return DEFAULT_ACTION_TYPE;
     }
 }
