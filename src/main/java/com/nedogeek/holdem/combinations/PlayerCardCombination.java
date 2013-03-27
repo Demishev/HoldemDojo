@@ -52,7 +52,7 @@ public class PlayerCardCombination implements Comparable<PlayerCardCombination> 
         return Combination.getCombinationType(cards);
     }
 
-    public Card[] getCombinationCards() {
+    Card[] getCombinationCards() {
         return Combination.getCombinationCards(cards);
     }
 
@@ -61,7 +61,7 @@ public class PlayerCardCombination implements Comparable<PlayerCardCombination> 
         return getCombination() + ": " + Arrays.asList(cards);
     }
 
-    
+
     public int compareTo(PlayerCardCombination o) {
         final Combination firstCombinationType = getCombinationType();
         final Combination secondCombinationType = o.getCombinationType();

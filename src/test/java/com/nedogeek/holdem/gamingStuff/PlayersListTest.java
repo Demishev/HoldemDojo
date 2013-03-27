@@ -32,7 +32,7 @@ public class PlayersListTest {
 
     private Player firstPlayer = mock(Player.class);
     private Player secondPlayer = mock(Player.class);
-    private EventManager eventManagerMock = mock(EventManager.class);
+    private final EventManager eventManagerMock = mock(EventManager.class);
 
     @Before
     public void setUp() throws Exception {

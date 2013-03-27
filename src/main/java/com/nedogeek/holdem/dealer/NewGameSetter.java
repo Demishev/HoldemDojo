@@ -9,7 +9,7 @@ import com.nedogeek.holdem.gamingStuff.PlayersList;
  * Date: 21.11.12
  * Time: 23:42
  */
-public class NewGameSetter {
+class NewGameSetter {
     private final Dealer dealer;
     private final MoveManager moveManager;
     private final PlayersList playersList;

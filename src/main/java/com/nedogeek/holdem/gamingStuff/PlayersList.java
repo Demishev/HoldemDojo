@@ -23,8 +23,8 @@ public class PlayersList extends Vector<Player> {
     private int lastMovedPlayer;
     private final EventManager eventManager;
 
-    private List<Player> waitingPlayers = new ArrayList<>();
-    private List<Player> kickedPlayers = new ArrayList<>();
+    private final List<Player> waitingPlayers = new ArrayList<>();
+    private final List<Player> kickedPlayers = new ArrayList<>();
 
     public PlayersList() {
         eventManager = EventManager.getInstance();
@@ -166,7 +166,7 @@ public class PlayersList extends Vector<Player> {
         lastMovedPlayer = dealerNumber;
     }
 
-    public boolean moreThanOnePlayerNotFolds() {
+    boolean moreThanOnePlayerNotFolds() {
         int notFoldedPlayersQuantity = 0;
         for (Player player : this) {
             if (player.getStatus() != PlayerStatus.Fold) {

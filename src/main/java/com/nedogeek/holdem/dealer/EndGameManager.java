@@ -14,7 +14,7 @@ import java.util.Map;
  * Date: 22.11.12
  * Time: 1:35
  */
-public class EndGameManager {
+class EndGameManager {
     private final Dealer dealer;
     private final PlayersList playersList;
     private final EventManager eventManager;

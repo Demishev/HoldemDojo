@@ -22,7 +22,7 @@ public class MoveManagerTest {
     private final int SMALL_BLIND = GameSettings.getSmallBlind();
 
     private PlayerAction playerActionMock;
-    List<Player> players;
+    private List<Player> players;
     private Player firstPlayerMock;
     private Player secondPlayerMock;
 

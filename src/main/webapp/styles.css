@@ -25,9 +25,7 @@ body {
     height: 20em;
     border-radius: 200px;
 
-    border-color: #b8860b;
-    border-style: solid;
-    border-width: 0.5em;
+    border: 0.5em solid #b8860b;
 }
 
 .deskCards {

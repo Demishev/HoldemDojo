@@ -9,7 +9,7 @@ import java.util.Iterator;
  * Date: 05.12.12
  * Time: 20:46
  */
-public class CardsChooser implements Iterator<Card[]>, Iterable<Card[]> {
+class CardsChooser implements Iterator<Card[]>, Iterable<Card[]> {
     private final Card[] cards;
 
     private boolean hasNext = true;

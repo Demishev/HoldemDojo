@@ -12,7 +12,7 @@ import java.util.Random;
  * Time: 19:37
  */
 public class RandomBot extends Player {
-    private Random random;
+    private final Random random;
 
     public RandomBot(Dealer dealer) {
         super("Random bot", dealer);

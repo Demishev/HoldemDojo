@@ -25,7 +25,7 @@ import static org.mockito.Mockito.when;
  * Time: 19:11
  */
 public class BotGameRunner {
-    static class ConsoleAnswer implements Answer {
+    private static class ConsoleAnswer implements Answer {
         @Override
         public Object answer(InvocationOnMock invocation) throws Throwable {
             System.out.println(invocation.getArguments()[0]);

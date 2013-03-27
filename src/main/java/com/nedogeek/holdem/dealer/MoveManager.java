@@ -12,7 +12,7 @@ import com.nedogeek.holdem.gamingStuff.PlayersList;
  * Date: 21.11.12
  * Time: 23:26
  */
-public class MoveManager {
+class MoveManager {
     private final Dealer dealer;
     private final PlayersList playersList;
     private final EventManager eventManager;

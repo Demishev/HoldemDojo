@@ -30,9 +30,9 @@ public class AdminServlet extends HttpServlet {
     private final String DEFAULT_ADMIN_PASSWORD = "1234";
     private String adminPassword = DEFAULT_ADMIN_PASSWORD;
 
-    Dealer dealer;
-    Thread dealerThread;
-    PlayersList players;
+    private Dealer dealer;
+    private Thread dealerThread;
+    private PlayersList players;
 
 
     @Override

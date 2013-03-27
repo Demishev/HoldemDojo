@@ -19,7 +19,7 @@ public class Card implements Comparable<Card> {
         this.cardValue = cardValue;
     }
 
-    public CardSuit getCardSuit() {
+    CardSuit getCardSuit() {
         return cardSuit;
     }
 

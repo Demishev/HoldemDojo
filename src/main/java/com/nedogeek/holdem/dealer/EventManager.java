@@ -26,7 +26,7 @@ public class EventManager implements Serializable {
     private Dealer dealer;
     private Event event;
 
-    private Map<String, List<Connection>> connections = new Hashtable<>();
+    private final Map<String, List<Connection>> connections = new Hashtable<>();
 
     public static EventManager getInstance() {
         return eventManager;
@@ -106,7 +106,7 @@ public class EventManager implements Serializable {
         }
     }
 
-    public String gameToJSON(String connectionName) {
+    String gameToJSON(String connectionName) {
         String playersJSON = generatePlayersJSON(connectionName);
 
         String gameStatus = dealer.getGameStatus().toString();

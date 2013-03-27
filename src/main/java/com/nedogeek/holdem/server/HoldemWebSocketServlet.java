@@ -13,7 +13,7 @@ import java.util.Map;
  * Time: 14:25
  */
 public class HoldemWebSocketServlet extends WebSocketServlet {
-    private Map<String, String> userData = new HashMap<>();
+    private final Map<String, String> userData = new HashMap<>();
 
     @Override
     public WebSocket doWebSocketConnect(HttpServletRequest request, String protocol) {
