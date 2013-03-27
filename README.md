@@ -21,6 +21,7 @@ Now game data and settings are not saving and resets at server restart.
 
 
 Server API:
+
     Output commands:
 
         Game data sends to connections by web-sockets as JSON string. It contains:
@@ -31,7 +32,8 @@ Server API:
         event: String;
         combination: String;
         deskCards: array of {cardValue: String; carsSuit: String}
-        players: array of {name: String; status: String; balance: int; pot: int; cards: array of {cardValue: String, cardSuit: String}}
+        players: array of {name: String; status: String; balance: int; pot: int;
+            cards: array of {cardValue: String, cardSuit: String}}
 
     Input commands:
 
@@ -54,8 +56,9 @@ Server API:
 
 What steps you should do to play with server:
 
-    1. Write a program on any programming language, that handles web-socket connections and parses JSON game data or download one of available templates.
-    Now you can download java client template [here](https://github.com/Demishev/HoldemDojoJavaClient)
+    1. Write a program on any programming language, that handles web-socket connections and parses JSON game data
+    or download one of available templates. Now you can download java client template
+        at Demishev/HoldemDojoJavaClient
     2. Connect to the server with login and password (automatic registration on first login provided).
     3. Parse game data.
     4. Analyze parsed data.
