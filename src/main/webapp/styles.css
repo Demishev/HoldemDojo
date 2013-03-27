@@ -220,6 +220,7 @@ textarea {
 .cheat {
     position: absolute;
     top: 35em;
+    opacity: 0;
 }
 
 
