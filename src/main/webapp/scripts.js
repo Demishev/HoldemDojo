@@ -39,8 +39,7 @@ var drawEvents = function () {
         $console.append(event[i] + "\n");
     }
 
-    textarea = document.getElementsByClassName('console');
-    textarea.scrollTop = textarea.scrollHeight;
+    $console.scrollTop($console[0].scrollHeight - $console.height());
 };
 
 drawPlayers = function () {

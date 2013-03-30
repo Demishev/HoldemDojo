@@ -11,7 +11,11 @@ import org.eclipse.jetty.websocket.WebSocket.Connection;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * User: Konstantin Demishev
@@ -26,7 +30,7 @@ public class EventManager implements Serializable {
     private Dealer dealer;
     private Event event;
 
-    private final Map<String, List<Connection>> connections = new Hashtable<>();
+    private final Map<String, List<Connection>> connections = new ConcurrentHashMap<>();
 
     public static EventManager getInstance() {
         return eventManager;
@@ -46,7 +50,7 @@ public class EventManager implements Serializable {
 
     private void addConnection(String owner, Connection connection) {
         if (!connections.containsKey(owner)) {
-            connections.put(owner, new Vector<Connection>());
+            connections.put(owner, new CopyOnWriteArrayList<Connection>());
         }
         connections.get(owner).add(connection);
     }
