@@ -1,5 +1,6 @@
 package com.nedogeek.holdem.gamingStuff;
 
+import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.PlayerStatus;
 import com.nedogeek.holdem.combinations.PlayerCardCombination;
 import com.nedogeek.holdem.dealer.EventManager;
@@ -399,5 +400,16 @@ public class PlayersListTest {
     @Test
     public void shouldNoExceptionsWhenNewPlayerListGetDealerName() throws Exception {
         new PlayersList().getDealerName();
+    }
+
+    @Test
+    public void shouldGameSettingsMaximumPlayersPlayersWhen20PlayersAddedAndSetNewGame() throws Exception {
+        for (int i = 0; i < 20; i++) {
+            playersList.add(mock(Player.class));
+        }
+
+        playersList.setNewGame();
+
+        assertEquals(GameSettings.getMaximumPlayers(), playersList.size());
     }
 }

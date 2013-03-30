@@ -1,5 +1,6 @@
 package com.nedogeek.holdem.gamingStuff;
 
+import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.PlayerStatus;
 import com.nedogeek.holdem.dealer.Dealer;
 import com.nedogeek.holdem.dealer.EventManager;
@@ -53,11 +54,12 @@ public class PlayersList extends Vector<Player> {
     }
 
     private void addWaitingPlayers() {
-        for (Player player : waitingPlayers) {
+        while (waitingPlayers.size() > 0 && size() < GameSettings.getMaximumPlayers()) {
+            final Player player = waitingPlayers.get(0);
             super.add(player);
             eventManager.addEvent(new AddPlayerEvent(player));
+            waitingPlayers.remove(0);
         }
-        waitingPlayers.clear();
     }
 
     @Override

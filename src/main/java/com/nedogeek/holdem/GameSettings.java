@@ -10,6 +10,7 @@ public class GameSettings {
     private static int smallBlind = 10;
     private static long gameDelayValue = 1000;
     private static long endGameDelayValue = 3000;
+    private static int maximumPlayers = 12;
 
     public static int getCoinsAtStart() {
         return coinsAtStart;
@@ -49,5 +50,9 @@ public class GameSettings {
         if (endGameDelayValue >= 0) {
             GameSettings.endGameDelayValue = endGameDelayValue;
         }
+    }
+
+    public static int getMaximumPlayers() {
+        return maximumPlayers;
     }
 }
