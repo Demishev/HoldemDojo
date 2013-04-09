@@ -33,7 +33,7 @@ public class NewGameSetterTest {
         resetPlayerManagerMock();
         resetMoveManagerMock();
 
-        newGameSetter = new NewGameSetter(dealerMock, playersManagerMock, moveManagerMock);
+        newGameSetter = new NewGameSetter(dealerMock, playersManagerMock, moveManagerMock, new EventManager());
 
     }
 

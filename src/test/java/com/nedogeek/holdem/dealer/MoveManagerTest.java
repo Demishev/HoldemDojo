@@ -38,7 +38,7 @@ public class MoveManagerTest {
         resetBank();
         resetPlayersManager();
 
-        moveManager = new MoveManager(dealerMock, playersListMock);
+        moveManager = new MoveManager(dealerMock, playersListMock, new EventManager());
         GameSettings.setGameDelayValue(0);
     }
 

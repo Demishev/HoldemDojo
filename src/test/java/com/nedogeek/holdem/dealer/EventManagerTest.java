@@ -106,7 +106,7 @@ public class EventManagerTest {
         gameEndedEventMock = mock(GameEndedEvent.class);
         when(gameEndedEventMock.toJSON()).thenReturn("Game ended");
 
-        eventManager = EventManager.getTestInstance();
+        eventManager = new EventManager();
         eventManager.setDealer(dealerMock);
         eventManager.setPlayersList(playersListMock);
         eventManager.addViewer(firstViewerConnectionMock);

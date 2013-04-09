@@ -34,17 +34,16 @@ public class Dealer implements Runnable {
 
     private List<Card> deskCards = new ArrayList<>();
 
-    public Dealer(PlayersList playersList) {
+    public Dealer(PlayersList playersList, EventManager eventManager) {
         this.playersList = playersList;
-        eventManager = EventManager.getInstance();
+        this.eventManager = eventManager;
 
-        eventManager.setPlayersList(playersList);
-        eventManager.setDealer(this);
+        this.eventManager.setDealer(this);
 
-        moveManager = new MoveManager(this, playersList);
+        moveManager = new MoveManager(this, playersList, eventManager);
 
-        newGameSetter = new NewGameSetter(this, playersList, moveManager);
-        endGameManager = new EndGameManager(this, playersList);
+        newGameSetter = new NewGameSetter(this, playersList, moveManager, eventManager);
+        endGameManager = new EndGameManager(this, playersList, eventManager);
         gameRound = GameRound.INITIAL;
     }
 

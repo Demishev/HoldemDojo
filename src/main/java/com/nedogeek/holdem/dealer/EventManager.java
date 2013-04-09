@@ -24,25 +24,12 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 public class EventManager implements Serializable {
     private final String PUBLIC = "public";
-    private static final EventManager eventManager = new EventManager();
 
     private PlayersList playersList;
     private Dealer dealer;
     private Event event;
 
     private final Map<String, List<Connection>> connections = new ConcurrentHashMap<>();
-
-    public static EventManager getInstance() {
-        return eventManager;
-    }
-
-    public static EventManager getTestInstance() {
-        return new EventManager();
-    }
-
-    private EventManager() {
-
-    }
 
     public void addViewer(Connection viewer) {
         addConnection(PUBLIC, viewer);

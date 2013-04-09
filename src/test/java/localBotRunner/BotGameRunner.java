@@ -1,13 +1,6 @@
 package localBotRunner;
 
-import com.nedogeek.holdem.GameSettings;
-import com.nedogeek.holdem.bot.CallBot;
-import com.nedogeek.holdem.bot.FoldBot;
-import com.nedogeek.holdem.bot.RandomBot;
-import com.nedogeek.holdem.bot.RiseBot;
-import com.nedogeek.holdem.dealer.Dealer;
-import com.nedogeek.holdem.dealer.EventManager;
-import com.nedogeek.holdem.gamingStuff.PlayersList;
+import com.nedogeek.holdem.GameImpl;
 import org.eclipse.jetty.websocket.WebSocket;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
@@ -34,23 +27,9 @@ public class BotGameRunner {
     }
 
     public static void main(String[] args) {
-        PlayersList players = new PlayersList();
-
-        Dealer dealer = new Dealer(players);
-
-        players.add(new RiseBot(dealer));
-        players.add(new RandomBot(dealer));
-        players.add(new CallBot(dealer));
-        players.add(new FoldBot("Folding bot", dealer));
-
-        GameSettings.setEndGameDelayValue(100);
-        GameSettings.setGameDelayValue(100);
-
         WebSocket.Connection consoleConnection = prepareConsoleConnection();
 
-        EventManager.getInstance().addViewer(consoleConnection);
-
-        dealer.run();
+        GameImpl.getInstance().addViewer(consoleConnection);
     }
 
     private static WebSocket.Connection prepareConsoleConnection() {

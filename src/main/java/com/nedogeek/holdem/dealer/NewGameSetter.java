@@ -13,11 +13,14 @@ class NewGameSetter {
     private final Dealer dealer;
     private final MoveManager moveManager;
     private final PlayersList playersList;
+    private final EventManager eventManager;
 
-    public NewGameSetter(Dealer dealer, PlayersList playersList, MoveManager moveManager) {
+    public NewGameSetter(Dealer dealer, PlayersList playersList, MoveManager moveManager,
+                         EventManager eventManager) {
         this.dealer = dealer;
         this.playersList = playersList;
         this.moveManager = moveManager;
+        this.eventManager = eventManager;
     }
 
     void setNewGame() {
@@ -30,7 +33,7 @@ class NewGameSetter {
 
 
             dealer.setNextGameRound();
-            EventManager.getInstance().addEvent(new NewGameStartedEvent());
+            eventManager.addEvent(new NewGameStartedEvent());
         }
     }
 

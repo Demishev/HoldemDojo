@@ -1,7 +1,7 @@
 package com.nedogeek.holdem.server;
 
 
-import com.nedogeek.holdem.dealer.EventManager;
+import com.nedogeek.holdem.GameImpl;
 import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayerAction;
 import org.eclipse.jetty.websocket.WebSocket;
@@ -41,14 +41,14 @@ class HoldemWebSocket implements WebSocket.OnTextMessage {
     public void onOpen(Connection connection) {
         this.connection = connection;
         if (login == null) {
-            EventManager.getInstance().addViewer(connection);
+            GameImpl.getInstance().addViewer(connection);
         } else {
-            player = EventManager.getInstance().addPlayer(connection, login);
+            player = GameImpl.getInstance().addPlayer(login, connection);
         }
     }
 
     @Override
     public void onClose(int i, String s) {
-        EventManager.getInstance().closeConnection(connection);
+        GameImpl.getInstance().removeConnection(connection);
     }
 }

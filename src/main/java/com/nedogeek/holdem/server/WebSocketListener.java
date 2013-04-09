@@ -1,7 +1,6 @@
 package com.nedogeek.holdem.server;
 
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.handler.DefaultHandler;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;

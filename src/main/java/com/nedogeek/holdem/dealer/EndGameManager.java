@@ -19,13 +19,6 @@ class EndGameManager {
     private final PlayersList playersList;
     private final EventManager eventManager;
 
-
-    public EndGameManager(Dealer dealer, PlayersList playersList) {
-        this.dealer = dealer;
-        this.playersList = playersList;
-        eventManager = EventManager.getInstance();
-    }
-
     public EndGameManager(Dealer dealer, PlayersList playersList, EventManager eventManager) {
         this.dealer = dealer;
         this.playersList = playersList;

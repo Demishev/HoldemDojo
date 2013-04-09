@@ -1,11 +1,8 @@
 package com.nedogeek.holdem.server;
 
+import com.nedogeek.holdem.Game;
+import com.nedogeek.holdem.GameImpl;
 import com.nedogeek.holdem.GameSettings;
-import com.nedogeek.holdem.bot.CallBot;
-import com.nedogeek.holdem.bot.RandomBot;
-import com.nedogeek.holdem.dealer.Dealer;
-import com.nedogeek.holdem.gamingStuff.Player;
-import com.nedogeek.holdem.gamingStuff.PlayersList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,34 +26,17 @@ public class AdminServlet extends HttpServlet {
     private final String DEFAULT_ADMIN_PASSWORD = "1234";
     private String adminPassword = DEFAULT_ADMIN_PASSWORD;
 
-    private Dealer dealer;
-    private Thread dealerThread;
-    private PlayersList players;
+    private Game game;
 
 
     @Override
     public void init() throws ServletException {
-        createDealer();
-        startDealerThread();
-    }
-
-    private void startDealerThread() {
-        dealerThread = new Thread(dealer);
-        dealerThread.start();
-    }
-
-    private void createDealer() {
-        players = new PlayersList();
-
-        dealer = new Dealer(players);
-
-        players.add(new RandomBot(dealer));
-        players.add(new CallBot(dealer));
+        game = GameImpl.getInstance();
     }
 
     @Override
     public void destroy() {
-        dealer.stop();
+        game.stop();
         super.destroy();
     }
 
@@ -82,10 +61,10 @@ public class AdminServlet extends HttpServlet {
     }
 
     private void addGameData(HttpServletRequest request) {
-        String gameStatus = (dealer != null) ? dealer.getGameStatus().toString() : "Stopped";
+        String gameStatus = game.getGameStatus().toString();
         request.setAttribute("GameStatus", gameStatus);
 
-        List<String> playerNames = (players != null) ? players.getPlayerNames() : new ArrayList<String>();
+        List<String> playerNames = new ArrayList<>(); //TODO code it
         request.setAttribute("Players", playerNames);
 
         request.setAttribute("Bots", serverBots);
@@ -115,20 +94,18 @@ public class AdminServlet extends HttpServlet {
         final String changePasswordCommand = request.getParameter("ChangePassword");
 
         if ("Stop".equals(stopServerCommand)) {
-            dealer.stop();
+            game.stop();
         }
         if ("Start".equals(startServerCommand)) {
-            if (dealerThread != null && !dealerThread.isAlive()) {
-                startDealerThread();
-            }
+            game.start();
         }
         if ("Pause".equals(pauseServerCommand)) {
-            dealer.pause();
+            game.pause();
         }
 
-        if (kickPlayerCommand != null && players != null) {
-            players.kickPlayer(kickPlayerCommand);
-        }
+//        if (kickPlayerCommand != null && players != null) {
+//            players.kickPlayer(kickPlayerCommand);                  //TODO code it
+//        }
 
         if (coinsAtStartCommand != null) {
             try {
@@ -154,20 +131,20 @@ public class AdminServlet extends HttpServlet {
             } catch (NumberFormatException ignored) {
             }
         }
-        if (addBotCommand != null && botName != null && !botName.equals("")) {
-            addBot(addBotCommand, botName);
-        }
+//        if (addBotCommand != null && botName != null && !botName.equals("")) {
+//            addBot(addBotCommand, botName);                                   //TODO code
+//        }
 
         if (changePasswordCommand != null) {
             adminPassword = changePasswordCommand;
         }
     }
 
-    private void addBot(String addBotCommand, String botName) {
-        try {
-            players.add((Player) Class.forName("com.nedogeek.holdem.bot." + addBotCommand).getConstructor(String.class, Dealer.class).newInstance(botName, dealer));
-        } catch (InstantiationException | NoSuchMethodException | ClassNotFoundException | InvocationTargetException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
-    }
+//    private void addBot(String addBotCommand, String botName) {
+//        try {
+//            players.add((Player) Class.forName("com.nedogeek.holdem.bot." + addBotCommand).getConstructor(String.class, Dealer.class).newInstance(botName, dealer));
+//        } catch (InstantiationException | NoSuchMethodException | ClassNotFoundException | InvocationTargetException | IllegalAccessException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

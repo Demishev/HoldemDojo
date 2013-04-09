@@ -27,14 +27,7 @@ public class PlayersList extends Vector<Player> {
     private final List<Player> waitingPlayers = new ArrayList<>();
     private final List<Player> kickedPlayers = new ArrayList<>();
 
-    public PlayersList() {
-        eventManager = EventManager.getInstance();
-    }
-
-    /**
-     * Test purposes ONLY!
-     */
-    PlayersList(EventManager eventManager) {
+    public PlayersList(EventManager eventManager) {
         this.eventManager = eventManager;
     }
 

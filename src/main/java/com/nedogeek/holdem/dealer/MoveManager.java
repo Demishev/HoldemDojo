@@ -17,10 +17,10 @@ class MoveManager {
     private final PlayersList playersList;
     private final EventManager eventManager;
 
-    MoveManager(Dealer dealer, PlayersList playersList) {
+    MoveManager(Dealer dealer, PlayersList playersList, EventManager eventManager) {
         this.dealer = dealer;
         this.playersList = playersList;
-        eventManager = EventManager.getInstance();
+        this.eventManager = eventManager;
     }
 
     void makeMove(Player mover) {
