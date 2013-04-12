@@ -1,11 +1,9 @@
 package com.nedogeek.holdem;
 
-import com.nedogeek.holdem.GameStatus;
-import com.nedogeek.holdem.PlayerStatus;
-import org.eclipse.jetty.websocket.WebSocket;
 import com.nedogeek.holdem.gamingStuff.Player;
+import org.eclipse.jetty.websocket.WebSocket;
 
-import java.lang.String;
+import java.util.List;
 
 /**
  * User: Konstantin Demishev
@@ -14,13 +12,22 @@ import java.lang.String;
  */
 public interface Game {
     void start();
+
     void pause();
+
     void stop();
 
     Player addPlayer(String name, WebSocket.Connection connection);
+
     void addViewer(WebSocket.Connection connection);
+
+    void addBot(Player bot);
 
     void removeConnection(WebSocket.Connection connection);
 
+    void removePlayer(String playerName);
+
     GameStatus getGameStatus();
+
+    List<String> getPlayers();
 }
