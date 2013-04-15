@@ -23,12 +23,10 @@ public class AdminModelImpl implements AdminModel {
     }
 
     @Override
-    public boolean addBot(Bots botType, String botName, String password) {
+    public void addBot(Bots botType, String botName, String password) {
         if (adminPassword.equals(password)) {
-            game.addBot(Bots.createBot(botType, botName));
-            return true;
+            game.addBot(botType, botName);
         }
-        return false;
     }
 
     @Override

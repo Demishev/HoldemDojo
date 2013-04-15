@@ -6,9 +6,10 @@ import org.eclipse.jetty.websocket.WebSocket;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 import static junit.framework.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 /**
  * User: Konstantin Demishev
@@ -19,11 +20,12 @@ public class GameImplTest {
     private EventManager eventManager;
     private GameImpl game;
     private final WebSocket.Connection connectionMock = mock(WebSocket.Connection.class);
+    private PlayersList playersList;
 
 
     @Before
     public void setUp() throws Exception {
-        PlayersList playersList = mock(PlayersList.class);
+        playersList = mock(PlayersList.class);
         eventManager = mock(EventManager.class);
 
         game = new GameImpl(eventManager, playersList);
@@ -55,5 +57,21 @@ public class GameImplTest {
         game.removeConnection(connectionMock);
 
         verify(eventManager).closeConnection(connectionMock);
+    }
+
+    @Test
+    public void shouldPlayersListRemovePlayerWhenGameRemovePlayerByName() throws Exception {
+        game.removePlayer("Some player");
+
+        verify(playersList).kickPlayer("Some player");
+    }
+
+    @Test @SuppressWarnings("unchecked")
+    public void shouldReturnedListOfPlayersWhenGameGetPlayers() throws Exception {
+        List<String> playersNames = mock(List.class);
+
+        when(playersList.getPlayerNames()).thenReturn(playersNames);
+
+        assertEquals(playersNames, game.getPlayers());
     }
 }

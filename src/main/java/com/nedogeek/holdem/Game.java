@@ -1,5 +1,6 @@
 package com.nedogeek.holdem;
 
+import com.nedogeek.holdem.bot.Bots;
 import com.nedogeek.holdem.gamingStuff.Player;
 import org.eclipse.jetty.websocket.WebSocket;
 
@@ -21,8 +22,6 @@ public interface Game {
 
     void addViewer(WebSocket.Connection connection);
 
-    void addBot(Player bot);
-
     void removeConnection(WebSocket.Connection connection);
 
     void removePlayer(String playerName);
@@ -30,4 +29,6 @@ public interface Game {
     GameStatus getGameStatus();
 
     List<String> getPlayers();
+
+    void addBot(Bots botType, String name);
 }

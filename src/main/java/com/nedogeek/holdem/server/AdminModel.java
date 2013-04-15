@@ -10,7 +10,7 @@ import com.nedogeek.holdem.bot.Bots;
 public interface AdminModel {
     boolean login(String password);
 
-    boolean addBot(Bots botType, String botName, String password);
+    void addBot(Bots botType, String botName, String password);
 
     boolean kick(String playerName, String password);
 
