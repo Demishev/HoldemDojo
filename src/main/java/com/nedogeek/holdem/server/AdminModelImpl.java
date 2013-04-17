@@ -11,122 +11,82 @@ import com.nedogeek.holdem.bot.Bots;
  * Time: 2:52
  */
 public class AdminModelImpl implements AdminModel {
-    private static final String DEFAULT_PASSWORD = "1234";
+    static final String DEFAULT_PASSWORD = "1234";
 
     private String adminPassword = DEFAULT_PASSWORD;
 
     private Game game = GameImpl.getInstance();
 
     @Override
-    public boolean login(String password) {
-        return adminPassword.equals(DEFAULT_PASSWORD);
+    public void addBot(Bots botType, String botName) {
+        game.addBot(botType, botName);
     }
 
     @Override
-    public void addBot(Bots botType, String botName, String password) {
-        if (adminPassword.equals(password)) {
-            game.addBot(botType, botName);
-        }
+    public void kick(String playerName) {
+        game.removePlayer(playerName);
     }
 
     @Override
-    public boolean kick(String playerName, String password) {
-        if (adminPassword.equals(password)) {
-            game.removePlayer(playerName);
-            return true;
-        }
-        return false;
+    public void setInitialCoins(int coinsCount) {
+        GameSettings.setCoinsAtStart(coinsCount);
     }
 
     @Override
-    public boolean setInitialCoins(int coinsCount, String password) {
-        if (adminPassword.equals(password)) {
-            GameSettings.setCoinsAtStart(coinsCount);
-            return true;
-        }
-        return false;
+    public void setMinimumBlind(int minimumBlind) {
+        GameSettings.setSmallBlind(minimumBlind);
     }
 
     @Override
-    public boolean setMinimumBlind(int minimumBlind, String password) {
-        if (adminPassword.equals(password)) {
-            GameSettings.setSmallBlind(minimumBlind);
-            return true;
-        }
-        return false;
+    public void setGameDelay(int gameDelay) {
+        GameSettings.setGameDelayValue(gameDelay);
     }
 
     @Override
-    public boolean setGameDelay(int gameDelay, String password) {
-        if (adminPassword.equals(password)) {
-            GameSettings.setGameDelayValue(gameDelay);
-            return true;
-        }
-        return false;
+    public void setEndGameDelay(int endGameDelay) {
+        GameSettings.setEndGameDelayValue(endGameDelay);
     }
 
     @Override
-    public boolean setEndGameDelay(int endGameDelay, String password) {
-        if (adminPassword.equals(password)) {
-            GameSettings.setEndGameDelayValue(endGameDelay);
-            return true;
-        }
-        return false;
+    public void start() {
+        game.start();
     }
 
     @Override
-    public boolean start(String password) {
-        if (adminPassword.equals(password)) {
-            game.start();
-            return true;
-        }
-        return false;
+    public void stop() {
+        game.stop();
     }
 
     @Override
-    public boolean stop(String password) {
-        if (adminPassword.equals(password)) {
-            game.stop();
-            return true;
-        }
-        return false;
+    public void pause() {
+        game.pause();
     }
 
     @Override
-    public boolean pause(String password) {
-        if (adminPassword.equals(password)) {
-            game.pause();
-            return true;
-        }
-        return false;
+    public void changePassword(String newPassword) {
+        adminPassword = newPassword;
     }
 
     @Override
-    public boolean changePassword(String oldPassword, String newPassword) {
-        if (adminPassword.equals(oldPassword)) {
-            adminPassword = newPassword;
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public GameDataBean getGameData(String password) {
+    public GameDataBean getGameData() {
         GameDataBean gameDataBean = new GameDataBean();
-        if (adminPassword.equals(password)) {
+        gameDataBean.setBotTypes(Bots.getBotTypes());
 
-            gameDataBean.setBotTypes(Bots.getBotTypes());
+        gameDataBean.setCoinsAtStart(GameSettings.getCoinsAtStart());
+        gameDataBean.setMinimumBind(GameSettings.getSmallBlind());
 
-            gameDataBean.setCoinsAtStart(GameSettings.getCoinsAtStart());
-            gameDataBean.setMinimumBind(GameSettings.getSmallBlind());
+        gameDataBean.setGameDelay(GameSettings.getGameDelayValue());
+        gameDataBean.setEndGameDelay(GameSettings.getEndGameDelayValue());
 
-            gameDataBean.setGameDelay(GameSettings.getGameDelayValue());
-            gameDataBean.setEndGameDelay(GameSettings.getEndGameDelayValue());
+        gameDataBean.setGameStatus(game.getGameStatus());
 
-            gameDataBean.setGameStatus(game.getGameStatus());
+        gameDataBean.setPlayers(game.getPlayers());
 
-            gameDataBean.setPlayers(game.getPlayers());
-        }
         return gameDataBean;
+    }
+
+    @Override
+    public boolean passwordCorrect(String password) {
+        return adminPassword.equals(password);
     }
 }

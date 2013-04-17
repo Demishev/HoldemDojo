@@ -2,6 +2,7 @@ package com.nedogeek.holdem.server;
 
 import com.nedogeek.holdem.GameStatus;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  * Date: 12.04.13
  * Time: 2:47
  */
-public class GameDataBean {
+public class GameDataBean implements Serializable {
     private List<String> players;
     private List<String> botTypes;
 

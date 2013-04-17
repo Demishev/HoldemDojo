@@ -8,27 +8,27 @@ import com.nedogeek.holdem.bot.Bots;
  * Time: 2:34
  */
 public interface AdminModel {
-    boolean login(String password);
+    void addBot(Bots botType, String botName);
 
-    void addBot(Bots botType, String botName, String password);
+    void kick(String playerName);
 
-    boolean kick(String playerName, String password);
+    void setInitialCoins(int coinsCount);
 
-    boolean setInitialCoins(int coinsCount, String password);
+    void setMinimumBlind(int minimumBlind);
 
-    boolean setMinimumBlind(int minimumBlind, String password);
+    void setGameDelay(int gameDelay);
 
-    boolean setGameDelay(int gameDelay, String password);
+    void setEndGameDelay(int endGameDelay);
 
-    boolean setEndGameDelay(int endGameDelay, String password);
+    void start();
 
-    boolean start(String password);
+    void stop();
 
-    boolean stop(String password);
+    void pause();
 
-    boolean pause(String password);
+    void changePassword(String newPassword);
 
-    boolean changePassword(String oldPassword, String newPassword);
+    GameDataBean getGameData();
 
-    GameDataBean getGameData(String password);
+    boolean passwordCorrect(String password);
 }

@@ -39,4 +39,8 @@ public enum Bots {
         }
         return botTypes;
     }
+
+    public static Bots getBotTypeByName(String botTypeName) {
+        return ("CallBot".equals(botTypeName)) ? CallBot : RiseBot; //TODO stub!
+    }
 }

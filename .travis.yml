@@ -5,5 +5,4 @@ jdk:
 notifications:
   email:
     - demishev.k@gmail.com
-  email:
     - schlachtnavaho@gmail.com
