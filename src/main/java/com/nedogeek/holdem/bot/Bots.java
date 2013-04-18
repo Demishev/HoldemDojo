@@ -41,6 +41,21 @@ public enum Bots {
     }
 
     public static Bots getBotTypeByName(String botTypeName) {
-        return ("CallBot".equals(botTypeName)) ? CallBot : RiseBot; //TODO stub!
+        if (botTypeName == null) {
+            throw new IllegalArgumentException("Bot type name is null");
+        }
+
+        switch (botTypeName) {
+            case "CallBot":
+                return CallBot;
+            case "RiseBot":
+                return RiseBot;
+            case "RandomBot":
+                return RandomBot;
+            case "FoldBot":
+                return FoldBot;
+        }
+
+        throw new IllegalArgumentException("Wrong bot name");
     }
 }

@@ -6,6 +6,7 @@ import org.eclipse.jetty.websocket.WebSocket;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.Assert.assertEquals;
@@ -66,9 +67,9 @@ public class GameImplTest {
         verify(playersList).kickPlayer("Some player");
     }
 
-    @Test @SuppressWarnings("unchecked")
+    @Test
     public void shouldReturnedListOfPlayersWhenGameGetPlayers() throws Exception {
-        List<String> playersNames = mock(List.class);
+        List<String> playersNames = new ArrayList<>();
 
         when(playersList.getPlayerNames()).thenReturn(playersNames);
 
