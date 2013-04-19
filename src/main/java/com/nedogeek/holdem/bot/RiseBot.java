@@ -1,7 +1,6 @@
 package com.nedogeek.holdem.bot;
 
 import com.nedogeek.holdem.dealer.Dealer;
-import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayerAction;
 
 /**
@@ -9,11 +8,7 @@ import com.nedogeek.holdem.gamingStuff.PlayerAction;
  * Date: 26.02.13
  * Time: 21:39
  */
-public class RiseBot extends Player {
-    public RiseBot(Dealer dealer) {
-        super("Rise bot", dealer);
-    }
-
+public class RiseBot extends Bot {
     public RiseBot(String name, Dealer dealer) {
         super(name, dealer);
     }

@@ -1,7 +1,6 @@
 package com.nedogeek.holdem.bot;
 
 import com.nedogeek.holdem.dealer.Dealer;
-import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayerAction;
 
 import java.util.Random;
@@ -11,7 +10,7 @@ import java.util.Random;
  * Date: 10.01.13
  * Time: 19:37
  */
-public class RandomBot extends Player {
+public class RandomBot extends Bot {
     private final Random random;
 
     public RandomBot(Dealer dealer) {

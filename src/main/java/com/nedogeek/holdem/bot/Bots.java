@@ -1,7 +1,6 @@
 package com.nedogeek.holdem.bot;
 
 import com.nedogeek.holdem.dealer.Dealer;
-import com.nedogeek.holdem.gamingStuff.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +13,7 @@ import java.util.List;
 public enum Bots {
     CallBot, FoldBot, RandomBot, RiseBot;
 
-    public static Player createBot(Bots botType, String name, Dealer dealer) {
+    public static Bot createBot(Bots botType, String name, Dealer dealer) {
         if (botType == CallBot) {
             return new CallBot(name, dealer);
         }

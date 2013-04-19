@@ -1,7 +1,6 @@
 package com.nedogeek.holdem.bot;
 
 import com.nedogeek.holdem.dealer.Dealer;
-import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayerAction;
 
 /**
@@ -9,7 +8,7 @@ import com.nedogeek.holdem.gamingStuff.PlayerAction;
  * Date: 10.01.13
  * Time: 19:28
  */
-public class FoldBot extends Player {
+public class FoldBot extends Bot {
     public FoldBot(String name, Dealer dealer) {
         super(name, dealer);
     }
