@@ -22,14 +22,21 @@ public class GameImplTest {
     private GameImpl game;
     private final WebSocket.Connection connectionMock = mock(WebSocket.Connection.class);
     private PlayersList playersList;
+    private final List<String> playersNames = new ArrayList<>();
 
 
     @Before
     public void setUp() throws Exception {
-        playersList = mock(PlayersList.class);
         eventManager = mock(EventManager.class);
+        resetPlayersListMock();
 
         game = new GameImpl(eventManager, playersList);
+    }
+
+    private void resetPlayersListMock() {
+        playersList = mock(PlayersList.class);
+
+        when(playersList.getPlayerNames()).thenReturn(playersNames);
     }
 
     @Test
@@ -69,9 +76,7 @@ public class GameImplTest {
 
     @Test
     public void shouldReturnedListOfPlayersWhenGameGetPlayers() throws Exception {
-        List<String> playersNames = new ArrayList<>();
 
-        when(playersList.getPlayerNames()).thenReturn(playersNames);
 
         assertEquals(playersNames, game.getPlayers());
     }
