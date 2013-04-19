@@ -1,7 +1,8 @@
 package com.nedogeek.holdem.server;
 
-import com.nedogeek.holdem.server.adminCommands.AdminCommand;
+import com.nedogeek.holdem.server.adminCommands.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -12,7 +13,29 @@ import java.util.Map;
 public class AdminCommandsPerformer {
     private Map<String, AdminCommand> commands;
 
-    public void performAction(String actionName, String[] params, AdminModel adminModel) {
+    public AdminCommandsPerformer() {
+        commands = new HashMap<>(5);
 
+        commands.put("kick", new KickCommand());
+
+        commands.put("start", new StartCommand());
+        commands.put("stop", new StopCommand());
+        commands.put("pause", new PauseCommand());
+
+        commands.put("addBot", new AddBotCommand());
+
+        commands.put("setInitialCoins", new SetInitialCoinsCommand());
+        commands.put("setMinimumBlind", new SetMinimumBlindCommand());
+
+        commands.put("setGameDelay", new SetGameDelayCommand());
+        commands.put("setEndGameDelay", new SetEndGameDelayValueCommand());
+    }
+
+    public void performAction(String actionName, String[] params, AdminModel adminModel) {
+        if (!commands.containsKey(actionName)) {
+            throw new IllegalArgumentException("Wrong command name");
+        }
+
+        commands.get(actionName).invoke(params, adminModel);
     }
 }
