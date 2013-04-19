@@ -1,4 +1,6 @@
-package com.nedogeek.holdem.server;
+package com.nedogeek.holdem.server.adminCommands;
+
+import com.nedogeek.holdem.server.AdminModel;
 
 /**
  * User: Konstantin Demishev
