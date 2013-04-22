@@ -1,139 +1,157 @@
-<%@ page import="java.util.ArrayList" %>
 <%--
   User: Konstantin Demishev
   Date: 25.03.13
   Time: 16:02
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<jsp:useBean id="gameData" class="com.nedogeek.holdem.server.GameDataBean" scope="request"></jsp:useBean>
+
+
 <html>
 <head>
     <title>Admin panel</title>
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js' type='text/javascript'></script>
+
     <script>
-        function validatePassword() {
-            pass = document.forms["changePassword"]["ChangePassword"].value;
-            ver = document.forms["changePassword"]["verification"].value;
-            if (pass != undefined && pass == ver) {
-                return true;
+        function submitForm(command, params) {
+            form = $(document).find("#submitForm");
+            $commandName = $(document).find("#commandName");
+            $commandParams = $(document).find("#commandParams");
+
+            $commandName.val(command);
+            $commandParams.val(params);
+
+            form.submit();
+        }
+
+        function changePassword() {
+            password = $(document).find("#password").val();
+            confirmation = $(document).find("#confirmation").val();
+
+            if (password == confirmation && password != "") {
+                submitForm("changePassword", password);
             } else {
-                alert("Verify password and verification");
-                return false;
+                alert("Confirmation does not math password or password is empty.");
             }
         }
+
+        function kickPlayer() {
+            playerName = $("#playerNames").find("option:selected").text();
+
+            submitForm("kick", playerName);
+        }
+
+        function addBot() {
+            botType = $("#botTypes").find("option:selected").text();
+
+            botName = $(document).find("#botName").val();
+
+            if (botName != "" && botName.indexOf("\n") === -1) {
+                submitForm("addBot", botType + "\n" + botName);
+            }
+        }
+
+        function setMinimumBlind() {
+            minimumBlind = $(document).find("#smallBlind").val();
+
+            submitForm("setMinimumBlind", minimumBlind);
+        }
+
+        function setCoinsAtStart() {
+            coins = $(document).find("#coinsAtStart").val();
+
+            submitForm("setInitialCoins", coins);
+        }
+
+        function setGameDelay() {
+            gameDelay = $(document).find("#gameDelay").val();
+
+            submitForm("setGameDelay", gameDelay);
+        }
+
+        function setEndGameDelay() {
+            endGameDelay = $(document).find("#endGameDelay").val();
+
+            submitForm("setEndGameDelay", endGameDelay);
+        }
+
+        function refreshPage() {
+            submitForm("refreshPage");
+        }
+
     </script>
 
 </head>
 <body>
+<form action="" id="submitForm" method="post">
+    <input type="hidden" name="command" id="commandName">
+    <input type="hidden" name="params" id="commandParams">
+</form>
+
+
+<div class="refreshDiv">
+    <button onclick="refreshPage()">Refresh page</button>
+</div>
+
 <div class="serverOperations">
-    Server status: <%= request.getAttribute("GameStatus") %>
-    <form action="" method="post">
-        <input type="hidden" name="Start" value="Start">
-        <input type="hidden" name="password" value="<%= request.getParameter("password")%>">
-        <input type="submit" value="Start">
-    </form>
-    <form action="" method="post">
-        <input type="hidden" name="Stop" value="Stop">
-        <input type="hidden" name="password" value="<%= request.getParameter("password")%>">
-        <input type="submit" value="Stop">
-    </form>
-    <form action="" method="post">
-        <input type="hidden" name="Pause" value="Pause">
-        <input type="hidden" name="password" value="<%= request.getParameter("password")%>">
-        <input type="submit" value="Pause">
-    </form>
+    Server status:
+    <jsp:getProperty name="gameData" property="gameStatus"/>
+    <button onClick="submitForm('start', '')"> Start</button>
+    <button onClick="submitForm('stop', '')"> Stop</button>
+    <button onClick="submitForm('pause', '')"> Pause</button>
 </div>
 
 <div class="kickDiv">
-    <form name="kickForm" action="" method="post">
-        <label>
-            <select name="Kick">
-                <%
-                    ArrayList<String> names = (ArrayList<String>) request.getAttribute("Players");
-                    for (String name : names) {
-                        out.println("<option value=\"" + name + "\">" + name + "</option>");
-                    }
-                %>
-            </select>
-        </label>
-        <input type="hidden" name="password" value='<%= request.getParameter("password")%>'>
-        <input type="submit" value="Kick player!">
-    </form>
+    <select id="playerNames">
+        <c:forEach var="name" items="${gameData.players}">
+            <option value="${name}">${name}</option>
+        </c:forEach>
+    </select>
+    <button onclick="kickPlayer()">Kick player.</button>
 </div>
 
 <div class="addBots">
-    <form name="addBots" action="" method="post">
-        <label>
-            <select name="AddBot">
-                <%
-                    String[] bots = (String[]) request.getAttribute("Bots");
-                    for (String botName : bots) {
-                        out.println("<option value=\"" + botName + "\">" + botName + "</option>");
-                    }
-                %>
-            </select>
-        </label>
-        <label>
-            <input name="BotName">
-        </label>
-        <label>
-            <input type="hidden" name="password" value="<%= request.getParameter("password")%>">
-        </label>
-        <input type="submit" value="Add bot">
-    </form>
+    <select id="botTypes">
+        <c:forEach var="name" items="${gameData.botTypes}">
+            <option id="${name}">${name}</option>
+        </c:forEach>
+    </select>
+    <input id="botName">
+    <button onclick="addBot()">Add bot.</button>
 </div>
 
 <div class="gameSettings">
-    <form action="" method="post">
-        Coins at start:
-        <label>
-            <input name="CoinsAtStart" value="<%= request.getAttribute("CoinsAtStart")%>">
-        </label>
-        <input type="hidden" name="password" value="<%= request.getParameter("password")%>">
-        <input type="submit" value="Set coins at start">
-    </form>
-    <form action="" method="post">
-        Small blind:
-        <label>
-            <input name="SmallBlind" value="<%= request.getAttribute("SmallBlind")%>">
-        </label>
-        <input type="hidden" name="password" value="<%= request.getParameter("password")%>">
-        <input type="submit" value="Set small blind">
-    </form>
-    <form action="" method="post">
-        Game delay:
-        <label>
-            <input name="GameDelay" value="<%= request.getAttribute("GameDelay")%>">
-        </label>
-        <input type="hidden" name="password" value="<%= request.getParameter("password")%>">
-        <input type="submit" value="Set game delay">
-    </form>
+    Coins at start:
+    <input type="number" id="coinsAtStart"
+           value='<jsp:getProperty name="gameData" property="coinsAtStart"></jsp:getProperty>'>
+    <button onclick="setCoinsAtStart()">Set coins at start.</button>
+    <br>
 
-    <form action="" method="post">
-        End game delay:
-        <label>
-            <input name="EndGameDelay" value="<%= request.getAttribute("EndGameDelay")%>">
-        </label>
-        <input type="hidden" name="password" value="<%= request.getParameter("password")%>">
-        <input type="submit" value="Set end game delay">
-    </form>
+    Small blind:
+    <input type="number" id="smallBlind"
+           value='<jsp:getProperty name="gameData" property="minimumBind"></jsp:getProperty>'>
+    <button onclick="setMinimumBlind()">Set small blind.</button>
+    <br>
+
+    Game delay:
+    <input type="number" id="gameDelay"
+           value='<jsp:getProperty name="gameData" property="gameDelay"></jsp:getProperty>'>
+    <button onclick="setGameDelay()">Set game delay.</button>
+    <br>
+
+    End game delay:
+    <input type="number" id="endGameDelay"
+           value='<jsp:getProperty name="gameData" property="endGameDelay"></jsp:getProperty>'>
+    <button onclick="setEndGameDelay()">Set end game delay.</button>
 </div>
 
 <div class="changeAdminPassword">
-    <form action="" name="changePassword" method="post" onsubmit="return validatePassword()">
-        Old password:
-        <label>
-            <input type="password" name="password">
-        </label>
-        New password:
-        <label>
-            <input type="password" name="ChangePassword">
-        </label>
-        Verification:
-        <label>
-            <input type="password" name="verification">
-        </label>
-        <input type="submit" value="Change password">
-    </form>
+    New password: <input type="password" id="password">
+    Confirmation: <input type="password" id="confirmation">
 
+    <button onclick="changePassword()">Change password</button>
 </div>
 
 </body>

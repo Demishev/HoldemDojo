@@ -24,7 +24,6 @@ public class AddBotCommand implements AdminCommand {
 
         Bots botType = Bots.getBotTypeByName(botTypeName);
 
-
         adminModel.addBot(botType, botName);
     }
 }

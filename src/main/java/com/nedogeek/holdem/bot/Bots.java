@@ -55,6 +55,6 @@ public enum Bots {
                 return FoldBot;
         }
 
-        throw new IllegalArgumentException("Wrong bot name");
+        throw new IllegalArgumentException("Wrong bot name: \"" + botTypeName + "\"");
     }
 }

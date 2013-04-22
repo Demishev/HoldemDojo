@@ -17,10 +17,12 @@ import java.io.IOException;
 @WebServlet(urlPatterns = "/admin", loadOnStartup = 1)
 public class AdminServlet extends HttpServlet {
     private AdminModel model;
+    private AdminCommandsPerformer commandsPerformer;
 
     @Override
     public void init() throws ServletException {
         model = new AdminModelImpl();
+        commandsPerformer = new AdminCommandsPerformer();
     }
 
     @Override
@@ -29,18 +31,50 @@ public class AdminServlet extends HttpServlet {
     }
 
     private void redirectToLoginPage(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
-        RequestDispatcher view = httpServletRequest.getRequestDispatcher("/admin/index.html");
+        String redirectPath = "/admin/index.html";
+        redirectTo(httpServletRequest, httpServletResponse, redirectPath);
+    }
+
+    private void redirectTo(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, String redirectPath) throws ServletException, IOException {
+        RequestDispatcher view = httpServletRequest.getRequestDispatcher(redirectPath);
         view.forward(httpServletRequest, httpServletResponse);
     }
 
     @Override
     protected void doPost(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
-        super.doPost(httpServletRequest, httpServletResponse);
+        checkLoginInfo(httpServletRequest, httpServletResponse);
 
-        if (!model.passwordCorrect(httpServletRequest.getParameter("password"))) {
-            redirectToLoginPage(httpServletRequest, httpServletResponse);
+        doCommand(httpServletRequest);
+
+        httpServletRequest.setAttribute("gameData", model.getGameData());
+
+        redirectTo(httpServletRequest, httpServletResponse, "/admin/adminPage.jsp");
+    }
+
+    private void checkLoginInfo(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
+        String PASSWORD = "password";
+        if (!model.passwordCorrect((String) httpServletRequest.getSession().getAttribute(PASSWORD))) {
+            String password = httpServletRequest.getParameter(PASSWORD);
+            if (model.passwordCorrect(password)) {
+                httpServletRequest.getSession().setAttribute(PASSWORD, password);
+            } else {
+                redirectToLoginPage(httpServletRequest, httpServletResponse);
+            }
         }
+    }
 
+    private void doCommand(HttpServletRequest httpServletRequest) {
+        String command = httpServletRequest.getParameter("command");
+        String paramsString = httpServletRequest.getParameter("params");
 
+        System.out.println("Performing action: " + command + "; params: " + paramsString);
+
+        if (command != null && paramsString != null) {
+            String[] params = paramsString.split("\n");
+            for (int i = 0; i < params.length; i++) {
+                params[i] = params[i].replace("\n", "").replace("\r", "");
+            }
+            commandsPerformer.performAction(command, params, model);
+        }
     }
 }

@@ -14,7 +14,7 @@ public class AdminCommandsPerformer {
     private Map<String, AdminCommand> commands;
 
     public AdminCommandsPerformer() {
-        commands = new HashMap<>(5);
+        commands = new HashMap<>();
 
         commands.put("kick", new KickCommand());
 
@@ -29,13 +29,13 @@ public class AdminCommandsPerformer {
 
         commands.put("setGameDelay", new SetGameDelayCommand());
         commands.put("setEndGameDelay", new SetEndGameDelayValueCommand());
+        commands.put("refreshPage", new DoNothingCommand());
     }
 
     public void performAction(String actionName, String[] params, AdminModel adminModel) {
         if (!commands.containsKey(actionName)) {
             throw new IllegalArgumentException("Wrong command name");
         }
-
         commands.get(actionName).invoke(params, adminModel);
     }
 }
