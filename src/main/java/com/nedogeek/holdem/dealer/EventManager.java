@@ -48,7 +48,6 @@ public class EventManager implements Serializable {
             sendMessageToPlayer(message, connectionName);
             removeClosedConnections(connectionName);
         }
-
     }
 
     public void addEvent(Event event) {

@@ -11,6 +11,7 @@
     <packaging>war</packaging>
     <properties>
         <jetty.version>8.1.4.v20120524</jetty.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <build>
