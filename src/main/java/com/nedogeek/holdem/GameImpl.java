@@ -105,7 +105,7 @@ public class GameImpl implements Game {
 
     @Override
     public GameStatus getGameStatus() {
-        return GameStatus.NOT_ENOUGH_PLAYERS;
+        return dealer.getGameStatus();
     }
 
     @Override

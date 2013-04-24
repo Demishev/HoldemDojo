@@ -205,20 +205,13 @@ li {
 
 }
 
-textarea {
+.console {
     position: absolute;
 
-    top: 7em;
-    left: 60em;
+    top: 10%;
+    right: 2em;
 
     width: 25em;
     height: 40em;
 }
-
-.cheat {
-    position: absolute;
-    top: 35em;
-    opacity: 0;
-}
-
 

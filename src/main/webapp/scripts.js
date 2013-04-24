@@ -2,7 +2,7 @@
  * Date: 20.03.13
  * Time: 0:17
  */
-document.write("<script src='jquery.min.js' type='text/javascript'></script>");
+//document.write("<script src='<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js' type='text/javascript'></script>");
 document.write("<script src='gameData.js' type='text/javascript'></script> ");
 document.write("<script src='gameSocket.js' type='text/javascript'></script> ");
 
@@ -36,7 +36,11 @@ var drawEvents = function () {
 
     event = gameData.event;
     for (i = 0; i < event.length; i++) {
-        $console.append(event[i] + "\n");
+        $console.val($console.val() + event[i] + "\n");
+    }
+
+    if ($console.val().split("\n").length > 50) {
+        $console.val($console.val().substring($console.val().indexOf("\n") + 1, $console.val().length));
     }
 
     $console.scrollTop($console[0].scrollHeight - $console.height());
@@ -103,7 +107,6 @@ drawDeskInfo = function () {
 
     $deskCards.each(function (cardNumber) {
         updateCard($deskCards[cardNumber], $($deskCardsDiv[cardNumber]));
-
 
         $($deskCardsDiv[cardNumber]).css("opacity", 1);
     });

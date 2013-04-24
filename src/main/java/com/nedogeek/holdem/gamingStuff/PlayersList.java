@@ -57,8 +57,12 @@ public class PlayersList extends Vector<Player> {
 
     @Override
     public boolean remove(Object player) {
-        eventManager.addEvent(new RemovePlayerEvent((Player) player));
-        return super.remove(player);
+        boolean removed = super.remove(player);
+        if (removed) {
+            eventManager.addEvent(new RemovePlayerEvent((Player) player));
+            return true;
+        }
+        return false;
     }
 
     public void playerMoved(Player player) {

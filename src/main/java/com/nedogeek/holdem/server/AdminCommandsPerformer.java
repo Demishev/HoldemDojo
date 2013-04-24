@@ -30,6 +30,8 @@ public class AdminCommandsPerformer {
         commands.put("setGameDelay", new SetGameDelayCommand());
         commands.put("setEndGameDelay", new SetEndGameDelayValueCommand());
         commands.put("refreshPage", new DoNothingCommand());
+
+        commands.put("changePassword", new ChangePasswordCommand());
     }
 
     public void performAction(String actionName, String[] params, AdminModel adminModel) {

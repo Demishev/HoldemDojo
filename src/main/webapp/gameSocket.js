@@ -2,7 +2,7 @@
  * Date: 16.03.13
  * Time: 12:24
  */
-document.write("<script src='jquery.min.js' type='text/javascript'></script>");
+document.write("<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js' type='text/javascript'></script>");
 document.write("<script src='gameData.js' type='text/javascript'></script> ");
 var socket;
 
