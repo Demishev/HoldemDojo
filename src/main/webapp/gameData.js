@@ -5,7 +5,7 @@
  */
 
 var login = undefined;
-var server = "ws://77.47.200.184:8080/ws";
+var server = "ws://localhost:8080/ws";
 
 gameData = {
 
