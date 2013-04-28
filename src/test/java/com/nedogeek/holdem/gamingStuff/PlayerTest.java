@@ -48,6 +48,14 @@ public class PlayerTest {
     }
 
     @Test
+    public void shouldSecondPlayerNameWhenSecondPlayerGetName() throws Exception {
+        String secondPlayerName = "Second player";
+        Player secondPlayer = new Player(secondPlayerName, dealerMock);
+
+        assertEquals(secondPlayerName, secondPlayer.getName());
+    }
+
+    @Test
     public void shouldFoldWhenNewPlayerSetStatusFoldAndGetStatus() throws Exception {
         player.setStatus(PlayerStatus.Fold);
 
