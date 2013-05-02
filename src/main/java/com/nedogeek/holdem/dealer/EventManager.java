@@ -7,46 +7,29 @@ import com.nedogeek.holdem.gameEvents.RemovePlayerEvent;
 import com.nedogeek.holdem.gamingStuff.Card;
 import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
-import org.eclipse.jetty.websocket.WebSocket.Connection;
 
-import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * User: Konstantin Demishev
  * Date: 08.02.13
  * Time: 22:10
  */
-public class EventManager implements Serializable {
+public class EventManager {
     private final String PUBLIC = "public";
 
     private PlayersList playersList;
     private Dealer dealer;
     private Event event;
-
-    private final Map<String, List<Connection>> connections = new ConcurrentHashMap<>();
-
-    public void addViewer(Connection viewer) {
-        addConnection(PUBLIC, viewer);
-    }
-
-    private void addConnection(String owner, Connection connection) {
-        if (!connections.containsKey(owner)) {
-            connections.put(owner, new CopyOnWriteArrayList<Connection>());
-        }
-        connections.get(owner).add(connection);
-    }
+    private ConnectionsManager connectionsManager;
 
     private void notifyConnections() {
-        for (String connectionName : connections.keySet()) {
-            String message = gameToJSON(connectionName);
-            sendMessageToPlayer(message, connectionName);
-            removeClosedConnections(connectionName);
+        connectionsManager.sendMessageToViewers(gameToJSON(PUBLIC));
+
+        for (String playerName : playersList.getPlayerNames()) {
+            String message = gameToJSON(playerName);
+            connectionsManager.sendPersonalMessage(playerName, message);
         }
     }
 
@@ -58,41 +41,9 @@ public class EventManager implements Serializable {
         notifyConnections();
     }
 
-
-    private void sendMessageToPlayer(String message, String playerName) {
-        List<Connection> playerConnections = connections.get(playerName);
-        for (Connection connection : playerConnections) {
-            try {
-                connection.sendMessage(message);
-            } catch (IOException e) {
-                connection.close();
-            }
-        }
-    }
-
     private void processEvents(Event event) {
         if (event instanceof AddPlayerEvent || event instanceof RemovePlayerEvent) {
             dealer.calculateGameStatus();
-        }
-    }
-
-    private void removeClosedConnections(String connectionsName) {
-        for (Connection connection : connections.get(connectionsName)) {
-            if (!connection.isOpen()) {
-                connections.get(connectionsName).remove(connection);
-                removeClosedConnections(connectionsName);
-                return;
-            }
-        }
-    }
-
-    public void closeConnection(Connection connection) {
-        connection.close();
-
-        for (List<Connection> connectionList : connections.values()) {
-            if (connectionList.contains(connection)) {
-                connectionList.remove(connection);
-            }
         }
     }
 
@@ -166,17 +117,15 @@ public class EventManager implements Serializable {
         return playersList.generatePlayersJSON(playerNamesArray);
     }
 
-    public Player addPlayer(Connection connection, String login) {
-        addConnection(login, connection);
-
-        return playersList.getPlayerByName(login, dealer);
-    }
-
     public void setDealer(Dealer dealer) {
         this.dealer = dealer;
     }
 
     public void setPlayersList(PlayersList playersList) {
         this.playersList = playersList;
+    }
+
+    public void setConnectionsManager(ConnectionsManager connectionsManager) {
+        this.connectionsManager = connectionsManager;
     }
 }

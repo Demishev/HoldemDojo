@@ -8,17 +8,13 @@ import com.nedogeek.holdem.gameEvents.GameEndedEvent;
 import com.nedogeek.holdem.gamingStuff.Card;
 import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
-import org.eclipse.jetty.websocket.WebSocket;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.*;
 
 /**
@@ -66,12 +62,6 @@ public class EventManagerTest {
 
     private EventManager eventManager;
 
-    private WebSocket.Connection firstViewerConnectionMock;
-    private WebSocket.Connection secondViewerConnectionMock;
-    private WebSocket.Connection firstPlayerConnectionMock;
-
-    private WebSocket.Connection secondPlayerConnectionMock;
-
     private Event eventMock;
 
     private GameEndedEvent gameEndedEventMock;
@@ -88,11 +78,11 @@ public class EventManagerTest {
 
     private Dealer dealerMock;
 
+    private ConnectionsManager connectionsManagerMock;
+
 
     @Before
     public void setUp() throws Exception {
-        resetConnections();
-
         resetDealerMock();
 
         resetPlayersMock();
@@ -106,10 +96,12 @@ public class EventManagerTest {
         gameEndedEventMock = mock(GameEndedEvent.class);
         when(gameEndedEventMock.toJSON()).thenReturn("Game ended");
 
+        connectionsManagerMock = mock(ConnectionsManager.class);
+
         eventManager = new EventManager();
         eventManager.setDealer(dealerMock);
         eventManager.setPlayersList(playersListMock);
-        eventManager.addViewer(firstViewerConnectionMock);
+        eventManager.setConnectionsManager(connectionsManagerMock);
     }
 
     private void resetCards() {
@@ -118,20 +110,6 @@ public class EventManagerTest {
 
         when(firstCardMock.toJSON()).thenReturn(FIRST_CARD_JSON);
         when(secondCardMock.toJSON()).thenReturn(SECOND_CARD_JSON);
-    }
-
-    private void resetConnections() {
-        firstViewerConnectionMock = mock(WebSocket.Connection.class);
-        secondViewerConnectionMock = mock(WebSocket.Connection.class);
-
-        firstPlayerConnectionMock = mock(WebSocket.Connection.class);
-        secondPlayerConnectionMock = mock(WebSocket.Connection.class);
-
-        when(firstViewerConnectionMock.isOpen()).thenReturn(true);
-        when(secondViewerConnectionMock.isOpen()).thenReturn(true);
-
-        when(firstPlayerConnectionMock.isOpen()).thenReturn(true);
-        when(secondViewerConnectionMock.isOpen()).thenReturn(true);
     }
 
     private void resetDealerMock() {
@@ -175,52 +153,26 @@ public class EventManagerTest {
         when(playersListMock.getPlayerCardCombination(SECOND_PLAYER)).thenReturn(SECOND_PLAYER_CARD_COMBINATION);
 
         when(playersListMock.iterator()).thenReturn(playersHolder.iterator(), playersHolder.iterator(), playersHolder.iterator());
+        ArrayList<String> playerNames = new ArrayList<>();
+        playerNames.add(FIRST_PLAYER);
+        playerNames.add(SECOND_PLAYER);
+        when(playersListMock.getPlayerNames()).thenReturn(playerNames);
     }
 
 
     @Test
-    public void shouldFirstViewerMockSendMessageWhenAddGameEvent() throws Exception {
+    public void shouldConnectionManagerMockSendMessageDefaultToViewersWhenAddGameEvent() throws Exception {
         eventManager.addEvent(eventMock);
 
-        verify(firstViewerConnectionMock).sendMessage(anyString());
+        verify(connectionsManagerMock).sendMessageToViewers(DEFAULT_MESSAGE);
     }
 
     @Test
-    public void shouldConnectionCloseWhenThirdViewerThrowsIOException() throws Exception {
-        WebSocket.Connection throwingConnection = mock(WebSocket.Connection.class);
-        Mockito.doThrow(new IOException()).when(throwingConnection).sendMessage(anyString());
-        eventManager.addViewer(throwingConnection);
-
+    public void shouldConnectionManagerMockSendMessageDefaultToViewersTwiceWhenAddGameEvent2Times() throws Exception {
+        eventManager.addEvent(eventMock);
         eventManager.addEvent(eventMock);
 
-        verify(throwingConnection).close();
-    }
-
-    @Test
-    public void shouldSecondViewerMockSendMessageWhenItAddsToEventManager() throws Exception {
-        eventManager.addViewer(secondViewerConnectionMock);
-
-        eventManager.addEvent(eventMock);
-
-        verify(secondViewerConnectionMock).sendMessage(anyString());
-    }
-
-    @Test
-    public void shouldFirstViewerMockSendMessageWhenSecondViewerAddsToEventManager() throws Exception {
-        eventManager.addViewer(secondViewerConnectionMock);
-
-        eventManager.addEvent(eventMock);
-
-        verify(firstViewerConnectionMock).sendMessage(anyString());
-    }
-
-    @Test
-    public void shouldNotNotifyFirstViewerWhenConnectionClosed() throws Exception {
-        eventManager.closeConnection(firstViewerConnectionMock);
-
-        eventManager.addEvent(eventMock);
-
-        verify(firstViewerConnectionMock, never()).sendMessage(anyString());
+        verify(connectionsManagerMock, times(2)).sendMessageToViewers(DEFAULT_MESSAGE);
     }
 
     @Test
@@ -272,35 +224,16 @@ public class EventManagerTest {
         verify(dealerMock, atLeast(1)).getDeskCards();
     }
 
-    @Test
-    public void shouldDefaultMessageSendToFirstViewerMockEqualsDefaultMessage() throws Exception {
-        eventManager.addEvent(eventMock);
-
-        verify(firstViewerConnectionMock).sendMessage(DEFAULT_MESSAGE);
-    }
-
-    @Test
-    public void shouldDefaultMessageSendToSecondViewerMockEqualsDefaultMessage() throws Exception {
-        eventManager.addViewer(secondViewerConnectionMock);
-
-        eventManager.addEvent(eventMock);
-
-        verify(secondViewerConnectionMock).sendMessage(DEFAULT_MESSAGE);
-    }
 
     @Test
     public void shouldInMessageFirstPlayerWithCardsSendToFirstPlayerConnection() throws Exception {
-        eventManager.addPlayer(firstPlayerConnectionMock, FIRST_PLAYER);
-
         eventManager.addEvent(eventMock);
 
-        verify(firstPlayerConnectionMock).sendMessage(FIRST_PLAYER_WITH_CARDS_MESSAGE);
+        verify(connectionsManagerMock).sendPersonalMessage(FIRST_PLAYER, FIRST_PLAYER_WITH_CARDS_MESSAGE);
     }
 
     @Test
     public void shouldInMessageSecondPlayerWithCardsSendToSecondPlayerConnection() throws Exception {
-        eventManager.addPlayer(secondPlayerConnectionMock, SECOND_PLAYER);
-
         eventManager.addEvent(eventMock);
 
         String message = "{\"gameRound\":\"" + INITIAL + "\",\"dealer\":\"" + DEALER_NAME + "\"," +
@@ -311,33 +244,20 @@ public class EventManagerTest {
                 + "\"," +
                 "\"gameStatus\":\"" + READY + "\",\"deskCards\":[],\"deskPot\":0}";
 
-        verify(secondPlayerConnectionMock).sendMessage(message);
+        verify(connectionsManagerMock).sendPersonalMessage(SECOND_PLAYER, message);
     }
 
     @Test
     public void shouldNewerPlayersCardsSendToViewersWhenBothPlayerConnectionsAdded() throws Exception {
-        eventManager.addPlayer(firstPlayerConnectionMock, FIRST_PLAYER);
-        eventManager.addPlayer(secondPlayerConnectionMock, SECOND_PLAYER);
-
         eventManager.addEvent(eventMock);
 
-        verify(firstViewerConnectionMock, never()).sendMessage(FIRST_PLAYER_WITH_CARDS_MESSAGE);
-        verify(firstViewerConnectionMock, never()).sendMessage(SECOND_PLAYER_WITH_CARDS_MESSAGE);
+        verify(connectionsManagerMock, never()).sendPersonalMessage(SECOND_PLAYER, FIRST_PLAYER_WITH_CARDS_MESSAGE);
+        verify(connectionsManagerMock, never()).sendPersonalMessage(FIRST_PLAYER, SECOND_PLAYER_WITH_CARDS_MESSAGE);
 
-        verify(secondViewerConnectionMock, never()).sendMessage(FIRST_PLAYER_WITH_CARDS_MESSAGE);
-        verify(secondViewerConnectionMock, never()).sendMessage(SECOND_PLAYER_WITH_CARDS_MESSAGE);
+        verify(connectionsManagerMock, never()).sendMessageToViewers(FIRST_PLAYER_WITH_CARDS_MESSAGE);
+        verify(connectionsManagerMock, never()).sendMessageToViewers(SECOND_PLAYER_WITH_CARDS_MESSAGE);
     }
 
-    @Test
-    public void shouldNewerPlayersCardsSendToNotPropitiatePlayerConnectionsWhenBothPlayerConnectionsAdded() throws Exception {
-        eventManager.addPlayer(firstPlayerConnectionMock, FIRST_PLAYER);
-        eventManager.addPlayer(secondPlayerConnectionMock, SECOND_PLAYER);
-
-        eventManager.addEvent(eventMock);
-
-        verify(firstPlayerConnectionMock, never()).sendMessage(SECOND_PLAYER_WITH_CARDS_MESSAGE);
-        verify(secondPlayerConnectionMock, never()).sendMessage(FIRST_PLAYER_WITH_CARDS_MESSAGE);
-    }
 
     @Test
     public void shouldFirstViewerCanViewFirstPlayerCardsWhenFirstPlayerWon() throws Exception {
@@ -352,14 +272,12 @@ public class EventManagerTest {
 
                 + "," + "\"gameStatus\":\"" + READY + "\",\"deskCards\":[],\"deskPot\":0}";
 
-        verify(firstViewerConnectionMock).sendMessage(message);
+        verify(connectionsManagerMock).sendMessageToViewers(message);
     }
 
     @Test
     public void shouldFirstPlayerCanViewBothPlayersCardsWhenSecondPlayerWon() throws Exception {
         when(gameEndedEventMock.getWinners()).thenReturn(Arrays.asList(secondPlayerMock));
-
-        eventManager.addPlayer(firstPlayerConnectionMock, FIRST_PLAYER);
 
         eventManager.addEvent(gameEndedEventMock);
 
@@ -372,7 +290,7 @@ public class EventManagerTest {
                 "\"combination\":\"" + FIRST_PLAYER_CARD_COMBINATION
                 + "\"," + "\"gameStatus\":\"" + READY + "\",\"deskCards\":[],\"deskPot\":0}";
 
-        verify(firstPlayerConnectionMock).sendMessage(message);
+        verify(connectionsManagerMock).sendPersonalMessage(FIRST_PLAYER, message);
     }
 
     @Test
@@ -388,17 +306,7 @@ public class EventManagerTest {
 
                 + "," + "\"gameStatus\":\"" + READY + "\",\"deskCards\":[],\"deskPot\":0}";
 
-        verify(firstViewerConnectionMock).sendMessage(message);
-    }
-
-    @Test
-    public void shouldMessageSendToFirstViewerOnceBecauseOfClosedConnectionShouldBeRemovedWhenAddEvent() throws Exception {
-        when(firstViewerConnectionMock.isOpen()).thenReturn(false);
-
-        eventManager.addEvent(eventMock);
-        eventManager.addEvent(eventMock);
-
-        verify(firstViewerConnectionMock).sendMessage(anyString());
+        verify(connectionsManagerMock).sendMessageToViewers(message);
     }
 
     @Test
@@ -413,6 +321,6 @@ public class EventManagerTest {
                 "[" + FIRST_CARD_JSON + "," + SECOND_CARD_JSON + "]" +
                 ",\"deskPot\":0}";
 
-        verify(firstViewerConnectionMock).sendMessage(message);
+        verify(connectionsManagerMock).sendMessageToViewers(message);
     }
 }

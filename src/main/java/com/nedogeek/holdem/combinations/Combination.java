@@ -24,7 +24,10 @@ enum Combination {
     HIGH_CARD("High card %s with %s, %s, %s and %s", 5),
     PAIR_TWO_CARDS("Pair of %s", 2),
 
-    HIGH_CARD_TWO_CARDS("High card %s with %s", 2);
+    HIGH_CARD_TWO_CARDS("High card %s with %s", 2),
+
+    NO_CARD_COMBINATION("No card combination", 0);
+
     private final String combinationMessage;
     private final int combinationType;
 
@@ -39,7 +42,7 @@ enum Combination {
                 return combination;
             }
         }
-        return null;
+        return NO_CARD_COMBINATION;
     }
 
     static String cardsCombination(Card[] cards) {

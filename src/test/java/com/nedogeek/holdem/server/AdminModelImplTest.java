@@ -1,11 +1,12 @@
 package com.nedogeek.holdem.server;
 
+import com.nedogeek.holdem.Game;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
 
 /**
  * User: Konstantin Demishev
@@ -19,7 +20,7 @@ public class AdminModelImplTest {
 
     @Before
     public void setUp() throws Exception {
-        adminModel = new AdminModelImpl();
+        adminModel = new AdminModelImpl(mock(Game.class));
     }
 
     @Test

@@ -15,7 +15,15 @@ public class AdminModelImpl implements AdminModel {
 
     private String adminPassword = DEFAULT_PASSWORD;
 
-    private Game game = GameImpl.getInstance();
+    private Game game;
+
+    public AdminModelImpl() {
+        game = GameImpl.getInstance();
+    }
+
+    AdminModelImpl(Game game) {
+        this.game = game;
+    }
 
     @Override
     public void addBot(Bots botType, String botName) {

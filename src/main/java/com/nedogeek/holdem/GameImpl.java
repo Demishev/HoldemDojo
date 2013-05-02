@@ -3,6 +3,7 @@ package com.nedogeek.holdem;
 import com.nedogeek.holdem.bot.Bots;
 import com.nedogeek.holdem.bot.CallBot;
 import com.nedogeek.holdem.bot.RandomBot;
+import com.nedogeek.holdem.dealer.ConnectionsManager;
 import com.nedogeek.holdem.dealer.Dealer;
 import com.nedogeek.holdem.dealer.EventManager;
 import com.nedogeek.holdem.gamingStuff.Player;
@@ -22,6 +23,7 @@ public class GameImpl implements Game {
     private final EventManager eventManager;
     private Dealer dealer;
     private final PlayersList players;
+    private ConnectionsManager connectionsManager;
 
     private Thread dealerThread;
 
@@ -29,6 +31,8 @@ public class GameImpl implements Game {
         eventManager = new EventManager();
         players = new PlayersList(eventManager);
         eventManager.setPlayersList(players);
+        connectionsManager = new ConnectionsManager();
+        eventManager.setConnectionsManager(connectionsManager);
 
         createDealer();
         start();
@@ -41,9 +45,10 @@ public class GameImpl implements Game {
         return instance;
     }
 
-    GameImpl(EventManager eventManager, PlayersList players) {
-        this.eventManager = eventManager;
+    GameImpl(PlayersList players, ConnectionsManager connectionsManager) {
+        this.eventManager = new EventManager();
         this.players = players;
+        this.connectionsManager = connectionsManager;
 
         createDealer();
         start();
@@ -80,12 +85,13 @@ public class GameImpl implements Game {
 
     @Override
     public Player addPlayer(String name, WebSocket.Connection connection) {
-        return eventManager.addPlayer(connection, name);
+        connectionsManager.addPersonalConnection(name, connection);
+        return players.getPlayerByName(name, dealer);
     }
 
     @Override
     public void addViewer(WebSocket.Connection connection) {
-        eventManager.addViewer(connection);
+        connectionsManager.addViewer(connection);
     }
 
     @Override
@@ -95,7 +101,7 @@ public class GameImpl implements Game {
 
     @Override
     public void removeConnection(WebSocket.Connection connection) {
-        eventManager.closeConnection(connection);
+        connectionsManager.removeConnection(connection);
     }
 
     @Override

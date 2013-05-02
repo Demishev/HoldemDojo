@@ -29,10 +29,9 @@ public class Dealer implements Runnable {
     private GameRound gameRound;
 
     private int callValue;
-
     private CardDeck cardDeck;
-
     private List<Card> deskCards = new ArrayList<>();
+
 
     public Dealer(PlayersList playersList, EventManager eventManager) {
         this.playersList = playersList;
