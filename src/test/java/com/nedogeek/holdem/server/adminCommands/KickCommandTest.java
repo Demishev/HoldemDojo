@@ -20,15 +20,16 @@ public class KickCommandTest {
 
     @Before
     public void setUp() throws Exception {
-        kickCommand = new KickCommand();
-
         adminModelMock = mock(AdminModel.class);
+
+
+        kickCommand = new KickCommand(adminModelMock);
     }
 
     @Test
     public void shouldKickFirstPlayerWhenKickFirstPlayer() throws Exception {
         String FIRST_PLAYER_NAME = "First player";
-        kickCommand.invoke(new String[]{FIRST_PLAYER_NAME}, adminModelMock);
+        kickCommand.invoke(new String[]{FIRST_PLAYER_NAME});
 
         verify(adminModelMock).kick(FIRST_PLAYER_NAME);
     }
@@ -36,23 +37,23 @@ public class KickCommandTest {
     @Test
     public void shouldKickSecondPlayerWhenKickSecondPlayer() throws Exception {
         String SECOND_PLAYER_NAME = "Second player";
-        kickCommand.invoke(new String[]{SECOND_PLAYER_NAME}, adminModelMock);
+        kickCommand.invoke(new String[]{SECOND_PLAYER_NAME});
 
         verify(adminModelMock).kick(SECOND_PLAYER_NAME);
     }
 
-    @Test (expected = IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void shouldExceptionWhenKickNullPlayer() throws Exception {
-        kickCommand.invoke(null, adminModelMock);
+        kickCommand.invoke(null);
     }
 
-    @Test (expected = IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void shouldExceptionWhenKickEmptyParams() throws Exception {
-        kickCommand.invoke(new String[] {}, adminModelMock);
+        kickCommand.invoke(new String[]{});
     }
 
-    @Test (expected = IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void shouldExceptionWhenKickPlayerNameIsNull() throws Exception {
-        kickCommand.invoke(new String[] {null}, adminModelMock);
+        kickCommand.invoke(new String[]{null});
     }
 }

@@ -25,7 +25,7 @@ public class EventManager {
     private ConnectionsManager connectionsManager;
 
     private void notifyConnections() {
-        connectionsManager.sendMessageToViewers(gameToJSON(PUBLIC));
+        connectionsManager.sendMessageToViewers("DEFAULT", gameToJSON(PUBLIC));
 
         for (String playerName : playersList.getPlayerNames()) {
             String message = gameToJSON(playerName);

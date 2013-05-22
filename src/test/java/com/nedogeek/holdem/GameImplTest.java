@@ -50,7 +50,7 @@ public class GameImplTest {
     public void shouldEventManagerMockConnectionAddViewerWhenGameAddViewerConnection() throws Exception {
         game.addViewer(connectionMock);
 
-        verify(connectionsManagerMock).addViewer(connectionMock);
+        verify(connectionsManagerMock).addViewer("DEFAULT", connectionMock);
     }
 
     @Test

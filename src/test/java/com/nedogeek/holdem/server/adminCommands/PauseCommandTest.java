@@ -17,7 +17,7 @@ public class PauseCommandTest {
     public void shouldAdminModelPauseWhenPauseCommandInvoked() throws Exception {
         AdminModel adminModelMock = mock(AdminModel.class);
 
-        new PauseCommand().invoke(null, adminModelMock);
+        new PauseCommand(adminModelMock).invoke(null);
 
         verify(adminModelMock).pause();
     }

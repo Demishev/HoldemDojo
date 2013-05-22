@@ -7,9 +7,14 @@ import com.nedogeek.holdem.server.AdminModel;
  * Date: 19.04.13
  * Time: 3:22
  */
-public class StartCommand implements AdminCommand {
+public class StartCommand extends AdminCommand {
+
+    public StartCommand(AdminModel adminModel) {
+        super(adminModel);
+    }
+
     @Override
-    public void invoke(String[] params, AdminModel adminModel) {
+    public void invoke(String[] params) {
         adminModel.start();
     }
 }

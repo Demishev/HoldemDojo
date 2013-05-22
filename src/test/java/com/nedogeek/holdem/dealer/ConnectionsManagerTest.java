@@ -16,10 +16,13 @@ import static org.mockito.Mockito.*;
  * Time: 14:32
  */
 public class ConnectionsManagerTest {
-    private static String MESSAGE = "message";
-    private static String OTHER_MESSAGE = "other message";
-    private static String FIRST_CONNECTION_OWNER_NAME = "first owner";
-    private static String SECOND_CONNECTION_OWNER_NAME = "second owner";
+    private static final String MESSAGE = "message";
+    private static final String OTHER_MESSAGE = "other message";
+    private static final String FIRST_CONNECTION_OWNER_NAME = "first owner";
+    private static final String SECOND_CONNECTION_OWNER_NAME = "second owner";
+
+    private static final String FIRST_GAME = "First game";
+    private static final String SECOND_GAME = "Second game";
 
     private WebSocket.Connection firstConnectionMock;
     private WebSocket.Connection secondConnectionMock;
@@ -60,18 +63,18 @@ public class ConnectionsManagerTest {
 
     @Test
     public void shouldSendMessageToViewerConnectionWhenViewerAddedAndMessageSent() throws Exception {
-        connectionsManager.addViewer(firstConnectionMock);
+        connectionsManager.addViewer(FIRST_GAME, firstConnectionMock);
 
-        connectionsManager.sendMessageToViewers(MESSAGE);
+        connectionsManager.sendMessageToViewers(FIRST_GAME, MESSAGE);
 
         verify(firstConnectionMock).sendMessage(MESSAGE);
     }
 
     @Test
     public void shouldSendOtherMessageToViewerConnectionWhenViewerAddedAndMessageSent() throws Exception {
-        connectionsManager.addViewer(firstConnectionMock);
+        connectionsManager.addViewer(FIRST_GAME, firstConnectionMock);
 
-        connectionsManager.sendMessageToViewers(OTHER_MESSAGE);
+        connectionsManager.sendMessageToViewers(FIRST_GAME, OTHER_MESSAGE);
 
         verify(firstConnectionMock).sendMessage(OTHER_MESSAGE);
     }
@@ -79,53 +82,53 @@ public class ConnectionsManagerTest {
     @Test
     public void shouldNotSendSecondMessageWhenViewerDoThrow() throws Exception {
         doThrow(new IOException()).when(firstConnectionMock).sendMessage(MESSAGE);
-        connectionsManager.addViewer(firstConnectionMock);
+        connectionsManager.addViewer(FIRST_GAME, firstConnectionMock);
 
-        connectionsManager.sendMessageToViewers(MESSAGE);
-        connectionsManager.sendMessageToViewers(OTHER_MESSAGE);
+        connectionsManager.sendMessageToViewers(FIRST_GAME, MESSAGE);
+        connectionsManager.sendMessageToViewers(FIRST_GAME, OTHER_MESSAGE);
 
         verify(firstConnectionMock, never()).sendMessage(OTHER_MESSAGE);
     }
 
     @Test
     public void shouldMessageSentToFirstViewerWhenAddedFirstMoverAddedSecondVieweer() throws Exception {
-        connectionsManager.addViewer(firstConnectionMock);
-        connectionsManager.addViewer(secondConnectionMock);
+        connectionsManager.addViewer(FIRST_GAME, firstConnectionMock);
+        connectionsManager.addViewer(FIRST_GAME, secondConnectionMock);
 
-        connectionsManager.sendMessageToViewers(MESSAGE);
+        connectionsManager.sendMessageToViewers(FIRST_GAME, MESSAGE);
 
         verify(firstConnectionMock).sendMessage(MESSAGE);
     }
 
     @Test
     public void shouldMessageSentToSecondViewerWhenAddedFirstMoverAddedSecondViewer() throws Exception {
-        connectionsManager.addViewer(firstConnectionMock);
-        connectionsManager.addViewer(secondConnectionMock);
+        connectionsManager.addViewer(FIRST_GAME, firstConnectionMock);
+        connectionsManager.addViewer(FIRST_GAME, secondConnectionMock);
 
-        connectionsManager.sendMessageToViewers(MESSAGE);
+        connectionsManager.sendMessageToViewers(FIRST_GAME, MESSAGE);
 
         verify(secondConnectionMock).sendMessage(MESSAGE);
     }
 
     @Test
     public void shouldNotSendMessageToClosedConnection() throws Exception {
-        connectionsManager.addViewer(firstConnectionMock);
+        connectionsManager.addViewer(FIRST_GAME, firstConnectionMock);
 
         when(firstConnectionMock.isOpen()).thenReturn(false);
 
-        connectionsManager.sendMessageToViewers(MESSAGE);
+        connectionsManager.sendMessageToViewers(FIRST_GAME, MESSAGE);
 
         verify(firstConnectionMock, never()).sendMessage(MESSAGE);
     }
 
     @Test
     public void shouldClosedConnectionMustBeRemoved() throws Exception {
-        connectionsManager.addViewer(firstConnectionMock);
+        connectionsManager.addViewer(FIRST_GAME, firstConnectionMock);
 
         when(firstConnectionMock.isOpen()).thenReturn(false).thenReturn(true);
 
-        connectionsManager.sendMessageToViewers(MESSAGE);
-        connectionsManager.sendMessageToViewers(OTHER_MESSAGE);
+        connectionsManager.sendMessageToViewers(FIRST_GAME, MESSAGE);
+        connectionsManager.sendMessageToViewers(FIRST_GAME, OTHER_MESSAGE);
 
         verify(firstConnectionMock, never()).sendMessage(OTHER_MESSAGE);
     }
@@ -141,7 +144,7 @@ public class ConnectionsManagerTest {
 
     @Test
     public void shouldNotSendMessageToFirstConnectionWhenItAddedAsViewer() throws Exception {
-        connectionsManager.addViewer(firstConnectionMock);
+        connectionsManager.addViewer(FIRST_GAME, firstConnectionMock);
 
         connectionsManager.sendPersonalMessage(FIRST_CONNECTION_OWNER_NAME, MESSAGE);
 
@@ -179,11 +182,11 @@ public class ConnectionsManagerTest {
 
     @Test
     public void shouldNotSendMessageToConnectionWhenItWasAddedAndRemovedBeforeSendingMessage() throws Exception {
-        connectionsManager.addViewer(firstConnectionMock);
+        connectionsManager.addViewer(FIRST_GAME, firstConnectionMock);
 
         connectionsManager.removeConnection(firstConnectionMock);
 
-        connectionsManager.sendMessageToViewers(MESSAGE);
+        connectionsManager.sendMessageToViewers(FIRST_GAME, MESSAGE);
 
         verify(firstConnectionMock, never()).sendMessage(MESSAGE);
     }
@@ -222,8 +225,8 @@ public class ConnectionsManagerTest {
             }
 
             private void addConnections() {
-                connectionsManager.addViewer(firstConnectionMock);
-                connectionsManager.addViewer(secondConnectionMock);
+                connectionsManager.addViewer(FIRST_GAME, firstConnectionMock);
+                connectionsManager.addViewer(FIRST_GAME, secondConnectionMock);
 
                 connectionsManager.addPersonalConnection(FIRST_CONNECTION_OWNER_NAME, thirdConnectionMock);
                 connectionsManager.addPersonalConnection(FIRST_CONNECTION_OWNER_NAME, fourthConnectionMock);
@@ -239,7 +242,7 @@ public class ConnectionsManagerTest {
             public void run() {
                 try {
                     for (int i = 0; i < 200; i++) {
-                        connectionsManager.sendMessageToViewers(MESSAGE);
+                        connectionsManager.sendMessageToViewers(FIRST_GAME, MESSAGE);
                         connectionsManager.sendPersonalMessage(FIRST_CONNECTION_OWNER_NAME, MESSAGE);
                         connectionsManager.sendPersonalMessage(SECOND_CONNECTION_OWNER_NAME, MESSAGE);
                     }
@@ -254,5 +257,23 @@ public class ConnectionsManagerTest {
         Thread.sleep(50);
 
         assertFalse(concurrentModificationTestFailed);
+    }
+
+    @Test
+    public void shouldNotSendMessageToFirstViewerWhenItAddToSecondGameAndSendFirstGameInfo() throws Exception {
+        connectionsManager.addViewer(SECOND_GAME, firstConnectionMock);
+
+        connectionsManager.sendMessageToViewers(FIRST_GAME, MESSAGE);
+
+        verify(firstConnectionMock, never()).sendMessage(MESSAGE);
+    }
+
+    @Test
+    public void shouldSendMessageToFirstViewerWhenItAddToSecondGameAndSendSecondGameInfo() throws Exception {
+        connectionsManager.addViewer(SECOND_GAME, firstConnectionMock);
+
+        connectionsManager.sendMessageToViewers(SECOND_GAME, MESSAGE);
+
+        verify(firstConnectionMock).sendMessage(MESSAGE);
     }
 }

@@ -164,7 +164,7 @@ public class EventManagerTest {
     public void shouldConnectionManagerMockSendMessageDefaultToViewersWhenAddGameEvent() throws Exception {
         eventManager.addEvent(eventMock);
 
-        verify(connectionsManagerMock).sendMessageToViewers(DEFAULT_MESSAGE);
+        verify(connectionsManagerMock).sendMessageToViewers("DEFAULT", DEFAULT_MESSAGE);
     }
 
     @Test
@@ -172,7 +172,7 @@ public class EventManagerTest {
         eventManager.addEvent(eventMock);
         eventManager.addEvent(eventMock);
 
-        verify(connectionsManagerMock, times(2)).sendMessageToViewers(DEFAULT_MESSAGE);
+        verify(connectionsManagerMock, times(2)).sendMessageToViewers("DEFAULT", DEFAULT_MESSAGE);
     }
 
     @Test
@@ -254,8 +254,8 @@ public class EventManagerTest {
         verify(connectionsManagerMock, never()).sendPersonalMessage(SECOND_PLAYER, FIRST_PLAYER_WITH_CARDS_MESSAGE);
         verify(connectionsManagerMock, never()).sendPersonalMessage(FIRST_PLAYER, SECOND_PLAYER_WITH_CARDS_MESSAGE);
 
-        verify(connectionsManagerMock, never()).sendMessageToViewers(FIRST_PLAYER_WITH_CARDS_MESSAGE);
-        verify(connectionsManagerMock, never()).sendMessageToViewers(SECOND_PLAYER_WITH_CARDS_MESSAGE);
+        verify(connectionsManagerMock, never()).sendMessageToViewers("DEFAULT", FIRST_PLAYER_WITH_CARDS_MESSAGE);
+        verify(connectionsManagerMock, never()).sendMessageToViewers("DEFAULT", SECOND_PLAYER_WITH_CARDS_MESSAGE);
     }
 
 
@@ -272,7 +272,7 @@ public class EventManagerTest {
 
                 + "," + "\"gameStatus\":\"" + READY + "\",\"deskCards\":[],\"deskPot\":0}";
 
-        verify(connectionsManagerMock).sendMessageToViewers(message);
+        verify(connectionsManagerMock).sendMessageToViewers("DEFAULT", message);
     }
 
     @Test
@@ -306,7 +306,7 @@ public class EventManagerTest {
 
                 + "," + "\"gameStatus\":\"" + READY + "\",\"deskCards\":[],\"deskPot\":0}";
 
-        verify(connectionsManagerMock).sendMessageToViewers(message);
+        verify(connectionsManagerMock).sendMessageToViewers("DEFAULT", message);
     }
 
     @Test
@@ -321,6 +321,6 @@ public class EventManagerTest {
                 "[" + FIRST_CARD_JSON + "," + SECOND_CARD_JSON + "]" +
                 ",\"deskPot\":0}";
 
-        verify(connectionsManagerMock).sendMessageToViewers(message);
+        verify(connectionsManagerMock).sendMessageToViewers("DEFAULT", message);
     }
 }

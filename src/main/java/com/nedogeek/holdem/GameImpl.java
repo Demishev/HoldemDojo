@@ -91,7 +91,7 @@ public class GameImpl implements Game {
 
     @Override
     public void addViewer(WebSocket.Connection connection) {
-        connectionsManager.addViewer(connection);
+        connectionsManager.addViewer("DEFAULT", connection);
     }
 
     @Override

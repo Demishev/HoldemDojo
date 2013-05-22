@@ -17,7 +17,7 @@ public class StartCommandTest {
     public void shouldModelStartWhenInvokeStartCommand() throws Exception {
         AdminModel adminModelMock = mock(AdminModel.class);
 
-        new StartCommand().invoke(null, adminModelMock);
+        new StartCommand(adminModelMock).invoke(null);
 
         verify(adminModelMock).start();
     }

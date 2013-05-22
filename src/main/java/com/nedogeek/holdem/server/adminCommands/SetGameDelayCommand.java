@@ -7,9 +7,14 @@ import com.nedogeek.holdem.server.AdminModel;
  * Date: 19.04.13
  * Time: 4:19
  */
-public class SetGameDelayCommand implements AdminCommand{
+public class SetGameDelayCommand extends AdminCommand {
+
+    public SetGameDelayCommand(AdminModel adminModel) {
+        super(adminModel);
+    }
+
     @Override
-    public void invoke(String[] params, AdminModel adminModel) {
+    public void invoke(String[] params) {
         int delayValue = Integer.parseInt(params[0]);
 
         adminModel.setGameDelay(delayValue);

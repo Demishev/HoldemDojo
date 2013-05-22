@@ -21,13 +21,13 @@ public class SetInitialCoinsCommandTest {
     public void setUp() throws Exception {
         adminModelMock = mock(AdminModel.class);
 
-        initialCoinsCommand = new SetInitialCoinsCommand();
+        initialCoinsCommand = new SetInitialCoinsCommand(adminModelMock);
     }
 
     @Test
     public void shouldAdminModelSetInitialCoins100WhenSetInitialCoinsCommandInvoked100() throws Exception {
         String HUNDRED_COINS_TEXT = "100";
-        initialCoinsCommand.invoke(new String[] {HUNDRED_COINS_TEXT}, adminModelMock);
+        initialCoinsCommand.invoke(new String[]{HUNDRED_COINS_TEXT});
 
         int HUNDRED_COINS = 100;
         verify(adminModelMock).setInitialCoins(HUNDRED_COINS);
@@ -36,14 +36,14 @@ public class SetInitialCoinsCommandTest {
     @Test
     public void shouldAdminModelSetInitialCoins200WhenSetInitialCoinsCommandInvoked200() throws Exception {
         String TWO_HUNDRED_COINS_TEXT = "200";
-        initialCoinsCommand.invoke(new String[] {TWO_HUNDRED_COINS_TEXT}, adminModelMock);
+        initialCoinsCommand.invoke(new String[]{TWO_HUNDRED_COINS_TEXT});
 
         int TWO_HUNDRED_COINS = 200;
         verify(adminModelMock).setInitialCoins(TWO_HUNDRED_COINS);
     }
 
-    @Test (expected = IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void shouldExceptionWhenSetInitialCoinsCommandInvokeWithNullParams() throws Exception {
-        initialCoinsCommand.invoke(new String[] {null}, adminModelMock);
+        initialCoinsCommand.invoke(new String[]{null});
     }
 }

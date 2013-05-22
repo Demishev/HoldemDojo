@@ -17,7 +17,7 @@ public class StopCommandTest {
     public void shouldAdminModelStopWhenStopCommandInvoke() throws Exception {
         AdminModel adminModelMock = mock(AdminModel.class);
 
-        new StopCommand().invoke(null, adminModelMock);
+        new StopCommand(adminModelMock).invoke(null);
 
         verify(adminModelMock).stop();
     }

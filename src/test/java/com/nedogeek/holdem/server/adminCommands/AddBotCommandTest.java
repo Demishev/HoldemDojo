@@ -29,61 +29,61 @@ public class AddBotCommandTest {
 
     @Before
     public void setUp() throws Exception {
-        addBotCommand = new AddBotCommand();
-
         adminModel = mock(AdminModel.class);
+
+        addBotCommand = new AddBotCommand(adminModel);
     }
 
     @Test
     public void shouldAddCallBotWhenAddBotCommandInvokeCallBotAdding() throws Exception {
-        String[] params = new String[] {CALL_BOT_TYPE_NAME, CALL_BOT_NAME};
+        String[] params = new String[]{CALL_BOT_TYPE_NAME, CALL_BOT_NAME};
 
-        addBotCommand.invoke(params, adminModel);
+        addBotCommand.invoke(params);
 
         verify(adminModel).addBot(CALL_BOT_TYPE, CALL_BOT_NAME);
     }
 
     @Test
     public void shouldAddCallBotWithAnotherNameWhenAddBotCommandInvokeCallBotWithAnotherNameAdding() throws Exception {
-        String[] params = new String[] {CALL_BOT_TYPE_NAME, ANOTHER_BOT_NAME};
+        String[] params = new String[]{CALL_BOT_TYPE_NAME, ANOTHER_BOT_NAME};
 
-        addBotCommand.invoke(params, adminModel);
+        addBotCommand.invoke(params);
 
         verify(adminModel).addBot(CALL_BOT_TYPE, ANOTHER_BOT_NAME);
     }
 
     @Test
     public void shouldAddRiseBotWhenAddBotCommandInvokeRiseBotAdding() throws Exception {
-        String[] params = new String[] {RISE_BOT_TYPE_NAME, RISE_BOT_NAME};
+        String[] params = new String[]{RISE_BOT_TYPE_NAME, RISE_BOT_NAME};
 
-        addBotCommand.invoke(params, adminModel);
+        addBotCommand.invoke(params);
 
         verify(adminModel).addBot(RISE_BOT_TYPE, RISE_BOT_NAME);
     }
 
-    @Test (expected = IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void shouldIllegalArgumentExceptionWhenAddBotCommandInvokesWithNullParams() throws Exception {
-        addBotCommand.invoke(null, adminModel);
+        addBotCommand.invoke(null);
     }
 
-    @Test (expected = IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void shouldIllegalArgumentExceptionWhenAddBotCommandWithNullName() throws Exception {
-        String[] params = new String[] {RISE_BOT_TYPE_NAME, null};
+        String[] params = new String[]{RISE_BOT_TYPE_NAME, null};
 
-        addBotCommand.invoke(params, adminModel);
+        addBotCommand.invoke(params);
     }
 
-    @Test (expected = IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void shouldIllegalArgumentExceptionWhenAddBotCommandWithNullBotType() throws Exception {
-        String[] params = new String[] {null, RISE_BOT_NAME};
+        String[] params = new String[]{null, RISE_BOT_NAME};
 
-        addBotCommand.invoke(params, adminModel);
+        addBotCommand.invoke(params);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void shouldIllegalArgumentExceptionWhenAddBotCommandWithOnlyBotType() throws Exception {
-        String[] params = new String[] {RISE_BOT_TYPE_NAME};
+        String[] params = new String[]{RISE_BOT_TYPE_NAME};
 
-        addBotCommand.invoke(params, adminModel);
+        addBotCommand.invoke(params);
     }
 }

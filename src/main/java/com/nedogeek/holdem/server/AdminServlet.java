@@ -22,7 +22,7 @@ public class AdminServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         model = new AdminModelImpl();
-        commandsPerformer = new AdminCommandsPerformer();
+        commandsPerformer = new AdminCommandsPerformer(model);
     }
 
     @Override
@@ -74,7 +74,7 @@ public class AdminServlet extends HttpServlet {
             for (int i = 0; i < params.length; i++) {
                 params[i] = params[i].replace("\n", "").replace("\r", "");
             }
-            commandsPerformer.performAction(command, params, model);
+            commandsPerformer.performCommand(command, params);
         }
     }
 }

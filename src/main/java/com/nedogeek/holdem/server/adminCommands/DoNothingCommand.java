@@ -1,15 +1,18 @@
 package com.nedogeek.holdem.server.adminCommands;
 
-import com.nedogeek.holdem.server.AdminModel;
-
 /**
  * User: Konstantin Demishev
  * Date: 22.04.13
  * Time: 12:53
  */
-public class DoNothingCommand implements AdminCommand {
+public class DoNothingCommand extends AdminCommand {
+
+    public DoNothingCommand() {
+        super(null);
+    }
+
     @Override
-    public void invoke(String[] params, AdminModel adminModel) {
+    public void invoke(String[] params) {
         //Doing nothing :)
     }
 }

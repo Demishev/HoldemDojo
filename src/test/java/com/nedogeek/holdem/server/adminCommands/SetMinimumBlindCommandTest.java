@@ -21,13 +21,13 @@ public class SetMinimumBlindCommandTest {
     public void setUp() throws Exception {
         adminModelMock = mock(AdminModel.class);
 
-        minimumBlindCommand = new SetMinimumBlindCommand();
+        minimumBlindCommand = new SetMinimumBlindCommand(adminModelMock);
     }
 
     @Test
     public void shouldAdminModelSetInitialCoins100WhenSetInitialCoinsCommandInvoked100() throws Exception {
         String HUNDRED_COINS_TEXT = "100";
-        minimumBlindCommand.invoke(new String[]{HUNDRED_COINS_TEXT}, adminModelMock);
+        minimumBlindCommand.invoke(new String[]{HUNDRED_COINS_TEXT});
 
         int HUNDRED_COINS = 100;
         verify(adminModelMock).setMinimumBlind(HUNDRED_COINS);
@@ -36,14 +36,14 @@ public class SetMinimumBlindCommandTest {
     @Test
     public void shouldAdminModelSetInitialCoins200WhenSetInitialCoinsCommandInvoked200() throws Exception {
         String TWO_HUNDRED_COINS_TEXT = "200";
-        minimumBlindCommand.invoke(new String[]{TWO_HUNDRED_COINS_TEXT}, adminModelMock);
+        minimumBlindCommand.invoke(new String[]{TWO_HUNDRED_COINS_TEXT});
 
         int TWO_HUNDRED_COINS = 200;
         verify(adminModelMock).setMinimumBlind(TWO_HUNDRED_COINS);
     }
 
-    @Test (expected = IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void shouldExceptionWhenSetInitialCoinsCommandInvokeWithNullParams() throws Exception {
-        minimumBlindCommand.invoke(new String[]{null}, adminModelMock);
+        minimumBlindCommand.invoke(new String[]{null});
     }
 }

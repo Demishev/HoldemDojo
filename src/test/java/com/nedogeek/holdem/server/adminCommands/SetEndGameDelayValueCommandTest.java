@@ -21,13 +21,13 @@ public class SetEndGameDelayValueCommandTest {
     public void setUp() throws Exception {
         adminModelMock = mock(AdminModel.class);
 
-        gameDelayCommand = new SetEndGameDelayValueCommand();
+        gameDelayCommand = new SetEndGameDelayValueCommand(adminModelMock);
     }
 
     @Test
     public void shouldAdminModelSetEndDelayValue100WhenSetEndDelayValueCommandInvoked100() throws Exception {
         String HUNDRED_TEXT = "100";
-        gameDelayCommand.invoke(new String[]{HUNDRED_TEXT}, adminModelMock);
+        gameDelayCommand.invoke(new String[]{HUNDRED_TEXT});
 
         int HUNDRED = 100;
         verify(adminModelMock).setEndGameDelay(HUNDRED);
@@ -36,14 +36,14 @@ public class SetEndGameDelayValueCommandTest {
     @Test
     public void shouldAdminModelSetEndDelayValue200WhenSetEndDelayValueCommandInvoked200() throws Exception {
         String TWO_HUNDRED_TEXT = "200";
-        gameDelayCommand.invoke(new String[]{TWO_HUNDRED_TEXT}, adminModelMock);
+        gameDelayCommand.invoke(new String[]{TWO_HUNDRED_TEXT});
 
         int TWO_HUNDRED = 200;
         verify(adminModelMock).setEndGameDelay(TWO_HUNDRED);
     }
 
-    @Test (expected = IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void shouldExceptionWhenSetDelayValueCommandInvokeWithNullParams() throws Exception {
-        gameDelayCommand.invoke(new String[]{null}, adminModelMock);
+        gameDelayCommand.invoke(new String[]{null});
     }
 }

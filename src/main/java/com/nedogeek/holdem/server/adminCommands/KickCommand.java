@@ -7,9 +7,13 @@ import com.nedogeek.holdem.server.AdminModel;
  * Date: 19.04.13
  * Time: 3:01
  */
-public class KickCommand implements AdminCommand {
+public class KickCommand extends AdminCommand {
+    public KickCommand(AdminModel adminModel) {
+        super(adminModel);
+    }
+
     @Override
-    public void invoke(String[] params, AdminModel adminModel) {
+    public void invoke(String[] params) {
         if (params == null || params.length != 1 || params[0] == null) {
             throw new IllegalArgumentException("Wrong params to kick command");
         }
