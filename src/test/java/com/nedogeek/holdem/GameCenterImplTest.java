@@ -59,8 +59,8 @@ public class GameCenterImplTest {
     }
 
     @Test
-    public void shouldNoGamesWhenNewGameCenter() throws Exception {
-        assertEquals(0, gameCenterImpl.getGames().size());
+    public void shouldOneGameWhenNewGameCenter() throws Exception {
+        assertEquals(1, gameCenterImpl.getGames().size());
     }
 
     @Test
@@ -72,36 +72,36 @@ public class GameCenterImplTest {
 
     @Test
     public void shouldFirstPlayerInLobbyWhenAddPlayer() throws Exception {
-        gameCenterImpl.addPlayer(FIRST_PLAYER_NAME);
+        gameCenterImpl.connectPlayer(FIRST_PLAYER_NAME, null);
 
         assertEquals(FIRST_PLAYER_NAME, gameCenterImpl.getLobbyPlayers().get(0));
     }
 
     @Test
     public void shouldNoLobbyPlayersWhenFirstPlayerAddedToFirstGame() throws Exception {
-        gameCenterImpl.addPlayer(FIRST_PLAYER_NAME);
+        gameCenterImpl.connectPlayer(FIRST_PLAYER_NAME, null);
         gameCenterImpl.createGame(FIRST_GAME_ID);
 
-        gameCenterImpl.joinGame(FIRST_GAME_ID);
+        gameCenterImpl.joinGame(FIRST_PLAYER_NAME, FIRST_GAME_ID);
 
         assertEquals(0, gameCenterImpl.getLobbyPlayers().size());
     }
 
     @Test
     public void shouldFirstPlayerInLobbyWhenFirstPlayerAddedToInvalidGame() throws Exception {
-        gameCenterImpl.addPlayer(FIRST_PLAYER_NAME);
+        gameCenterImpl.connectPlayer(FIRST_PLAYER_NAME, null);
         gameCenterImpl.createGame(FIRST_GAME_ID);
 
-        gameCenterImpl.joinGame("Invalid game id");
+        gameCenterImpl.joinGame(FIRST_PLAYER_NAME, "Invalid game id");
 
         assertEquals(FIRST_PLAYER_NAME, gameCenterImpl.getLobbyPlayers().get(0));
     }
 
     @Test
     public void shouldFirstPlayerInLobbyWhenFirstPlayerAddedToUncreatedGame() throws Exception {
-        gameCenterImpl.addPlayer(FIRST_PLAYER_NAME);
+        gameCenterImpl.connectPlayer(FIRST_PLAYER_NAME, null);
 
-        gameCenterImpl.joinGame(FIRST_GAME_ID);
+        gameCenterImpl.joinGame(FIRST_PLAYER_NAME, "Not created game");
 
         assertEquals(FIRST_PLAYER_NAME, gameCenterImpl.getLobbyPlayers().get(0));
     }
@@ -170,5 +170,16 @@ public class GameCenterImplTest {
         gameCenterImpl.setPlayerMove(FIRST_LOGIN, playerAction);
 
         verify(gameMock).setMove(FIRST_LOGIN, playerAction);
+    }
+
+    @Test
+    public void shouldFirstPlayerInLobbyWhenCreateFirstGameConnectFirstPlayerJoinFirstGameAdnRemoveFirstGame() throws Exception {
+        gameCenterImpl.connectPlayer(FIRST_LOGIN, connectionMock);
+        gameCenterImpl.createGame(FIRST_GAME_ID);
+        gameCenterImpl.joinGame(FIRST_PLAYER_NAME, FIRST_GAME_ID);
+
+        gameCenterImpl.removeGame(FIRST_GAME_ID);
+
+        assertEquals(FIRST_PLAYER_NAME, gameCenterImpl.getLobbyPlayers().get(0));
     }
 }

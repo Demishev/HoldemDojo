@@ -1,8 +1,6 @@
 package com.nedogeek.holdem;
 
 import com.nedogeek.holdem.bot.Bots;
-import com.nedogeek.holdem.bot.CallBot;
-import com.nedogeek.holdem.bot.RandomBot;
 import com.nedogeek.holdem.dealer.ConnectionsManager;
 import com.nedogeek.holdem.dealer.Dealer;
 import com.nedogeek.holdem.dealer.EventManager;
@@ -11,6 +9,8 @@ import com.nedogeek.holdem.gamingStuff.PlayerAction;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
 import com.nedogeek.holdem.server.GameDataBean;
 import org.eclipse.jetty.websocket.WebSocket;
+
+import java.util.List;
 
 /**
  * User: Konstantin Demishev
@@ -27,7 +27,7 @@ public class GameImpl implements Game {
 
     private Thread dealerThread;
 
-    private GameImpl() {
+    GameImpl() {
         eventManager = new EventManager();
         players = new PlayersList(eventManager);
         eventManager.setPlayersList(players);
@@ -56,9 +56,6 @@ public class GameImpl implements Game {
 
     private void createDealer() {
         dealer = new Dealer(players, eventManager);
-
-        players.add(new RandomBot(dealer));
-        players.add(new CallBot(dealer));
     }
 
     @Override
@@ -120,6 +117,11 @@ public class GameImpl implements Game {
     @Override
     public void setMove(String login, PlayerAction move) {
         players.setPlayerMove(login, move);
+    }
+
+    @Override
+    public List<String> getPlayerNames() {
+        return players.getPlayerNames();
     }
 
     @Override

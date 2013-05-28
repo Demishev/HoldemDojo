@@ -6,7 +6,10 @@ import com.nedogeek.holdem.server.AdminCommandsPerformer;
 import com.nedogeek.holdem.server.GameDataBean;
 import org.eclipse.jetty.websocket.WebSocket;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * User: Konstantin Demishev
@@ -14,7 +17,6 @@ import java.util.*;
  * Time: 20:44
  */
 class GameCenterImpl implements GameCenter {
-    private Set<String> gameIDs = new HashSet<>();
     private List<String> lobbyPlayers = new ArrayList<>();
 
     private final ConnectionsManager connectionsManager;
@@ -45,7 +47,7 @@ class GameCenterImpl implements GameCenter {
 
     @Override
     public Set<String> getGames() {
-        return gameIDs;
+        return games.keySet();
     }
 
     @Override
@@ -86,16 +88,21 @@ class GameCenterImpl implements GameCenter {
         }
     }
 
+    @Override
     public void createGame(String gameId) {
-        gameIDs.add(gameId);
+        games.put(gameId, new GameImpl());
     }
 
-    public void addPlayer(String playerName) {
-        lobbyPlayers.add(playerName);
+    @Override
+    public void removeGame(String gameID) {
+        lobbyPlayers.add(games.get(gameID).getPlayerNames().get(0));
     }
 
-    public void joinGame(String gameId) {
-        if (gameIDs.contains(gameId))
+    public void joinGame(String login, String gameId) {
+        if (games.containsKey(gameId)) {
+            final Game game = games.get(gameId);
+            game.addPlayer(login, null);  //TODO WTF, connection???
             lobbyPlayers = new ArrayList<>();
+        }
     }
 }

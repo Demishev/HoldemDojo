@@ -30,4 +30,8 @@ public interface GameCenter {
     void connectPlayer(String login, WebSocket.Connection connection);
 
     void setPlayerMove(String login, PlayerAction move);
+
+    void createGame(String gameID);
+
+    void removeGame(String gameID);
 }

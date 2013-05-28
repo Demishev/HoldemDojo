@@ -6,6 +6,8 @@ import com.nedogeek.holdem.gamingStuff.PlayerAction;
 import com.nedogeek.holdem.server.GameDataBean;
 import org.eclipse.jetty.websocket.WebSocket;
 
+import java.util.List;
+
 /**
  * User: Konstantin Demishev
  * Date: 09.04.13
@@ -31,4 +33,6 @@ public interface Game {
     GameDataBean getGameData();
 
     void setMove(String login, PlayerAction move);
+
+    List<String> getPlayerNames();
 }
