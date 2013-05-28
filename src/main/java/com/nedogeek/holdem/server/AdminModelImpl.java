@@ -77,20 +77,7 @@ public class AdminModelImpl implements AdminModel {
 
     @Override
     public GameDataBean getGameData() {
-        GameDataBean gameDataBean = new GameDataBean();
-        gameDataBean.setBotTypes(Bots.getBotTypes());
-
-        gameDataBean.setCoinsAtStart(GameSettings.getCoinsAtStart());
-        gameDataBean.setMinimumBind(GameSettings.getSmallBlind());
-
-        gameDataBean.setGameDelay(GameSettings.getGameDelayValue());
-        gameDataBean.setEndGameDelay(GameSettings.getEndGameDelayValue());
-
-        gameDataBean.setGameStatus(game.getGameStatus());
-
-        gameDataBean.setPlayers(game.getPlayers());
-
-        return gameDataBean;
+        return game.getGameData();
     }
 
     @Override

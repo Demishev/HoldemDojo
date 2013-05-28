@@ -22,8 +22,6 @@ class GameCenterImpl implements GameCenter {
 
     private final Map<String, Game> games;
 
-    private static final GameCenterImpl instance = new GameCenterImpl();
-
     /**
      * Test constructor.
      */
@@ -38,14 +36,6 @@ class GameCenterImpl implements GameCenter {
         this.games = games;
     }
 
-    GameCenterImpl() {
-        connectionsManager = new ConnectionsManager();
-        adminCommandsPerformer = new AdminCommandsPerformer(null);
-        playerCommandPerformer = new PlayerCommandPerformer();
-
-        games = new HashMap<>();
-    }
-
     @Override
     public List<String> getLobbyPlayers() {
         return lobbyPlayers;
@@ -58,7 +48,7 @@ class GameCenterImpl implements GameCenter {
 
     @Override
     public GameDataBean getGameData(String gameID) {
-        return null;//TODO stub
+        return games.get(gameID).getGameData();
     }
 
     @Override

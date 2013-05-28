@@ -8,9 +8,8 @@ import com.nedogeek.holdem.dealer.Dealer;
 import com.nedogeek.holdem.dealer.EventManager;
 import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
+import com.nedogeek.holdem.server.GameDataBean;
 import org.eclipse.jetty.websocket.WebSocket;
-
-import java.util.List;
 
 /**
  * User: Konstantin Demishev
@@ -100,6 +99,24 @@ public class GameImpl implements Game {
     }
 
     @Override
+    public GameDataBean getGameData() {
+        GameDataBean gameDataBean = new GameDataBean();
+        gameDataBean.setBotTypes(Bots.getBotTypes());
+
+        gameDataBean.setCoinsAtStart(GameSettings.getCoinsAtStart());
+        gameDataBean.setMinimumBind(GameSettings.getSmallBlind());
+
+        gameDataBean.setGameDelay(GameSettings.getGameDelayValue());
+        gameDataBean.setEndGameDelay(GameSettings.getEndGameDelayValue());
+
+        gameDataBean.setGameStatus(dealer.getGameStatus());
+
+        gameDataBean.setPlayers(players.getPlayerNames());
+
+        return gameDataBean;
+    }
+
+    @Override
     public void removeConnection(WebSocket.Connection connection) {
         connectionsManager.removeConnection(connection);
     }
@@ -109,13 +126,4 @@ public class GameImpl implements Game {
         players.kickPlayer(playerName);
     }
 
-    @Override
-    public GameStatus getGameStatus() {
-        return dealer.getGameStatus();
-    }
-
-    @Override
-    public List<String> getPlayers() {
-        return players.getPlayerNames();
-    }
 }

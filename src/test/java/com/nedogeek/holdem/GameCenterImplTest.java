@@ -2,14 +2,14 @@ package com.nedogeek.holdem;
 
 import com.nedogeek.holdem.dealer.ConnectionsManager;
 import com.nedogeek.holdem.server.AdminCommandsPerformer;
+import com.nedogeek.holdem.server.GameDataBean;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 /**
  * User: Konstantin Demishev
@@ -25,6 +25,7 @@ public class GameCenterImplTest {
     private AdminCommandsPerformer adminCommandsPerformerMock;
     private ConnectionsManager connectionsManagerMock;
     private Map gamesMock;
+    private GameDataBean gameDataBeanMock;
 
     private GameCenterImpl gameCenterImpl;
 
@@ -42,7 +43,12 @@ public class GameCenterImplTest {
         playerCommandPerformerMock = mock(PlayerCommandPerformer.class);
         connectionsManagerMock = mock(ConnectionsManager.class);
 
+        Game gameMock = mock(Game.class);
+        gameDataBeanMock = mock(GameDataBean.class);
+        when(gameMock.getGameData()).thenReturn(gameDataBeanMock);
+
         gamesMock = mock(Map.class);
+        when(gamesMock.get(FIRST_GAME_ID)).thenReturn(gameMock);
     }
 
     @Test
@@ -130,5 +136,10 @@ public class GameCenterImplTest {
     @Test
     public void shouldNoNullPointerWhenGetGameDataBeanNotExistingGame() throws Exception {
         gameCenterImpl.getGameData(FIRST_GAME_ID);
+    }
+
+    @Test
+    public void shouldGeWhen() throws Exception {
+        assertEquals(gameDataBeanMock, gameCenterImpl.getGameData(FIRST_GAME_ID));
     }
 }

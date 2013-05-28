@@ -2,6 +2,7 @@ package com.nedogeek.holdem;
 
 import com.nedogeek.holdem.dealer.ConnectionsManager;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
+import com.nedogeek.holdem.server.GameDataBean;
 import org.eclipse.jetty.websocket.WebSocket;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,11 +43,6 @@ public class GameImplTest {
     }
 
     @Test
-    public void shouldGameStatusNotEnoughPlayersWhenNewGameImpl() throws Exception {
-        assertEquals(GameStatus.NOT_ENOUGH_PLAYERS, game.getGameStatus());
-    }
-
-    @Test
     public void shouldEventManagerMockConnectionAddViewerWhenGameAddViewerConnection() throws Exception {
         game.addViewer(connectionMock);
 
@@ -77,9 +73,16 @@ public class GameImplTest {
     }
 
     @Test
-    public void shouldReturnedListOfPlayersWhenGameGetPlayers() throws Exception {
+    public void shouldNotEnoughPlayersWhenGameDataGetGameStatus() throws Exception {
+        assertEquals(GameStatus.NOT_ENOUGH_PLAYERS, getGameData().getGameStatus());
+    }
 
+    private GameDataBean getGameData() {
+        return game.getGameData();
+    }
 
-        assertEquals(playersNames, game.getPlayers());
+    @Test
+    public void shouldPlayersWhenGameDataGetPlayers() throws Exception {
+        assertEquals(playersNames, getGameData().getPlayers());
     }
 }

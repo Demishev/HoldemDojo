@@ -2,9 +2,8 @@ package com.nedogeek.holdem;
 
 import com.nedogeek.holdem.bot.Bots;
 import com.nedogeek.holdem.gamingStuff.Player;
+import com.nedogeek.holdem.server.GameDataBean;
 import org.eclipse.jetty.websocket.WebSocket;
-
-import java.util.List;
 
 /**
  * User: Konstantin Demishev
@@ -26,9 +25,7 @@ public interface Game {
 
     void removePlayer(String playerName);
 
-    GameStatus getGameStatus();
-
-    List<String> getPlayers();
-
     void addBot(Bots botType, String name);
+
+    GameDataBean getGameData();
 }
