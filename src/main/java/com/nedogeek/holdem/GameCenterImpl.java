@@ -3,6 +3,7 @@ package com.nedogeek.holdem;
 import com.nedogeek.holdem.dealer.ConnectionsManager;
 import com.nedogeek.holdem.server.AdminCommandsPerformer;
 import com.nedogeek.holdem.server.GameDataBean;
+import org.eclipse.jetty.websocket.WebSocket;
 
 import java.util.*;
 
@@ -69,6 +70,11 @@ class GameCenterImpl implements GameCenter {
     @Override
     public void notifyPlayer(String playerName, String message) {
         connectionsManager.sendPersonalMessage(playerName, message);
+    }
+
+    @Override
+    public void connectPlayer(String login, WebSocket.Connection connection) {
+        //TODO stub!
     }
 
     public void createGame(String gameId) {

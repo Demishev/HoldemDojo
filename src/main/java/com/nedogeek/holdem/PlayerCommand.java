@@ -5,5 +5,5 @@ package com.nedogeek.holdem;
  * Date: 19.05.13
  * Time: 20:35
  */
-public class PlayerCommand {
+public interface PlayerCommand {
 }

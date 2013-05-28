@@ -1,6 +1,7 @@
 package com.nedogeek.holdem;
 
 import com.nedogeek.holdem.server.GameDataBean;
+import org.eclipse.jetty.websocket.WebSocket;
 
 import java.util.List;
 import java.util.Set;
@@ -24,4 +25,6 @@ public interface GameCenter {
     void notifyViewers(String gameID, String message);
 
     void notifyPlayer(String playerName, String message);
+
+    void connectPlayer(String login, WebSocket.Connection connection);
 }

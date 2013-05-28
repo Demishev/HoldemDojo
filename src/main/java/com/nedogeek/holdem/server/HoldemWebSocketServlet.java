@@ -21,16 +21,16 @@ public class HoldemWebSocketServlet extends WebSocketServlet {
         String password = request.getParameter("password");
 
         if (login == null && password == null) {
-            return new HoldemWebSocket();
+            return new PlayerWebSocket("public"); //TODO Test!
         } else {
             if (login != null && password != null) {
                 if (userData.containsKey(login)) {
                     if (userData.get(login).equals(password)) {
-                        return new HoldemWebSocket(login);
+                        return new PlayerWebSocket(login);
                     }
                 } else {
                     userData.put(login, password);
-                    return new HoldemWebSocket(login);
+                    return new PlayerWebSocket(login);
                 }
             }
         }
