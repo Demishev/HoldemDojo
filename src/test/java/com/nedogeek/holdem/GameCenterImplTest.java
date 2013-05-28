@@ -1,11 +1,14 @@
 package com.nedogeek.holdem;
 
 import com.nedogeek.holdem.dealer.ConnectionsManager;
+import com.nedogeek.holdem.gamingStuff.PlayerAction;
 import com.nedogeek.holdem.server.AdminCommandsPerformer;
 import com.nedogeek.holdem.server.GameDataBean;
+import org.eclipse.jetty.websocket.WebSocket;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
@@ -24,10 +27,13 @@ public class GameCenterImplTest {
     private PlayerCommandPerformer playerCommandPerformerMock;
     private AdminCommandsPerformer adminCommandsPerformerMock;
     private ConnectionsManager connectionsManagerMock;
-    private Map gamesMock;
+    private Map<String, Game> gamesMock;
     private GameDataBean gameDataBeanMock;
 
     private GameCenterImpl gameCenterImpl;
+    private final String FIRST_LOGIN = "First player";
+    private WebSocket.Connection connectionMock;
+    private Game gameMock;
 
 
     @Before
@@ -42,13 +48,14 @@ public class GameCenterImplTest {
         adminCommandsPerformerMock = mock(AdminCommandsPerformer.class);
         playerCommandPerformerMock = mock(PlayerCommandPerformer.class);
         connectionsManagerMock = mock(ConnectionsManager.class);
+        connectionMock = mock(WebSocket.Connection.class);
 
-        Game gameMock = mock(Game.class);
+        gameMock = mock(Game.class);
         gameDataBeanMock = mock(GameDataBean.class);
         when(gameMock.getGameData()).thenReturn(gameDataBeanMock);
 
-        gamesMock = mock(Map.class);
-        when(gamesMock.get(FIRST_GAME_ID)).thenReturn(gameMock);
+        gamesMock = new HashMap<>();
+        gamesMock.put(FIRST_GAME_ID, gameMock);
     }
 
     @Test
@@ -139,7 +146,29 @@ public class GameCenterImplTest {
     }
 
     @Test
-    public void shouldGeWhen() throws Exception {
+    public void shouldGetGameBeanMockWhenGetFirstGameData() throws Exception {
         assertEquals(gameDataBeanMock, gameCenterImpl.getGameData(FIRST_GAME_ID));
+    }
+
+    @Test
+    public void shouldPlayerAddedToLobbyWhenConnectPlayer() throws Exception {
+        gameCenterImpl.connectPlayer(FIRST_LOGIN, null);
+
+        assertEquals(FIRST_LOGIN, gameCenterImpl.getLobbyPlayers().get(0));
+    }
+
+    @Test
+    public void shouldPlayerConnectionRegisteredToConnectionManagerWhenConnectPlayer() throws Exception {
+        gameCenterImpl.connectPlayer(FIRST_LOGIN, connectionMock);
+
+        verify(connectionsManagerMock).addPersonalConnection(FIRST_LOGIN, connectionMock);
+    }
+
+    @Test
+    public void shouldFirstGameSetPlayerMoveWhenGameCenterSetPlayerMove() throws Exception {
+        final PlayerAction playerAction = mock(PlayerAction.class);
+        gameCenterImpl.setPlayerMove(FIRST_LOGIN, playerAction);
+
+        verify(gameMock).setMove(FIRST_LOGIN, playerAction);
     }
 }

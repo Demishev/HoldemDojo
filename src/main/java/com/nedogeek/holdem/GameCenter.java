@@ -1,5 +1,6 @@
 package com.nedogeek.holdem;
 
+import com.nedogeek.holdem.gamingStuff.PlayerAction;
 import com.nedogeek.holdem.server.GameDataBean;
 import org.eclipse.jetty.websocket.WebSocket;
 
@@ -27,4 +28,6 @@ public interface GameCenter {
     void notifyPlayer(String playerName, String message);
 
     void connectPlayer(String login, WebSocket.Connection connection);
+
+    void setPlayerMove(String login, PlayerAction move);
 }

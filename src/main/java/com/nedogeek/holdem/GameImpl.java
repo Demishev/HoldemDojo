@@ -7,6 +7,7 @@ import com.nedogeek.holdem.dealer.ConnectionsManager;
 import com.nedogeek.holdem.dealer.Dealer;
 import com.nedogeek.holdem.dealer.EventManager;
 import com.nedogeek.holdem.gamingStuff.Player;
+import com.nedogeek.holdem.gamingStuff.PlayerAction;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
 import com.nedogeek.holdem.server.GameDataBean;
 import org.eclipse.jetty.websocket.WebSocket;
@@ -114,6 +115,11 @@ public class GameImpl implements Game {
         gameDataBean.setPlayers(players.getPlayerNames());
 
         return gameDataBean;
+    }
+
+    @Override
+    public void setMove(String login, PlayerAction move) {
+        //TODO stub!
     }
 
     @Override

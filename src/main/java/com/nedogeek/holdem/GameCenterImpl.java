@@ -1,6 +1,7 @@
 package com.nedogeek.holdem;
 
 import com.nedogeek.holdem.dealer.ConnectionsManager;
+import com.nedogeek.holdem.gamingStuff.PlayerAction;
 import com.nedogeek.holdem.server.AdminCommandsPerformer;
 import com.nedogeek.holdem.server.GameDataBean;
 import org.eclipse.jetty.websocket.WebSocket;
@@ -74,7 +75,15 @@ class GameCenterImpl implements GameCenter {
 
     @Override
     public void connectPlayer(String login, WebSocket.Connection connection) {
-        //TODO stub!
+        lobbyPlayers.add(login);
+        connectionsManager.addPersonalConnection(login, connection);
+    }
+
+    @Override
+    public void setPlayerMove(String login, PlayerAction move) {
+        for (Game game : games.values()) {
+            game.setMove(login, move);
+        }
     }
 
     public void createGame(String gameId) {

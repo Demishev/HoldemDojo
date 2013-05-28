@@ -2,6 +2,7 @@ package com.nedogeek.holdem;
 
 import com.nedogeek.holdem.bot.Bots;
 import com.nedogeek.holdem.gamingStuff.Player;
+import com.nedogeek.holdem.gamingStuff.PlayerAction;
 import com.nedogeek.holdem.server.GameDataBean;
 import org.eclipse.jetty.websocket.WebSocket;
 
@@ -28,4 +29,6 @@ public interface Game {
     void addBot(Bots botType, String name);
 
     GameDataBean getGameData();
+
+    void setMove(String login, PlayerAction move);
 }
