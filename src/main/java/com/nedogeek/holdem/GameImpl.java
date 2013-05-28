@@ -119,7 +119,7 @@ public class GameImpl implements Game {
 
     @Override
     public void setMove(String login, PlayerAction move) {
-        //TODO stub!
+        players.setPlayerMove(login, move);
     }
 
     @Override

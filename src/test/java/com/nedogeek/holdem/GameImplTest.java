@@ -1,6 +1,7 @@
 package com.nedogeek.holdem;
 
 import com.nedogeek.holdem.dealer.ConnectionsManager;
+import com.nedogeek.holdem.gamingStuff.PlayerAction;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
 import com.nedogeek.holdem.server.GameDataBean;
 import org.eclipse.jetty.websocket.WebSocket;
@@ -84,5 +85,15 @@ public class GameImplTest {
     @Test
     public void shouldPlayersWhenGameDataGetPlayers() throws Exception {
         assertEquals(playersNames, getGameData().getPlayers());
+    }
+
+    @Test
+    public void shouldPlayersListSetPlayerMoveWhenGameSetMove() throws Exception {
+        String login = "Some player";
+        PlayerAction move = mock(PlayerAction.class);
+
+        game.setMove(login, move);
+
+        verify(playersList).setPlayerMove(login, move);
     }
 }

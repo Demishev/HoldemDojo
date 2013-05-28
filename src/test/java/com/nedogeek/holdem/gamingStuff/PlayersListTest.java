@@ -412,4 +412,31 @@ public class PlayersListTest {
 
         assertEquals(GameSettings.getMaximumPlayers(), playersList.size());
     }
+
+    @Test
+    public void shouldFirstPlayerSetMoveWhenPlayersListSetFirstPlayerMove() throws Exception {
+        final PlayerAction playerAction = mock(PlayerAction.class);
+
+        playersList.setPlayerMove(FIRST_PLAYER, playerAction);
+
+        verify(firstPlayer).setMove(playerAction);
+    }
+
+    @Test
+    public void shouldSecondPlayerSetMoveWhenPlayersListSetSecondPlayerMove() throws Exception {
+        final PlayerAction playerAction = mock(PlayerAction.class);
+
+        playersList.setPlayerMove(SECOND_PLAYER, playerAction);
+
+        verify(secondPlayer).setMove(playerAction);
+    }
+
+    @Test
+    public void shouldNoFirstPlayerSetMoveWhenPlayersListSetIllegalPlayerMove() throws Exception {
+        final PlayerAction playerAction = mock(PlayerAction.class);
+
+        playersList.setPlayerMove("Illegal player", playerAction);
+
+        verify(firstPlayer, never()).setMove(playerAction);
+    }
 }

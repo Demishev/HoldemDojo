@@ -275,4 +275,20 @@ public class PlayersList extends Vector<Player> {
         }
         return names;
     }
+
+    public void setPlayerMove(String playerName, PlayerAction playerAction) {
+        final Player player = getPlayerByName(playerName);
+        if (player != null) {
+            player.setMove(playerAction);
+        }
+    }
+
+    private Player getPlayerByName(String playerName) {
+        for (Player player : this) {
+            if (player.getName().equals(playerName)) {
+                return player;
+            }
+        }
+        return null;
+    }
 }
