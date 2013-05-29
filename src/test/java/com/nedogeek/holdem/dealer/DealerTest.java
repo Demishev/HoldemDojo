@@ -99,7 +99,7 @@ public class DealerTest {
 
     @Test
     public void shouldNoNullPointerExceptionWhenNewDealerTick() throws Exception {
-        dealer = new Dealer(playersManagerMock, new EventManager());
+        dealer = new Dealer(playersManagerMock, eventManagerMock);
         try {
             dealer.tick();
         } catch (NullPointerException e) {

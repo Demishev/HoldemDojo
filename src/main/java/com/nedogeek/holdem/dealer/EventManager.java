@@ -1,5 +1,6 @@
 package com.nedogeek.holdem.dealer;
 
+import com.nedogeek.holdem.GameCenter;
 import com.nedogeek.holdem.gameEvents.AddPlayerEvent;
 import com.nedogeek.holdem.gameEvents.Event;
 import com.nedogeek.holdem.gameEvents.GameEndedEvent;
@@ -18,18 +19,24 @@ import java.util.List;
  */
 public class EventManager {
     private final String PUBLIC = "public";
+    private final String gameId;
+    private final GameCenter gameCenter;
 
     private PlayersList playersList;
     private Dealer dealer;
     private Event event;
-    private ConnectionsManager connectionsManager;
+
+    public EventManager(String gameId, GameCenter gameCenter) {
+        this.gameId = gameId;
+        this.gameCenter = gameCenter;
+    }
 
     private void notifyConnections() {
-        connectionsManager.sendMessageToViewers("DEFAULT", gameToJSON(PUBLIC));
+        gameCenter.notifyViewers(gameId, gameToJSON(PUBLIC));
 
         for (String playerName : playersList.getPlayerNames()) {
             String message = gameToJSON(playerName);
-            connectionsManager.sendPersonalMessage(playerName, message);
+            gameCenter.notifyPlayer(playerName, message);
         }
     }
 
@@ -123,9 +130,5 @@ public class EventManager {
 
     public void setPlayersList(PlayersList playersList) {
         this.playersList = playersList;
-    }
-
-    public void setConnectionsManager(ConnectionsManager connectionsManager) {
-        this.connectionsManager = connectionsManager;
     }
 }

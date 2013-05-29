@@ -1,6 +1,7 @@
 package com.nedogeek.holdem.dealer;
 
 
+import com.nedogeek.holdem.GameCenter;
 import com.nedogeek.holdem.GameRound;
 import com.nedogeek.holdem.GameStatus;
 import com.nedogeek.holdem.gameEvents.Event;
@@ -23,6 +24,7 @@ import static org.mockito.Mockito.*;
  * Time: 14:29
  */
 public class EventManagerTest {
+    private final String GAME_ID = "first game";
 
     private final String FIRST_PLAYER = "FirstPlayer";
     private final String SECOND_PLAYER = "SecondPlayer";
@@ -79,11 +81,13 @@ public class EventManagerTest {
     private Dealer dealerMock;
 
     private ConnectionsManager connectionsManagerMock;
+    private GameCenter gameCenterMock;
 
 
     @Before
     public void setUp() throws Exception {
         resetDealerMock();
+        resetGameCenterMock();
 
         resetPlayersMock();
         resetPlayerListMock();
@@ -98,10 +102,17 @@ public class EventManagerTest {
 
         connectionsManagerMock = mock(ConnectionsManager.class);
 
-        eventManager = new EventManager();
+        createEventManager(GAME_ID);
+    }
+
+    private void createEventManager(String gameID) {
+        eventManager = new EventManager(gameID, gameCenterMock);
         eventManager.setDealer(dealerMock);
         eventManager.setPlayersList(playersListMock);
-        eventManager.setConnectionsManager(connectionsManagerMock);
+    }
+
+    private void resetGameCenterMock() {
+        gameCenterMock = mock(GameCenter.class);
     }
 
     private void resetCards() {
@@ -164,7 +175,7 @@ public class EventManagerTest {
     public void shouldConnectionManagerMockSendMessageDefaultToViewersWhenAddGameEvent() throws Exception {
         eventManager.addEvent(eventMock);
 
-        verify(connectionsManagerMock).sendMessageToViewers("DEFAULT", DEFAULT_MESSAGE);
+        verify(gameCenterMock).notifyViewers(GAME_ID, DEFAULT_MESSAGE);
     }
 
     @Test
@@ -172,7 +183,7 @@ public class EventManagerTest {
         eventManager.addEvent(eventMock);
         eventManager.addEvent(eventMock);
 
-        verify(connectionsManagerMock, times(2)).sendMessageToViewers("DEFAULT", DEFAULT_MESSAGE);
+        verify(gameCenterMock, times(2)).notifyViewers(GAME_ID, DEFAULT_MESSAGE);
     }
 
     @Test
@@ -229,7 +240,7 @@ public class EventManagerTest {
     public void shouldInMessageFirstPlayerWithCardsSendToFirstPlayerConnection() throws Exception {
         eventManager.addEvent(eventMock);
 
-        verify(connectionsManagerMock).sendPersonalMessage(FIRST_PLAYER, FIRST_PLAYER_WITH_CARDS_MESSAGE);
+        verify(gameCenterMock).notifyPlayer(FIRST_PLAYER, FIRST_PLAYER_WITH_CARDS_MESSAGE);
     }
 
     @Test
@@ -244,7 +255,7 @@ public class EventManagerTest {
                 + "\"," +
                 "\"gameStatus\":\"" + READY + "\",\"deskCards\":[],\"deskPot\":0}";
 
-        verify(connectionsManagerMock).sendPersonalMessage(SECOND_PLAYER, message);
+        verify(gameCenterMock).notifyPlayer(SECOND_PLAYER, message);
     }
 
     @Test
@@ -272,7 +283,7 @@ public class EventManagerTest {
 
                 + "," + "\"gameStatus\":\"" + READY + "\",\"deskCards\":[],\"deskPot\":0}";
 
-        verify(connectionsManagerMock).sendMessageToViewers("DEFAULT", message);
+        verify(gameCenterMock).notifyViewers(GAME_ID, message);
     }
 
     @Test
@@ -290,7 +301,7 @@ public class EventManagerTest {
                 "\"combination\":\"" + FIRST_PLAYER_CARD_COMBINATION
                 + "\"," + "\"gameStatus\":\"" + READY + "\",\"deskCards\":[],\"deskPot\":0}";
 
-        verify(connectionsManagerMock).sendPersonalMessage(FIRST_PLAYER, message);
+        verify(gameCenterMock).notifyPlayer(FIRST_PLAYER, message);
     }
 
     @Test
@@ -306,7 +317,7 @@ public class EventManagerTest {
 
                 + "," + "\"gameStatus\":\"" + READY + "\",\"deskCards\":[],\"deskPot\":0}";
 
-        verify(connectionsManagerMock).sendMessageToViewers("DEFAULT", message);
+        verify(gameCenterMock).notifyViewers(GAME_ID, message);
     }
 
     @Test
@@ -321,6 +332,16 @@ public class EventManagerTest {
                 "[" + FIRST_CARD_JSON + "," + SECOND_CARD_JSON + "]" +
                 ",\"deskPot\":0}";
 
-        verify(connectionsManagerMock).sendMessageToViewers("DEFAULT", message);
+        verify(gameCenterMock).notifyViewers(GAME_ID, message);
+    }
+
+    @Test
+    public void shouldDefaultMessageToViewersToOtherGameIDWhenEventManagerCreatesWithOtherGameID() throws Exception {
+        String OTHER_GAME_ID = "second game";
+        createEventManager(OTHER_GAME_ID);
+
+        eventManager.addEvent(eventMock);
+
+        verify(gameCenterMock).notifyViewers(OTHER_GAME_ID, DEFAULT_MESSAGE);
     }
 }

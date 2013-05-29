@@ -90,7 +90,7 @@ class GameCenterImpl implements GameCenter {
 
     @Override
     public void createGame(String gameId) {
-        games.put(gameId, new GameImpl());
+        games.put(gameId, new GameImpl("1", this));
     }
 
     @Override
@@ -101,7 +101,7 @@ class GameCenterImpl implements GameCenter {
     public void joinGame(String login, String gameId) {
         if (games.containsKey(gameId)) {
             final Game game = games.get(gameId);
-            game.addPlayer(login, null);  //TODO WTF, connection???
+            game.addPlayer(login);
             lobbyPlayers = new ArrayList<>();
         }
     }

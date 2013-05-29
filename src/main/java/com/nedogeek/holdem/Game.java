@@ -4,7 +4,6 @@ import com.nedogeek.holdem.bot.Bots;
 import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayerAction;
 import com.nedogeek.holdem.server.GameDataBean;
-import org.eclipse.jetty.websocket.WebSocket;
 
 import java.util.List;
 
@@ -20,11 +19,7 @@ public interface Game {
 
     void stop();
 
-    Player addPlayer(String name, WebSocket.Connection connection);
-
-    void addViewer(WebSocket.Connection connection);
-
-    void removeConnection(WebSocket.Connection connection);
+    Player addPlayer(String name);
 
     void removePlayer(String playerName);
 

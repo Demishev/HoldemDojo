@@ -1,7 +1,6 @@
 package com.nedogeek.holdem.server;
 
 import com.nedogeek.holdem.Game;
-import com.nedogeek.holdem.GameImpl;
 import com.nedogeek.holdem.GameSettings;
 import com.nedogeek.holdem.bot.Bots;
 
@@ -18,7 +17,7 @@ public class AdminModelImpl implements AdminModel {
     private Game game;
 
     public AdminModelImpl() {
-        game = GameImpl.getInstance();
+//        game = GameImpl.getInstance(); TODO fix admin model
     }
 
     AdminModelImpl(Game game) {

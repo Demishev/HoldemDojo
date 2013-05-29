@@ -1,10 +1,8 @@
 package com.nedogeek.holdem;
 
-import com.nedogeek.holdem.dealer.ConnectionsManager;
 import com.nedogeek.holdem.gamingStuff.PlayerAction;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
 import com.nedogeek.holdem.server.GameDataBean;
-import org.eclipse.jetty.websocket.WebSocket;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,49 +19,21 @@ import static org.mockito.Mockito.*;
  */
 public class GameImplTest {
     private GameImpl game;
-    private final WebSocket.Connection connectionMock = mock(WebSocket.Connection.class);
     private PlayersList playersList;
     private final List<String> playersNames = new ArrayList<>();
-
-    private ConnectionsManager connectionsManagerMock;
 
 
     @Before
     public void setUp() throws Exception {
         resetPlayersListMock();
 
-        connectionsManagerMock = mock(ConnectionsManager.class);
-
-        game = new GameImpl(playersList, connectionsManagerMock);
+        game = new GameImpl(playersList);
     }
 
     private void resetPlayersListMock() {
         playersList = mock(PlayersList.class);
 
         when(playersList.getPlayerNames()).thenReturn(playersNames);
-    }
-
-    @Test
-    public void shouldEventManagerMockConnectionAddViewerWhenGameAddViewerConnection() throws Exception {
-        game.addViewer(connectionMock);
-
-        verify(connectionsManagerMock).addViewer("DEFAULT", connectionMock);
-    }
-
-    @Test
-    public void shouldEventManagerMockConnectionAddPlayerWhenGameAddPlayerConnection() throws Exception {
-        final String playerName = "Player";
-
-        game.addPlayer(playerName, connectionMock);
-
-        verify(connectionsManagerMock).addPersonalConnection(playerName, connectionMock);
-    }
-
-    @Test
-    public void shouldEventManagerMockConnectionRemoveViewerWhenGameRemoveViewerConnection() throws Exception {
-        game.removeConnection(connectionMock);
-
-        verify(connectionsManagerMock).removeConnection(connectionMock);
     }
 
     @Test

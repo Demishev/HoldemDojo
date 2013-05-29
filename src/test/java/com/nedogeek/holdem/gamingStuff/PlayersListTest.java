@@ -101,7 +101,7 @@ public class PlayersListTest {
 
     @Test
     public void should0PlayersWhenNewPlayersManager() throws Exception {
-        assertEquals(0, new PlayersList(new EventManager()).size());
+        assertEquals(0, new PlayersList(eventManagerMock).size());
     }
 
     @Test
@@ -384,22 +384,22 @@ public class PlayersListTest {
 
     @Test
     public void shouldNoExceptionsWhenNewPlayerListGetBigBlindPlayer() throws Exception {
-        new PlayersList(new EventManager()).bigBlindPlayer();
+        new PlayersList(eventManagerMock).bigBlindPlayer();
     }
 
     @Test
     public void shouldNoExceptionsWhenNewPlayerListGetSmallBlindPlayer() throws Exception {
-        new PlayersList(new EventManager()).smallBlindPlayer();
+        new PlayersList(eventManagerMock).smallBlindPlayer();
     }
 
     @Test
     public void shouldNoExceptionsWhenNewPlayerListGetMover() throws Exception {
-        new PlayersList(new EventManager()).getMover();
+        new PlayersList(eventManagerMock).getMover();
     }
 
     @Test
     public void shouldNoExceptionsWhenNewPlayerListGetDealerName() throws Exception {
-        new PlayersList(new EventManager()).getDealerName();
+        new PlayersList(eventManagerMock).getDealerName();
     }
 
     @Test

@@ -1,14 +1,12 @@
 package com.nedogeek.holdem;
 
 import com.nedogeek.holdem.bot.Bots;
-import com.nedogeek.holdem.dealer.ConnectionsManager;
 import com.nedogeek.holdem.dealer.Dealer;
 import com.nedogeek.holdem.dealer.EventManager;
 import com.nedogeek.holdem.gamingStuff.Player;
 import com.nedogeek.holdem.gamingStuff.PlayerAction;
 import com.nedogeek.holdem.gamingStuff.PlayersList;
 import com.nedogeek.holdem.server.GameDataBean;
-import org.eclipse.jetty.websocket.WebSocket;
 
 import java.util.List;
 
@@ -23,32 +21,21 @@ public class GameImpl implements Game {
     private final EventManager eventManager;
     private Dealer dealer;
     private final PlayersList players;
-    private ConnectionsManager connectionsManager;
 
     private Thread dealerThread;
 
-    GameImpl() {
-        eventManager = new EventManager();
+    GameImpl(String gameID, GameCenter gameCenter) {
+        eventManager = new EventManager(gameID, gameCenter);
         players = new PlayersList(eventManager);
         eventManager.setPlayersList(players);
-        connectionsManager = new ConnectionsManager();
-        eventManager.setConnectionsManager(connectionsManager);
 
         createDealer();
         start();
     }
 
-    public static GameImpl getInstance() {
-        if (instance == null) {
-            instance = new GameImpl();
-        }
-        return instance;
-    }
-
-    GameImpl(PlayersList players, ConnectionsManager connectionsManager) {
-        this.eventManager = new EventManager();
+    GameImpl(PlayersList players) {
+        this.eventManager = new EventManager(null, null); //TODO fix!
         this.players = players;
-        this.connectionsManager = connectionsManager;
 
         createDealer();
         start();
@@ -81,14 +68,8 @@ public class GameImpl implements Game {
     }
 
     @Override
-    public Player addPlayer(String name, WebSocket.Connection connection) {
-        connectionsManager.addPersonalConnection(name, connection);
+    public Player addPlayer(String name) {
         return players.getPlayerByName(name, dealer);
-    }
-
-    @Override
-    public void addViewer(WebSocket.Connection connection) {
-        connectionsManager.addViewer("DEFAULT", connection);
     }
 
     @Override
@@ -124,10 +105,6 @@ public class GameImpl implements Game {
         return players.getPlayerNames();
     }
 
-    @Override
-    public void removeConnection(WebSocket.Connection connection) {
-        connectionsManager.removeConnection(connection);
-    }
 
     @Override
     public void removePlayer(String playerName) {

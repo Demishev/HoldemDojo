@@ -1,6 +1,5 @@
 package localBotRunner;
 
-import com.nedogeek.holdem.GameImpl;
 import org.eclipse.jetty.websocket.WebSocket;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
@@ -26,10 +25,10 @@ public class BotGameRunner {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) { //TODO does not work!
         WebSocket.Connection consoleConnection = prepareConsoleConnection();
 
-        GameImpl.getInstance().addViewer(consoleConnection);
+//        GameImpl.getInstance().addViewer(consoleConnection);
     }
 
     private static WebSocket.Connection prepareConsoleConnection() {
