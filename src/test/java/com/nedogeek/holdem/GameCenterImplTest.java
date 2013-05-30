@@ -182,4 +182,19 @@ public class GameCenterImplTest {
 
         assertEquals(FIRST_PLAYER_NAME, gameCenterImpl.getLobbyPlayers().get(0));
     }
+
+    @Test
+    public void shouldAddPublicConnectionToConnectionManagerWhenConnectViewerToFirstGame() throws Exception {
+        gameCenterImpl.connectViewer(FIRST_GAME_ID, connectionMock);
+
+        verify(connectionsManagerMock).addViewer(FIRST_GAME_ID, connectionMock);
+    }
+
+    @Test
+    public void shouldAddPublicConnectionToConnectionManagerWhenConnectViewerToSecondGame() throws Exception {
+        final String SECOND_GAME_ID = "Second game";
+        gameCenterImpl.connectViewer(SECOND_GAME_ID, connectionMock);
+
+        verify(connectionsManagerMock).addViewer(SECOND_GAME_ID, connectionMock);
+    }
 }

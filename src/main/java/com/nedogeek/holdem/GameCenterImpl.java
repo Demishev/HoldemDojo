@@ -16,7 +16,9 @@ import java.util.Set;
  * Date: 19.05.13
  * Time: 20:44
  */
-class GameCenterImpl implements GameCenter {
+public class GameCenterImpl implements GameCenter {
+    private static final GameCenter instance = new GameCenterImpl();
+
     private List<String> lobbyPlayers = new ArrayList<>();
 
     private final ConnectionsManager connectionsManager;
@@ -25,6 +27,10 @@ class GameCenterImpl implements GameCenter {
     private final PlayerCommandPerformer playerCommandPerformer;
 
     private final Map<String, Game> games;
+
+    public static GameCenter getInstance() {
+        return instance;
+    }
 
     /**
      * Test constructor.
@@ -38,6 +44,14 @@ class GameCenterImpl implements GameCenter {
         this.playerCommandPerformer = playerCommandPerformer;
 
         this.games = games;
+    }
+
+    private GameCenterImpl() {
+        connectionsManager = null;     //TODO stub!
+        adminCommandsPerformer = null;
+        playerCommandPerformer = null;
+
+        games = null;
     }
 
     @Override
@@ -100,7 +114,7 @@ class GameCenterImpl implements GameCenter {
 
     @Override
     public void connectViewer(String gameId, WebSocket.Connection connection) {
-        //TODO stub!
+        connectionsManager.addViewer(gameId, connection);
     }
 
     public void joinGame(String login, String gameId) {
