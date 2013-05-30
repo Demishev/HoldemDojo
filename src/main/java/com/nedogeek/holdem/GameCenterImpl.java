@@ -98,6 +98,11 @@ class GameCenterImpl implements GameCenter {
         lobbyPlayers.add(games.get(gameID).getPlayerNames().get(0));
     }
 
+    @Override
+    public void connectViewer(String gameId, WebSocket.Connection connection) {
+        //TODO stub!
+    }
+
     public void joinGame(String login, String gameId) {
         if (games.containsKey(gameId)) {
             final Game game = games.get(gameId);

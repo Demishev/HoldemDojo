@@ -4,8 +4,6 @@ import org.eclipse.jetty.websocket.WebSocket;
 import org.eclipse.jetty.websocket.WebSocketServlet;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * User: Konstantin Demishev
@@ -13,28 +11,13 @@ import java.util.Map;
  * Time: 14:25
  */
 public class HoldemWebSocketServlet extends WebSocketServlet {
-    private final Map<String, String> userData = new HashMap<>();
 
     @Override
     public WebSocket doWebSocketConnect(HttpServletRequest request, String protocol) {
         String login = request.getParameter("user");
         String password = request.getParameter("password");
+        String gameID = request.getParameter("gameID");
 
-        if (login == null && password == null) {
-            return new PlayerWebSocket("public"); //TODO Test!
-        } else {
-            if (login != null && password != null) {
-                if (userData.containsKey(login)) {
-                    if (userData.get(login).equals(password)) {
-                        return new PlayerWebSocket(login);
-                    }
-                } else {
-                    userData.put(login, password);
-                    return new PlayerWebSocket(login);
-                }
-            }
-        }
-        return null;
+        return new HoldemWebSocketConnector().connect(login, password, gameID);
     }
-
 }

@@ -16,8 +16,6 @@ import java.util.List;
  * Time: 23:20
  */
 public class GameImpl implements Game {
-    private static GameImpl instance;
-
     private final EventManager eventManager;
     private Dealer dealer;
     private final PlayersList players;
@@ -33,8 +31,13 @@ public class GameImpl implements Game {
         start();
     }
 
+    /**
+     * Test constructor!!
+     *
+     * @param players injecting players for test reasons.
+     */
     GameImpl(PlayersList players) {
-        this.eventManager = new EventManager(null, null); //TODO fix!
+        this.eventManager = new EventManager(null, null);
         this.players = players;
 
         createDealer();

@@ -34,4 +34,6 @@ public interface GameCenter {
     void createGame(String gameID);
 
     void removeGame(String gameID);
+
+    void connectViewer(String gameId, WebSocket.Connection connection);
 }
