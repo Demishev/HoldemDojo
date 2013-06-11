@@ -18,6 +18,7 @@ import java.io.IOException;
 public class AdminServlet extends HttpServlet {
     private AdminModel model;
     private AdminCommandsPerformer commandsPerformer;
+    private AdminLogic adminLogic = new AdminLogic();
 
     @Override
     public void init() throws ServletException {
@@ -48,12 +49,13 @@ public class AdminServlet extends HttpServlet {
 
         httpServletRequest.setAttribute("gameData", model.getGameData());
 
-        redirectTo(httpServletRequest, httpServletResponse, "/admin/adminPage.jsp");
+        redirectTo(httpServletRequest, httpServletResponse, adminLogic.successPage);
     }
 
     private void checkLoginInfo(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
         String PASSWORD = "password";
-        if (!model.passwordCorrect((String) httpServletRequest.getSession().getAttribute(PASSWORD))) {
+        final String passwordValue = (String) httpServletRequest.getSession().getAttribute(PASSWORD);
+        if (!model.passwordCorrect(passwordValue)) {
             String password = httpServletRequest.getParameter(PASSWORD);
             if (model.passwordCorrect(password)) {
                 httpServletRequest.getSession().setAttribute(PASSWORD, password);

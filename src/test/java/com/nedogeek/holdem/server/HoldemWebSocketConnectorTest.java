@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.*;
 
 /**
@@ -121,5 +122,17 @@ public class HoldemWebSocketConnectorTest {
     @Test
     public void shouldSecondViewerSocketWhenNullNullSecondGameID() throws Exception {
         assertEquals(SECOND_GAME_VIEWER_SOCKET, connect(null, null, SECOND_GAME_ID));
+    }
+
+    @Test
+    public void shouldNullWhenConnectNullNullNull() throws Exception {
+        assertNull(connect(null, null, null));
+    }
+
+    @Test
+    public void shouldNoFabricInteractionsWhenConnectNullNullNull() throws Exception {
+        connect(null, null, null);
+
+        verify(factoryMock, never()).getViewerSocket(null);
     }
 }

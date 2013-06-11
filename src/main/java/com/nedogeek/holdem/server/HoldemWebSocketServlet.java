@@ -12,12 +12,14 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class HoldemWebSocketServlet extends WebSocketServlet {
 
+    private final HoldemWebSocketConnector holdemWebSocketConnector = new HoldemWebSocketConnector();
+
     @Override
     public WebSocket doWebSocketConnect(HttpServletRequest request, String protocol) {
         String login = request.getParameter("user");
         String password = request.getParameter("password");
         String gameID = request.getParameter("gameID");
 
-        return new HoldemWebSocketConnector().connect(login, password, gameID);
+        return holdemWebSocketConnector.connect(login, password, gameID);
     }
 }

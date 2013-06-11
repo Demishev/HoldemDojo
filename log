@@ -1,0 +1,154 @@
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for com.nedogeek:holdem:war:1.0
+[WARNING] 'build.plugins.plugin.version' for org.codehaus.mojo:tomcat-maven-plugin is missing. @ line 34, column 21
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-compiler-plugin is missing. @ line 25, column 21
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building holdem 1.0
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] >>> jetty-maven-plugin:8.1.4.v20120524:run-war (default-cli) @ holdem >>>
+[INFO] 
+[INFO] --- maven-resources-plugin:2.5:resources (default-resources) @ holdem ---
+[debug] execute contextualize
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory F:\Projects\Java\workspace01\holdem.dojo\src\main\resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:2.3.2:compile (default-compile) @ holdem ---
+[INFO] Compiling 40 source files to F:\Projects\Java\workspace01\holdem.dojo\target\classes
+[INFO] 
+[INFO] --- maven-resources-plugin:2.5:testResources (default-testResources) @ holdem ---
+[debug] execute contextualize
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory F:\Projects\Java\workspace01\holdem.dojo\src\test\resources
+[INFO] 
+[INFO] --- maven-compiler-plugin:2.3.2:testCompile (default-testCompile) @ holdem ---
+[INFO] Compiling 14 source files to F:\Projects\Java\workspace01\holdem.dojo\target\test-classes
+[INFO] 
+[INFO] --- maven-surefire-plugin:2.10:test (default-test) @ holdem ---
+[INFO] Surefire report directory: F:\Projects\Java\workspace01\holdem.dojo\target\surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running com.nedogeek.holdem.combinations.CardsChooserTest
+Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.14 sec
+Running com.nedogeek.holdem.combinations.CombinationTest
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 sec
+Running com.nedogeek.holdem.combinations.PlayerCardCombinationTest
+Tests run: 32, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec
+Running com.nedogeek.holdem.dealer.DealerTest
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.357 sec
+Running com.nedogeek.holdem.dealer.EndGameManagerTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.125 sec
+Running com.nedogeek.holdem.dealer.EventManagerTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.078 sec
+Running com.nedogeek.holdem.dealer.MoveManagerTest
+Tests run: 42, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.64 sec
+Running com.nedogeek.holdem.dealer.NewGameSetterTest
+Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.062 sec
+Running com.nedogeek.holdem.GameRoundTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 sec
+Running com.nedogeek.holdem.gamingStuff.CardDeckTest
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec
+Running com.nedogeek.holdem.gamingStuff.CardTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec
+Running com.nedogeek.holdem.gamingStuff.PlayersListTest
+Tests run: 20, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.125 sec
+Running com.nedogeek.holdem.gamingStuff.PlayerTest
+Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 sec
+
+Results :
+
+Tests run: 154, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] 
+[INFO] --- maven-war-plugin:2.1.1:war (default-war) @ holdem ---
+[INFO] Packaging webapp
+[INFO] Assembling webapp [holdem] in [F:\Projects\Java\workspace01\holdem.dojo\target\holdem-1.0]
+[INFO] Processing war project
+[INFO] Copying webapp resources [F:\Projects\Java\workspace01\holdem.dojo\src\main\webapp]
+[INFO] Webapp assembled in [2542 msecs]
+[INFO] Building war: F:\Projects\Java\workspace01\holdem.dojo\target\holdem-1.0.war
+[WARNING] Warning: selected war files include a WEB-INF/web.xml which will be ignored 
+(webxml attribute is missing from war task, or ignoreWebxml attribute is specified as 'true')
+[INFO] 
+[INFO] <<< jetty-maven-plugin:8.1.4.v20120524:run-war (default-cli) @ holdem <<<
+[INFO] 
+[INFO] --- jetty-maven-plugin:8.1.4.v20120524:run-war (default-cli) @ holdem ---
+[INFO] Configuring Jetty for project: holdem
+[INFO] Context path = /
+[INFO] Tmp directory = F:\Projects\Java\workspace01\holdem.dojo\target\tmp
+[INFO] Web defaults = org/eclipse/jetty/webapp/webdefault.xml
+[INFO] Web overrides =  none
+[INFO] Jetty server exiting.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 29.593s
+[INFO] Finished at: Fri Mar 22 00:50:00 EET 2013
+[INFO] Final Memory: 16M/39M
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.mortbay.jetty:jetty-maven-plugin:8.1.4.v20120524:run-war (default-cli) on project holdem: Execution default-cli of goal org.mortbay.jetty:jetty-maven-plugin:8.1.4.v20120524:run-war failed: A required class was missing while executing org.mortbay.jetty:jetty-maven-plugin:8.1.4.v20120524:run-war: org/eclipse/jetty/server/Handler
+[ERROR] -----------------------------------------------------
+[ERROR] realm =    plugin>org.mortbay.jetty:jetty-maven-plugin:8.1.4.v20120524
+[ERROR] strategy = org.codehaus.plexus.classworlds.strategy.SelfFirstStrategy
+[ERROR] urls[0] = file:/C:/Users/dima/.m2/repository/org/mortbay/jetty/jetty-maven-plugin/8.1.4.v20120524/jetty-maven-plugin-8.1.4.v20120524.jar
+[ERROR] urls[1] = file:/C:/Users/dima/.m2/repository/org/eclipse/jetty/jetty-util/8.1.4.v20120524/jetty-util-8.1.4.v20120524.jar
+[ERROR] urls[2] = file:/C:/Users/dima/.m2/repository/org/eclipse/jetty/jetty-webapp/8.1.4.v20120524/jetty-webapp-8.1.4.v20120524.jar
+[ERROR] urls[3] = file:/C:/Users/dima/.m2/repository/org/eclipse/jetty/jetty-xml/8.1.4.v20120524/jetty-xml-8.1.4.v20120524.jar
+[ERROR] urls[4] = file:/C:/Users/dima/.m2/repository/org/eclipse/jetty/jetty-servlet/8.1.4.v20120524/jetty-servlet-8.1.4.v20120524.jar
+[ERROR] urls[5] = file:/C:/Users/dima/.m2/repository/org/eclipse/jetty/jetty-security/8.1.4.v20120524/jetty-security-8.1.4.v20120524.jar
+[ERROR] urls[6] = file:/C:/Users/dima/.m2/repository/org/eclipse/jetty/jetty-server/8.1.4.v20120524/jetty-server-8.1.4.v20120524.jar
+[ERROR] urls[7] = file:/C:/Users/dima/.m2/repository/org/eclipse/jetty/jetty-continuation/8.1.4.v20120524/jetty-continuation-8.1.4.v20120524.jar
+[ERROR] urls[8] = file:/C:/Users/dima/.m2/repository/org/sonatype/sisu/sisu-inject-bean/2.1.1/sisu-inject-bean-2.1.1.jar
+[ERROR] urls[9] = file:/C:/Users/dima/.m2/repository/org/sonatype/sisu/sisu-guice/2.9.4/sisu-guice-2.9.4-no_aop.jar
+[ERROR] urls[10] = file:/C:/Users/dima/.m2/repository/org/codehaus/plexus/plexus-utils/2.0.6/plexus-utils-2.0.6.jar
+[ERROR] urls[11] = file:/C:/Users/dima/.m2/repository/org/sonatype/aether/aether-util/1.11/aether-util-1.11.jar
+[ERROR] urls[12] = file:/C:/Users/dima/.m2/repository/org/codehaus/plexus/plexus-interpolation/1.14/plexus-interpolation-1.14.jar
+[ERROR] urls[13] = file:/C:/Users/dima/.m2/repository/org/codehaus/plexus/plexus-component-annotations/1.5.5/plexus-component-annotations-1.5.5.jar
+[ERROR] urls[14] = file:/C:/Users/dima/.m2/repository/org/sonatype/plexus/plexus-sec-dispatcher/1.3/plexus-sec-dispatcher-1.3.jar
+[ERROR] urls[15] = file:/C:/Users/dima/.m2/repository/org/sonatype/plexus/plexus-cipher/1.4/plexus-cipher-1.4.jar
+[ERROR] urls[16] = file:/C:/Users/dima/.m2/repository/org/apache/maven/plugin-tools/maven-plugin-tools-api/2.9/maven-plugin-tools-api-2.9.jar
+[ERROR] urls[17] = file:/C:/Users/dima/.m2/repository/org/apache/maven/reporting/maven-reporting-api/2.0.6/maven-reporting-api-2.0.6.jar
+[ERROR] urls[18] = file:/C:/Users/dima/.m2/repository/org/apache/maven/doxia/doxia-sink-api/1.0-alpha-7/doxia-sink-api-1.0-alpha-7.jar
+[ERROR] urls[19] = file:/C:/Users/dima/.m2/repository/junit/junit/3.8.1/junit-3.8.1.jar
+[ERROR] urls[20] = file:/C:/Users/dima/.m2/repository/net/sf/jtidy/jtidy/r938/jtidy-r938.jar
+[ERROR] urls[21] = file:/C:/Users/dima/.m2/repository/org/eclipse/jetty/jetty-plus/8.1.4.v20120524/jetty-plus-8.1.4.v20120524.jar
+[ERROR] urls[22] = file:/C:/Users/dima/.m2/repository/org/eclipse/jetty/orbit/javax.transaction/1.1.1.v201105210645/javax.transaction-1.1.1.v201105210645.jar
+[ERROR] urls[23] = file:/C:/Users/dima/.m2/repository/org/eclipse/jetty/jetty-jndi/8.1.4.v20120524/jetty-jndi-8.1.4.v20120524.jar
+[ERROR] urls[24] = file:/C:/Users/dima/.m2/repository/org/eclipse/jetty/orbit/javax.mail.glassfish/1.4.1.v201005082020/javax.mail.glassfish-1.4.1.v201005082020.jar
+[ERROR] urls[25] = file:/C:/Users/dima/.m2/repository/org/eclipse/jetty/orbit/javax.activation/1.1.0.v201105071233/javax.activation-1.1.0.v201105071233.jar
+[ERROR] urls[26] = file:/C:/Users/dima/.m2/repository/org/eclipse/jetty/jetty-jmx/8.1.4.v20120524/jetty-jmx-8.1.4.v20120524.jar
+[ERROR] urls[27] = file:/C:/Users/dima/.m2/repository/org/eclipse/jetty/jetty-annotations/8.1.4.v20120524/jetty-annotations-8.1.4.v20120524.jar
+[ERROR] urls[28] = file:/C:/Users/dima/.m2/repository/org/eclipse/jetty/orbit/javax.annotation/1.1.0.v201108011116/javax.annotation-1.1.0.v201108011116.jar
+[ERROR] urls[29] = file:/C:/Users/dima/.m2/repository/org/eclipse/jetty/orbit/org.objectweb.asm/3.1.0.v200803061910/org.objectweb.asm-3.1.0.v200803061910.jar
+[ERROR] urls[30] = file:/C:/Users/dima/.m2/repository/org/eclipse/jetty/jetty-websocket/8.1.4.v20120524/jetty-websocket-8.1.4.v20120524.jar
+[ERROR] urls[31] = file:/C:/Users/dima/.m2/repository/org/eclipse/jetty/jetty-io/8.1.4.v20120524/jetty-io-8.1.4.v20120524.jar
+[ERROR] urls[32] = file:/C:/Users/dima/.m2/repository/org/eclipse/jetty/jetty-http/8.1.4.v20120524/jetty-http-8.1.4.v20120524.jar
+[ERROR] urls[33] = file:/C:/Users/dima/.m2/repository/org/eclipse/jetty/jetty-jsp/8.1.4.v20120524/jetty-jsp-8.1.4.v20120524.jar
+[ERROR] urls[34] = file:/C:/Users/dima/.m2/repository/org/eclipse/jetty/orbit/javax.servlet.jsp/2.2.0.v201112011158/javax.servlet.jsp-2.2.0.v201112011158.jar
+[ERROR] urls[35] = file:/C:/Users/dima/.m2/repository/org/eclipse/jetty/orbit/javax.servlet/3.0.0.v201112011016/javax.servlet-3.0.0.v201112011016.jar
+[ERROR] urls[36] = file:/C:/Users/dima/.m2/repository/org/eclipse/jetty/orbit/org.apache.jasper.glassfish/2.2.2.v201112011158/org.apache.jasper.glassfish-2.2.2.v201112011158.jar
+[ERROR] urls[37] = file:/C:/Users/dima/.m2/repository/org/eclipse/jetty/orbit/javax.servlet.jsp.jstl/1.2.0.v201105211821/javax.servlet.jsp.jstl-1.2.0.v201105211821.jar
+[ERROR] urls[38] = file:/C:/Users/dima/.m2/repository/org/eclipse/jetty/orbit/org.apache.taglibs.standard.glassfish/1.2.0.v201112081803/org.apache.taglibs.standard.glassfish-1.2.0.v201112081803.jar
+[ERROR] urls[39] = file:/C:/Users/dima/.m2/repository/org/eclipse/jetty/orbit/javax.el/2.2.0.v201108011116/javax.el-2.2.0.v201108011116.jar
+[ERROR] urls[40] = file:/C:/Users/dima/.m2/repository/org/eclipse/jetty/orbit/com.sun.el/2.2.0.v201108011116/com.sun.el-2.2.0.v201108011116.jar
+[ERROR] urls[41] = file:/C:/Users/dima/.m2/repository/org/eclipse/jetty/orbit/org.eclipse.jdt.core/3.7.1/org.eclipse.jdt.core-3.7.1.jar
+[ERROR] Number of foreign imports: 1
+[ERROR] import: Entry[import  from realm ClassRealm[maven.api, parent: null]]
+[ERROR] 
+[ERROR] -----------------------------------------------------: org.eclipse.jetty.server.Handler
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/PluginContainerException

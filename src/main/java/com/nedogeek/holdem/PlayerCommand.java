@@ -6,4 +6,7 @@ package com.nedogeek.holdem;
  * Time: 20:35
  */
 public interface PlayerCommand {
+    String getLogin();
+
+    PlayerCommandReceiver getReceiver();
 }

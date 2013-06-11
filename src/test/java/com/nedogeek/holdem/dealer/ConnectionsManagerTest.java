@@ -204,55 +204,56 @@ public class ConnectionsManagerTest {
 
     static boolean concurrentModificationTestFailed = false;
 
-    @Test
-    public void shouldNoConcurrentModificationExceptionsWhen200TimesAddingRemovingConnectionsDuring200TimesMessageSending() throws Exception {
-        new Thread() {
-            @Override
-            public void run() {
+    private class ConnectionsAddRemover implements Runnable {
+        @Override
+        public void run() {
+            for (int i = 0; i < 200; i++) {
+                addConnections();
+                removeConnections();
+            }
+        }
+
+        private void removeConnections() {
+            connectionsManager.removeConnection(firstConnectionMock);
+            connectionsManager.removeConnection(secondConnectionMock);
+            connectionsManager.removeConnection(thirdConnectionMock);
+            connectionsManager.removeConnection(fourthConnectionMock);
+            connectionsManager.removeConnection(firstConnectionMock);
+            connectionsManager.removeConnection(sixthConnectionMock);
+        }
+
+        private void addConnections() {
+            connectionsManager.addViewer(FIRST_GAME, firstConnectionMock);
+            connectionsManager.addViewer(FIRST_GAME, secondConnectionMock);
+
+            connectionsManager.addPersonalConnection(FIRST_CONNECTION_OWNER_NAME, thirdConnectionMock);
+            connectionsManager.addPersonalConnection(FIRST_CONNECTION_OWNER_NAME, fourthConnectionMock);
+
+            connectionsManager.addPersonalConnection(SECOND_CONNECTION_OWNER_NAME, fifthConnectionMock);
+            connectionsManager.addPersonalConnection(SECOND_CONNECTION_OWNER_NAME, sixthConnectionMock);
+        }
+    }
+
+    private class MessageSender implements Runnable {
+        @Override
+        public void run() {
+            try {
                 for (int i = 0; i < 200; i++) {
-                    addConnections();
-                    removeConnections();
+                    connectionsManager.sendMessageToViewers(FIRST_GAME, MESSAGE);
+                    connectionsManager.sendPersonalMessage(FIRST_CONNECTION_OWNER_NAME, MESSAGE);
+                    connectionsManager.sendPersonalMessage(SECOND_CONNECTION_OWNER_NAME, MESSAGE);
                 }
+            } catch (ConcurrentModificationException | NullPointerException e) {
+                ConnectionsManagerTest.concurrentModificationTestFailed = true;
+                e.printStackTrace();
             }
+        }
+    }
 
-            private void removeConnections() {
-                connectionsManager.removeConnection(firstConnectionMock);
-                connectionsManager.removeConnection(secondConnectionMock);
-                connectionsManager.removeConnection(thirdConnectionMock);
-                connectionsManager.removeConnection(fourthConnectionMock);
-                connectionsManager.removeConnection(firstConnectionMock);
-                connectionsManager.removeConnection(sixthConnectionMock);
-            }
-
-            private void addConnections() {
-                connectionsManager.addViewer(FIRST_GAME, firstConnectionMock);
-                connectionsManager.addViewer(FIRST_GAME, secondConnectionMock);
-
-                connectionsManager.addPersonalConnection(FIRST_CONNECTION_OWNER_NAME, thirdConnectionMock);
-                connectionsManager.addPersonalConnection(FIRST_CONNECTION_OWNER_NAME, fourthConnectionMock);
-
-                connectionsManager.addPersonalConnection(SECOND_CONNECTION_OWNER_NAME, fifthConnectionMock);
-                connectionsManager.addPersonalConnection(SECOND_CONNECTION_OWNER_NAME, sixthConnectionMock);
-            }
-        }.start();
-
-
-        new Thread() {
-            @Override
-            public void run() {
-                try {
-                    for (int i = 0; i < 200; i++) {
-                        connectionsManager.sendMessageToViewers(FIRST_GAME, MESSAGE);
-                        connectionsManager.sendPersonalMessage(FIRST_CONNECTION_OWNER_NAME, MESSAGE);
-                        connectionsManager.sendPersonalMessage(SECOND_CONNECTION_OWNER_NAME, MESSAGE);
-                    }
-                } catch (ConcurrentModificationException e) {
-                    ConnectionsManagerTest.concurrentModificationTestFailed = true;
-                    e.printStackTrace();
-                }
-            }
-
-        }.start();
+    @Test
+    public void shouldNoExceptionsWhen200TimesAddingRemovingConnectionsDuring200TimesMessageSending() throws Exception {
+        new Thread(new ConnectionsAddRemover()).start();
+        new Thread(new MessageSender()).start();
 
         Thread.sleep(50);
 

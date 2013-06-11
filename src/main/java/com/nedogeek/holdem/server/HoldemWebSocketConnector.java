@@ -15,7 +15,7 @@ public class HoldemWebSocketConnector {
     private HoldemWebSocketFactory factory = new HoldemWebSocketFactory();
 
     public WebSocket connect(String user, String password, String gameID) {
-        if (user == null && password == null) {
+        if (user == null && password == null && gameID != null) {
             return factory.getViewerSocket(gameID);
         }
         if (user != null && password != null) {

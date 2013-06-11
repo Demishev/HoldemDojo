@@ -26,7 +26,7 @@ class PlayerWebSocket implements WebSocket.OnTextMessage {
 
     @Override
     public void onMessage(String message) {
-        PlayerCommand playerCommand = playerCommandParser.parseCommand(message);
+        PlayerCommand playerCommand = playerCommandParser.parseCommand("login", message); //TODO stub!!!!
         gameCenter.performPlayerCommand(playerCommand);
     }
 

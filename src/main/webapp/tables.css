@@ -1,0 +1,9 @@
+body {
+    background-color: #20cc79;
+    font-size: 0.9em;
+}
+
+#session {
+    text-align: right;
+    opacity: 1;
+}

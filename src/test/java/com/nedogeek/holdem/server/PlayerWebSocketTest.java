@@ -44,7 +44,7 @@ public class PlayerWebSocketTest {
     private void resetPlayerCommandsParserMock() {
         playerCommandsParserMock = mock(PlayerCommandsParser.class);
 
-        when(playerCommandsParserMock.parseCommand(MESSAGE)).thenReturn(playerCommandMock);
+        when(playerCommandsParserMock.parseCommand("login", MESSAGE)).thenReturn(playerCommandMock);
     }
 
     @Test

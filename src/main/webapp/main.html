@@ -1,0 +1,42 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type"
+          content="text/html;charset=UTF-8">
+
+    <link href="styles.css" type="text/css" rel="stylesheet"></link>
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js' type='text/javascript'></script>
+
+	<script src="main.js"></script>
+
+    <link href="tables.css" type="text/css" rel="stylesheet">
+ 
+</head>
+
+<body>
+<div id="session">
+    <input id="login" value="User">
+    <input id="password" value="Password" type="password">
+    <button class="sessionButton" onclick="sessionAction()">login</button>
+</div>
+
+<div class="screen">
+
+    
+</div>
+
+<script>
+	targetUrl = "http://localhost:8080/test/DOJOGamePage.html"
+	callback = function(value){
+	
+		$(document).find(".screen").append(value);
+			  				 
+		  };
+		
+		showTablesCallback(callback);
+	
+	
+
+</script>
+
+</body>
+</html>
