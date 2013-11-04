@@ -11,27 +11,27 @@
 <body>
 
 <div class="tables" id="table">
-    
+
     <ul class="deskCards" id="descks">
-        
+
         <li><a onclick="showTable()">table1</a></li>
         <li><a onclick="showTable()">table2</a></li>
-        
+
     </ul>
 
 </div>
 <script>
 
-	function showTable(){
-		targetUrl = "http://localhost:8080/test/DOJOGamePage.html"
-		callback = function(value){
-		alert(value);
-		$(document).find(".screen").append(value);
-			  				 
-		  };
-		
-		showTablesCallback(callback);
-	}
+    function showTable() {
+        targetUrl = "http://localhost:8080/test/DOJOGamePage.html"
+        callback = function (value) {
+            alert(value);
+            $(document).find(".screen").append(value);
+
+        };
+
+        showTablesCallback(callback);
+    }
 
 </script>
 </body>

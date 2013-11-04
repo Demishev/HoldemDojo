@@ -17,8 +17,7 @@ eventTypes = {
 };
 
 
-
-var parseEvent = function(event) {
+var parseEvent = function (event) {
     eventType = event.EventType;
 
     if (eventType == eventType.PLAYER_ADDED) {
