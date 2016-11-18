@@ -12,23 +12,11 @@
     <properties>
         <jetty.version>8.1.4.v20120524</jetty.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven-license.version>1.9</maven-license.version>
     </properties>
 
     <build>
         <plugins>
-        	<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-        			<artifactId>sonar-maven-plugin</artifactId>
-        			<version>2.1</version>
-        			<executions>
-        				<execution>
-        					<phase>verify</phase>
-        					<goals>
-        						<goal>sonar</goal>
-        					</goals>
-        				</execution>
-        			</executions>
-				</plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
@@ -67,6 +55,31 @@
                     <stopPort>9999</stopPort>
                     <stopKey>foo</stopKey>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>${maven-license.version}</version>
+                <configuration>
+                    <licenseName>gpl_v3</licenseName>
+                    <licenseResolver>${project.baseUri}/src/license</licenseResolver>
+                    <organizationName>Holdemdojo</organizationName>
+                    <projectName>Holdem dojo project is a server-side java application for playing holdem pocker in DOJO style.</projectName>
+                    <failOnMissingHeader>true</failOnMissingHeader>
+                    <inceptionYear>2016</inceptionYear>
+                    <canUpdateCopyright>false</canUpdateCopyright>
+                    <canUpdateDescription>false</canUpdateDescription>
+                    <canUpdateLicense>false</canUpdateLicense>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>first</id>
+                        <goals>
+                            <goal>update-file-header</goal>
+                        </goals>
+                        <phase>process-sources</phase>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
