@@ -113,7 +113,12 @@ public class PlayerTest {
 
     @Test
     public void shouldPlayerWithCardsSerializedToJSONProperly() throws Exception {
-        assertEquals("{\"balance\":1000,\"status\":\"NotMoved\",\"name\":\"Player name\",\"pot\":0}", player.toJSON());
+        String json = player.toJSON();
+
+        assertTrue(json.contains("\"balance\":1000"));
+        assertTrue(json.contains("\"status\":\"NotMoved\""));
+        assertTrue(json.contains("\"name\":\"Player name\""));
+        assertTrue(json.contains("\"pot\":0"));
     }
 
     @Test
@@ -126,8 +131,8 @@ public class PlayerTest {
 
         player.setCards(new Card[]{firstCardMock, secondCardMock});
 
-        assertEquals("{\"balance\":1000,\"status\":\"NotMoved\",\"name\":\"Player name\",\"pot\":0" +
-                ",\"cards\":[\"FirstCardJSON\",\"SecondCardJSON\"]}", player.toJSONWithCards());
+        assertTrue(player.toJSONWithCards().contains("\"cards\":[\"FirstCardJSON\",\"SecondCardJSON\"]"));
+        assertTrue(player.toJSONWithCards().contains("\"name\":\"Player name\""));
     }
 
     @Test

@@ -3,6 +3,7 @@ package com.nedogeek.holdem.gamingStuff;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
 
 /**
  * User: Konstantin Demishev
@@ -18,6 +19,9 @@ public class CardTest {
 
     @Test
     public void shouldHeartsAceToJSONProperlyWhenCreatingNewCard() throws Exception {
-        assertEquals("{\"cardValue\":\"A\",\"cardSuit\":\"♥\"}", new Card(CardSuit.HEARTS, CardValue.ACE).toJSON());
+        String json = new Card(CardSuit.HEARTS, CardValue.ACE).toJSON();
+
+        assertTrue(json.contains("\"cardValue\":\"A\""));
+        assertTrue(json.contains("\"cardSuit\":\"♥\""));
     }
 }
