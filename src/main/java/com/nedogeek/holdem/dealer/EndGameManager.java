@@ -70,7 +70,9 @@ class EndGameManager {
     private void checkZeroBalance() {
         for (Player player : playersList) {
             if (player.getBalance() == 0) {
-                player.setBalance(GameSettings.getCoinsAtStart());
+                //player.setBalance(GameSettings.getCoinsAtStart());
+                playersList.kickPlayer(player.getName());
+                System.out.println("Removed: " + player.getName());
             }
         }
     }
